@@ -1,6 +1,6 @@
 import React from "react";
-import Logo from "./../../imgs/footer-logo.svg";
-import ChevoeronRight from "./../../imgs/right-arrow.svg";
+import Logo from "./../../assets/imgs/footer-logo.svg";
+import ChevoeronRight from "./../../assets/imgs/right-arrow.svg";
 import "./Footer.css";
 import FooterColumn from "./FooterColumn";
 
