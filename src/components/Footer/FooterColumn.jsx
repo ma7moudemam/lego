@@ -1,5 +1,5 @@
 import React from "react";
-import CheveronDown from "./../../imgs/chevron-down.svg";
+import CheveronDown from "./../../assets/imgs/chevron-down.svg";
 
 function FooterColumn({ title, footerLinks }) {
   return (
