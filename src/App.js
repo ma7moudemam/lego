@@ -5,13 +5,14 @@ import Footer from './components/Footer/Footer';
 import Navbar from './components/Navbar/Navbar';
 import Hero from "./components/Hero/Hero";
 import ProductCart from "./components/ProductCart/ProductCart";
+import Recommended from "./components/Recommended/Recommended";
 
 function App() {
   return (
     
     <div className="App">
       <Navbar />
-      <ProductCart/>
+      <Recommended/>
       <Hero />
         <Switch>
           <Route exact path="/">
