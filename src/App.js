@@ -7,33 +7,35 @@ import Hero from "./components/Hero/Hero";
 import HomePage from "./components/HomePage/HomePage";
 import ProductPage from "./components/ProductPage/ProductPage";
 import ProductSlider from "./components/ProductSlider/ProductSlider";
+import ProductCart from "./components/ProductCart/ProductCart";
+import Utility from "./components/Utilitybar/Utility";
+import Recommended from "./components/Recommended/Recommended";
+import Menu from "./components/Menu/Menu";
+import SwiperSlider from "./components/SwiperSlider/SwiperSlider";
 
 import "swiper/css/bundle";
 
 function App() {
-  return (
-    <div className="">
-      <ProductPage />
-      {/* <Navbar />
-      <Hero />
-      <Switch>
-        <Route exact path="/">
+	return (
+		<div className="App">
+			<Menu />
+			<Utility />
+			<Navbar />
+			<Hero />
+			<Recommended />
+			<Switch>
+				<Route exact path="/">
           <HomePage />
-        </Route>
-        <Route path="/whishlist">
-          <Wishlist />
-        </Route> */}
-      {/* <Route path="/product-page">
-          <ProductPage />
-        </Route> */}
-      {/* <Route path="/product-slider">
-          <ProductSlider />
-        </Route>  */}
-      {/* </Switch> */}
+  				</Route>
+				<Route path="/whishlist">
+					<Wishlist />
+				</Route>
+			</Switch>
+			<SwiperSlider />
 
-      {/* <Footer /> */}
-    </div>
-  );
+			<Footer />
+		</div>
+	);
 }
 
 export default App;
