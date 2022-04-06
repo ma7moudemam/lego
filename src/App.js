@@ -8,6 +8,7 @@ import ProductCart from "./components/ProductCart/ProductCart";
 import Utility from "./components/Utilitybar/Utility";
 import Recommended from "./components/Recommended/Recommended";
 import Menu from "./components/Menu/Menu";
+import SwiperSlider from "./components/SwiperSlider/SwiperSlider";
 
 function App() {
 	return (
@@ -25,6 +26,7 @@ function App() {
 					<Wishlist />
 				</Route>
 			</Switch>
+			<SwiperSlider />
 
 			<Footer />
 		</div>
