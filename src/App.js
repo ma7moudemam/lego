@@ -11,11 +11,13 @@ import ProductCart from "./components/ProductCart/ProductCart";
 import Utility from "./components/Utilitybar/Utility";
 import Recommended from "./components/Recommended/Recommended";
 import Menu from "./components/Menu/Menu";
+import AccordionProduct from "./components/AccordionProduct/AccordionProduct";
 import SwiperSlider from "./components/SwiperSlider/SwiperSlider";
 
 import "swiper/css/bundle";
 
 function App() {
+
 	return (
 		<div className="App">
 			<Menu />
@@ -28,9 +30,9 @@ function App() {
 				<Route exact path="/">
           <HomePage />
   				</Route>
-				<Route path="/whishlist">
+				<Router path="/whishlist">
 					<Wishlist />
-				</Route>
+				</Router>
 			</Switch>
 			<SwiperSlider />
 
