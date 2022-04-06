@@ -37,7 +37,7 @@ export default function WishListContent() {
             <General/>
           </div>
         {/*  wish support  */}
-       {/* <WishListSup/> */}
+       <WishListSup/>
       </div>
     </>
   );
