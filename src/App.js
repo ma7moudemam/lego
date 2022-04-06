@@ -4,20 +4,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
-import HomePage from "./components/HomePage/HomePage";
-import ProductPage from "./components/ProductPage/ProductPage";
-import ProductSlider from "./components/ProductSlider/ProductSlider";
 import ProductCart from "./components/ProductCart/ProductCart";
 import Utility from "./components/Utilitybar/Utility";
 import Recommended from "./components/Recommended/Recommended";
 import Menu from "./components/Menu/Menu";
-<<<<<<< HEAD
 import AccordionProduct from "./components/AccordionProduct/AccordionProduct";
-=======
-import SwiperSlider from "./components/SwiperSlider/SwiperSlider";
-
-import "swiper/css/bundle";
->>>>>>> 51665bc44278fba3837a59e6ca8f2532236a4d61
 
 function App() {
 	return (
@@ -30,13 +21,12 @@ function App() {
 			<AccordionProduct/>
 			<Switch>
 				<Route exact path="/">
-          <HomePage />
-  				</Route>
+					<h1>This is home page</h1>
+				</Route>
 				<Route path="/whishlist">
 					<Wishlist />
 				</Route>
 			</Switch>
-			<SwiperSlider />
 
 			<Footer />
 		</div>
