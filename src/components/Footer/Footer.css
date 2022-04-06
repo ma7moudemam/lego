@@ -19,6 +19,7 @@ footer {
   background: rgb(32, 29, 72) none repeat scroll 0% 0%;
   color: rgb(255, 255, 255);
   font-family: ceraProLight;
+  text-align: left;
 }
 .container {
   display: flex;
@@ -99,7 +100,7 @@ footer {
 }
 .subscription .email button {
   position: absolute;
-  right: 10%;
+  right: 5%;
   height: 100%;
   width: 60px;
   border: 2px solid #fd8024;
@@ -241,11 +242,15 @@ footer {
     justify-content: flex-start;
   }
 }
-.container .column-ul-active ul {
+.container .column-ul-active ~ ul {
   max-height: 220px;
   /* height: 100%;
     transform: scaleY(1); */
 }
-.column-ul-active h4 img {
+.column-ul-active img {
   transform: rotate(180deg);
+}
+footer .region i {
+  display: inline-block;
+  margin-right: 7px;
 }
