@@ -28,7 +28,7 @@ export default function Personal() {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 42 42"
           >
-            <g fill="currentColor" fill-rule="evenodd">
+            <g fill="currentColor" fillRule="evenodd">
               <path d="M42 24H0v-6h42z"></path>
               <path d="M18 0h6v42h-6z"></path>
             </g>

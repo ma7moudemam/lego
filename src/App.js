@@ -15,9 +15,9 @@ function App() {
           <Route exact path="/">
               <h1>This is home page</h1>
           </Route>
-          <Route  path="/whishlist">
+          <Router  path="/whishlist">
                 <Wishlist />
-          </Route>
+          </Router>
           </Switch>         
         
       <Footer />

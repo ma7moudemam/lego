@@ -1,54 +1,81 @@
 .wish-general {
-    margin: 5rem 0px;
-} 
+  margin: 5rem 0px;
+}
 .wish-general-info {
-    background-color: rgb(248, 248, 248);
-    padding: 1rem;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    margin: 1rem 0px;
-} 
+  background-color: rgb(248, 248, 248);
+  padding: 1rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0px;
+}
 .general-content {
-    display: flex;
-    flex-direction: row;
-} 
+  display: flex;
+  flex-direction: row;
+}
 .content-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    flex: 1 1 20%;
-} 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 1 1 20%;
+}
 .wish-general-date {
-    color: #53362C;
-    font-size: 0.9rem;
-    line-height: 1.5rem;
+  color: #53362c;
+  font-size: 0.9rem;
+  line-height: 1.5rem;
 }
 .wish-general-cost {
-    color: #53362C;
-    font-size: 1rem;
-    line-height: 1.1.5625rem;
-    font-weight: 500;
-} 
+  color: #53362c;
+  font-size: 1rem;
+  line-height: 1.1.5625rem;
+  font-weight: 500;
+}
 .content-btn {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex: 1 1 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex: 1 1 70%;
 }
 .breakline {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
-.addtobag-btn{
-    width: 40%;
-    padding: 1rem;
-    border: 1px solid rgb(224, 224, 224);
-    border-radius: 5px;
-    text-align: center;
-    font-size: 0.9rem;
-    background-color: rgb(224, 224, 224);
-    cursor: not-allowed;
-    color: black;
+.addtobag-btn {
+  width: 40%;
+  padding: 1rem;
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.9rem;
+  background-color: rgb(224, 224, 224);
+  cursor: not-allowed;
+  color: black;
+}
+@media screen and (max-width: 900px) {
+  .menu {
+    display: none;
+  }
+  .menuTwo {
+    display: block;
+  }
+  .addtobag-btn {
+    width: 30%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .wish-general-info {
+    flex-direction: column;
+  }
+  .content-btn {
+    flex-direction: column;
+    margin-top: 1rem;
+    align-items: stretch;
+  }
+  .addtobag-btn {
+    width: auto;
+  }
+  .general-content {
+    flex-direction: column;
+  }
 }
