@@ -1,0 +1,25 @@
+a.active{
+    text-decoration: none;
+    font-weight: bold;
+  }
+.side-menu{
+    text-decoration: none;
+}
+.menu {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgb(224, 224, 224);
+    flex: 1 1 35%;
+}
+.side-menu-items {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgb(224, 224, 224);
+    border-left: 1px solid rgb(224, 224, 224);
+    border-right: 1px solid rgb(224, 224, 224);
+    padding: 1rem;
+    color: black;}
+/* .side-menu-items span{
+    border-bottom: 1px solid white;
+    color: white;
+} */
