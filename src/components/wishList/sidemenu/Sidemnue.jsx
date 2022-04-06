@@ -7,15 +7,15 @@ function SideMenue() {
   return (
     <div className={Style.container}>
       <ul className={Style.menu}>
-        <NavLink to="/myorder"  className={(isActive) =>
+        <NavLink to="/whishlist/myorder"  className={(isActive) =>
                 isActive ? Style.active : Style["side-menu"]} style={{ textDecoration: 'none' }}>
           <li className={Style["side-menu-items"]}>My Orders</li>
         </NavLink>
-        <NavLink to="/personal"  className={(isActive) =>
+        <NavLink to="/whishlist/personal"  className={(isActive) =>
                 isActive ? Style.active : Style["side-menu"]} style={{ textDecoration: 'none' }}>
           <li className={Style["side-menu-items"]}>Personal & Address Details</li>
         </NavLink>
-        <NavLink to="/whishlist"  className={(isActive) =>
+        <NavLink to="/whishlist/whishlist"  className={(isActive) =>
                 isActive ? Style.active : Style["side-menu"]}>
           <li className={Style["side-menu-items"]} 
           //  style={{backgroundColor:'rgb(0, 109, 183)'}}

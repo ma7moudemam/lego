@@ -37,18 +37,15 @@ export default function Wishlist() {
           </div>
           <div style={{width: "73%"}}>
             <Switch>
-              <Route exact path="/">
-                <h1>hello</h1>
-              </Route>
-              <Route exact path="/whishlist">
-                <WishListContent />
-              </Route>
-              <Route exact path="/personal">
-                <Personal />
-              </Route>
-              <Route exact path="/myorder">
-                <MyOrder />
-              </Route>
+              <Route exact path="/whishlist/personal">
+                  <Personal />
+                </Route>
+                <Route exact path="/whishlist/myorder">
+                  <MyOrder />
+                </Route>
+                <Route exact path="/whishlist/whishlist">
+                  <WishListContent />
+                </Route>
             </Switch>
           </div>
         </div>
