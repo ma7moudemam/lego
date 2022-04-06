@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import ProductCart from "./components/ProductCart/ProductCart";
 import Utility from "./components/Utilitybar/Utility";
+import Recommended from "./components/Recommended/Recommended";
 
 function App() {
 	return (
@@ -13,7 +14,7 @@ function App() {
 			<Utility />
 			<Navbar />
 			<Hero />
-			<ProductCart />
+			<Recommended />
 			<Switch>
 				<Route exact path="/">
 					<h1>This is home page</h1>

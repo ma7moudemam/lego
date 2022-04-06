@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     height: 500px;
-    width: 350px;
+    width: 280px;
     margin: 20px auto;
 }
 
@@ -61,15 +61,15 @@
 
 .cardImage {
     border: 1px solid #ccc;
-    height: 340px;
-    width: 340px;
+    height: 280px;
+    width: 280px;
     margin-bottom: 10px;
     overflow: hidden;
 }
 
 .cardImage img {
-    height: 240px;
-    width: 240px;
+    height: 200px;
+    width: 200px;
     transition: 1s;
     display:block;
     margin:auto;
