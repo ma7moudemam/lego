@@ -1,4 +1,5 @@
 import "./Menu.css";
+import legoUser from "../../assets/imgs/lego-user.svg";
 
 export default function Menu() {
 	return (
@@ -33,7 +34,7 @@ export default function Menu() {
 						</li>
 						<li class="menu-bar-list-item">
 							<a href="#" class="user-icon">
-								<img src="./images/lego-user.svg" class="svg" />
+								<img src={legoUser} class="svg" />
 								Account
 							</a>
 						</li>
