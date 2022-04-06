@@ -10,8 +10,6 @@ function App() {
   return (
     
     <div className="App">
-      <Navbar />
-      <ProductCart/>
       <Hero />
         <Switch>
           <Route exact path="/">
