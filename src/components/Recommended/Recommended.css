@@ -1,3 +1,8 @@
+.recommended{
+    display: flex;
+    justify-content: center;
+}
+
 .recommended .boxes{
     display: flex;
     flex-direction: row;

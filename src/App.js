@@ -8,6 +8,7 @@ import ProductCart from "./components/ProductCart/ProductCart";
 import Utility from "./components/Utilitybar/Utility";
 import Recommended from "./components/Recommended/Recommended";
 import Menu from "./components/Menu/Menu";
+import AccordionProduct from "./components/AccordionProduct/AccordionProduct";
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 			<Navbar />
 			<Hero />
 			<Recommended />
+			<AccordionProduct/>
 			<Switch>
 				<Route exact path="/">
 					<h1>This is home page</h1>

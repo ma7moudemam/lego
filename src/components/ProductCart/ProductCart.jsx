@@ -13,7 +13,7 @@ function ProductCart() {
                     <img src={ProductImg} alt=""/>
                     <p class="new">New</p>
                 </div>
-                <Link className='title' to="#">Valentine Lovebirds</Link>
+                <Link className='product-title' to="#">Valentine Lovebirds</Link>
                 <div class="stars">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
