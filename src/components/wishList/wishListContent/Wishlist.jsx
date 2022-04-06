@@ -1,5 +1,5 @@
 import { Link } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
 import App from "../../../App";
@@ -9,8 +9,19 @@ import General from "../general/General";
 import SideMenue from "../sidemenu/Sidemnue";
 import Style from "./wishlist.module.css";
 import WishListContent from './WishlistContent'
-
+import {
+  useLocation
+} from "react-router-dom";
 export default function Wishlist() {
+
+  const [route, setRoute] = useState("");
+
+    let location = useLocation();
+    useEffect(() => {
+      let route = location.pathname.split("/")[2];
+      setRoute(route)
+    }, [location]);
+
   return (
     <>
       <ul className={Style.ulist}>
@@ -29,7 +40,7 @@ export default function Wishlist() {
               />
             </svg>
           </li>
-          <li className ={Style["list-direct"]}><span>Wish list</span></li>
+          <li className ={Style["list-direct"]}><span>{route}</span></li>
         </ul>
         <div className={Style.container}>
           <div className={Style.sidemenue}>

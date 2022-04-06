@@ -89,3 +89,11 @@
     color: rgb(117, 117, 117);
     margin-left: 1rem;
 }
+@media screen and (max-width: 900px) {
+    .container {
+      flex-direction: column;
+    }
+    .content {
+      padding: 1.5rem 0px;
+    }
+  }

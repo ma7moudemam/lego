@@ -13,6 +13,15 @@
     margin-top: 5px;
     height: 30px;
     text-decoration: none;
+    
+}
+
+.box .product-title{
+    transition: 1s;
+}
+
+.box .product-title:hover {
+    text-decoration: underline;
 }
 
 
@@ -46,9 +55,6 @@
 }
 
 
-.box .title:hover {
-    text-decoration: underline;
-}
 
 .box .price {
     text-align: left;
@@ -90,6 +96,7 @@
     width: 50px;
     top: 10px;
     left: 10px;
+    cursor: pointer;
 }
 
 .stars i {

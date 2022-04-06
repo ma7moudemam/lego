@@ -83,3 +83,11 @@
     height: 0px;
     border-top: 1px solid rgb(224, 224, 224);
 }
+@media screen and (max-width: 900px) {
+    .container {
+      flex-direction: column;
+    }
+    .content {
+      padding: 1.5rem 0px;
+    }
+  }
