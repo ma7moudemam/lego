@@ -3,7 +3,7 @@ import React from "react";
 import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
 import { Router } from "react-router-dom";
-import App from "../../App";
+import App from "../../../App";
 import MyOrder from "../../Myorder/MyOrder";
 import Personal from "../../personal&address/Personal";
 import General from "../general/General";
