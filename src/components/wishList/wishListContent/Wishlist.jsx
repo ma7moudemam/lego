@@ -2,7 +2,6 @@ import { Link } from "@mui/material";
 import React from "react";
 import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
-import { Router } from "react-router-dom";
 import App from "../../../App";
 import MyOrder from "../../Myorder/MyOrder";
 import Personal from "../../personal&address/Personal";
@@ -16,7 +15,7 @@ export default function Wishlist() {
     <>
       <ul className={Style.ulist}>
           <li className ={Style["list-direct"]}>
-            <Link href="#" className ="link">Home</Link>
+            <Link href="#" className ={Style.link}>Home</Link>
             <svg
               className ={Style.arrow}
               height="10"
