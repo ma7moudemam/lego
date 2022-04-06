@@ -13,6 +13,8 @@ import Recommended from "./components/Recommended/Recommended";
 import Menu from "./components/Menu/Menu";
 import AccordionProduct from "./components/AccordionProduct/AccordionProduct";
 import SwiperSlider from "./components/SwiperSlider/SwiperSlider";
+import MyBag from "./components/Bag";
+
 
 import "swiper/css/bundle";
 
@@ -27,6 +29,11 @@ function App() {
 			<Recommended />
 			<AccordionProduct/>
 			<Switch>
+
+			<Route exact path="/mybag">
+          <MyBag />
+        </Route>
+
 				<Route exact path="/">
           <HomePage />
   				</Route>
