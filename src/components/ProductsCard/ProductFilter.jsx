@@ -1,7 +1,6 @@
 import React from 'react'
-import  "./ProductCard.css";
-import  "./ProductFilter.css";
-
+// import  "./ProductCard.css";
+// import  "./ProductFilter.css";
 
 export default function ProductFilter() {
   return (

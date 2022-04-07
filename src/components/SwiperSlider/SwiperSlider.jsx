@@ -18,8 +18,8 @@ export default function SwiperSlider() {
 
   return (
     <div className="slider-container">
-      {/* main right floating*/}
-      <Swiper
+          {/* main right floating*/}
+          <Swiper
             style={{
               "--swiper-navigation-color": "#fff",
               "--swiper-pagination-color": "#fff",
@@ -62,8 +62,9 @@ export default function SwiperSlider() {
             </SwiperSlide>
           </Swiper>
 
-          {/* nested left floating*/}
-          <Swiper
+
+                    {/* nested left floating*/}
+                    <Swiper
             onSwiper={setThumbsSwiper}
             spaceBetween={10}
             slidesPerView={4}
@@ -103,6 +104,6 @@ export default function SwiperSlider() {
               />
             </SwiperSlide>
           </Swiper>
-    </div>
+        </div>
   );
 }

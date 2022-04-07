@@ -1,25 +1,7 @@
-#app { height: 100% }
-html,
-body {
-  position: relative;
-  height: 100%;
-}
-
 .slider-container{
   width: 60vw;
   margin: 3vw;
 }
-
-body {
-  background: #eee;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
-
-
 
 .swiper {
   width: 20%;
@@ -30,8 +12,6 @@ body {
   text-align: center;
   font-size: 18px;
   background: #fff;
-
-  /* Center slide text vertically */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,21 +24,18 @@ body {
   object-fit: cover;
 }
 
-
 .swiper-slide {
   background-size: cover;
   background-position: center;
 }
 
-/* **************************** */
 .mySwiper2 {
   height: 80%;
   width: 100%;
 }
 
-/* **************************** */
 .mySwiper {
-  height: 20vh;
+  height: 10vh;
   box-sizing: border-box;
   padding: 10px 0;
   margin-top: 2vh;
@@ -80,4 +57,9 @@ body {
   width: 100%;
   height: 60vh;
   object-fit: cover;
+}
+
+
+.swiper-button-next:after, .swiper-button-prev:after {
+  font-size: 2vw;
 }

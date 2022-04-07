@@ -1,6 +1,4 @@
 import React from "react";
-
-import Quick from "../../assets/images/Quick links/img1.jpg";
 import Women from "../../assets/images/woman.png"
 import Cards from "../../assets/images/spotlight/card1.jpg"
 import NestedCards from "../../assets/images/spotlight/nested-card1.png"
@@ -10,78 +8,6 @@ import "./HomePage.css";
 export default function HomePage() {
   return (
     <>
-      {/* Quick Links */}
-      <div className="home-page-container">
-        <section id="quick-links">
-          <ul>
-            <li>
-              <a target="_blank" href="#">
-                <div>
-                  <img src={Quick} />
-                </div>
-                <span>New</span>
-              </a>
-            </li>
-            <li>
-              <a target="_blank" href="#">
-                <div>
-                  <img src={Quick} />
-                </div>
-                <span>Exclusives</span>
-              </a>
-            </li>
-            <li>
-              <a target="_blank" href="#">
-                <div>
-                  <img src={Quick} />
-                </div>
-                <span>Offers</span>
-              </a>
-            </li>
-            <li>
-              <a target="_blank" href="#">
-                <div>
-                  <img src={Quick} />
-                </div>
-                <span>Valentine's Day</span>
-              </a>
-            </li>
-            <li>
-              <a target="_blank" href="#">
-                <div>
-                  <img src={Quick} />
-                </div>
-                <span>Free Magazine</span>
-              </a>
-            </li>
-            <li>
-              <a target="_blank" href="#">
-                <div>
-                  <img src={Quick} />
-                </div>
-                <span>Hard to find</span>
-              </a>
-            </li>
-            <li>
-              <a target="_blank" href="#">
-                <div>
-                  <img src={Quick} />
-                </div>
-                <span>Pick-a-Brick</span>
-              </a>
-            </li>
-            <li>
-              <a target="_blank" href="#">
-                <div>
-                  <img src={Quick} />
-                </div>
-                <span>VIP</span>
-              </a>
-            </li>
-          </ul>
-        </section>
-      </div>
-
       {/* Keep-in-touch */}
       <div className="container-full">
         <section className="keep-in-touch">
@@ -116,7 +42,7 @@ export default function HomePage() {
         <section id="spotlight-on">
           <div className="card-section">
             {/* card inner content */}
-            <div className="card-header">
+            <div className="card-header-spotlight">
               <h2>
                 <span>Spotlight on</span>
               </h2>

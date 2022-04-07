@@ -4,35 +4,34 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
-import HomePage from "./components/HomePage/HomePage";
-// import ProductPage from "./components/ProductPage/ProductPage";
-// import ProductSlider from "./components/ProductSlider/ProductSlider";
-// import ProductCart from "./components/ProductCart/ProductCart";
 import Utility from "./components/Utilitybar/Utility";
 import Recommended from "./components/Recommended/Recommended";
 import Menu from "./components/Menu/Menu";
 import AccordionProduct from "./components/AccordionProduct/AccordionProduct";
-import SwiperSlider from "./components/SwiperSlider/SwiperSlider";
 import MyBag from "./components/Bag";
+import ProductCart from "./components/ProductCart/ProductCart";
+
+import HomePage from "./components/HomePage/HomePage";
+import ProductCard from "./components/ProductsCard/ProductCard";
+import SwiperSlider from "./components/SwiperSlider/SwiperSlider";
 
 
-import Login from './components/Login/Login';
-import Signup from './components/Signup/Signup';
 
-import "swiper/css/bundle";
-import './App.css';
+
+// import Login from "./components/Login/Login";
+// import Signup from "./components/Signup/Signup";
+
+import "./App.css";
 function App() {
-
   return (
     <div className="App">
       <Menu />
       <Utility />
       <Navbar />
       <Hero />
-      <Recommended />
-      <AccordionProduct />
+      {/* <Recommended />
+      <AccordionProduct /> */}
       <Switch>
-
         <Route exact path="/mybag">
           <MyBag />
         </Route>
@@ -43,15 +42,20 @@ function App() {
         <Router path="/whishlist">
           <Wishlist />
         </Router>
-        <Router path="/login">
+        {/* <Router path="/login">
           <Login />
         </Router>
         <Router path="/signup">
           <Signup />
+        </Router> */}
+        <Router path="/shop-now">
+          <ProductCard />
+        </Router>
+        <Router path="/card">
+          {/* <ProductCart /> */}
+          <SwiperSlider />
         </Router>
       </Switch>
-      <SwiperSlider />
-
       <Footer />
     </div>
   );

@@ -9,29 +9,27 @@ body{
     font-family: 'Roboto'
 }
 
-ul{
-    list-style-type: none;
-}
-a{
-    text-decoration: none;
-    color: black;
-}
-h2{
-    font-weight: normal;
-    letter-spacing: 0.4rem;
+.card-header-spotlight h2 span, .left-side h2 span{
+    font-weight: 400;
     font-size: 2rem;
 }
 
-h3{
+.text-container h3 span{
     font-weight: bolder;
-    letter-spacing: 0.2rem;
     font-size: 1.1rem;
     padding-bottom: 0.5rem;
+    font-family: CeraProLight;
+    text-decoration: none;
+    color: black;
 }
 
-p{
-    font-size: 1rem;
-    letter-spacing: 0.1rem;
+.text-container span{
+    color: black;
+}
+
+.card-content{
+    text-decoration: none;
+    color: black;
 }
 
 /*****************Varible****************/
@@ -58,35 +56,6 @@ p{
     display: flex;
     flex-direction: column;
 }
-
-/*************Quick Link***************/
-
-#quick-links{
-    margin:var(--section-margin);
-    padding: var(--section-padding);
-}
-
-#quick-links ul{
-    display: flex;
-    justify-content: center;
-}
-
-#quick-links li{
-    font-size: var(--span-font-size);
-    font-weight: lighter;
-    text-align: center;
-    margin-right: var(--margin-right);
-}
-
-#quick-links img{
-   opacity: 0.8;
-}
-
-#quick-links a:hover{
-    text-decoration: underline;
-    color: blue;
-}
-
 
 /************* Keep-in-touch ***************/
 
@@ -120,9 +89,13 @@ p{
     color: white;
     text-align: center;
     width: fit-content;
+    text-decoration: none;
 }
 .shop-fill i{
     font-weight: normal;
+}
+.shop-fill:hover{
+    color: white;
 }
 
 
@@ -135,11 +108,13 @@ p{
     justify-content: center;
 }
 
-.card-header{
+.card-header-spotlight{
     display: flex;
     flex-direction: row;
     width: 100%;
     margin-bottom: var(--margin-bottom);
+    background-color: white;
+    border-bottom: none;
 }
 
 .card-container{
@@ -186,6 +161,7 @@ p{
     font-size: 1rem;
 }
 
+
 .shop i{
     font-weight: normal;
 }
@@ -197,16 +173,6 @@ p{
 /************* Media Quary ***************/
 
 @media only screen and (max-width: 600px) {
-
-    #quick-links ul{
-        flex-wrap: wrap;
-    }
-
-    #quick-links img{
-        width: 10vw;
-        height: 10vh;
-        object-fit: contain;
-    }
 
     .keep-in-touch-container{
         display: flex;
@@ -223,22 +189,6 @@ p{
     .card-container{
         display: flex;
         flex-wrap: wrap;
-    }
-
-    h2{
-        font-size: 1.5rem;
-    }
-
-    h3{
-        font-size: 1rem;
-    }
-
-    p{
-        font-size: 0.8rem;
-    }
-
-    .shop{
-        font-size: 0.8rem;
     }
 }
 
