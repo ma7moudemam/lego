@@ -47,7 +47,7 @@ function Footer() {
   ];
   return (
     <footer>
-      <div className="container">
+      <div className="footer-container">
         <div className="column col-logo">
           <div className="logo-region">
             <img src={Logo} alt="" />

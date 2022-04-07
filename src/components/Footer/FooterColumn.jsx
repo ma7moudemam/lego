@@ -2,9 +2,12 @@ import React from "react";
 import CheveronDown from "./../../assets/imgs/chevron-down.svg";
 
 function FooterColumn({ title, footerLinks }) {
+  const expand = (e) => {
+    e.target.classList.toggle("column-ul-active");
+  };
   return (
     <div className="column">
-      <h4>
+      <h4 onClick={expand}>
         {title} <img src={CheveronDown} alt="" />
       </h4>
       <ul>

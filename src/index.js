@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import "./assets/fonts/Cera Pro Bold.otf";
+import "./assets/fonts/Cera Pro Light.otf";
+import "./assets/fonts/Cera Pro Medium.otf";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 
 
 

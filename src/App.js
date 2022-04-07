@@ -5,9 +5,9 @@ import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import HomePage from "./components/HomePage/HomePage";
-import ProductPage from "./components/ProductPage/ProductPage";
-import ProductSlider from "./components/ProductSlider/ProductSlider";
-import ProductCart from "./components/ProductCart/ProductCart";
+// import ProductPage from "./components/ProductPage/ProductPage";
+// import ProductSlider from "./components/ProductSlider/ProductSlider";
+// import ProductCart from "./components/ProductCart/ProductCart";
 import Utility from "./components/Utilitybar/Utility";
 import Recommended from "./components/Recommended/Recommended";
 import Menu from "./components/Menu/Menu";
@@ -16,36 +16,45 @@ import SwiperSlider from "./components/SwiperSlider/SwiperSlider";
 import MyBag from "./components/Bag";
 
 
-import "swiper/css/bundle";
+import Login from './components/Login/Login';
+import Signup from './components/Signup/Signup';
 
+import "swiper/css/bundle";
+import './App.css';
 function App() {
 
-	return (
-		<div className="App">
-			<Menu />
-			<Utility />
-			<Navbar />
-			<Hero />
-			<Recommended />
-			<AccordionProduct/>
-			<Switch>
+  return (
+    <div className="App">
+      <Menu />
+      <Utility />
+      <Navbar />
+      <Hero />
+      <Recommended />
+      <AccordionProduct />
+      <Switch>
 
-			<Route exact path="/mybag">
+        <Route exact path="/mybag">
           <MyBag />
         </Route>
 
-				<Route exact path="/">
+        <Route exact path="/">
           <HomePage />
-  				</Route>
-				<Router path="/whishlist">
-					<Wishlist />
-				</Router>
-			</Switch>
-			<SwiperSlider />
+        </Route>
+        <Router path="/whishlist">
+          <Wishlist />
+        </Router>
+        <Router path="/login">
+          <Login />
+        </Router>
+        <Router path="/signup">
+          <Signup />
+        </Router>
+      </Switch>
+      <SwiperSlider />
 
-			<Footer />
-		</div>
-	);
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

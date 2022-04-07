@@ -1,41 +1,41 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import legoLogo from "../../assets/imgs/lego-logo.svg";
+import legoLogo from "./../../assets/imgs/lego-logo.svg";
 import legoUser from "../../assets/imgs/lego-user.svg";
 
 export default function Navbar() {
 	return (
-		<div class="nav-container">
-			<nav class="nav-bar">
-				<ul class="nav-list">
-					<div class="nav-list-item menu-icon">
+		<div className="nav-container">
+			<nav className="nav-bar">
+				<ul className="nav-list">
+					<div className="nav-list-item menu-icon">
 						<sub>Menu</sub>
 					</div>
-					<img src={legoLogo} class="nav-list-item" />
-					<li class="nav-list-item">
-						<a>shop</a>
+					<img src={legoLogo} className="nav-list-item" alt="logo" />
+					<li className="nav-list-item">
+						<a href="/store">shop</a>
 					</li>
-					<li class="nav-list-item">
-						<a>discover</a>
+					<li className="nav-list-item">
+						<a href="/store">discover</a>
 					</li>
-					<li class="nav-list-item">
-						<a>help</a>
+					<li className="nav-list-item">
+						<a href="/contactus">help</a>
 					</li>
 				</ul>
-				<div class="nav-icons">
-					<div class="content">
-						<div class="search-bar">
-							<button class="search-bar-submit" aria-label="submit search">
-								<i class="fas fa-search"></i>
+				<div className="nav-icons">
+					<div className="content">
+						<div className="search-bar">
+							<button className="search-bar-submit" aria-label="submit search">
+								<i className="fas fa-search"></i>
 							</button>
-							<input type="text" class="search-bar-input" aria-label="search" placeholder="Search..." />
+							<input type="text" className="search-bar-input" aria-label="search" placeholder="Search..." />
 						</div>
-						<div class="search-content"></div>
+						<div className="search-content"></div>
 					</div>
-					<a href="#" class="nav-user-icon">
-						<img src={legoUser} class="svg" />
+					<a href="/account" className="nav-user-icon">
+						<img src={legoUser} className="svg" alt="account" />
 					</a>
-					<i class="wish-list-icon">
+					<i className="wish-list-icon">
 						<svg width="20" height="18">
 							<path
 								d="M16.84 8.417L10 15.204 3.16 8.417A3.67 3.67 0 012 5.739C2 3.677 3.71 2 5.815 2a3.82 3.82 0 012.754 1.159l1.43 1.467 1.433-1.467A3.818 3.818 0 0114.186 2C16.289 2 18 3.677 18 5.739a3.673 3.673 0 01-1.16 2.678M9.986 18l.014-.014.014.014 8.223-8.116-.018-.019a5.678 5.678 0 001.78-4.126C20 2.569 17.398 0 14.187 0A5.829 5.829 0 0010 1.762 5.827 5.827 0 005.815 0C2.604 0 0 2.569 0 5.739a5.68 5.68 0 001.782 4.126"
@@ -44,7 +44,7 @@ export default function Navbar() {
 							></path>
 						</svg>
 					</i>
-					<i class="cart-icon">
+					<i className="cart-icon">
 						<svg height="20px" width="18px">
 							<g fill="currentColor" fill-rule="evenodd">
 								<path d="M4 3.512v5.804c0 .377.349.684.779.684.43 0 .779-.307.779-.684V3.512C5.558 2.33 6.653 1.368 8 1.368c1.347 0 2.442.962 2.442 2.144v5.804c0 .377.35.684.78.684.43 0 .778-.307.778-.684V3.512C12 1.575 10.206 0 8 0S4 1.575 4 3.512z"></path>
