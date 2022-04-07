@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <>
       {/* Quick Links */}
-      <div className="container">
+      <div className="home-page-container">
         <section id="quick-links">
           <ul>
             <li>
