@@ -3,22 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* @font-face {
-  font-family: ceraProLight;
-  src: url("./fonts/Cera Pro Light.otf");
-}
-@font-face {
-  font-family: ceraProBold;
-  src: url("./fonts/Cera Pro Bold.otf");
-}
-@font-face {
-  font-family: ceraProMed;
-  src: url("./fonts/Cera Pro Medium.otf");
-} */
+
 footer {
   background: rgb(32, 29, 72) none repeat scroll 0% 0%;
   color: rgb(255, 255, 255);
-  font-family: ceraProLight;
+  font-family: "CeraProLight";
   text-align: left;
 }
 .container {
@@ -45,7 +34,7 @@ footer {
 .column h4 {
   font-size: 1.3rem;
   margin-bottom: 15px;
-  font-family: ceraProBold;
+  font-family: "CeraProBold";
 }
 .column ul {
   list-style: none;
@@ -55,7 +44,7 @@ footer {
 }
 .column li {
   font-size: 1rem;
-  font-family: ceraProLight;
+  font-family: "CeraProLight";
 }
 .column a {
   display: block;
@@ -78,7 +67,7 @@ footer {
   padding: 2.5rem 1rem;
 }
 .socialmedia-wrapper h6 {
-  font-family: ceraProMed;
+  font-family: "CeraProMed";
   font-size: 1.1rem;
   margin-bottom: 15px;
   text-transform: uppercase;

@@ -1,6 +1,6 @@
 .auth-wrapper {
   background: #f2f5f7;
-  font-family: ceraProLight, Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "CeraProLight", Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .login-container {
@@ -110,7 +110,7 @@
   -ms-flex-pack: center;
   justify-content: center;
   padding: 1rem 0;
-  font-family: ceraProBold;
+  font-family: "CeraProBold";
   font-size: 0.9rem;
 }
 
@@ -147,7 +147,7 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  font-family: ceraProBold;
+  font-family: "CeraProBold";
 }
 
 .login-container .header .signup-title {
@@ -160,12 +160,12 @@
 }
 
 .login-container .login-suPage h2 {
-  font-family: ceraProMed;
+  font-family: "CeraProBold";
   margin-bottom: 1rem;
 }
 
 .login-container .login-suPage a {
-  font-family: ceraProBold;
+  font-family: "CeraProBold";
   display: block;
   margin-bottom: 1rem;
 }

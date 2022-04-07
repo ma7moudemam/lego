@@ -1,0 +1,454 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+   --font-size: 1rem;
+   --font-weight: bold;
+   --border: 1px solid gainsboro;
+   --font-color:gainsboro;
+}
+
+body{
+    line-height: 1.6;
+    font-family: 'Roboto';
+}
+
+ul{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    color: black;
+}
+
+button{
+    border: none;
+    background-color: transparent;
+}
+
+.filter-btn{
+    display: none;
+}
+
+/******************** breadcrumb-navigator ********************/
+
+.breadcrumb-navigator{
+    width: 90vw;
+    padding: 0.8rem 0;
+    margin: auto;
+}
+
+ul.breadcrumb li {
+  display: inline;
+  font-size: 0.8rem;
+  opacity: 0.8;
+  
+}
+
+ul.breadcrumb li a{
+  color: rgb(153, 153, 255)
+}
+ul.breadcrumb li a:hover{
+  text-decoration: underline;
+}
+
+ul.breadcrumb li+li:before {
+  padding: 0.5rem;
+  opacity: 0.5;
+  color: black;
+  content: "\003E";
+}
+
+/******************** Shop Now ********************/
+
+.shop-now{
+    width: 90vw;
+    margin: 0.5rem auto;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr;
+    column-gap: 1.5rem;
+}
+
+/******************** filter ********************/
+
+.filter{
+   border: var(--border);
+   height: max-content;
+}
+
+.accordion-menu li{
+    border-bottom: var(--border);
+}
+
+.accordion-menu li>input[type=checkbox] {
+    position: absolute;
+    opacity: 0;
+}
+
+.accordion-menu li>label {
+    position: relative;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color:  black;
+    background-color: #fff;
+    padding: 0.5rem 1rem;
+}
+
+.accordion-menu li>label i{
+    float: right;
+}
+
+.accordion-menu li>section {
+    opacity: 0;
+    height: 0px;
+    color: black;
+}
+
+.accordion-menu li>input[type=checkbox]:checked + label + section {
+    opacity: 1;
+    height: auto;
+    padding: 0.5rem 1rem;
+}
+
+
+.accordion-menu li>input[type=checkbox]:checked + label {
+	color: black;
+}
+
+.filter-content label{
+    padding-left: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color:  black;
+}
+
+.filter-content input[type=checkbox]{
+    text-align: center;
+    appearance : none;
+    padding: 0.6rem;
+    vertical-align: top;
+    border: 2px solid #ddd;
+    background: #fff no-repeat center center;
+}
+
+.filter-content input[type=checkbox]:checked{
+    color: black;
+    border-color : gainsboro;
+    background-image : url('./checkbox.svg');
+    background-size: 10px;
+}
+
+.accordion-menu #header-filter{
+    background-color: gainsboro;
+}
+
+.accordion-menu #header-filter a:hover{
+    color:  rgb(153, 153, 255);
+}
+
+.accordion-menu li>p{
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.filter-content i{
+    color: yellow;
+    font-size: 1.2rem;
+}
+
+
+/******************** cards ********************/
+
+
+
+/******************** dropDown ********************/
+
+.cards-header-section{
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropbtn {
+    text-align:center;
+    line-height: 1.5;
+    color: black;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+    border: none;
+    border: var(--border);
+    cursor: pointer;
+}
+
+.dropbtn #sortBy {
+    color: var(--font-color);
+}
+
+.dropbtn::before {
+    content: "\02C5";
+    color: black;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    padding-left: 1rem;
+    float: right;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    width: max-content;
+    overflow: auto;
+    z-index: 1;
+    border: var(--border);
+    background-color: white;
+}
+
+.dropdown-content a {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    color: black;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+
+
+/******************** card ********************/
+
+.cards-container{
+    display: grid;
+    grid-template-columns: repeat(3 , 1fr);
+}
+
+.card{
+    border: var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+.add-to-wishlist{
+    font-size: 0.8rem;
+}
+
+.add-to-wishlist i{
+    color: #0f75bb;
+    background-color: #f8f8f8;
+    border-radius: 50%;
+    padding: 0.4rem;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+}
+
+.card-img{
+    margin: 0.2rem auto;
+    width: 17rem;
+    transition: transform .2s
+}
+.card-img:hover{
+    transform: scale(1.2);
+}
+
+.new-item{
+    width: max-content;
+    padding: 0.2rem 0.5rem;
+    background-color: yellow;
+}
+
+.card-name p{
+    font-size: var(--font-size);
+    color: black;
+    font-weight: bold;
+}
+
+.card .fas{
+    color: yellow;
+}
+
+.card-price{
+    font-size: var(--font-size);
+    color: black;
+    font-weight: bold;
+}
+
+.card-button-exist{
+    font-size: var(--font-size);
+    color: black;
+    font-weight: bolder;
+    background-color: orange;
+    text-align: center;
+    width: 18rem;
+    padding: 1.3rem 1rem;
+    border-radius: 3%;
+}
+
+.offer-item{
+    width: max-content;
+    padding: 0.2rem 0.5rem;
+    background-color: red;
+    font-weight: 400;
+}
+
+.card-button-out{
+    font-size: var(--font-size);
+    color: red;
+    font-weight: bolder;
+    background-color: #fff2f2;
+    text-align: center;
+    width: 18rem;
+    padding: 1.3rem 1rem;
+    border-radius: 3%;
+}
+
+/******************** Show More & Less ********************/
+
+.sliding{
+    margin: 1rem auto;
+    text-align: center;
+    width: fit-content;
+}
+
+.slider-link{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+
+.slider-link i{
+    font-size: 2rem;
+    font-weight: 100;
+    color: black
+}
+
+.slider-number a:hover{
+    border-bottom: 2px solid rgb(131, 131, 240);
+}
+
+.slider-link .slider-number a{
+    font-size: 0.9rem;
+    font-weight: 100;
+    color:rgb(131, 131, 240);
+}
+
+.sliding .show-more-less{
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    padding: 0.5rem 1rem;
+    border: 1px solid blue;
+    border-radius: 4rem;
+    background-color: white;
+    width: 10rem;
+    text-align: center;
+}
+
+.sliding .show-more-less:hover{
+    background-color: rgba(237, 237, 250, 0.425);
+}
+
+/********************* Media Quary *********************/
+
+#filter-btn{
+    border: 1px solid black;
+    padding: 1rem 5rem;
+    color: black;
+    font-size: var(--font-size);
+    text-align: center;
+    width: 90vw;
+    border-radius: 0.5rem;
+}
+
+
+/* Tablet */
+
+@media only screen and (max-width: 768px) {
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .shop-now{
+        display: flex;
+        flex-direction: column;
+        width: 90vw;
+        margin: 0;
+    }
+    
+    .breadcrumb-navigator{
+        width: 90vw;
+        margin: 0;
+    }
+    .breadcrumb-navigator ul{
+        padding-left: 1rem;
+    }
+
+    .filter{
+        display: none;
+    }
+    .filter-btn{
+        display: block;
+        margin-bottom: 1rem;
+    }
+    .cards-header-section{
+        display: none;
+    }
+    .cards-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;        
+    }
+    .card-button-exist{
+        margin: auto;
+    }
+    .card-button-out{
+        margin: auto
+    }
+}
+
+/* Mobile */
+
+@media only screen and (max-width: 428px) {
+    .container{
+        width: fit-content;
+    }
+    .shop-now{
+        width: 100%;
+    }
+    .breadcrumb-navigator{
+        width: 100%;
+    }
+    #filter-btn{
+        width: 100%;
+    }
+}
+
+
+

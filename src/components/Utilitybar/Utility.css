@@ -1,0 +1,110 @@
+a {
+	color: #006db7;
+	text-decoration: none;
+}
+.utility-bar {
+	background-color: #f8f8f8;
+	color: var(--font-color);
+	display: flex;
+	margin: 0 auto;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0px 1.875em;
+	font-size: 1rem;
+}
+.utility-bar-styles {
+	display: inline-flex;
+	font-size: 0.75rem;
+	border: none;
+	margin: 0.9375em 0;
+	border-radius: 3px;
+}
+.utility-bar-styles:nth-child(1) a {
+	text-transform: uppercase;
+	text-decoration: none;
+    display: flex;
+	gap: 0.3rem;
+	align-items: center;
+	padding: 0 0.625rem;
+	line-height: 1.5625rem;
+	color: rgb(0, 0, 0);
+	background: rgb(171, 217, 255);
+	box-shadow: rgb(48 85 181 / 44%) 0px 1px 4px 0px;
+    font-size: 0.75rem;
+	font-weight: 500;
+}
+.utility-bar-styles:nth-child(1) a:hover {
+	background-color: #f8f8f8;
+}
+.utility-bar-styles:nth-child(2) {
+    font-size: 0.75rem;
+	font-family: "CeraProLight";
+	line-height: 1.5rem;
+	display: inline-flex;
+	gap: 1.75rem;
+}
+.utility-bar-styles:nth-child(2) span,
+.utility-bar-styles:nth-child(2) a {
+    font-size: 0.75rem;
+}
+.utility-bar-styles:nth-child(2) a:hover {
+	text-decoration: underline;
+}
+.utility-bar-styles:nth-child(3) {
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+	gap: 1rem;
+	line-height: 1.5625rem;
+}
+.utility-bar-styles:nth-child(4) {
+	display: none;
+}
+.user-icon,
+.vip-icon,
+.region-icon {
+	display: flex;
+    align-items: center;
+	gap: 0.5em;
+	color: #2c2c2c;
+	font-weight: 500;
+    font-size: 0.75rem;
+}
+.vip-icon i {
+	line-height: 1.5em;
+	font-size: 1.125em;
+	background: linear-gradient(to bottom right, #70cbe9, #1055af);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 770px) {
+    .utility-bar-styles {
+		display: none;
+		margin: 0.325rem 0;
+	}
+    .utility-bar-styles:nth-child(3) {
+        display: none;
+    }
+	.utility-bar-styles:nth-child(4) {
+		display: inline-flex;
+	}
+	.utility-bar-styles:nth-child(4) a {
+		color: #2c2c2c;
+		font-size: 1.5rem;
+	}
+}
+@media (max-width: 470px) {
+    .utility-bar-styles {
+		display: none;
+		margin: 0.325rem 0;
+	}
+	.utility-bar-styles:nth-child(4) {
+		display: inline-flex;
+	}
+	.utility-bar-styles:nth-child(4) a {
+		color: #2c2c2c;
+		font-size: 1.5rem;
+	}
+}

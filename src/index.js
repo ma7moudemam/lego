@@ -1,10 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom'
+import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import "./assets/fonts/Cera Pro Bold.otf";
+import "./assets/fonts/Cera Pro Light.otf";
+import "./assets/fonts/Cera Pro Medium.otf";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-	<React.StrictMode>
-		<App />
-	</React.StrictMode>
+
+
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
