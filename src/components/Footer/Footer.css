@@ -10,7 +10,7 @@ footer {
   font-family: "CeraProLight";
   text-align: left;
 }
-.container {
+.footer-container {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -67,7 +67,7 @@ footer {
   padding: 2.5rem 1rem;
 }
 .socialmedia-wrapper h6 {
-  font-family: "CeraProMed";
+  font-family: "CeraProMedium";
   font-size: 1.1rem;
   margin-bottom: 15px;
   text-transform: uppercase;
