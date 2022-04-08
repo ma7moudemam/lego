@@ -52,7 +52,7 @@ function App() {
           <ProductCard />
         </Router>
         <Router path="/card">
-          {/* <ProductCart /> */}
+          <ProductCart />
           <SwiperSlider />
         </Router>
       </Switch>
