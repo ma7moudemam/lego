@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Style from "./Personal.module.css";
 
 export default function Personal() {
@@ -13,7 +14,11 @@ export default function Personal() {
           go here to edit your LEGO Account details
         </span>
         <div className={Style["wrapper-personal-btn"]}>
-          <button className={Style["personal-btn"]}>LEGO® Account Details</button>
+          <button className={Style["personal-btn"]}>
+          <Link to={`/details`} style={{ textDecoration: "none", color: "white" }}>
+          LEGO® Account Details
+        </Link>
+            </button>
           <div className={Style["personal-email"]}>
             <span className={Style["lego-account"]}>LEGO® Account Email</span>
             <span className={Style["personal-text"]}>-----@gmail.com</span>
@@ -39,3 +44,5 @@ export default function Personal() {
     </div>
   );
 }
+
+

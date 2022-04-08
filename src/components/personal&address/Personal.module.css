@@ -48,7 +48,7 @@
     cursor: pointer;
     text-decoration: none;
 }.personal-btn:hover{
-    background-color: white;
+    /* background-color: white; */
     color: black;
 }
 .personal-email {
