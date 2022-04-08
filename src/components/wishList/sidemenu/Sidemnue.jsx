@@ -12,7 +12,7 @@ function SideMenue() {
   }
   return (
     <div className={Style.container}>
-      <ul className={Style.menu}>
+      <ul className={Style.menu} style={{paddingLeft: "0px"}}>
         <NavLink
           to="/whishlist/myorder"
           className={(isActive) =>
@@ -43,7 +43,7 @@ function SideMenue() {
           <li className={Style["side-menu-items"]}>Logout</li>
         </NavLink>
       </ul>
-      <ul className={Style.menuTwo} >
+      <ul className={Style.menuTwo} style={{paddingLeft: "0px"}}>
         <div>
           <button className={Style["btn-menu"]} onClick={toggling}>
             <div className={Style["account-menu"]}>
@@ -66,7 +66,7 @@ function SideMenue() {
             </div>
           </button>
           <div className={isOpen ?Style.show :Style.hiddenMenu} >
-            <ul className={Style.menuT}>
+            <ul className={Style.menuTwo} style={{paddingLeft: "0px"}}> 
               <NavLink
                 to="/whishlist/myorder"
                 className={(isActive) =>

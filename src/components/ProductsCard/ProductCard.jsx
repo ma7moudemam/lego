@@ -21,6 +21,26 @@ export default function ProductCard() {
   const handleChange = (event, value) => {
     setCard(value);
   };
+  // const [products, setProducts] = useState([]);
+  // useEffect(() => {
+  //   axiosInstance
+  //     .get("/products", {
+  //       params: {
+  //         limit: 5,
+  //       },
+  //     })
+  //     .then((res) => setProducts(res.data))
+  //     .catch((err) => console.log(err));
+
+  //   // axiosInstance.post('url' , { name : "test" } , {
+  //   //   params: {
+  //   //     limit: 5,
+  //   //   },
+  //   //   headers: {
+  //   //     Authorization: "Bearer s5da46s5d43a2s1das5d4as5d4as5dasd",
+  //   //   },
+  //   // })
+  // }, []);
 
   return (
     <>

@@ -13,9 +13,12 @@ export default function Navbar() {
 						<sub>Menu</sub>
 					</div>
 					<img src={legoLogo} className="nav-list-item" alt="logo" />
-					<li className="nav-list-item">
-						<a href="/store">shop</a>
-					</li>
+
+						<NavLink to="/shop-now">
+						<li className="nav-list-item">
+							shop 
+						</li>
+						</NavLink>
 					<li className="nav-list-item">
 						<a href="/store">discover</a>
 					</li>
