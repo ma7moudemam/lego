@@ -14,11 +14,9 @@ export default function Navbar() {
 					</div>
 					<img src={legoLogo} className="nav-list-item" alt="logo" />
 
-						<NavLink to="/shop-now">
-						<li className="nav-list-item">
-							shop 
-						</li>
-						</NavLink>
+					<NavLink to="/shop-now">
+						<li className="nav-list-item">shop</li>
+					</NavLink>
 					<li className="nav-list-item">
 						<a href="/store">discover</a>
 					</li>
@@ -32,16 +30,18 @@ export default function Navbar() {
 							<button className="search-bar-submit" aria-label="submit search">
 								<i className="fas fa-search"></i>
 							</button>
-							<input type="text" className="search-bar-input" aria-label="search" placeholder="Search..." />
+							<input
+								type="text"
+								className="search-bar-input"
+								aria-label="search"
+								placeholder="Search..."
+							/>
 						</div>
 						<div className="search-content"></div>
 					</div>
 					<a href="/account" className="nav-user-icon">
 						<img src={legoUser} className="svg" alt="account" />
 					</a>
-					<li className="nav-list-item">
-						<a href="/contactus">help</a>
-					</li>
 					<NavLink to="/whishlist">
 						<i className="wish-list-icon">
 							<svg width="20" height="18">
@@ -60,7 +60,9 @@ export default function Navbar() {
 								<path d="M2.46 6.33c-.269 0-.489.194-.5.441L1.435 18.19a.436.436 0 00.131.332.52.52 0 00.348.149h12.151c.276 0 .501-.207.501-.462l-.525-11.436c-.011-.248-.23-.442-.5-.442H2.46zM14.448 20l-12.974-.001a1.591 1.591 0 01-1.064-.462 1.357 1.357 0 01-.408-1.03L.56 6.372C.595 5.602 1.277 5 2.11 5h11.78c.835 0 1.516.602 1.551 1.372l.56 12.197c0 .789-.697 1.431-1.553 1.431z"></path>
 							</g>
 						</svg>
-						<span>0</span>
+						<span>
+							<small>(0)</small>
+						</span>
 					</i>
 				</div>
 			</nav>
