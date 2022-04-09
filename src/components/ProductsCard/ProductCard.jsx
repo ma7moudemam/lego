@@ -34,7 +34,17 @@ export default function ProductCard() {
       })
       .catch((err) => console.log(err));
 
-  }, [page,filterValues]);
+  }, [page]);
+  useEffect(() => {
+    getProduct(3, page,filterValues)
+    .then((res) => {
+      setProducts(res.data.products)
+      setCount(res.data.count)
+      setPage(1)
+    })
+    .catch((err) => console.log(err));
+
+}, [filterValues]);
   
 
  
@@ -79,7 +89,7 @@ export default function ProductCard() {
             {/* <!-- sliding --> */}
             <div className="sliding">
               <Stack spacing={2}>
-                <Pagination count={Math.ceil(count/3)} card={page} onChange={handleChange} />
+                <Pagination count={Math.ceil(count/3) || 1} card={page} onChange={handleChange} />
               </Stack>
             </div>
           </section>

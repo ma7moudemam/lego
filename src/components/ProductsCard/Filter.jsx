@@ -41,6 +41,7 @@ export default function Filter(props) {
       category: [...categoryFilter],
       rating:[...ratingFilter]
     })
+    
   },[priceRangeFilter, categoryFilter,ratingFilter])
 
   useEffect(()=>{
