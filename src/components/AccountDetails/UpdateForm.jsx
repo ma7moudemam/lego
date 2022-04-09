@@ -19,6 +19,9 @@ export default function UpdateForm() {
       month: "",
       year: "",
       country: "",
+      city: "",
+      street: "",
+      building: "",
     },
     validationSchema: Yup.object({
       UserName: Yup.string()
@@ -38,6 +41,9 @@ export default function UpdateForm() {
         .min(1930, "your can't be a 100 years old stop lying")
         .required("required"),
       country: Yup.string().required("required"),
+      city: Yup.string().required("required"),
+      street: Yup.string().required("required"),
+      building: Yup.string().required("required"),
     }),
     onSubmit: (values) => {
       console.log("submited");
@@ -48,6 +54,7 @@ export default function UpdateForm() {
   return (
     <>
       <form id="update-form" onSubmit={formik.handleSubmit}>
+        
         <label htmlFor="UpdateUserName"></label>
         <FormControl sx={{ width: "100%", mb: 2 }}>
           <TextField
@@ -149,6 +156,7 @@ export default function UpdateForm() {
             </FormControl>
           </div>
         </div>
+
         <FormControl sx={{ width: "100%", mt: 2 }}>
           <InputLabel id="countries-label">Country</InputLabel>
           <Select
@@ -176,6 +184,66 @@ export default function UpdateForm() {
               : null}
           </FormHelperText>
         </FormControl>
+
+        <div className="row mt-2">
+          <div className="col">
+            <label htmlFor="UpdateCity"></label>
+            <FormControl sx={{ width: "100%", mb: 2 }}>
+              <TextField
+                helperText={
+                  formik.touched.city && formik.errors.city
+                    ? `${formik.errors.city}`
+                    : null
+                }
+                error={formik.touched.city && formik.errors.city ? true : false}
+                label="City"
+                type="text"
+                id="UpdateCity"
+                name="City"
+                placeholder="city"
+                {...formik.getFieldProps("city")}
+              />
+            </FormControl>
+          </div>
+          <div className="col">
+            <label htmlFor="UpdateStreet"></label>
+            <FormControl sx={{ width: "100%", mb: 2 }}>
+              <TextField
+                helperText={
+                  formik.touched.street && formik.errors.street
+                    ? `${formik.errors.street}`
+                    : null
+                }
+                error={formik.touched.street && formik.errors.street ? true : false}
+                label="Street"
+                type="text"
+                id="UpdateStreet"
+                name="Street"
+                placeholder="street"
+                {...formik.getFieldProps("street")}
+              />
+            </FormControl>
+          </div>
+          <div className="col">
+            <label htmlFor="UpdateCity"></label>
+            <FormControl sx={{ width: "100%", mb: 2 }}>
+              <TextField
+                helperText={
+                  formik.touched.building && formik.errors.building
+                    ? `${formik.errors.building}`
+                    : null
+                }
+                error={formik.touched.building && formik.errors.building ? true : false}
+                label="Building"
+                type="text"
+                id="UpdateBuilding"
+                name="building"
+                placeholder="city"
+                {...formik.getFieldProps("building")}
+              />
+            </FormControl>
+          </div>
+        </div>
 
         <div className="d-grid gap-2 col-6 mx-auto my-4">
           <button
