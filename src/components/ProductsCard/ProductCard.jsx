@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
@@ -11,36 +11,43 @@ import Cards from "./Cards";
 // import ProductFilter from "./ProductFilter";
 
 import "./ProductCard.css";
+import { getProduct, getProductDetails } from "../../network/productsAPIs";
 
 function handleClick(event) {
   event.preventDefault();
 }
 
 export default function ProductCard() {
-  const [card, setCard] = React.useState('');
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState(1);
+  const [products, setProducts] = useState([]);
+  const [filterValues , setFilterValues]=useState({});
   const handleChange = (event, value) => {
-    setCard(value);
+    setPage(value);
   };
-  // const [products, setProducts] = useState([]);
-  // useEffect(() => {
-  //   axiosInstance
-  //     .get("/products", {
-  //       params: {
-  //         limit: 5,
-  //       },
-  //     })
-  //     .then((res) => setProducts(res.data))
-  //     .catch((err) => console.log(err));
 
-  //   // axiosInstance.post('url' , { name : "test" } , {
-  //   //   params: {
-  //   //     limit: 5,
-  //   //   },
-  //   //   headers: {
-  //   //     Authorization: "Bearer s5da46s5d43a2s1das5d4as5d4as5dasd",
-  //   //   },
-  //   // })
-  // }, []);
+  useEffect(() => {
+      getProduct(3, page,filterValues)
+      .then((res) => {
+        setProducts(res.data.products)
+        setCount(res.data.count)
+      })
+      .catch((err) => console.log(err));
+
+  }, [page,filterValues]);
+  
+
+ 
+  useEffect(() => {
+    getProduct(5, page,filterValues)
+    .then((res) => setCount(res.data.count))
+    .catch((err) => console.log(err));
+
+  }, []);
+
+  const handelFilterChange = filterValues =>{
+    setFilterValues(filterValues);
+  }
 
   return (
     <>
@@ -55,27 +62,30 @@ export default function ProductCard() {
         </div>
 
         <section className="shop-now ">
-          <Filter />
+          <Filter  handelFilterChange={handelFilterChange}/>
 
           <section className="cards">
             {/* <!-- cards-header-section --> */}
             <div className="cards-header-section">
-              <span>Showing 1 - 17 of 51 results</span>
+              <span>Showing 1 - {3} of {count} results</span>
             </div>
             {/* <!-- cards ccontainer --> */}
             <div className="cards-container">
+              {
+                products.map(item => <Cards product={item} key={item._id} />)
+              }
+              {/* <Cards />
               <Cards />
               <Cards />
               <Cards />
               <Cards />
-              <Cards />
-              <Cards />
+              <Cards /> */}
             </div>
 
             {/* <!-- sliding --> */}
             <div className="sliding">
               <Stack spacing={2}>
-                <Pagination count={10} card={card} onChange={handleChange} />
+                <Pagination count={Math.ceil(count/3)} card={page} onChange={handleChange} />
               </Stack>
             </div>
           </section>

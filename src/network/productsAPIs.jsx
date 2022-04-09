@@ -1,9 +1,22 @@
 import { axiosInstance } from "./axiosConfig";
 
 export const getProductDetails = (id) => {
-  return axiosInstance.get(`/products/${id}`);
+  return axiosInstance.get(`/shop/${id}`);
 };
 
-export const getProduct = () => {
-  return axiosInstance.get(`/products`);
+export const getProduct = (limit, page,filter) => {
+  return axiosInstance.get(`/shop`, {
+    params: {
+      limit: limit,
+      page: page,
+      filter:filter
+    },
+  });
 };
+
+export const postProductRating = (rating, _id) => {
+    return axiosInstance.put(`/rating`,  { rating: rating,  _id: _id});
+};
+
+
+

@@ -1,8 +1,17 @@
-import React from "react";
-
+import React, { useState } from "react";
+import Rating from '@mui/material/Rating';
+import Stack from '@mui/material/Stack';
 import CardImg from "../../assets/imgs/1.jpg";
+import ReactStars from "react-rating-stars-component";
+import { render } from "react-dom";
+import { postProductRating } from "../../network/productsAPIs";
+export default function Cards({product}) {
+  
+const ratingChanged = (newRating) => {
+  console.log(newRating);
+  postProductRating(newRating, product._id).then(res => console.log(res))
+};
 
-export default function Cards() {
   return (
     <div>
           <div className="card">
@@ -12,7 +21,9 @@ export default function Cards() {
               </span>
               <span>Add to wish list</span>
             </div>
-            <img src={CardImg} className="card-img" />
+            <div className="image-contatiner" style={{width: "100%",overflow: "hidden"}}>
+              <img src={`http://localhost:8080/images/${product.images[0]}`} className="card-img" />
+            </div>
             <div className="new-item">new</div>
             <div className="card-name">
               <p>
@@ -20,9 +31,16 @@ export default function Cards() {
               </p>
             </div>
             <span>
-              <i className="fas fa-star"></i>
+              {/* <i className="fas fa-star"></i> */}
+                  <ReactStars
+                  count={5}
+                  onChange={ratingChanged}
+                  size={24}
+                  activeColor="#ffd700"
+                  value={product.rating ? product.rating : 0}
+                />
             </span>
-            <div className="card-price">$79.99</div>
+            <div className="card-price">${product.price}</div>
             <button className="card-button-exist">
               <a href="#">Add to Bag</a>
             </button>

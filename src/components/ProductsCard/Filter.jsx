@@ -1,6 +1,23 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 
-export default function Filter() {
+export default function Filter(props) {
+  const [priceRangeFilter  , setPriceRangeFilter ] = useState([])
+  const handelPriceRangeFilter = e =>{
+    console.log('=>>',e.target.checked,e.target.name)
+    if(e.target.checked){
+        setPriceRangeFilter([...priceRangeFilter,e.target.name ])
+    }else{
+        setPriceRangeFilter(priceRangeFilter.filter(value=>value!==e.target.name))
+    }
+
+  }
+
+  useEffect(()=>{
+    //SEND REQUEST ON FILTER CHANGE
+    props.handelFilterChange({
+      priceRange:[...priceRangeFilter]
+    })
+  },[priceRangeFilter])
   return (
     <div>
       {" "}
@@ -56,19 +73,20 @@ export default function Filter() {
               PRICE <i className="fas fa-chevron-down"></i>
             </label>
             <section className="filter-content">
-              <input type="checkbox" id="max-25" name="max-25" value="" />
+              <br></br>
+              <input type="checkbox" id="max-25" name="0-25" value=""  onChange={handelPriceRangeFilter}/>
               <label for="max-25"> $0 - $25 [19]</label>
               <br></br>
-              <input type="checkbox" id="max-50" name="max-50" value="" />
+              <input type="checkbox" id="max-50" name="25-50" value="" onChange={handelPriceRangeFilter}/>
               <label for="max-50">$25 - $50 [18]</label>
               <br></br>
-              <input type="checkbox" id="max-75" name="max-75" value="" />
+              <input type="checkbox" id="max-75" name="50-75" value="" onChange={handelPriceRangeFilter} />
               <label for="max-75"> $50 - $75 [7]</label>
               <br></br>
-              <input type="checkbox" id="max-100" name="max-100" value="" />
+              <input type="checkbox" id="max-100" name="75-100" value="" onChange={handelPriceRangeFilter} />
               <label for="max-100"> $75 - $100 [6]</label>
               <br></br>
-              <input type="checkbox" id="min-100" name="min-100" value="" />
+              <input type="checkbox" id="min-100" name="100-200" value="" onChange={handelPriceRangeFilter} />
               <label for="min-100"> $100+ [1]</label>
               <br></br>
             </section>
