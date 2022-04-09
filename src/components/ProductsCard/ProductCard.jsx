@@ -74,12 +74,6 @@ export default function ProductCard() {
               {
                 products.map(item => <Cards product={item} key={item._id} />)
               }
-              {/* <Cards />
-              <Cards />
-              <Cards />
-              <Cards />
-              <Cards />
-              <Cards /> */}
             </div>
 
             {/* <!-- sliding --> */}

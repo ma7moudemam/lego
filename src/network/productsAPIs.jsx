@@ -18,5 +18,9 @@ export const postProductRating = (rating, _id) => {
     return axiosInstance.put(`/rating`,  { rating: rating,  _id: _id});
 };
 
+export const getAllCategory = () => {
+  return axiosInstance.get(`/dashboard/category`);
+};
+
 
 
