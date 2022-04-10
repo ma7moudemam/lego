@@ -6,7 +6,6 @@ export default function Filter(props) {
   const [priceRangeFilter  , setPriceRangeFilter ] = useState([]);
   const [categoryFilter  , setCategoryFilter ] = useState([])
   const [ratingFilter  , setRatingFilter ] = useState([])
-
   const handelPriceRangeFilter = e =>{
     if(e.target.checked){
         setPriceRangeFilter([...priceRangeFilter,e.target.name ])
@@ -63,7 +62,7 @@ export default function Filter(props) {
         <ul className="accordion-menu">
           <li id="header-filter">
             <p>
-              <a href="#">Reset All</a>
+              <a onClick={()=>setCategoryFilter([])}>Reset All</a>
             </p>
           </li>
           <li>

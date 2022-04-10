@@ -24,6 +24,7 @@
 	align-items: center;
 	list-style: none;
 	gap: 3em;
+	margin-bottom: 0;
 }
 .nav-list a {
     font-size: 1rem;
@@ -31,8 +32,10 @@
 	line-height: 1.1875rem;
 	border-bottom: 3px solid transparent;
 	cursor: pointer;
+	text-decoration: none;
 }
 .nav-list a:hover {
+	color: rgb(0, 0, 0);
 	border-bottom-color: black;
 	transition: border 500ms;
 }
@@ -50,6 +53,7 @@
 	font-size: 0.75rem;
 }
 .nav-icons i {
+	color: rgb(0, 0, 0);
     font-size: 0.9rem;
 	display: flex;
 	align-items: center;
@@ -57,6 +61,11 @@
 	text-decoration: none;
 	font-style: normal;
 }
+
+.nav-icons i:hover {
+	color: rgb(0, 0, 0,0.6);
+}
+
 .cart-icon a {
 	display: flex;
 	gap: 0.25rem;
@@ -184,6 +193,7 @@ max-width: 750px */
 	.nav-list {
 		align-items: center;
 		gap: 1rem;
+		padding-left: 0;
 	}
 
 	.nav-bar .nav-list div {

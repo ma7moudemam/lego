@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useFormik } from "formik";
@@ -19,9 +19,21 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 
 import Logo from "../../assets/imgs/LEGOAccount-Logo.svg";
 import "./AccountDetails.css";
-import { NoEncryption } from "@mui/icons-material";
+import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 export default function AccountSecurity() {
+  const [users, setUsers] = useState([]);
+  // Just getting user
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/account/me", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((res) => setUsers(res.data)) // users => returned data
+      .catch((err) => console.log(err));
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       new_password: "",
@@ -36,6 +48,16 @@ export default function AccountSecurity() {
     onSubmit: (values) => {
       console.log("submited");
       console.log(JSON.stringify(values, null, 2));
+      axios
+        .put("http://localhost:8080/account", values, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        })
+        .then((res) => (
+          setUsers({
+            ...users,
+            values}),
+          <Redirect to="/my-account" /> ))
+        .catch((err) => console.log(err));
     },
   });
 
@@ -159,7 +181,11 @@ export default function AccountSecurity() {
               >
                 <Link
                   to={`/details`}
-                  style={{ textDecoration: "none", border: 'none', color: "black" }}
+                  style={{
+                    textDecoration: "none",
+                    border: "none",
+                    color: "black",
+                  }}
                 >
                   Go Back
                 </Link>
