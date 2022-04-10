@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "./Navbar.css";
 import legoLogo from "./../../assets/imgs/lego-logo.svg";
 import legoUser from "../../assets/imgs/lego-user.svg";

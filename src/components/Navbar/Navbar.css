@@ -193,6 +193,7 @@ max-width: 750px */
 	.nav-list {
 		align-items: center;
 		gap: 1rem;
+		padding-left: 0;
 	}
 
 	.nav-bar .nav-list div {
