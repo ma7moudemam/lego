@@ -24,7 +24,32 @@ import AccountDetails from "./components/AccountDetails/AccountDetails";
 import AccountInformation from "./components/AccountDetails/AccountInformation";
 import AccountSecurity from "./components/AccountDetails/AccountSecurity";
 import DeleteAccount from "./components/AccountDetails/DeleteAccount";
+
+import {useEffect, useState} from 'react'
+import {getUserCart,updateUserCart} from './network/cartAPI'
+import {useSelector,useDispatch} from 'react-redux'
+import {initUserCart} from './Redux/Actions/cartActions'
 function App() {
+
+  const dispatch = useDispatch()
+  const cart = useSelector(store=>store.cart)
+  const [initCart,setInitCart]=useState(false)
+
+
+  useEffect(()=>{
+    if(initCart){
+      updateUserCart({...cart})
+      .then(res=>console.log('===>UPDATE CART ',res.data))
+      .catch(err=>console.log('==>ERROR UPDATE CART ,',err))
+    }else{
+      setInitCart(true)
+      getUserCart()
+      .then(res=>dispatch(initUserCart(res.data)))
+      .catch(err=>console.log('==>ERROR CART ,',err))
+    }
+  },[cart])
+
+
 	return (
 		<div className="App">
 			<Menu />
@@ -37,7 +62,6 @@ function App() {
 				<Route exact path="/mybag">
 					<MyBag />
 				</Route>
-
 				<Route exact path="/">
 					<HomePage />
 				</Route>
