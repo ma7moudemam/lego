@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,8 +11,34 @@ import TextField from "@mui/material/TextField";
 
 import Logo from "../../assets/imgs/LEGOAccount-Logo.svg";
 import "./AccountDetails.css";
+import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 export default function AccountSecurity() {
+  const [user, setUser] = useState([]);
+useEffect(() => {
+  axios
+    .get("http://localhost:8080/account/me", {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    })
+    .then((res) => setUser(res.data))
+    .catch((err) => console.log(err));
+}, []);
+
+  const handelDeleteAction = () => {
+    axios
+      .delete("http://localhost:8080/account", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((res) => (console.log("deleted"), (<Redirect to="/" />)))
+      .catch((err) => console.log(err));
+  };
+
+  const handelLogOutAction = () => {
+    localStorage.removeItem("token");
+    <Redirect to="/" />;
+  };
+
   return (
     <>
       <CssBaseline />
@@ -21,7 +47,14 @@ export default function AccountSecurity() {
           <Box sx={{ bgcolor: "#ffcf00", height: "12vh" }}>
             <div className="text-center">
               <button className="back-arrow">
-                <Link to={`/details`}  style={{ textDecoration: "none", border: 'none', color: "black" }}>
+                <Link
+                  to={`/details`}
+                  style={{
+                    textDecoration: "none",
+                    border: "none",
+                    color: "black",
+                  }}
+                >
                   <ArrowBackIosIcon fontSize="large" />
                 </Link>
               </button>
@@ -32,7 +65,14 @@ export default function AccountSecurity() {
                 style={{ marginLeft: "0" }}
               />
               <button className="closing-btn">
-                <Link to={`/my-account`}  style={{ textDecoration: "none", border: 'none', color: "black" }}>
+                <Link
+                  to={`/my-account`}
+                  style={{
+                    textDecoration: "none",
+                    border: "none",
+                    color: "black",
+                  }}
+                >
                   <CloseIcon fontSize="large" />
                 </Link>
               </button>
@@ -63,7 +103,7 @@ export default function AccountSecurity() {
                 fullWidth
                 id="standard-read-only-input"
                 label="Username"
-                defaultValue="Hello World"
+                defaultValue={user.userName}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -74,8 +114,8 @@ export default function AccountSecurity() {
               <TextField
                 fullWidth
                 id="standard-read-only-input"
-                label="Nickname"
-                defaultValue="Hello World"
+                label="Email"
+                defaultValue={user.email}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -92,6 +132,7 @@ export default function AccountSecurity() {
                   fontSize: "20px",
                 }}
                 type=""
+                onClick={handelDeleteAction}
               >
                 <Link
                   to={`/`}
@@ -108,6 +149,7 @@ export default function AccountSecurity() {
                   fontSize: "20px",
                 }}
                 type="button"
+                onClick={handelLogOutAction}
               >
                 cancel
               </button>
@@ -118,5 +160,3 @@ export default function AccountSecurity() {
     </>
   );
 }
-
-// Link with LEGO® Account
