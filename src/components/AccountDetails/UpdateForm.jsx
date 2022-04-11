@@ -80,6 +80,7 @@ export default function UpdateForm() {
         address: address,
         age: getAge()
       };
+      
       console.log(body);
       axios
         .post("http://localhost:8080/account/update", body, {

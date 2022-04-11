@@ -4,60 +4,61 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
+import axios from "axios";
+import { Redirect } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+
+import { FacebookLoginButton } from "react-social-login-buttons";
+import { GoogleLoginButton } from "react-social-login-buttons";
 
 import FormControl from "@mui/material/FormControl";
-
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-import { FacebookLoginButton } from "react-social-login-buttons";
-
-import { GoogleLoginButton } from "react-social-login-buttons";
-
 import Logo from "../../assets/imgs/LEGOAccount-Logo.svg";
 import "./AccountDetails.css";
-import axios from "axios";
-import { Redirect } from "react-router-dom";
 
 export default function AccountSecurity() {
-  const [users, setUsers] = useState([]);
-  // Just getting user
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/account/me", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-      .then((res) => setUsers(res.data)) // users => returned data
-      .catch((err) => console.log(err));
-  }, []);
+    const [users, setUsers] = useState(() =>
+    jwt_decode(localStorage.getItem("token"))
+  );
 
   const formik = useFormik({
     initialValues: {
-      new_password: "",
+      password: "",
     },
 
     validationSchema: Yup.object({
-      new_password: Yup.string()
+      password: Yup.string()
         .max(20, "Must be 20 characters or less")
         .min(5, "Must be 5 characters or more")
         .required("required"),
     }),
+
     onSubmit: (values) => {
       console.log("submited");
       console.log(JSON.stringify(values, null, 2));
+
+      const body = {
+        password : values.password
+      };
+
+      console.log(body);
+
       axios
-        .put("http://localhost:8080/account", values, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        })
-        .then((res) => (
-          setUsers({
-            ...users,
-            values}),
-          <Redirect to="/my-account" /> ))
-        .catch((err) => console.log(err));
+      .post("http://localhost:8080/account/update", body, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        console.log("res");
+        <Redirect to="/login" />;
+      })
+      .catch((err) => console.log(err));
     },
   });
 
@@ -110,20 +111,20 @@ export default function AccountSecurity() {
               <FormControl sx={{ width: "100%" }} variant="filled">
                 <TextField
                   helperText={
-                    formik.touched.new_password && formik.errors.new_password
-                      ? `${formik.errors.new_password}`
+                    formik.touched.password && formik.errors.password
+                      ? `${formik.errors.password}`
                       : null
                   }
                   error={
-                    formik.touched.new_password && formik.errors.new_password
+                    formik.touched.password && formik.errors.password
                       ? true
                       : false
                   }
                   label="Password"
                   type="password"
                   id="signupPassword"
-                  name="new_password"
-                  {...formik.getFieldProps("new_password")}
+                  name={users.user.password}
+                  {...formik.getFieldProps("password")}
                 />
               </FormControl>
 
@@ -147,11 +148,12 @@ export default function AccountSecurity() {
                 </button>
               </div>
             </form>
+
             <h4 style={{ textAlign: "center" }}>Link with LEGO® Account</h4>
 
-            <FacebookLoginButton onClick={() => alert("Hello")} />
+            <FacebookLoginButton onClick={() => alert("Hello FaceBook")} />
 
-            <GoogleLoginButton onClick={() => alert("Hello")} />
+            <GoogleLoginButton onClick={() => alert("Hello Google")} />
 
             <div className="d-grid gap-2 col-6 mx-auto my-4">
               <button
@@ -197,5 +199,3 @@ export default function AccountSecurity() {
     </>
   );
 }
-
-// Link with LEGO® Account
