@@ -281,7 +281,8 @@ ul.breadcrumb li+li:before {
 .card-img{
     margin: 0.2rem auto;
     width: 17rem;
-    transition: transform .2s
+    transition: transform .2s;
+    /* max-width: 230px */
 }
 .card-img:hover{
     transform: scale(1.2);

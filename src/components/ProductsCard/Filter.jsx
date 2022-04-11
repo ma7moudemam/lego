@@ -6,7 +6,10 @@ export default function Filter(props) {
   const [priceRangeFilter  , setPriceRangeFilter ] = useState([]);
   const [categoryFilter  , setCategoryFilter ] = useState([])
   const [ratingFilter  , setRatingFilter ] = useState([])
+  const [isReset  , setReset ] = useState(false);
+
   const handelPriceRangeFilter = e =>{
+    setReset(false)
     if(e.target.checked){
         setPriceRangeFilter([...priceRangeFilter,e.target.name ])
     }else{
@@ -16,6 +19,7 @@ export default function Filter(props) {
   }
 
   const handelCategoryFilter = e => {
+    setReset(false)
     if(e.target.checked){
       setCategoryFilter([...categoryFilter,e.target.value ])
     }else{
@@ -24,6 +28,7 @@ export default function Filter(props) {
   }
 
   const handelRatingFilter = e => {
+    setReset(false)
     if(e.target.checked){
       setRatingFilter([...ratingFilter,e.target.value ])
     }else{
@@ -48,6 +53,16 @@ export default function Filter(props) {
     getAllCategory().then(res => setCategories(res.data.body) )
   },[]);
 
+  useEffect(()=>{
+    // Get All category
+    if(isReset){
+      setPriceRangeFilter([]);
+      setCategoryFilter([])
+      setRatingFilter([])
+    }
+
+  },[isReset]);
+
   return (
     <div>
       {" "}
@@ -62,7 +77,7 @@ export default function Filter(props) {
         <ul className="accordion-menu">
           <li id="header-filter">
             <p>
-              <a onClick={()=>setCategoryFilter([])}>Reset All</a>
+              <div onClick={()=>setReset(true)}>Reset All</div>
             </p>
           </li>
           <li>
@@ -74,7 +89,7 @@ export default function Filter(props) {
               {
                 categories.map(catgory => 
                   <div key={catgory._id}>
-                    <input type="checkbox" id={catgory._id} name={catgory.name} value={catgory._id}
+                    <input type="checkbox" checked={categoryFilter.includes(String(catgory._id))} id={catgory._id} name={catgory.name} value={catgory._id}
                     onChange={handelCategoryFilter}
                     />
                     <label for={catgory._id}> {catgory.name}[{catgory.products.length}]</label>
@@ -110,19 +125,19 @@ export default function Filter(props) {
             </label>
             <section className="filter-content">
               <br></br>
-              <input type="checkbox" id="max-25" name="0-25" value=""  onChange={handelPriceRangeFilter}/>
+              <input type="checkbox" id="max-25" name="0-25" value="" checked={priceRangeFilter.includes("0-25")}  onChange={handelPriceRangeFilter}/>
               <label for="max-25"> $0 - $25 [19]</label>
               <br></br>
-              <input type="checkbox" id="max-50" name="25-50" value="" onChange={handelPriceRangeFilter}/>
+              <input type="checkbox" id="max-50" name="25-50" value="" checked={priceRangeFilter.includes("25-50")} onChange={handelPriceRangeFilter}/>
               <label for="max-50">$25 - $50 [18]</label>
               <br></br>
-              <input type="checkbox" id="max-75" name="50-75" value="" onChange={handelPriceRangeFilter} />
+              <input type="checkbox" id="max-75" name="50-75" value="" onChange={handelPriceRangeFilter} checked={priceRangeFilter.includes("50-75")}/>
               <label for="max-75"> $50 - $75 [7]</label>
               <br></br>
-              <input type="checkbox" id="max-100" name="75-100" value="" onChange={handelPriceRangeFilter} />
+              <input type="checkbox" id="max-100" name="75-100" value="" onChange={handelPriceRangeFilter} checked={priceRangeFilter.includes("75-100")}/>
               <label for="max-100"> $75 - $100 [6]</label>
               <br></br>
-              <input type="checkbox" id="min-100" name="100-200" value="" onChange={handelPriceRangeFilter} />
+              <input type="checkbox" id="min-100" name="100-200" value="" onChange={handelPriceRangeFilter} checked={priceRangeFilter.includes("100-200")} />
               <label for="min-100"> $100+ [1]</label>
               <br></br>
             </section>
@@ -174,7 +189,7 @@ export default function Filter(props) {
               RATING<i className="fas fa-chevron-down"></i>
             </label>
             <section className="filter-content">
-              <input type="checkbox" id="up-2-star" name="up-2-star" value="2" onChange={handelRatingFilter} />
+              <input type="checkbox" id="up-2-star" name="up-2-star" checked={ratingFilter.includes("2")} value="2" onChange={handelRatingFilter} />
               <label for="up-2-star">
                 <span>
                   <i className="fas fa-star"></i>
@@ -194,7 +209,7 @@ export default function Filter(props) {
                 <span>[19]</span>
               </label>
               <br></br>
-              <input type="checkbox" id="up-4-star" name="up-4-star" value="4" onChange={handelRatingFilter}/>
+              <input type="checkbox" id="up-4-star" name="up-4-star" value="4" checked={ratingFilter.includes("4")} onChange={handelRatingFilter}/>
               <label for="up-4-star">
                 <span>
                   <i className="fas fa-star"></i>
