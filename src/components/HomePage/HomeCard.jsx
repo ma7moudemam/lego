@@ -5,25 +5,24 @@ export default function HomeCard({product}) {
   return (
     <div>
       {" "}
-      <h1>{product.name}</h1>
       <div className="card-1">
         <a className="card-content" href="#" target="_blank">
           <div className="image-container">
             <div className="main-image">
-              <img src={Cards} />
+              <img src={product.images[0]} />
             </div>
-            <div className="nested-image">
+            {/* <div className="nested-image">
               <img src={NestedCards} />
-            </div>
+            </div> */}
           </div>
           <div className="text-container">
             <h3>
-              <span>Bring worlds together</span>
+              <span>{product.name}</span>
             </h3>
             <p>
-              <span>
+              {/* <span>
                 Kids can mix and match stories with new LEGO® | Disney sets.
-              </span>
+              </span> */}
             </p>
             <div className="shop">
               <span>Shop Now</span>
