@@ -35,28 +35,28 @@ import { initUserCart } from './Redux/Actions/cartActions'
 
 function App() {
 
-  const dispatch = useDispatch()
-  const cart = useSelector(store => store.cart)
-  const [initCart, setInitCart] = useState(false)
+  // const dispatch = useDispatch()
+  // const cart = useSelector(store => store.cart)
+  // const [initCart, setInitCart] = useState(false)
 
 
-  useEffect(() => {
-    if (initCart) {
-      updateUserCart({ ...cart })
-        .then(res => console.log('===>UPDATE CART ', res.data))
-        .catch(err => console.log('==>ERROR UPDATE CART ,', err))
-    } else {
-      setInitCart(true)
-      getUserCart()
-        .then(res => dispatch(initUserCart(res.data)))
-        .catch(err => console.log('==>ERROR CART ,', err))
-    }
-  }, [cart])
+  // useEffect(() => {
+  //   if (initCart) {
+  //     updateUserCart({ ...cart })
+  //       .then(res => console.log('===>UPDATE CART ', res.data))
+  //       .catch(err => console.log('==>ERROR UPDATE CART ,', err))
+  //   } else {
+  //     setInitCart(true)
+  //     getUserCart()
+  //       .then(res => dispatch(initUserCart(res.data)))
+  //       .catch(err => console.log('==>ERROR CART ,', err))
+  //   }
+  // }, [cart])
 
 
   return (
     <div className="App">
-      <Menu />
+      {/* <Menu />
       <Utility />
       <Navbar />
       <Hero />
@@ -65,11 +65,11 @@ function App() {
       <Switch>
         <Route exact path="/mybag">
           <MyBag />
-        </Route>
+        </Route> */}
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Router path="/whishlist">
+        {/* <Router path="/whishlist">
           <Wishlist />
         </Router>
         <Router path="/login">
@@ -104,7 +104,7 @@ function App() {
           <Dashboard />
         </Router>
       </Switch>
-      <Footer />
+      <Footer /> */}
     </div>
   );
 }
