@@ -11,7 +11,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import "./Login.css";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, NavLink } from "react-router-dom";
 
 function Login() {
 	const formik = useFormik({
@@ -27,9 +27,7 @@ function Login() {
 			axios.post("http://localhost:8080/login", values).then((res) => {
 				//res.data
 				localStorage.setItem("token", res.data.token);
-				<Route exact path="/">
-					{<Redirect to="/home" />}
-				</Route>;
+				return <Redirect to="/home" />;
 			});
 		},
 	});
@@ -98,7 +96,7 @@ function Login() {
 				</div>
 				<div className="go-signup">
 					<p>Don't have a LEGO® Account?</p>
-					<a href="/signup">Create account</a>
+					<NavLink to="/signup">Create account</NavLink>
 				</div>
 			</div>
 		</div>

@@ -1,35 +1,36 @@
 import "./Utility.css";
 import legoUser from "../../assets/imgs/lego-user.svg";
+import { NavLink } from "react-router-dom";
 
 export default function Utility() {
 	return (
 		<>
 			<div className="utility-bar">
 				<div className="utility-bar-styles">
-					<a className="left-utility" href="#">
+					<NavLink className="left-utility" to="#">
 						<i className="fas fa-long-arrow-alt-left"></i>
 						play zone
-					</a>
+					</NavLink>
 				</div>
 				<div className="utility-bar-styles">
 					<span>
-						FREE Shipping with orders over $35! <a href="#">Learn more</a>
+						FREE Shipping with orders over $35! <NavLink to="#">Learn more</NavLink>
 					</span>
 				</div>
 				<div className="utility-bar-styles">
-					<a href="#" className="user-icon">
+					<NavLink to="/login" className="user-icon">
 						<img src={legoUser} className="svg" />
 						Account
-					</a>
+					</NavLink>
 					|
-					<a href="#" className="vip-icon">
+					<NavLink to="#" className="vip-icon">
 						<i className="fas fa-crown"></i>VIP
-					</a>
+					</NavLink>
 				</div>
 				<div className="utility-bar-styles">
-					<a href="#">
+					<button type="button">
 						<i className="fas fa-times"></i>
-					</a>
+					</button>
 				</div>
 			</div>
 		</>
