@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
 import "./Navbar.css";
 import legoLogo from "./../../assets/imgs/lego-logo.svg";
 import legoUser from "../../assets/imgs/lego-user.svg";
 import { NavLink } from "react-router-dom";
-
+import {useSelector} from 'react-redux'
 export default function Navbar() {
+	const totalItemsCount = useSelector(store=>store.cart.totalItemsCount)
 	return (
 		<div className="nav-container">
 			<nav className="nav-bar">
@@ -14,11 +14,9 @@ export default function Navbar() {
 					</div>
 					<img src={legoLogo} className="nav-list-item" alt="logo" />
 
-						<NavLink to="/shop-now">
-						<li className="nav-list-item">
-							shop 
-						</li>
-						</NavLink>
+					<NavLink to="/shop-now">
+						<li className="nav-list-item">shop</li>
+					</NavLink>
 					<li className="nav-list-item">
 						<a href="/store">discover</a>
 					</li>
@@ -32,16 +30,18 @@ export default function Navbar() {
 							<button className="search-bar-submit" aria-label="submit search">
 								<i className="fas fa-search"></i>
 							</button>
-							<input type="text" className="search-bar-input" aria-label="search" placeholder="Search..." />
+							<input
+								type="text"
+								className="search-bar-input"
+								aria-label="search"
+								placeholder="Search..."
+							/>
 						</div>
 						<div className="search-content"></div>
 					</div>
 					<a href="/account" className="nav-user-icon">
 						<img src={legoUser} className="svg" alt="account" />
 					</a>
-					<li className="nav-list-item">
-						<a href="/contactus">help</a>
-					</li>
 					<NavLink to="/whishlist">
 						<i className="wish-list-icon">
 							<svg width="20" height="18">
@@ -53,15 +53,17 @@ export default function Navbar() {
 							</svg>
 						</i>
 					</NavLink>
-					<i className="cart-icon">
-						<svg height="20px" width="18px">
-							<g fill="currentColor" fill-rule="evenodd">
-								<path d="M4 3.512v5.804c0 .377.349.684.779.684.43 0 .779-.307.779-.684V3.512C5.558 2.33 6.653 1.368 8 1.368c1.347 0 2.442.962 2.442 2.144v5.804c0 .377.35.684.78.684.43 0 .778-.307.778-.684V3.512C12 1.575 10.206 0 8 0S4 1.575 4 3.512z"></path>
-								<path d="M2.46 6.33c-.269 0-.489.194-.5.441L1.435 18.19a.436.436 0 00.131.332.52.52 0 00.348.149h12.151c.276 0 .501-.207.501-.462l-.525-11.436c-.011-.248-.23-.442-.5-.442H2.46zM14.448 20l-12.974-.001a1.591 1.591 0 01-1.064-.462 1.357 1.357 0 01-.408-1.03L.56 6.372C.595 5.602 1.277 5 2.11 5h11.78c.835 0 1.516.602 1.551 1.372l.56 12.197c0 .789-.697 1.431-1.553 1.431z"></path>
-							</g>
-						</svg>
-						<span>0</span>
-					</i>
+					<NavLink to="/mybag">
+						<i className="cart-icon">
+							<svg height="20px" width="18px">
+								<g fill="currentColor" fill-rule="evenodd">
+									<path d="M4 3.512v5.804c0 .377.349.684.779.684.43 0 .779-.307.779-.684V3.512C5.558 2.33 6.653 1.368 8 1.368c1.347 0 2.442.962 2.442 2.144v5.804c0 .377.35.684.78.684.43 0 .778-.307.778-.684V3.512C12 1.575 10.206 0 8 0S4 1.575 4 3.512z"></path>
+									<path d="M2.46 6.33c-.269 0-.489.194-.5.441L1.435 18.19a.436.436 0 00.131.332.52.52 0 00.348.149h12.151c.276 0 .501-.207.501-.462l-.525-11.436c-.011-.248-.23-.442-.5-.442H2.46zM14.448 20l-12.974-.001a1.591 1.591 0 01-1.064-.462 1.357 1.357 0 01-.408-1.03L.56 6.372C.595 5.602 1.277 5 2.11 5h11.78c.835 0 1.516.602 1.551 1.372l.56 12.197c0 .789-.697 1.431-1.553 1.431z"></path>
+								</g>
+							</svg>
+							<small>{totalItemsCount}</small>
+						</i>
+					</NavLink>
 				</div>
 			</nav>
 		</div>

@@ -22,7 +22,8 @@ export default function ProductCard() {
   const [count, setCount] = useState(1);
   const [products, setProducts] = useState([]);
   const [filterValues , setFilterValues]=useState({});
-  const handleChange = (event, value) => {
+ 
+    const handleChange = (event, value) => {
     setPage(value);
   };
 

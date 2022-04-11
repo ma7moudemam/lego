@@ -5,8 +5,12 @@ import CardImg from "../../assets/imgs/1.jpg";
 import ReactStars from "react-rating-stars-component";
 import { render } from "react-dom";
 import { postProductRating } from "../../network/productsAPIs";
+//REDUX
+import {useDispatch} from 'react-redux'
+import {addToBag} from '../../Redux/Actions/cartActions'
 export default function Cards({product}) {
-  
+  const dispatch = useDispatch()
+
 const ratingChanged = (newRating) => {
   console.log(newRating);
   postProductRating(newRating, product._id).then(res => console.log(res))
@@ -41,8 +45,8 @@ const ratingChanged = (newRating) => {
                 />
             </span>
             <div className="card-price">${product.price}</div>
-            <button className="card-button-exist">
-              <a href="#">Add to Bag</a>
+            <button className="card-button-exist" onClick={()=>dispatch(addToBag({...product}))}>
+              <div>Add to Bag</div>
             </button>
           </div>
     </div>

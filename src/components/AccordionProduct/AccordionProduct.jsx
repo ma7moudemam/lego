@@ -5,42 +5,53 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { BsPlusCircle } from "react-icons/bs";
+import { AiOutlineMinusCircle } from "react-icons/ai";
 import './AccordionProduct.css'
+import AccordionSpecification from "./AccordionSpecification/AccordionSpecification";
+import AccordionFeature from "./AccordionFeature/AccordionFeature";
 
 function AccordionProduct() {
+
+
+
   return (
     <>
       <div className="product-accordion">
         <Accordion>
-          <AccordionSummary
-            //   expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>Features</Typography>
-          </AccordionSummary>
+
+        
+        <AccordionSummary
+        expandIcon={<BsPlusCircle
+          style={{fontSize: '2rem', fontWeight: 'bold' , color: '#000'}}/>}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+     
+        sx={{
+          backgroundColor: "#f5f5f5",
+        }}
+      >
+        <Typography    style={{fontSize: '1.5rem', fontWeight: 'bold'}} >Features</Typography>
+      </AccordionSummary>
+         
           <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
+            <AccordionFeature/>
           </AccordionDetails>
         </Accordion>
         <Accordion>
           <AccordionSummary
-            //   expandIcon={<ExpandMoreIcon />}
+           expandIcon={<BsPlusCircle
+            style={{fontSize: '2rem', fontWeight: 'bold' , color: '#000'}}/>}
             aria-controls="panel2a-content"
+            sx={{
+              backgroundColor: "#f5f5f5",
+            }}
             id="panel2a-header"
           >
-            <Typography>Specifications</Typography>
+            <Typography  style={{fontSize: '1.5rem', fontWeight: 'bold'}}>Specifications</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
+            <AccordionSpecification/>
           </AccordionDetails>
         </Accordion>
       </div>

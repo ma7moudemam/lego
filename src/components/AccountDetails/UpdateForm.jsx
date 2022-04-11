@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
@@ -9,24 +9,38 @@ import Select from "@mui/material/Select";
 import FormHelperText from "@mui/material/FormHelperText";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import axios from "axios";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function UpdateForm() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/account/me", {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      .then((res) => setUsers(res.data)) // users => returned data
+      .catch((err) => console.log(err));
+  }, [users]);
+
   const formik = useFormik({
     initialValues: {
-      UserName: "",
-      EmailAdress: "",
+      userName: "",
+      email: "",
       day: "",
       month: "",
       year: "",
       country: "",
+      city: "",
+      street: "",
+      building: "",
     },
     validationSchema: Yup.object({
-      UserName: Yup.string()
+      userName: Yup.string()
         .max(15, "Must be 15 characters or less")
         .required("Required"),
-      EmailAdress: Yup.string()
-        .email("Invalid email address")
-        .required("required"),
+      email: Yup.string().email("Invalid email address").required("required"),
       day: Yup.number("day should be a number")
         .max(31, "day should be two numbers DD")
         .required("required"),
@@ -38,53 +52,61 @@ export default function UpdateForm() {
         .min(1930, "your can't be a 100 years old stop lying")
         .required("required"),
       country: Yup.string().required("required"),
+      city: Yup.string().required("required"),
+      street: Yup.string().required("required"),
+      building: Yup.string().required("required"),
     }),
+
     onSubmit: (values) => {
-      console.log("submited");
+      // console.log("submited");
       console.log(JSON.stringify(values, null, 2));
+      axios
+        .put("http://localhost:8080/account", values, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        })
+        .then((res) => (setUsers(res.data), (<Redirect to="/my-account" />)))
+        .catch((err) => console.log(err));
     },
   });
 
   return (
     <>
       <form id="update-form" onSubmit={formik.handleSubmit}>
-        <label htmlFor="UpdateUserName"></label>
         <FormControl sx={{ width: "100%", mb: 2 }}>
           <TextField
             helperText={
-              formik.touched.UserName && formik.errors.UserName
-                ? `${formik.errors.UserName}`
+              formik.touched.userName && formik.errors.userName
+                ? `${formik.errors.userName}`
                 : null
             }
             error={
-              formik.touched.UserName && formik.errors.UserName ? true : false
+              formik.touched.userName && formik.errors.userName ? true : false
             }
             label="UserName"
             type="text"
             id="UpdateUserName"
-            name="UserName"
+            name={users.userName}
+            // name="userName"
             placeholder="InitialUserName"
-            {...formik.getFieldProps("UserName")}
+            {...formik.getFieldProps("userName")}
           />
         </FormControl>
 
         <FormControl sx={{ width: "100%", mb: 2 }}>
           <TextField
             helperText={
-              formik.touched.EmailAdress && formik.errors.EmailAdress
-                ? `${formik.errors.EmailAdress}`
+              formik.touched.email && formik.errors.email
+                ? `${formik.errors.email}`
                 : null
             }
-            error={
-              formik.touched.EmailAdress && formik.errors.EmailAdress
-                ? true
-                : false
-            }
-            label="Email adress"
+            error={formik.touched.email && formik.errors.email ? true : false}
+            label="EmailAddress"
             type="email"
             id="UpdateEmailAdress"
-            name="EmailAdress"
-            {...formik.getFieldProps("EmailAdress")}
+            name={users.email}
+            // name="email"
+            placeholder="example@gmail.com"
+            {...formik.getFieldProps("email")}
           />
         </FormControl>
 
@@ -104,7 +126,8 @@ export default function UpdateForm() {
                 label="Day"
                 type="number"
                 placeholder="DD"
-                name="day"
+                name={users.day}
+                // name="day"
                 id="birthDay"
                 {...formik.getFieldProps("day")}
               />
@@ -124,7 +147,8 @@ export default function UpdateForm() {
                 label="Month"
                 type="number"
                 placeholder="MM"
-                name="month"
+                name={users.month}
+                // name="month"
                 id="birthMonth"
                 {...formik.getFieldProps("month")}
               />
@@ -142,13 +166,15 @@ export default function UpdateForm() {
                 label="Year"
                 type="number"
                 placeholder="YYYY"
-                name="year"
+                name={users.year}
+                // name="year"
                 id="birthYear"
                 {...formik.getFieldProps("year")}
               />
             </FormControl>
           </div>
         </div>
+
         <FormControl sx={{ width: "100%", mt: 2 }}>
           <InputLabel id="countries-label">Country</InputLabel>
           <Select
@@ -156,7 +182,8 @@ export default function UpdateForm() {
               formik.touched.country && formik.errors.country ? true : false
             }
             labelId="countries-label"
-            name="country"
+            name={users.country}
+            // name="country"
             id="countries"
             {...formik.getFieldProps("country")}
             sx={{ backgroundColor: "#fff" }}
@@ -176,6 +203,75 @@ export default function UpdateForm() {
               : null}
           </FormHelperText>
         </FormControl>
+
+        <div className="row mt-2">
+          <div className="col">
+            <label htmlFor="UpdateCity"></label>
+            <FormControl sx={{ width: "100%", mb: 2 }}>
+              <TextField
+                helperText={
+                  formik.touched.city && formik.errors.city
+                    ? `${formik.errors.city}`
+                    : null
+                }
+                error={formik.touched.city && formik.errors.city ? true : false}
+                label="City"
+                type="text"
+                id="UpdateCity"
+                name={users.city}
+                // name="City"
+                placeholder="city"
+                {...formik.getFieldProps("city")}
+              />
+            </FormControl>
+          </div>
+          <div className="col">
+            <label htmlFor="UpdateStreet"></label>
+            <FormControl sx={{ width: "100%", mb: 2 }}>
+              <TextField
+                helperText={
+                  formik.touched.street && formik.errors.street
+                    ? `${formik.errors.street}`
+                    : null
+                }
+                error={
+                  formik.touched.street && formik.errors.street ? true : false
+                }
+                label="Street"
+                type="text"
+                id="UpdateStreet"
+                name={users.street}
+                // name="Street"
+                placeholder="street"
+                {...formik.getFieldProps("street")}
+              />
+            </FormControl>
+          </div>
+          <div className="col">
+            <label htmlFor="UpdateCity"></label>
+            <FormControl sx={{ width: "100%", mb: 2 }}>
+              <TextField
+                helperText={
+                  formik.touched.building && formik.errors.building
+                    ? `${formik.errors.building}`
+                    : null
+                }
+                error={
+                  formik.touched.building && formik.errors.building
+                    ? true
+                    : false
+                }
+                label="Building"
+                type="text"
+                id="UpdateBuilding"
+                // name="building"
+                name={users.building}
+                placeholder="city"
+                {...formik.getFieldProps("building")}
+              />
+            </FormControl>
+          </div>
+        </div>
 
         <div className="d-grid gap-2 col-6 mx-auto my-4">
           <button

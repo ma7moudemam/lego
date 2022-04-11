@@ -10,6 +10,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "../Login/Login.css";
+import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 function Signup() {
   const formik = useFormik({
@@ -37,13 +39,15 @@ function Signup() {
         .required("required"),
       year: Yup.number("year should be a number")
         .max(2010, "you can't register if your age less than 12")
-        .min(1930, "you can't be a 100 years old stop lying")
+        .min(1930, "your can't be a 100 years old stop lying")
         .required("required"),
       country: Yup.string().required("required"),
     }),
     onSubmit: (values) => {
-      console.log("submited");
-      console.log(JSON.stringify(values, null, 2));
+      axios
+        .post("http://localhost:8080/register", values)
+        .then((res) => <Redirect to="/login" />)
+        .catch((err) => console.log(err));
     },
   });
   return (
