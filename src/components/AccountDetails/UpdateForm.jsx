@@ -12,30 +12,26 @@ import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function UpdateForm() {
-  const [users, setUsers] = useState([]);
+import jwt_decode from "jwt-decode";
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/account/me", {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-      .then((res) => setUsers(res.data)) // users => returned data
-      .catch((err) => console.log(err));
-  }, [users]);
+export default function UpdateForm() {
+  const [users, setUsers] = useState(() =>
+    jwt_decode(localStorage.getItem("token"))
+  );
 
   const formik = useFormik({
     initialValues: {
-      userName: "",
-      email: "",
+      userName: users.user.userName,
+      email: users.user.email,
       day: "",
       month: "",
       year: "",
-      country: "",
-      city: "",
-      street: "",
-      building: "",
+      country: users.user.country,
+      city: users.user.address.city,
+      street: users.user.address.street,
+      building: users.user.address.building,
     },
+
     validationSchema: Yup.object({
       userName: Yup.string()
         .max(15, "Must be 15 characters or less")
@@ -58,13 +54,43 @@ export default function UpdateForm() {
     }),
 
     onSubmit: (values) => {
-      // console.log("submited");
+      console.log("submited");
       console.log(JSON.stringify(values, null, 2));
+
+      const address = {
+        city: values.city,
+        street: values.street,
+        building: values.building,
+      };
+
+      function getAge() {
+        let today = new Date();
+        let birthDate = new Date(`${values.year}/${values.month}/${values.day}`);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        let m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        return age;
+      }
+      const body = {
+        userName: values.userName,
+        email: values.email,
+        country: values.country,
+        address: address,
+        age: getAge()
+      };
+      console.log(body);
       axios
-        .put("http://localhost:8080/account", values, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        .post("http://localhost:8080/account/update", body, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         })
-        .then((res) => (setUsers(res.data), (<Redirect to="/my-account" />)))
+        .then((res) => {
+          console.log("res");
+          <Redirect to="/login" />;
+        })
         .catch((err) => console.log(err));
     },
   });
@@ -85,8 +111,7 @@ export default function UpdateForm() {
             label="UserName"
             type="text"
             id="UpdateUserName"
-            name={users.userName}
-            // name="userName"
+            name={users.user.userName}
             placeholder="InitialUserName"
             {...formik.getFieldProps("userName")}
           />
@@ -103,8 +128,11 @@ export default function UpdateForm() {
             label="EmailAddress"
             type="email"
             id="UpdateEmailAdress"
-            name={users.email}
-            // name="email"
+            InputProps={{
+              readOnly: true,
+            }}
+            value={formik.values.email}
+            name="email"
             placeholder="example@gmail.com"
             {...formik.getFieldProps("email")}
           />
@@ -126,8 +154,7 @@ export default function UpdateForm() {
                 label="Day"
                 type="number"
                 placeholder="DD"
-                name={users.day}
-                // name="day"
+                // name={users.day}
                 id="birthDay"
                 {...formik.getFieldProps("day")}
               />
@@ -147,7 +174,7 @@ export default function UpdateForm() {
                 label="Month"
                 type="number"
                 placeholder="MM"
-                name={users.month}
+                // name={users.month}
                 // name="month"
                 id="birthMonth"
                 {...formik.getFieldProps("month")}
@@ -166,7 +193,7 @@ export default function UpdateForm() {
                 label="Year"
                 type="number"
                 placeholder="YYYY"
-                name={users.year}
+                // name={users.year}
                 // name="year"
                 id="birthYear"
                 {...formik.getFieldProps("year")}
@@ -182,8 +209,7 @@ export default function UpdateForm() {
               formik.touched.country && formik.errors.country ? true : false
             }
             labelId="countries-label"
-            name={users.country}
-            // name="country"
+            name={users.user.country}
             id="countries"
             {...formik.getFieldProps("country")}
             sx={{ backgroundColor: "#fff" }}
@@ -204,7 +230,7 @@ export default function UpdateForm() {
           </FormHelperText>
         </FormControl>
 
-        <div className="row mt-2">
+        <div className="row mt-3">
           <div className="col">
             <label htmlFor="UpdateCity"></label>
             <FormControl sx={{ width: "100%", mb: 2 }}>
@@ -218,8 +244,7 @@ export default function UpdateForm() {
                 label="City"
                 type="text"
                 id="UpdateCity"
-                name={users.city}
-                // name="City"
+                name={users.user.address.city}
                 placeholder="city"
                 {...formik.getFieldProps("city")}
               />
@@ -240,8 +265,7 @@ export default function UpdateForm() {
                 label="Street"
                 type="text"
                 id="UpdateStreet"
-                name={users.street}
-                // name="Street"
+                name={users.user.address.street}
                 placeholder="street"
                 {...formik.getFieldProps("street")}
               />
@@ -264,8 +288,8 @@ export default function UpdateForm() {
                 label="Building"
                 type="text"
                 id="UpdateBuilding"
-                // name="building"
-                name={users.building}
+               
+                name={users.user.address['building']}
                 placeholder="city"
                 {...formik.getFieldProps("building")}
               />

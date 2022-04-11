@@ -1,7 +1,6 @@
 import React from "react";
-import Women from "../../assets/images/woman.png"
-import Cards from "../../assets/images/spotlight/card1.jpg"
-import NestedCards from "../../assets/images/spotlight/nested-card1.png"
+import Women from "../../assets/images/woman.png";
+import HomeCard from './HomeCard'
 
 import "./HomePage.css";
 
@@ -50,101 +49,16 @@ export default function HomePage() {
 
             {/* card outer content  */}
             <div className="card-container">
-              <div className="card-1">
-                <a className="card-content" href="#" target="_blank">
-                  <div className="image-container">
-                    <div className="main-image">
-                      <img src={Cards} />
-                    </div>
-                    <div className="nested-image">
-                      <img src={NestedCards} />
-                    </div>
-                  </div>
-                  <div className="text-container">
-                    <h3>
-                      <span>Bring worlds together</span>
-                    </h3>
-                    <p>
-                      <span>
-                        Kids can mix and match stories with new LEGO® | Disney
-                        sets.
-                      </span>
-                    </p>
-                    <div className="shop">
-                      <span>Shop Now</span>
-                      <span>
-                        <i className="fas fa-angle-right"></i>
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-
-              <div className="card-2">
-                <a className="card-content" href="#" target="_blank">
-                  <div className="image-container">
-                    <div className="main-image">
-                      <img src={Cards} />
-                    </div>
-                    <div className="nested-image">
-                      <img src={NestedCards} />
-                    </div>
-                  </div>
-                  <div className="text-container">
-                    <h3>
-                      <span>The ultimate fighting machine</span>
-                    </h3>
-                    <p>
-                      <span>
-                        Enthralling ninja action with new LEGO® NINJAGO® sets.
-                      </span>
-                    </p>
-                    <div className="shop">
-                      <span>Shop Now</span>
-                      <span>
-                        <i className="fas fa-angle-right"></i>
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-
-              <div className="card-3">
-                <a className="card-content" href="#" target="_blank">
-                  <div className="image-container">
-                    <div className="main-image">
-                      <img src={Cards} />
-                    </div>
-                    <div className="nested-image">
-                      <img src={NestedCards} />
-                    </div>
-                  </div>
-                  <div className="text-container">
-                    <h3>
-                      <span>Build cool shape-shifting vehicles</span>
-                    </h3>
-                    <p>
-                      <span>
-                        Kids expand their magical creations with new LEGO®
-                        Monkie Kid™.
-                      </span>
-                    </p>
-                    <div className="shop">
-                      <span>Shop Now</span>
-                      <span>
-                        <i className="fas fa-angle-right"></i>
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </div>
+              <HomeCard />
+              <HomeCard />
+              <HomeCard />
             </div>
           </div>
         </section>
       </div>
 
-            {/* Spotlight-on */}
-            <div className="container">
+      {/* trending Now */}
+      <div className="container">
         <section id="spotlight-on">
           <div className="card-section">
             {/* card inner content */}
@@ -156,94 +70,9 @@ export default function HomePage() {
 
             {/* card outer content  */}
             <div className="card-container">
-              <div className="card-1">
-                <a className="card-content" href="#" target="_blank">
-                  <div className="image-container">
-                    <div className="main-image">
-                      <img src={Cards} />
-                    </div>
-                    <div className="nested-image">
-                      <img src={NestedCards} />
-                    </div>
-                  </div>
-                  <div className="text-container">
-                    <h3>
-                      <span>Bring worlds together</span>
-                    </h3>
-                    <p>
-                      <span>
-                        Kids can mix and match stories with new LEGO® | Disney
-                        sets.
-                      </span>
-                    </p>
-                    <div className="shop">
-                      <span>Shop Now</span>
-                      <span>
-                        <i className="fas fa-angle-right"></i>
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-
-              <div className="card-2">
-                <a className="card-content" href="#" target="_blank">
-                  <div className="image-container">
-                    <div className="main-image">
-                      <img src={Cards} />
-                    </div>
-                    <div className="nested-image">
-                      <img src={NestedCards} />
-                    </div>
-                  </div>
-                  <div className="text-container">
-                    <h3>
-                      <span>The ultimate fighting machine</span>
-                    </h3>
-                    <p>
-                      <span>
-                        Enthralling ninja action with new LEGO® NINJAGO® sets.
-                      </span>
-                    </p>
-                    <div className="shop">
-                      <span>Shop Now</span>
-                      <span>
-                        <i className="fas fa-angle-right"></i>
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-
-              <div className="card-3">
-                <a className="card-content" href="#" target="_blank">
-                  <div className="image-container">
-                    <div className="main-image">
-                      <img src={Cards} />
-                    </div>
-                    <div className="nested-image">
-                      <img src={NestedCards} />
-                    </div>
-                  </div>
-                  <div className="text-container">
-                    <h3>
-                      <span>Build cool shape-shifting vehicles</span>
-                    </h3>
-                    <p>
-                      <span>
-                        Kids expand their magical creations with new LEGO®
-                        Monkie Kid™.
-                      </span>
-                    </p>
-                    <div className="shop">
-                      <span>Shop Now</span>
-                      <span>
-                        <i className="fas fa-angle-right"></i>
-                      </span>
-                    </div>
-                  </div>
-                </a>
-              </div>
+              <HomeCard />
+              <HomeCard />
+              <HomeCard />
             </div>
           </div>
         </section>
