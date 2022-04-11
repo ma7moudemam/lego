@@ -15,7 +15,7 @@ import Personal from "./components/personal&address/Personal";
 import HomePage from "./components/HomePage/HomePage";
 import ProductCard from "./components/ProductsCard/ProductCard";
 import SwiperSlider from "./components/SwiperSlider/SwiperSlider";
-
+import Dashboard from "./components/Dashboard/Dashboard";
 
 
 
@@ -40,7 +40,6 @@ function App() {
         <Route exact path="/mybag">
           <MyBag />
         </Route>
-
         <Route exact path="/">
           <HomePage />
         </Route>
@@ -74,6 +73,9 @@ function App() {
         </Router>
         <Router path="/delete-account">
           <DeleteAccount />
+        </Router>
+        <Router path="/dashboard">
+          <Dashboard />
         </Router>
       </Switch>
       <Footer />
