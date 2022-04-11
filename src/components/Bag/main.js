@@ -58,12 +58,16 @@ export default function Main() {
 
 
     <div className='border rounded'>
-        <span className='counter p-1 px-3' onClick={() => {
+        <span className='counter p-1 px-3'  
+            style={{pointerEvents: product.quantity == 1 ? "none": '', color: product.quantity == 1 ?"#d9d0d0":''}} 
+            onClick={() => {
             // setCount(count - 1)
             dispatch(removeFromBag(product))
         }}>-</span>
         <span className='counter p-1 px-3'>{product.quantity}</span>
-        <span className='counter border-0 p-1 px-3' onClick={() => {
+        <span className='counter border-0 p-1 px-3'       
+         style={{pointerEvents: product.quantity >= product.amount ? "none": '', color: product.quantity >= product.amount ?"#d9d0d0":''}}
+         onClick={() => {
             // setCount(count + 1)
             dispatch(addToBag(product))
         }}>+</span>
