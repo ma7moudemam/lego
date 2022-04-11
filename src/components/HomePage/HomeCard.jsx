@@ -1,10 +1,11 @@
 import React from "react";
 import Cards from "../../assets/images/spotlight/card1.jpg";
 import NestedCards from "../../assets/images/spotlight/nested-card1.png";
-export default function HomeCard() {
+export default function HomeCard({product}) {
   return (
     <div>
       {" "}
+      <h1>{product.name}</h1>
       <div className="card-1">
         <a className="card-content" href="#" target="_blank">
           <div className="image-container">
