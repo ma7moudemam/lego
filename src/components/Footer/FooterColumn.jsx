@@ -3,6 +3,9 @@ import CheveronDown from "./../../assets/imgs/chevron-down.svg";
 
 function FooterColumn({ title, footerLinks }) {
   const expand = (e) => {
+    if (e.target.tagName === "IMG") {
+      e.target.parentElement.classList.toggle("column-ul-active");
+    }
     e.target.classList.toggle("column-ul-active");
   };
   return (
