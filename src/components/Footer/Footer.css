@@ -177,7 +177,7 @@ footer {
 }
 
 @media (max-width: 770px) {
-  .container {
+  .footer-container {
     flex-flow: column;
     padding-left: 0;
     padding-right: 0;
@@ -210,10 +210,10 @@ footer {
   .column h4 img {
     visibility: visible;
   }
-  .container .column {
+  .footer-container .column {
     overflow: hidden;
   }
-  .container .column ul {
+  .footer-container .column ul {
     padding: 5px 20px;
     max-height: 0;
   }
@@ -231,7 +231,7 @@ footer {
     justify-content: flex-start;
   }
 }
-.container .column-ul-active ~ ul {
+.footer-container .column-ul-active ~ ul {
   max-height: 220px;
   /* height: 100%;
     transform: scaleY(1); */

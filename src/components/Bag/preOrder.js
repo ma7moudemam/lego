@@ -1,6 +1,6 @@
 import bag from '../../assets/imgs/40527 (1).png'
 import "./Bag.css";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import bagThree from '../../assets/imgs/11.png'
 import bagFour from '../../assets/imgs/12.jpeg'
@@ -30,13 +30,13 @@ export default function PreOrder() {
         </p>
         <div className='d-flex justify-content-start align-items-center mb-3'>
         <div className=' border rounded'>
-            <span className='counter p-1 px-3' onClick={() => {
-                setCount(count - 1)
+            <span className='counter p-1 px-3'  onClick={() => {
+                setCount(count - 1) 
             }}>-</span>
             <span className='counter p-1 px-3'>{count}</span>
             <span className='counter border-0 p-1 px-3' onClick={() => {
-                setCount(count + 1)
-            }}>+</span>
+                setCount(count + 1)}
+            }>+</span>
 
 
         </div>
