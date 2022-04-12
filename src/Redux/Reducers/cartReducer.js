@@ -1,4 +1,4 @@
-import {ADD_TO_BAG,REMOVE_FROM_BAG,DELETE_FROM_BAG,INIT_USER_CART} from '../Actions/cartActions'
+import {ADD_TO_BAG,REMOVE_FROM_BAG,DELETE_FROM_BAG,INIT_USER_CART} from '../actions/cartActions'
 const initialState={
     products:{},
     totalPrice:0,
