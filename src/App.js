@@ -1,8 +1,6 @@
 import "./App.css";
 import Wishlist from "./components/wishList/wishListContent/Wishlist";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Hero from "./components/Hero/Hero";
-import Recommended from "./components/Recommended/Recommended";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AccordionProduct from "./components/AccordionProduct/AccordionProduct";
 import MyBag from "./components/Bag";
 import ProductCart from "./components/ProductCart/ProductCart";
@@ -45,71 +43,101 @@ function App() {
 	return (
 		<div className="App">
 			<Router>
-				<Switch>
-					<Route exact path="/mybag">
-						<Layout>
-							<MyBag />
-						</Layout>
-					</Route>
-					<Route exact path="/">
-						<Layout>
-							<HomePage />
-							<Hero />
-							<Recommended />
-						</Layout>
-					</Route>
-					<Route exact path="/whishlist">
-						<Layout>
-							<Wishlist />
-						</Layout>
-					</Route>
-					<Route exact path="/login">
-						<Login />
-					</Route>
-					<Route exact path="/signup">
-						<Signup />
-					</Route>
-					<Route exact path="/shop-now">
-						<Layout>
-							<ProductCard />
-							<AccordionProduct />
-						</Layout>
-					</Route>
-					<Route exact path="/card">
-						<Layout>
-							<ProductCart />
-							<SwiperSlider />
-						</Layout>
-					</Route>
-					<Route exact path="/my-account">
-						<Layout>
-							<Personal />
-						</Layout>
-					</Route>
-					<Route exact path="/details">
-						<Layout>
-							<AccountDetails />
-						</Layout>
-					</Route>
-					<Route exact path="/info">
-						<Layout>
-							<AccountInformation />
-						</Layout>
-					</Route>
-					<Route exact path="/security">
-						<Layout>
-							<AccountSecurity />
-						</Layout>
-					</Route>
-					<Route exact path="/delete-account">
-						<Layout>
-							<DeleteAccount />
-						</Layout>
-					</Route>
-					<Route exact path="/dashboard">
-						<Dashboard />
-					</Route>
-				</Switch>
+				<Routes>
+					<Route
+						path="/mybag"
+						element={
+							<Layout>
+								<MyBag />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/"
+						element={
+							<Layout>
+								<HomePage />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/home"
+						element={
+							<Layout>
+								<HomePage />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/whishlist"
+						element={
+							<Layout>
+								<Wishlist />
+							</Layout>
+						}
+					/>
+					<Route path="/login" element={<Login />} />
+					<Route path="/signup" element={<Signup />} />
+					<Route
+						path="/shop-now"
+						element={
+							<Layout>
+								<ProductCard />
+								<AccordionProduct />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/card"
+						element={
+							<Layout>
+								<ProductCart />
+								<SwiperSlider />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/my-account"
+						element={
+							<Layout>
+								<Personal />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/details"
+						element={
+							<Layout>
+								<AccountDetails />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/info"
+						element={
+							<Layout>
+								<AccountInformation />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/security"
+						element={
+							<Layout>
+								<AccountSecurity />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/delete-account"
+						element={
+							<Layout>
+								<DeleteAccount />
+							</Layout>
+						}
+					/>
+					<Route path="/dashboard" element={<Dashboard />} />
+				</Routes>
 			</Router>
 		</div>
 	);
