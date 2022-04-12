@@ -8,7 +8,7 @@ import {
   addToBag,
   removeFromBag,
   deleteFromBag,
-} from "../../Redux/actions/cartActions";
+} from "../../Redux/Actions/cartActions";
 export default function Main() {
   const dispatch = useDispatch();
   const [count, setCount] = useState(0);

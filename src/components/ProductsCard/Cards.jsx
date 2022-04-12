@@ -7,7 +7,7 @@ import { render } from "react-dom";
 import { postProductRating } from "../../network/productsAPIs";
 //REDUX
 import {useDispatch} from 'react-redux'
-import {addToBag} from '../../Redux/actions/cartActions'
+import {addToBag} from '../../Redux/Actions/cartActions'
 export default function Cards({product}) {
   const dispatch = useDispatch()
 

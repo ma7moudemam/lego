@@ -19,7 +19,7 @@ import DeleteAccount from "./components/AccountDetails/DeleteAccount";
 import { useEffect, useState } from "react";
 import { getUserCart, updateUserCart } from "./network/cartAPI";
 import { useSelector, useDispatch } from "react-redux";
-import { initUserCart } from "./Redux/actions/cartActions";
+import { initUserCart } from "./Redux/Actions/cartActions";
 import Layout from "./components/Layout/Layout";
 
 function App() {
