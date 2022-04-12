@@ -44,7 +44,7 @@ function Signup() {
 			axios
 				.post("http://localhost:8080/register", values)
 				.then((res) => {
-					return;
+					console.log(res);
 				})
 				.catch((err) => console.log(err));
 			navigate("/login");

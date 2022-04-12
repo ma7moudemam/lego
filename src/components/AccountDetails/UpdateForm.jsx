@@ -16,6 +16,8 @@ import jwt_decode from "jwt-decode";
 
 export default function UpdateForm() {
 	const [users, setUsers] = useState(() => jwt_decode(localStorage.getItem("token")));
+
+	console.log(users)
 	let navigate = useNavigate();
 	const formik = useFormik({
 		initialValues: {
@@ -24,10 +26,10 @@ export default function UpdateForm() {
 			day: "",
 			month: "",
 			year: "",
-			country: users.user.country,
-			city: users.user.address.city,
-			street: users.user.address.street,
-			building: users.user.address.building,
+			country: users.user.country ,
+			city: users.user.address ? users.user.address.city : "" ,
+			street:  users.user.address ? users.user.address.street : "" ,
+			building: users.user.address ? users.user.address.building : "" ,
 		},
 
 		validationSchema: Yup.object({
@@ -211,7 +213,8 @@ export default function UpdateForm() {
 								label="City"
 								type="text"
 								id="UpdateCity"
-								name={users.user.address.city}
+								// name={users.user.address.city ? '' : }
+								name="city"
 								placeholder="city"
 								{...formik.getFieldProps("city")}
 							/>
@@ -228,7 +231,8 @@ export default function UpdateForm() {
 								label="Street"
 								type="text"
 								id="UpdateStreet"
-								name={users.user.address.street}
+								// name={users.user.address.street}
+								name="street"
 								placeholder="street"
 								{...formik.getFieldProps("street")}
 							/>
@@ -247,7 +251,8 @@ export default function UpdateForm() {
 								label="Building"
 								type="text"
 								id="UpdateBuilding"
-								name={users.user.address["building"]}
+								// name={users.user.address["building"]}
+								name="building"
 								placeholder="city"
 								{...formik.getFieldProps("building")}
 							/>
