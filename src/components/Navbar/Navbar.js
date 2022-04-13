@@ -3,13 +3,13 @@ import legoLogo from "./../../assets/imgs/lego-logo.svg";
 import legoUser from "../../assets/imgs/lego-user.svg";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-export default function Navbar() {
+export default function Navbar(props) {
 	const totalItemsCount = useSelector((store) => store.cart.totalItemsCount);
 	return (
 		<div className="nav-container">
 			<nav className="nav-bar">
 				<ul className="nav-list">
-					<div className="nav-list-item menu-icon">
+					<div className="nav-list-item menu-icon" onClick={props.toggleMenu}>
 						<sub>Menu</sub>
 					</div>
 					<NavLink to="/home">
@@ -42,7 +42,7 @@ export default function Navbar() {
 						</div>
 						<div className="search-content"></div>
 					</div>
-					<NavLink to="/account" className="nav-user-icon">
+					<NavLink to={props.isLoggedIn ? "/details" : "/login"} className="nav-user-icon">
 						<img src={legoUser} className="svg" alt="account" />
 					</NavLink>
 					<NavLink to="/whishlist">

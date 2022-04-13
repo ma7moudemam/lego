@@ -8,10 +8,9 @@ import axios from "axios";
 
 import "./HomePage.css";
 
-export default function HomePage() {
+export default function HomePage(props) {
 	const [trendingProducts, setTtrendingProducts] = useState([]);
 	const [newProducts, setNewProducts] = useState([]);
-
 	useEffect(() => {
 		axios
 			.get("http://localhost:8080/home/trending-products")

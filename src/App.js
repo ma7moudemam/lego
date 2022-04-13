@@ -108,42 +108,35 @@ function App() {
 							</Layout>
 						}
 					/>
-					<Route
-						path="/details"
-						element={
-							<Layout>
-								<AccountDetails />
-							</Layout>
-						}
-					/>
-					<Route
-						path="/info"
-						element={
-							<Layout>
-								<AccountInformation />
-							</Layout>
-						}
-					/>
-					<Route
-						path="/security"
-						element={
-							<Layout>
-								<AccountSecurity />
-							</Layout>
-						}
-					/>
-					<Route
-						path="/delete-account"
-						element={
-							<Layout>
-								<DeleteAccount />
-							</Layout>
-						}
-					/>
+					<Route path="/details" element={<AccountDetails />} />
+					<Route path="/info" element={<AccountInformation />} />
+					<Route path="/security" element={<AccountSecurity />} />
+					<Route path="/delete-account" element={<DeleteAccount />} />
 					<Route path="/dashboard" element={<Dashboard />} />
-					<Route path="/checkout" element={<Checkout />} />
-					<Route path="/success" element={<Success />} />
-					<Route path="/canceled" element={<Canceled />} />
+					<Route
+						path="/checkout"
+						element={
+							<Layout>
+								<Checkout />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/success"
+						element={
+							<Layout>
+								<Success />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/canceled"
+						element={
+							<Layout>
+								<Canceled />
+							</Layout>
+						}
+					/>
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>

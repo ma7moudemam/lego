@@ -1,11 +1,13 @@
 import "./Utility.css";
 import legoUser from "../../assets/imgs/lego-user.svg";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
-export default function Utility() {
+export default function Utility(props) {
+	const [toggleUtility, setToggleUtility] = useState(false);
 	return (
 		<>
-			<div className="utility-bar">
+			<div className={`utility-bar ${toggleUtility ? "hide" : ""}`}>
 				<div className="utility-bar-styles">
 					<NavLink className="left-utility" to="#">
 						<i className="fas fa-long-arrow-alt-left"></i>
@@ -18,7 +20,7 @@ export default function Utility() {
 					</span>
 				</div>
 				<div className="utility-bar-styles">
-					<NavLink to="/login" className="user-icon">
+					<NavLink to={props.isLoggedIn ? "/details" : "/login"} className="user-icon">
 						<img src={legoUser} className="svg" />
 						Account
 					</NavLink>
@@ -28,7 +30,7 @@ export default function Utility() {
 					</NavLink>
 				</div>
 				<div className="utility-bar-styles">
-					<button type="button">
+					<button type="button" onClick={() => setToggleUtility((prev) => !prev)}>
 						<i className="fas fa-times"></i>
 					</button>
 				</div>

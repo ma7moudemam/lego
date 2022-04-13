@@ -5,7 +5,7 @@ import { fetchFromAPI } from "../../../helpers";
 
 export default function StripeCheckout() {
 	const [email, setEmail] = useState("");
-	const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
 	// this comes from cart redux
 	const cartItems = [
 		{

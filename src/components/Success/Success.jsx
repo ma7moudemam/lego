@@ -7,19 +7,17 @@ import "./Success.css";
 export default function Success() {
 	return (
 		<>
-			<Layout>
-				<div className="success">
-					<h1>🎉 Thank you for your order 🎉</h1>
-					<p>We are currently processing your order and will send you a confirmation email shortly</p>
-				</div>
-				<div className="success-button">
-					<NavLink to="/home">
-						<button onClick={() => {}} className="home-button">
-							Continue Shopping
-						</button>
-					</NavLink>
-				</div>
-			</Layout>
+			<div className="success">
+				<h1>🎉 Thank you for your order 🎉</h1>
+				<p>We are currently processing your order and will send you a confirmation email shortly</p>
+			</div>
+			<div className="success-button">
+				<NavLink to="/home">
+					<button onClick={() => {}} className="home-button">
+						Continue Shopping
+					</button>
+				</NavLink>
+			</div>
 		</>
 	);
 }
