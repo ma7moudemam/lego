@@ -12,9 +12,69 @@ import AccordionSpecification from "./AccordionSpecification/AccordionSpecificat
 import AccordionFeature from "./AccordionFeature/AccordionFeature";
 
 function AccordionProduct() {
+  const [open, setOpen] = React.useState(true);
+  const toggleOpen = () => setOpen(!open);
+
+  let accordianItems = [
+    {
+      title: "Features",
+    },
+    {
+      title: "Specifications",
+    },
+    {
+      title: "Reviews",
+    },
+  ];
   return (
     <>
-      <div className="product-accordion">
+      {accordianItems.map((item, index) => {
+        return (
+          <div className="product-accordion">
+            <Accordion key={index}>
+              <AccordionSummary
+                expandIcon={
+                  open === true ? (
+                    <BsPlusCircle
+                      style={{
+                        fontSize: "2rem",
+                        fontWeight: "bold",
+                        color: "#000",
+                      }}
+                    />
+                  ) : (
+                    <AiOutlineMinusCircle
+                      style={{
+                        fontSize: "2rem",
+                        fontWeight: "bold",
+                        color: "#000",
+                      }}
+                    />
+                  )
+                }
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                onClick={toggleOpen}
+                sx={{
+                  backgroundColor: "#f5f5f5",
+                }}
+              >
+                <Typography className="title"
+                style={{ fontSize: "1.5rem", fontWeight: "bold" }}
+                >{item.title}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                {item.title === "Features" ? (
+                  <AccordionFeature />
+                ) : item.title === "Specifications" ? (
+                  <AccordionSpecification />
+                ) : null}
+              </AccordionDetails>
+            </Accordion>
+          </div>
+        );
+      })}
+      {/* <div className="product-accordion">
         <Accordion>
           <AccordionSummary
             expandIcon={
@@ -58,7 +118,7 @@ function AccordionProduct() {
             <AccordionSpecification />
           </AccordionDetails>
         </Accordion>
-      </div>
+      </div> */}
     </>
   );
 }
