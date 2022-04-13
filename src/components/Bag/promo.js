@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import StripeCheckout from "react-stripe-checkout";
 import bag from "../../assets/imgs/40527 (1).png";
 import bagTwo from "../../assets/imgs/10297.png";
 import axios from "axios";
@@ -65,16 +64,9 @@ export default function Promo() {
 						<p>Order Total</p>
 						<p>$399.98</p>
 					</div>
-					<StripeCheckout
-						stripeKey="pk_test_51Kn6l7FX5cnEGu87tVfCDlrwZGeEyQHcntClfUy0jeRA6diOZOQTU5wZ1RQ7AUAu3vzT0eHSk5IB00VlbOLXW3I700mzktu6NQ"
-						token={makePayment}
-						name="Buy Product"
-						amount={product.price * 100}
-					>
-						<button type="button" class="btn btn-warning w-100">
-							Checkout Securely
-						</button>
-					</StripeCheckout>
+					<button type="button" class="btn btn-warning w-100">
+						Checkout Securely
+					</button>
 				</div>
 
 				<div className="py-3">

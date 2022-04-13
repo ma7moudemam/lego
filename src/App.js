@@ -21,6 +21,7 @@ import { getUserCart, updateUserCart } from "./network/cartAPI";
 import { useSelector, useDispatch } from "react-redux";
 import { initUserCart } from "./Redux/Actions/cartActions";
 import Layout from "./components/Layout/Layout";
+import Checkout from "./components/Checkout/Checkout";
 
 function App() {
 	const dispatch = useDispatch();
@@ -137,6 +138,7 @@ function App() {
 						}
 					/>
 					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/checkout" element={<Checkout />} />
 				</Routes>
 			</Router>
 		</div>
