@@ -12,19 +12,13 @@ import TextField from "@mui/material/TextField";
 import Logo from "../../assets/imgs/LEGOAccount-Logo.svg";
 import "./AccountDetails.css";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 export default function AccountSecurity() {
-	const [user, setUser] = useState([]);
+	const [users, setUsers] = useState(() => jwt_decode(localStorage.getItem("token")));
+	
 	let navigate = useNavigate();
-	useEffect(() => {
-		axios
-			.get("http://localhost:8080/account/me", {
-				headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-			})
-			.then((res) => setUser(res.data))
-			.catch((err) => console.log(err));
-	}, []);
 
 	const handelDeleteAction = () => {
 		axios
@@ -92,23 +86,23 @@ export default function AccountSecurity() {
 						</h4>
 
 						<form id="delete-form" sx={{ mb: "0" }}>
-							<TextField
+							{/* <TextField
 								fullWidth
 								id="standard-read-only-input"
 								label="Username"
-								defaultValue={user.userName}
+								defaultValue={users.user.userName}
 								InputProps={{
 									readOnly: true,
 								}}
 								sx={{ mb: 2 }}
 								//   variant="standard"
-							/>
+							/> */}
 
 							<TextField
 								fullWidth
 								id="standard-read-only-input"
 								label="Email"
-								defaultValue={user.email}
+								defaultValue={users.user.email}
 								InputProps={{
 									readOnly: true,
 								}}

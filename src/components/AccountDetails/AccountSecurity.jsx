@@ -23,8 +23,9 @@ import "./AccountDetails.css";
 
 export default function AccountSecurity() {
 	const [users, setUsers] = useState(() => jwt_decode(localStorage.getItem("token")));
+	
+	console.log(users)
 	let navigate = useNavigate();
-
 	const formik = useFormik({
 		initialValues: {
 			password: "",
@@ -48,7 +49,7 @@ export default function AccountSecurity() {
 			console.log(body);
 
 			axios
-				.post("http://localhost:8080/account/update", body, {
+				.post("http://localhost:8080/account/change-password", body, {
 					headers: {
 						Authorization: `Bearer ${localStorage.getItem("token")}`,
 					},

@@ -17,7 +17,7 @@ import jwt_decode from "jwt-decode";
 export default function UpdateForm() {
 	const [users, setUsers] = useState(() => jwt_decode(localStorage.getItem("token")));
 
-	console.log(users)
+	// console.log(users)
 	let navigate = useNavigate();
 	const formik = useFormik({
 		initialValues: {
