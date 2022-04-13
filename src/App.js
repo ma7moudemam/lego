@@ -22,6 +22,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { initUserCart } from "./Redux/Actions/cartActions";
 import Layout from "./components/Layout/Layout";
 import Checkout from "./components/Checkout/Checkout";
+import Success from "./components/Success/Success";
+import Canceled from "./components/Canceled/Canceled";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
 	const dispatch = useDispatch();
@@ -139,6 +142,9 @@ function App() {
 					/>
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/checkout" element={<Checkout />} />
+					<Route path="/success" element={<Success />} />
+					<Route path="/canceled" element={<Canceled />} />
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>
 		</div>

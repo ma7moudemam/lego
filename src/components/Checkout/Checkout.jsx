@@ -5,7 +5,7 @@ import "./Checkout.css";
 
 export default function Checkout() {
 	// comes from the cart redux
-	const { itemCount, total } = { itemCount: 3, total: 20 };
+	const { itemCount, total } = { itemCount: 1, total: 2000 };
 	return (
 		<Layout>
 			<div className="checkout">

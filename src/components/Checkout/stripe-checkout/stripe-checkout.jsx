@@ -5,6 +5,7 @@ import { fetchFromAPI } from "../../../helpers";
 
 export default function StripeCheckout() {
 	const [email, setEmail] = useState("");
+	const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	// this comes from cart redux
 	const cartItems = [
 		{
@@ -56,6 +57,7 @@ export default function StripeCheckout() {
 					value={email}
 					className="stripe-email-input"
 				/>
+				{!emailPattern.test(email) && email !== "" && <p className="error">Enter a Valid Email Address</p>}
 			</div>
 			<div className="submit-button">
 				<button type="submit" className="button checkout-button">
