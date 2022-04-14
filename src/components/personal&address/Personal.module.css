@@ -89,6 +89,16 @@
     color: rgb(117, 117, 117);
     margin-left: 1rem;
 }
+
+.list-group-item {
+    padding: 0.4rem 1rem;
+}
+.list-group-item-action:active {
+    background-color: #8d959d;
+}
+.center-vertical{
+   background-color: aqua;
+}
 @media screen and (max-width: 900px) {
     .container {
       flex-direction: column;
