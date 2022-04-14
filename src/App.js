@@ -25,6 +25,7 @@ import Checkout from "./components/Checkout/Checkout";
 import Success from "./components/Success/Success";
 import Canceled from "./components/Canceled/Canceled";
 import NotFound from "./components/NotFound/NotFound";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
 	const dispatch = useDispatch();
@@ -46,7 +47,6 @@ function App() {
 
 	return (
 		<div className="App">
-			
 			<Router>
 				<Routes>
 					<Route
@@ -104,9 +104,12 @@ function App() {
 					<Route
 						path="/my-account"
 						element={
-							<Layout>
+							// <Layout>
+							// {/* // </Layout> */}
+							<>
+							<Navbar />
 								<Personal />
-							</Layout>
+							</>
 						}
 					/>
 					<Route path="/details" element={<AccountDetails />} />

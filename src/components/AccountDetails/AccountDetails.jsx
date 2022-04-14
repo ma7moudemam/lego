@@ -110,18 +110,6 @@ export default function AccountDetails() {
                   Save
                 </Link>
               </button>
-              <button
-                className="btn mb-2"
-                style={{ backgroundColor: "transparent", color: "black" }}
-                type="button"
-              >
-                <Link
-                  to={`/`}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  Log Out
-                </Link>
-              </button>
             </div>
           </Box>
         </Box>
