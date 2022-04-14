@@ -8,7 +8,7 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   function (config) {
     //   SHOW LOADER
-    console.log("INTERCEPTOR", config);
+    // console.log("INTERCEPTOR", config);
     // Do something before request is sent
     let token = localStorage.getItem("token")
     config.headers["Authorization"] =

@@ -24,6 +24,10 @@
     border-radius: 0.25rem;
 }
 
+.checkout input:focus {
+    outline: none;
+}
+
 .checkout button {
     width: 200px;
     padding: 0.75rem 1.5rem;
@@ -31,4 +35,8 @@
     font-size: 1.2rem;
     background-color: #ffcf00;
     margin: 1.5rem auto 1rem;
+}
+
+.checkout button:hover {
+    background-color: #ffcf00cc;
 }

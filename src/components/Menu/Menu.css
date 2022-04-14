@@ -9,6 +9,7 @@
 	box-sizing: border-box;
     height: 100vh;
     overflow-y: scroll;
+	transition: left 250ms ease-in-out;
 }
 
 .open {

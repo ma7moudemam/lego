@@ -25,6 +25,8 @@ import Checkout from "./components/Checkout/Checkout";
 import Success from "./components/Success/Success";
 import Canceled from "./components/Canceled/Canceled";
 import NotFound from "./components/NotFound/NotFound";
+import Navbar from "./components/Navbar/Navbar";
+import ContactUs from "./components/Contact-us/ContactUs";
 
 import MyOrder from "./components/Myorder/MyOrder";
 import WishListContent from "./components/wishList/wishListContent/WishlistContent";
@@ -54,7 +56,6 @@ function App() {
 
 	return (
 		<div className="App">
-			
 			<Router>
 				<Routes>
 					<Route
@@ -120,9 +121,10 @@ function App() {
 					<Route
 						path="/my-account"
 						element={
-							<Layout>
+							<>
+								<Navbar />
 								<Personal />
-							</Layout>
+							</>
 						}
 					/>
 					<Route path="/details" element={<AccountDetails />} />
@@ -154,6 +156,15 @@ function App() {
 							</Layout>
 						}
 					/>
+					<Route
+						path="/contact-us"
+						element={
+							<Layout>
+								<ContactUs />
+							</Layout>
+						}
+					/>
+					<Route path="/about-us" element={<NotFound />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>

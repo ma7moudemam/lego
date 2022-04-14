@@ -1,7 +1,7 @@
 import "./Navbar.css";
 import legoLogo from "./../../assets/imgs/lego-logo.svg";
 import legoUser from "../../assets/imgs/lego-user.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 export default function Navbar(props) {
 	const totalItemsCount = useSelector((store) => store.cart.totalItemsCount);
@@ -12,19 +12,22 @@ export default function Navbar(props) {
 					<div className="nav-list-item menu-icon" onClick={props.toggleMenu}>
 						<sub>Menu</sub>
 					</div>
-					<NavLink to="/home">
+					<Link to="/home" className="logo">
 						<img src={legoLogo} className="nav-list-item" alt="logo" />
-					</NavLink>
+					</Link>
 
 					<li className="nav-list-item">
 						<NavLink to="/shop-now">shop</NavLink>
 					</li>
 
 					<li className="nav-list-item">
-						<NavLink to="/store">discover</NavLink>
+						<NavLink to="/about-us">about us</NavLink>
 					</li>
 					<li className="nav-list-item">
-						<NavLink to="/contactus">help</NavLink>
+						<NavLink to="/contact-us">contact us</NavLink>
+					</li>
+					<li className="nav-list-item">
+						<NavLink to="/dashboard">dashboard</NavLink>
 					</li>
 				</ul>
 				<div className="nav-icons">

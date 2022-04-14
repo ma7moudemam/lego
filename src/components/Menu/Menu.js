@@ -3,7 +3,6 @@ import legoUser from "../../assets/imgs/lego-user.svg";
 import { NavLink } from "react-router-dom";
 
 export default function Menu(props) {
-	console.log("menu", props.toggleMenu);
 	return (
 		<>
 			<div className={`menu-bar ${props.openMenuBar ? "open" : ""}`}>
@@ -23,16 +22,19 @@ export default function Menu(props) {
 
 					<ul className="menu-bar-list">
 						<li className="menu-bar-list-item">
-							<NavLink to="/">HOME</NavLink>
+							<NavLink to="/home">HOME</NavLink>
 						</li>
 						<li className="menu-bar-list-item">
 							<NavLink to="/shop-now">SHOP</NavLink>
 						</li>
 						<li className="menu-bar-list-item">
-							<NavLink to="/">DISCOVER</NavLink>
+							<NavLink to="/about-us">ABOUT US</NavLink>
 						</li>
 						<li className="menu-bar-list-item">
-							<NavLink to="/contact-us">HELP</NavLink>
+							<NavLink to="/contact-us">CONTACT US</NavLink>
+						</li>
+						<li className="menu-bar-list-item">
+							<NavLink to="/dashboard">DASHBOARD</NavLink>
 						</li>
 						<li className="menu-bar-list-item">
 							<NavLink to={props.isLoggedIn ? "/details" : "/login"} className="user-icon">

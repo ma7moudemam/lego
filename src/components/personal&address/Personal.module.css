@@ -1,6 +1,7 @@
+
 .inner-content {
     width: 100%;
-    padding: 0px 1.5rem;
+    padding: 0px 0px;
 }
 .nameOfBlock {
     margin-bottom: 1rem;
@@ -88,6 +89,16 @@
 .add-address {
     color: rgb(117, 117, 117);
     margin-left: 1rem;
+}
+
+.list-group-item {
+    padding: 0.4rem 1rem;
+}
+.list-group-item-action:active {
+    background-color: #8d959d;
+}
+.center-vertical{
+   background-color: aqua;
 }
 @media screen and (max-width: 900px) {
     .container {
