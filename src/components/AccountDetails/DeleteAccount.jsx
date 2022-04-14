@@ -37,7 +37,12 @@ export default function AccountSecurity() {
 
   const handelLogOutAction = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    // To insure token Remove 
+    if(localStorage.getItem("token")){
+      localStorage.removeItem("token");
+    }else {
+      navigate("/");
+    }
   };
 
   return (

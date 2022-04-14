@@ -108,11 +108,9 @@ function App() {
 					<Route
 						path="/my-account"
 						element={
-							// <Layout>
-							// {/* // </Layout> */}
 							<>
 							<Navbar />
-								<Personal />
+							<Personal />
 							</>
 						}
 					/>

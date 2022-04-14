@@ -15,7 +15,7 @@ export default function Personal() {
 
   return (
     <div className="">
-      <div className="row mt-5">
+      <div className="row mt-5 mx-auto">
         <div className="col-4">
           <div className="list-group text-center w-75 mx-auto my-4">
             <Link
