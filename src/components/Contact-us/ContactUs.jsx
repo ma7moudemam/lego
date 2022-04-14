@@ -17,7 +17,7 @@ export default function ContactUs() {
 			name: "Mahmoud Emam",
 			image: Emam,
 			email: "m7moud_emam@hotmail.com",
-			linkedIn: "http://www.linkedin.com/in/m7moudemam/",
+			linkedIn: "https://www.linkedin.com/in/m7hmoudemam/",
 			github: "https://github.com/ma7moudemam",
 		}
 	];
