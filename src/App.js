@@ -26,6 +26,7 @@ import Success from "./components/Success/Success";
 import Canceled from "./components/Canceled/Canceled";
 import NotFound from "./components/NotFound/NotFound";
 import Navbar from "./components/Navbar/Navbar";
+import ContactUs from "./components/Contact-us/ContactUs";
 
 function App() {
 	const dispatch = useDispatch();
@@ -109,8 +110,8 @@ function App() {
 						path="/my-account"
 						element={
 							<>
-							<Navbar />
-							<Personal />
+								<Navbar />
+								<Personal />
 							</>
 						}
 					/>
@@ -143,7 +144,14 @@ function App() {
 							</Layout>
 						}
 					/>
-					<Route path="/contact-us" element={<NotFound />} />
+					<Route
+						path="/contact-us"
+						element={
+							<Layout>
+								<ContactUs />
+							</Layout>
+						}
+					/>
 					<Route path="/about-us" element={<NotFound />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>

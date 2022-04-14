@@ -23,7 +23,7 @@
 	font-size: 0.9275rem;
 	align-items: center;
 	list-style: none;
-	gap: 3em;
+	gap: 2.7em;
 	margin-bottom: 0;
 }
 .nav-list a {
@@ -60,6 +60,10 @@
 	cursor: pointer;
 	text-decoration: none;
 	font-style: normal;
+}
+
+.nav-list-item {
+	flex-shrink: 0;
 }
 
 .nav-icons i:hover {
