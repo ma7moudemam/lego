@@ -48,13 +48,6 @@ export default function ProductCard() {
 }, [filterValues]);
   
 
- 
-  useEffect(() => {
-    getProduct(5, page,filterValues)
-    .then((res) => setCount(res.data.count))
-    .catch((err) => console.log(err));
-
-  }, []);
 
   const handelFilterChange = filterValues =>{
     setFilterValues(filterValues);

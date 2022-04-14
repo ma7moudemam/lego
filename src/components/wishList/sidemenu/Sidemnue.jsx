@@ -15,15 +15,16 @@ function SideMenue() {
       <ul className={Style.menu} style={{paddingLeft: "0px"}}>
         <NavLink
           to="/whishlist/myorder"
-          className={(isActive) =>
+          className={({isActive}) =>
             isActive ? Style.active : Style["side-menu"]
+            
           }
         >
           <li className={Style["side-menu-items"]}>My Orders</li>
         </NavLink>
         <NavLink
           to="/whishlist/personal"
-          className={(isActive) =>
+          className={({isActive}) =>
             isActive ? Style.active : Style["side-menu"]
           }
         >
@@ -33,7 +34,7 @@ function SideMenue() {
         </NavLink>
         <NavLink
           to="/whishlist/whishlist"
-          className={(isActive) =>
+          className={({isActive}) =>
             isActive ? Style.active : Style["side-menu"]
           }
         >

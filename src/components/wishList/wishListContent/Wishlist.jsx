@@ -1,6 +1,6 @@
 import { Link } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Routes } from "react-router-dom";
+import { Outlet, Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
 import App from "../../../App";
 import MyOrder from "../../Myorder/MyOrder";
@@ -46,7 +46,7 @@ export default function Wishlist() {
 					<SideMenue />
 				</div>
 				<div style={{ width: "73%" }}>
-					<Routes>
+					{/* <Routes>
 						<Route exact path="/whishlist/personal">
 							<Personal />
 						</Route>
@@ -56,7 +56,8 @@ export default function Wishlist() {
 						<Route exact path="/whishlist/whishlist">
 							<WishListContent />
 						</Route>
-					</Routes>
+					</Routes> */}
+					<Outlet />
 				</div>
 			</div>
 		</>

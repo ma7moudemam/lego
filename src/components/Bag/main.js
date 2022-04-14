@@ -43,7 +43,7 @@ export default function Main() {
           <div className="d-flex justify-content-between align-items-center border px-3 py-3 my-4">
             <figure className="w-img">
               <img
-                src={`http://localhost:8080/images/${product.images[0]}`}
+                src={`http://localhost:8080/images/${product?.images?.[0]}`}
                 className="w-100 "
               ></img>
             </figure>

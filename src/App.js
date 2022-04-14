@@ -26,23 +26,31 @@ import Success from "./components/Success/Success";
 import Canceled from "./components/Canceled/Canceled";
 import NotFound from "./components/NotFound/NotFound";
 
+import MyOrder from "./components/Myorder/MyOrder";
+import WishListContent from "./components/wishList/wishListContent/WishlistContent";
+
+
 function App() {
 	const dispatch = useDispatch();
 	const cart = useSelector((store) => store.cart);
 	const [initCart, setInitCart] = useState(false);
+	const [token, setToken] = useState(localStorage.getItem("token"))
 
 	useEffect(() => {
-		if (initCart) {
-			updateUserCart({ ...cart })
-				.then((res) => console.log("===>UPDATE CART ", res.data))
-				.catch((err) => console.log("==>ERROR UPDATE CART ,", err));
-		} else {
-			setInitCart(true);
-			getUserCart()
-				.then((res) => dispatch(initUserCart(res.data)))
-				.catch((err) => console.log("==>ERROR CART ,", err));
-		}
-	}, [cart]);
+		if(token) {
+			if (initCart) {
+				updateUserCart({ ...cart })
+					.then((res) => console.log("===>UPDATE CART ", res.data))
+					.catch((err) => console.log("==>ERROR UPDATE CART ,", err));
+			} else {
+				setInitCart(true);
+				getUserCart()
+					.then((res) => dispatch(initUserCart(res.data)))
+					.catch((err) => console.log("==>ERROR CART ,", err));
+			}
+		}	
+		
+	}, [cart, token]);				
 
 	return (
 		<div className="App">
@@ -80,15 +88,21 @@ function App() {
 								<Wishlist />
 							</Layout>
 						}
-					/>
+					>
+    			 		<Route  path="personal" element={<Personal />} />
+						<Route path="myorder" element={<MyOrder />} />
+						<Route path="whishlist" element={<WishListContent />} />
+					</Route>
 					<Route path="/login" element={<Login />} />
 					<Route path="/signup" element={<Signup />} />
 					<Route
 						path="/shop-now"
 						element={
 							<Layout>
+								<>
 								<ProductCard />
 								<AccordionProduct />
+								</>
 							</Layout>
 						}
 					/>
@@ -96,8 +110,10 @@ function App() {
 						path="/card"
 						element={
 							<Layout>
+								<>
 								<ProductCart />
 								<SwiperSlider />
+								</>
 							</Layout>
 						}
 					/>
