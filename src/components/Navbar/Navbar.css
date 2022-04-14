@@ -33,11 +33,11 @@
 	border-bottom: 3px solid transparent;
 	cursor: pointer;
 	text-decoration: none;
+	transition: border 750ms;
 }
 .nav-list a:hover {
 	color: rgb(0, 0, 0);
 	border-bottom-color: black;
-	transition: border 500ms;
 }
 .nav-list img {
 	width: 2.4375rem;
@@ -171,6 +171,24 @@ max-width: 750px */
 .nav-list-item.menu-icon {
 	display: none;
 }
+
+.nav-list a {
+	transition: 
+		border 250ms ease-in-out,
+		padding 500ms ease-in-out;
+}
+.nav-list a.active {
+	padding-bottom: 1rem;
+	border-bottom-color: black;
+	transition: 
+		border 250ms ease-in-out,
+		padding 500ms ease-in-out;
+}
+
+.nav-list a:hover.logo {
+	border-color: transparent;
+}
+
 
 @media (max-width: 950px) {
     .nav-container {

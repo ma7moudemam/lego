@@ -141,6 +141,8 @@ function App() {
 							</Layout>
 						}
 					/>
+					<Route path="/contact-us" element={<NotFound />} />
+					<Route path="/about-us" element={<NotFound />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>
