@@ -87,8 +87,8 @@ export default function Promo() {
 			<div className="py-3">
 				<p className="py-2">Help with your order:</p>
 				<div className="d-flex">
-					<Link className="f-12">Shipping / Handling</Link>
-					<Link className="f-12 mx-3">Returns</Link>
+					<a className="f-12">Shipping / Handling</a>
+					<a className="f-12 mx-3">Returns</a>
 				</div>
 				<div>
 					<p className="my-3">Payment methods</p>

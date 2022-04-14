@@ -87,8 +87,10 @@ function App() {
 						path="/shop-now"
 						element={
 							<Layout>
-								<ProductCard />
-								<AccordionProduct />
+								<div>
+									<ProductCard />
+									<AccordionProduct />
+								</div>
 							</Layout>
 						}
 					/>
@@ -96,8 +98,10 @@ function App() {
 						path="/card"
 						element={
 							<Layout>
-								<ProductCart />
-								<SwiperSlider />
+								<div>
+									<ProductCart />
+									<SwiperSlider />
+								</div>
 							</Layout>
 						}
 					/>

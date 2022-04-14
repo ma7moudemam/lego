@@ -74,11 +74,7 @@ export default function HomePage(props) {
 						{/* card outer content  */}
 						<div className="card-container">
 							{newProducts.map((product) => {
-								<>
-									<HomeCard product={product} />
-									<HomeCard product={product} />
-									<HomeCard product={product} />
-								</>;
+								<HomeCard product={product} />;
 							})}
 						</div>
 					</div>
@@ -99,11 +95,7 @@ export default function HomePage(props) {
 						{/* card outer content  */}
 						<div className="card-container">
 							{trendingProducts.map((product) => {
-								<>
-									<HomeCard product={product} />
-									<HomeCard product={product} />
-									<HomeCard product={product} />
-								</>;
+								<HomeCard product={product} />;
 							})}
 						</div>
 					</div>
