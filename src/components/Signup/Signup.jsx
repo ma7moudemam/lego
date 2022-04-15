@@ -44,6 +44,7 @@ function Signup() {
       country: Yup.string().required("required"),
     }),
     onSubmit: (values) => {
+      console.log("submitted");
       axios
         .post("http://localhost:8080/register", values)
         .then((res) => <Redirect to="/login" />)

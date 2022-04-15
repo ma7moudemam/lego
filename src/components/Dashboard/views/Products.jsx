@@ -5,20 +5,13 @@ import allyprops from "../Tabs/allyprops";
 import { useTheme } from "@mui/material/styles";
 import TabPanel from "../Tabs/TabPanel";
 import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import Box from "@mui/material/Box";
 import SwipeableViews from "react-swipeable-views";
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
 import { Grid } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import testImg from "./../../../assets/imgs/City-Home-202201-Hero-Standard-Small.jpg";
 import Modal from "@mui/material/Modal";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -31,9 +24,49 @@ import * as Yup from "yup";
 import axios from "axios";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import FormData from "form-data";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import { Search } from "@mui/icons-material";
+import { useAutocomplete } from "@mui/base/AutocompleteUnstyled";
+import ProductCard from "./ProductCard";
+
 const Input = styled("input")({
   display: "none",
 });
+const Label = styled("label")({
+  display: "block",
+});
+
+const SearchInput = styled("input")(({ theme }) => ({
+  width: 200,
+  backgroundColor: theme.palette.background.paper,
+  color: theme.palette.getContrastText(theme.palette.background.paper),
+}));
+
+const Listbox = styled("ul")(({ theme }) => ({
+  width: 200,
+  margin: 0,
+  padding: 0,
+  zIndex: 1,
+  position: "absolute",
+  listStyle: "none",
+  backgroundColor: theme.palette.background.paper,
+  overflow: "auto",
+  maxHeight: 200,
+  border: "1px solid rgba(0,0,0,.25)",
+  '& li[data-focus="true"]': {
+    backgroundColor: "#4a8df6",
+    color: "white",
+    cursor: "pointer",
+  },
+  "& li:active": {
+    backgroundColor: "#2977f5",
+    color: "white",
+  },
+}));
 
 const style = {
   position: "absolute",
@@ -50,53 +83,146 @@ const style = {
 function Products() {
   const theme = useTheme();
   const [value, setValue] = useState(0);
-  const [editable, setEditable] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [productId, setProductId] = useState(null);
-  const [products, setProducts] = useState([
-    {
-      _id: 1,
-      name: "lego batman",
-      price: "22.5",
-      stock: "30",
-      category: "dc",
-    },
-    {
-      _id: 2,
-      name: "lego joker",
-      price: "25",
-      stock: "50",
-      category: "dc",
-    },
-    { _id: 3, name: "spiderman", price: "24", stock: "33", category: "marvel" },
-    { _id: 4, name: "spiderman", price: "24", stock: "33", category: "marvel" },
-    { _id: 5, name: "spiderman", price: "24", stock: "33", category: "marvel" },
-    { _id: 6, name: "spiderman", price: "24", stock: "33", category: "marvel" },
-    { _id: 7, name: "spiderman", price: "24", stock: "33", category: "marvel" },
-    { _id: 8, name: "spiderman", price: "24", stock: "33", category: "marvel" },
-    { _id: 9, name: "spiderman", price: "24", stock: "33", category: "marvel" },
-  ]);
-  const [imgs, setImgs] = useState([]);
+  const [openModel, setOpenModel] = useState(false);
+  const [productDetails, setProductDetails] = useState({});
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [searchOptions, setSearchOptions] = useState([...products]);
+  const [selectedFile, setSelectedFile] = useState([]);
+  const [preview, setPreview] = useState([]);
+  const {
+    getRootProps,
+    getInputLabelProps,
+    getInputProps,
+    getListboxProps,
+    getOptionProps,
+    groupedOptions,
+  } = useAutocomplete({
+    id: "use-autocomplete-demo",
+    options: searchOptions,
+    getOptionLabel: (option) => option.name,
+  });
+  let imgPreviewer;
+  useEffect(() => {
+    // imgPreviewer = document.querySelectorAll(".image-previewer");
+    // console.log(imgPreviewer);
+    if (!selectedFile) {
+      setPreview([]);
+      // [...imgPreviewer].forEach((img) => {
+      //   console.log(img);
+      //   img.remove();
+      // });
+      return;
+    }
 
-  const handleOpen = (id) => {
-    setProductId(id);
-    setOpen(true);
+    let objectUrl;
+    for (let i = 0; i < selectedFile.length; i++) {
+      // document.querySelectorAll(".image-previewer")[i].remove()
+      objectUrl = URL.createObjectURL(selectedFile[i]);
+      preview.push(objectUrl);
+    }
+    // free memory when ever this component is unmounted
+    return () => {
+      URL.revokeObjectURL(objectUrl);
+    };
+  }, [selectedFile]);
+
+  /************ delete handlers ************* */
+  const deleteConfirmation = (id, name) => {
+    setProductDetails({
+      id,
+      name,
+    });
+    setOpenModel(true);
   };
-  const handleClose = () => setOpen(false);
+  const deleteRejection = () => setOpenModel(false);
+
+  const deleteProduct = () => {
+    axios
+      .delete("http://localhost:8080/dashboard/products", {
+        data: { id: productDetails.id },
+      })
+      .then((res) => {
+        console.log(res);
+        let index = searchOptions.findIndex(
+          (element) => element._id === productDetails.id
+        );
+        products.splice(index, 1);
+        setSearchOptions(products);
+        openNotification(res.data.data);
+      })
+      .catch((err) => {
+        openErrorMsg(err.response.data.Error);
+      });
+    setOpenModel(false);
+  };
+  /************ delete handlers ************* */
+
+  /********* tabs handlers******** */
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-  const deleteProduct = () => {
-    console.log(productId, "deleted");
-    setOpen(false);
+  /********* tabs handlers******** */
+
+  /**** notifications */
+  const [notification, setnotification] = useState(false);
+  const [addCategoryStatus, setAddCategoryStatus] = useState("test");
+  const [addProductNotify, setAddProductNotify] = useState(false);
+
+  const openNotification = (message) => {
+    setAddCategoryStatus(message);
+    setnotification(true);
+  };
+
+  const hideNotification = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setnotification(false);
+  };
+
+  const openErrorMsg = (message) => {
+    setAddCategoryStatus(message);
+    setAddProductNotify(true);
+  };
+  const hideErrorMsg = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setAddProductNotify(false);
+  };
+  /**** notifications */
+  const search = (searchValue) => {
+    let arr = products.filter((product) => product.name.includes(searchValue));
+    setSearchOptions(arr);
   };
   useEffect(() => {
-    // axios.get("http://localhost:8080/")
+    axios
+      .get("http://localhost:8080/dashboard/category")
+      .then((res) => {
+        // setCategories(res.data)
+        setCategories(res.data.body);
+      })
+      .catch((err) => console.log(err));
   }, []);
+  useEffect(() => {
+    // products
+    axios
+      .get("http://localhost:8080/dashboard/products")
+      .then((res) => {
+        console.log(res);
+        setProducts(res.data.products);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  useEffect(() => {
+    setSearchOptions(products);
+  }, [products]);
   return (
     <div className="products">
       <Tabs
@@ -126,13 +252,13 @@ function Products() {
         >
           <TabPanel value={value} index={0}>
             <Box component="div">
-              <Autocomplete
+              {/* <Autocomplete
                 freeSolo
                 id="updateSearch"
                 disableClearable
                 options={products.map((product) => product.name)}
-                // options={["lego batman", "lego joker"]}
-                sx={{ backgroundColor: "#fff" }}
+                onKeyUp={(event) => search(event.target.value)}
+                sx={{ backgroundColor: "#fff", margin: "20px 0" }}
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -143,61 +269,49 @@ function Products() {
                     }}
                   />
                 )}
-              />
+              /> */}
+              <div {...getRootProps()}>
+                <Label {...getInputLabelProps()}>useAutocomplete</Label>
+                <SearchInput
+                  {...getInputProps()}
+                  onKeyUp={(event) => search(event.target.value)}
+                />
+              </div>
+              {groupedOptions.length > 0 ? (
+                <Listbox {...getListboxProps()}>
+                  {groupedOptions.map((option, index) => (
+                    <li {...getOptionProps({ option, index })} key={option._id}>
+                      {option.name}
+                    </li>
+                  ))}
+                </Listbox>
+              ) : null}
               <Grid container spacing={3} sx={{ my: 2 }}>
-                {products.map((product, index) => (
-                  <Grid item xs={12} md={6} lg={4} key={index}>
-                    <Card sx={{ maxWidth: 345 }}>
-                      <CardMedia
-                        component="img"
-                        height="140"
-                        image={testImg}
-                        alt="green iguana"
-                      />
-                      <CardContent>
-                        <Typography
-                          gutterBottom
-                          variant="h5"
-                          contentEditable={editable ? true : false}
-                          component="div"
-                        >
-                          {product.name}
-                        </Typography>
-                        <Typography
-                          variant="h5"
-                          contentEditable={editable ? true : false}
-                        >
-                          {product.price}$
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          contentEditable={editable ? true : false}
-                          color="text.secondary"
-                        >
-                          stock:{product.stock}
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <Button
-                          size="small"
-                          onClick={() => setEditable(!editable)}
-                        >
-                          {editable ? "Save" : "Edit"}
-                        </Button>
-                        <Button
-                          size="small"
-                          onClick={() => handleOpen(product._id)}
-                        >
-                          Delete
-                        </Button>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                ))}
+                {searchOptions.length > 0 ? (
+                  searchOptions.map((product, index) => (
+                    <ProductCard
+                      product={product}
+                      categories={categories}
+                      deleteConfirm={deleteConfirmation}
+                      showNotify={openNotification}
+                      showErr={openErrorMsg}
+                      key={product._id}
+                    />
+                  ))
+                ) : (
+                  <Typography
+                    component="div"
+                    sx={{ textAlign: "center", width: "100%", m: 2 }}
+                  >
+                    <Alert severity="warning">
+                      There is No products in your database
+                    </Alert>
+                  </Typography>
+                )}
               </Grid>
               <Modal
-                open={open}
-                onClose={handleClose}
+                open={openModel}
+                onClose={deleteRejection}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
               >
@@ -207,13 +321,17 @@ function Products() {
                     variant="h6"
                     component="h2"
                   >
-                    R u sure u want to delete this product?
+                    R u sure u want to delete{" "}
+                    <span style={{ color: "orange" }}>
+                      {productDetails.name}
+                    </span>
+                    ?
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     <Button
                       variant="contained"
                       color="error"
-                      onClick={() => deleteProduct(1)}
+                      onClick={() => deleteProduct()}
                       sx={{ mr: "1rem" }}
                     >
                       yes i'm sure
@@ -221,7 +339,7 @@ function Products() {
                     <Button
                       variant="contained"
                       color="success"
-                      onClick={handleClose}
+                      onClick={deleteRejection}
                     >
                       Cancel
                     </Button>
@@ -234,7 +352,7 @@ function Products() {
             <Formik
               initialValues={{
                 name: "",
-                images: "",
+                images: [""],
                 price: 0,
                 amount: 0,
                 sold: 0,
@@ -243,29 +361,38 @@ function Products() {
               }}
               validationSchema={Yup.object({
                 name: Yup.string().required("product name is Required"),
-                images: Yup.string().required(
-                  " you should select at least one image"
-                ),
+                images: Yup.array()
+                  .nullable()
+                  .required(" you should select at least one image"),
                 price: Yup.number().required("price is required"),
                 amount: Yup.number().required(" amount is Required"),
-                category: Yup.string().required("category is required"),
+                category: Yup.number().required("category is required"),
               })}
-              onSubmit={(values) => {
-                console.log("submitted");
-                // console.log(JSON.stringify(values, null, 2));
-                // console.log(imgs);
+              onSubmit={(values, { resetForm }) => {
                 let data = new FormData();
-                data.append("name", values.name);
-                data.append("images", values.images);
+                data.append("productName", values.name.toLowerCase());
                 data.append("price", values.price);
                 data.append("amount", values.amount);
                 data.append("sold", values.sold);
                 data.append("rating", values.rating);
                 data.append("category", values.category);
+                [...values.images].forEach((image) => {
+                  data.append("images", image);
+                });
 
-                // console.log(values);
                 let config = {
-                  headers: { "content-type": "application/json" },
+                  headers: {
+                    "content-type": "multipart/form-data",
+                  },
+                  onUploadProgress: (progressEvent) => {
+                    console.log(
+                      "progress:" +
+                        Math.round(
+                          (progressEvent.loaded / progressEvent.total) * 100
+                        ) +
+                        "%"
+                    );
+                  },
                 };
                 axios
                   .post(
@@ -275,10 +402,37 @@ function Products() {
                   )
                   .then((response) => {
                     console.log(response);
+                    openNotification(response.data.message);
+                    resetForm();
+                    setPreview([]);
+                    // [...imgPreviewer].forEach((img) => {
+                    //   img.remove();
+                    // });
+                    // let imgSrc = values.images.map((img) => {
+                    //   return (
+                    //     new Date().toLocaleDateString().replace(/\//g, "-") +
+                    //     "-" +
+                    //     img.name
+                    //   );
+                    // });
+                    // setProducts([
+                    //   ...products,
+                    //   {
+                    //     ...values,
+                    //     images: imgSrc,
+                    //     _id: imgSrc,
+                    //   },
+                    // ]);
+                    // console.log(products);
                   })
                   .catch((error) => {
                     console.log("err");
-                    console.log(error);
+
+                    setPreview([]);
+
+                    openErrorMsg(
+                      "Faild to upload your images's size is too large"
+                    );
                   });
               }}
             >
@@ -346,29 +500,31 @@ function Products() {
                       />
                     </Grid>
                     <Grid item xs={12} md={6}>
-                      <FormControl sx={{ m: 1, minWidth: 200 }}>
+                      <FormControl
+                        sx={{ width: "100%" }}
+                        error={
+                          props.touched.category && props.errors.category
+                            ? true
+                            : false
+                        }
+                      >
                         <InputLabel id="category">Category</InputLabel>
                         <Select
                           fullWidth
                           labelId="category"
                           id="category"
                           label="Category"
-                          error={
-                            props.touched.category && props.errors.category
-                              ? true
-                              : false
-                          }
+                          name="category"
                           {...props.getFieldProps("category")}
                         >
-                          <MenuItem value="">
+                          <MenuItem value="" selected>
                             <em>None</em>
                           </MenuItem>
-                          <MenuItem value="dc">DC</MenuItem>
-                          <MenuItem value="marvel">Marvel</MenuItem>
-                          <MenuItem value="warner bros">Warner Bros</MenuItem>
-                          <MenuItem value="20th century studios">
-                            20th Century Studios
-                          </MenuItem>
+                          {categories.map((category) => (
+                            <MenuItem value={category._id} key={category._id}>
+                              {category.name}
+                            </MenuItem>
+                          ))}
                         </Select>
                         <FormHelperText sx={{ color: "red" }}>
                           {props.touched.category && props.errors.category
@@ -384,10 +540,21 @@ function Products() {
                           id="images"
                           name="images"
                           type="file"
+                          multiple
                           onChange={(e) => {
-                            console.log(e.target.files[0]);
-                            props.setFieldValue("images", e.target.files[0]);
+                            props.setFieldValue("images", [...e.target.files]);
+                            if (
+                              !e.target.files ||
+                              e.target.files.length === 0
+                            ) {
+                              setSelectedFile(undefined);
+                              return;
+                            }
+                            // i need to delete the images from image list
+                            // setSelectedFile([]);
+                            setSelectedFile([...e.target.files]);
                             // setImgs([...e.target.files]);
+                            console.log(selectedFile);
                           }}
                           onBlur={props.handleBlur}
                         />
@@ -397,6 +564,7 @@ function Products() {
                           component="span"
                         >
                           <PhotoCamera />
+                          <p style={{ margin: "0" }}>Upload pictures</p>
                         </IconButton>
                       </label>
                       <FormHelperText sx={{ color: "red" }}>
@@ -404,17 +572,68 @@ function Products() {
                           ? `${props.errors.images}`
                           : null}
                       </FormHelperText>
+                      <Button variant="contained" type="submit" color="success">
+                        Add Product
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={6}>
+                      {selectedFile.length > 0 ? (
+                        <ImageList
+                          sx={{
+                            width: "100%",
+                            height: 300,
+                          }}
+                          cols={3}
+                          rowHeight={164}
+                        >
+                          {preview.map((item) => (
+                            <ImageListItem
+                              key={item}
+                              className="image-previewer"
+                            >
+                              <img
+                                src={`${item}`}
+                                srcSet={`${item}`}
+                                alt={item}
+                                loading="lazy"
+                              />
+                            </ImageListItem>
+                          ))}
+                        </ImageList>
+                      ) : (
+                        <p>selected images will show here</p>
+                      )}
                     </Grid>
                   </Grid>
-
-                  <Button variant="contained" type="submit" color="success">
-                    Add Product
-                  </Button>
                 </Box>
               )}
             </Formik>
           </TabPanel>
         </SwipeableViews>
+        <Snackbar
+          open={notification}
+          autoHideDuration={3000}
+          onClose={hideNotification}
+          severity="success"
+        >
+          <Alert
+            onClose={hideNotification}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            {addCategoryStatus}
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={addProductNotify}
+          autoHideDuration={3000}
+          onClose={hideErrorMsg}
+          severity="error"
+        >
+          <Alert onClose={hideErrorMsg} severity="error" sx={{ width: "100%" }}>
+            {addCategoryStatus}
+          </Alert>
+        </Snackbar>
       </Box>
     </div>
   );

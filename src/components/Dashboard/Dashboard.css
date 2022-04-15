@@ -8,3 +8,7 @@
   width: 100%;
   justify-content: center;
 }
+.admin-product-card label {
+  display: inline-block;
+  margin-right: 15px;
+}

@@ -97,7 +97,7 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 function DashboardContent() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
   const [orders, setOrders] = React.useState([
     {

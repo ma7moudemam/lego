@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,15 +7,25 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CheckIcon from "@mui/icons-material/Check";
-import { red } from "@mui/material/colors";
-import Modal from "@mui/material/Modal";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import TabPanel from "../Tabs/TabPanel";
+import EditIcon from "@mui/icons-material/Edit";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import allyprops from "../Tabs/allyprops";
+import SwipeableViews from "react-swipeable-views";
+import { useTheme } from "@mui/material/styles";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import FormData from "form-data";
+import { Grid } from "@mui/material";
+import CTableRow from "./CTapleRow";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const style = {
   position: "absolute",
@@ -29,106 +39,339 @@ const style = {
   p: 4,
 };
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const names = [
+  "Oliver Hansen",
+  "Van Henry",
+  "April Tucker",
+  "Ralph Hubbard",
+  "Omar Alexander",
+  "Carlos Abbott",
+  "Miriam Wagner",
+  "Bradley Wilkerson",
+  "Virginia Andrews",
+  "Kelly Snyder",
+];
+
 function Categories() {
-  const [categories, setCategories] = useState([
-    { id: 1, name: "dc", products: [0, 1, 2] },
-    { id: 2, name: "marvel", products: [0, 1, 2, 5, 3] },
-    { id: 3, name: "paramount", products: [0, 1, 2] },
-    { id: 4, name: "netflix", products: [0, 1, 2] },
-  ]);
+  const theme = useTheme();
+  const [categories, setCategories] = useState([]);
   const [searchOptions, setSearchOptions] = useState([...categories]);
-  const [open, setOpen] = useState(false);
-  const handleOpen = (id) => {
-    setOpen(true);
+  const [value, setValue] = useState(0);
+  const [productsName, setProductName] = useState([]);
+  const [addCategoryStatus, setAddCategoryStatus] = useState("test");
+  const [addCategoryNotify, setAddCategoryNotify] = useState(false);
+  const openErrorMsg = (message) => {
+    setAddCategoryStatus(message);
+    setAddCategoryNotify(!false);
   };
-  const handleClose = () => setOpen(false);
+  const hideErrorMsg = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setAddCategoryNotify(false);
+  };
+  /**** notifications */
+  const [notification, setnotification] = useState(false);
+
+  const openNotification = (message) => {
+    setAddCategoryStatus(message);
+    setnotification(true);
+  };
+
+  const hideNotification = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setnotification(false);
+  };
+
+  /**** notifications */
   const search = (value) => {
+    // let test = categories.map((category) => ({
+    //   ...category,
+    //   name: category.name.toLowerCase(),
+    // }));
     let arr = categories.filter((category) => category.name.includes(value));
+
     setSearchOptions(arr);
   };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
+
+  const confirmDelete = (id, close) => {
+    axios
+      .delete("http://localhost:8080/dashboard/category", { data: { id: id } })
+      .then((res) => {
+        let index = searchOptions.findIndex((element) => element._id === id);
+        categories.splice(index, 1);
+        setSearchOptions(categories);
+        close();
+        openNotification(res.data.data + " Successfully!");
+        //notify res.data.data
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/dashboard/category").then((res) => {
+      setCategories(res.data.body);
+    });
+  }, []);
+
+  useEffect(() => {
+    setSearchOptions(categories);
+  }, [categories]);
 
   return (
     <>
-      <Box component="div" sx={{ my: 3 }}>
-        <Autocomplete
-          freeSolo
-          id="categorySearch"
-          onKeyUp={(e) => search(e.target.value)}
-          disableClearable
-          options={categories.map((category) => category.name)}
-          // options={["lego batman", "lego joker"]}
-          sx={{ backgroundColor: "#fff" }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Search input"
-              InputProps={{
-                ...params.InputProps,
-                type: "search",
-              }}
-            />
-          )}
-        />
-      </Box>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Products Number</TableCell>
-              <TableCell>Controls</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {searchOptions.map((category) => (
-              <TableRow
-                key={category.id}
-                sx={{ "&:last-child td, &:last-child th": { bcategory: 0 } }}
-              >
-                <TableCell>{category.id}</TableCell>
-                <TableCell>{category.name}</TableCell>
-                <TableCell>{category.products.length}</TableCell>
-                <TableCell>
-                  <Box sx={{ display: "flex", padding: "16px" }}>
-                    <IconButton aria-label="dispatch">
-                      <CheckIcon color="success" />
-                    </IconButton>
-                    <IconButton aria-label="delete" onClick={handleOpen}>
-                      <DeleteIcon sx={{ color: red[600] }} />
-                    </IconButton>
-                  </Box>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+      <Tabs
+        orientation="horizontal"
+        value={value}
+        variant="fullWidth"
+        onChange={handleChange}
+        aria-label="Horizontal tabs example"
+        sx={{ borderRight: 1, borderColor: "divider" }}
       >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            R u sure u want to delete this Category?
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <Button
-              variant="contained"
-              color="error"
-              onClick={() => handleClose()}
-              sx={{ mr: "1rem" }}
+        <Tab
+          label="Update"
+          icon={<EditIcon color="primary" />}
+          {...allyprops(0)}
+        />
+        <Tab
+          label="Add"
+          icon={<AddBoxIcon color="success" />}
+          {...allyprops(1)}
+        />
+      </Tabs>
+      <Box component="div" sx={{ paddingTop: "1rem" }}>
+        <SwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={value}
+          onChangeIndex={handleChangeIndex}
+        >
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            <Box component="div" sx={{ my: 3 }}>
+              <Autocomplete
+                freeSolo
+                id="categorySearch"
+                onKeyUp={(e) => search(e.target.value)}
+                disableClearable
+                options={searchOptions.map((category) => category.name)}
+                sx={{ backgroundColor: "#fff" }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Search input"
+                    InputProps={{
+                      ...params.InputProps,
+                      type: "search",
+                    }}
+                  />
+                )}
+              />
+            </Box>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>ID</TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Controls</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {searchOptions.map((category) => (
+                    <CTableRow
+                      category={category}
+                      confirmDelete={confirmDelete}
+                      key={category._id}
+                    />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            <Formik
+              initialValues={{
+                categoryName: "",
+                products: [0],
+              }}
+              validationSchema={Yup.object({
+                categoryName: Yup.string().required(
+                  "product category name is Required"
+                ),
+                products: Yup.array().nullable(),
+              })}
+              onSubmit={(values) => {
+                let data = new FormData();
+                data.append("categoryName", values.categoryName.toLowerCase());
+
+                let config = {
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                };
+                axios
+                  .post(
+                    "http://localhost:8080/dashboard/category",
+                    values,
+                    config
+                  )
+                  .then((response) => {
+                    setCategories([...categories, response.data.data]);
+                    values.categoryName = "";
+                    openNotification(response.data.message);
+                  })
+                  .catch((error) => {
+                    openErrorMsg(error.response.data.message);
+                  });
+              }}
             >
-              yes i'm sure
-            </Button>
-            <Button variant="contained" color="success" onClick={handleClose}>
-              Cancel
-            </Button>
-          </Typography>
-        </Box>
-      </Modal>
+              {(props) => (
+                <Box
+                  component="form"
+                  id="addCategoryForm"
+                  onSubmit={props.handleSubmit}
+                  sx={{ paddingTop: "35px" }}
+                >
+                  <Grid container spacing={3}>
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        fullWidth
+                        id="categoryName"
+                        name="categoryName"
+                        label="Category Name"
+                        helperText={
+                          props.touched.categoryName &&
+                          props.errors.categoryName
+                            ? `${props.errors.categoryName}`
+                            : null
+                        }
+                        error={
+                          props.touched.categoryName &&
+                          props.errors.categoryName
+                            ? true
+                            : false
+                        }
+                        {...props.getFieldProps("categoryName")}
+                      />
+                    </Grid>
+                    {/* <Grid item xs={12} md={6}>
+                      <FormControl sx={{ m: 1, width: 300 }}>
+                        <InputLabel id="products">Products</InputLabel>
+                        <Select
+                          labelId="products"
+                          id="demo-multiple-chip"
+                          fullWidth
+                          name="products"
+                          multiple
+                          value={productsName}
+                          onChange={multiSelectChange}
+                          input={
+                            <OutlinedInput
+                              id="select-multiple-chip"
+                              label="Chip"
+                            />
+                          }
+                          renderValue={(selected) => (
+                            <Box
+                              sx={{
+                                display: "flex",
+                                flexWrap: "wrap",
+                                gap: 0.5,
+                              }}
+                            >
+                              {selected.map((value) => (
+                                <Chip key={value} label={value} />
+                              ))}
+                            </Box>
+                          )}
+                          MenuProps={MenuProps}
+                          error={
+                            props.touched.products && props.errors.products
+                              ? true
+                              : false
+                          }
+                          {...props.getFieldProps("products")}
+                        >
+                          {names.map((name) => (
+                            <MenuItem
+                              key={name}
+                              value={name}
+                              sx={{ fontWeight: "400" }}
+                            >
+                              {name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                        <FormHelperText sx={{ color: "red" }}>
+                          {props.touched.products && props.errors.products
+                            ? `${props.errors.products}`
+                            : null}
+                        </FormHelperText>
+                      </FormControl>
+                    </Grid> */}
+                  </Grid>
+
+                  <Button
+                    variant="contained"
+                    sx={{ my: 2 }}
+                    type="submit"
+                    color="success"
+                  >
+                    Add Category
+                  </Button>
+                </Box>
+              )}
+            </Formik>
+          </TabPanel>
+        </SwipeableViews>
+        <Snackbar
+          open={addCategoryNotify}
+          autoHideDuration={3000}
+          onClose={hideErrorMsg}
+          severity="error"
+        >
+          <Alert onClose={hideErrorMsg} severity="error" sx={{ width: "100%" }}>
+            {addCategoryStatus}
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={notification}
+          autoHideDuration={3000}
+          onClose={hideNotification}
+          severity="success"
+        >
+          <Alert
+            onClose={hideNotification}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            {addCategoryStatus}
+          </Alert>
+        </Snackbar>
+      </Box>
     </>
   );
 }

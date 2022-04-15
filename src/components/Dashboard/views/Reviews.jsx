@@ -8,6 +8,8 @@ import TableRow from "@mui/material/TableRow";
 import Title from "../Title";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Paper from "@mui/material/Paper";
+
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
   return { id, date, name, shipTo, paymentMethod, amount };
@@ -63,7 +65,7 @@ function Reviews() {
   return (
     <React.Fragment>
       <Title>Recent Reviews</Title>
-      <Table size="large" stickyHeader>
+      <Table size="large" component={Paper} stickyHeader>
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
