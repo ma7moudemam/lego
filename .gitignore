@@ -2,7 +2,9 @@
 
 # dependencies
 /node_modules
+/lego
 /.pnp
+yarn.lock
 .pnp.js
 .env
 

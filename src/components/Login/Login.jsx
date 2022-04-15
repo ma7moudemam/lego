@@ -11,9 +11,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import "./Login.css";
-import { Route, Redirect, NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 function Login() {
+	let navigate = useNavigate();
 	const formik = useFormik({
 		initialValues: {
 			email: "",
@@ -24,11 +25,14 @@ function Login() {
 			password: Yup.string().required("password is required"),
 		}),
 		onSubmit: (values) => {
-			axios.post("http://localhost:8080/login", values).then((res) => {
-				//res.data
-				localStorage.setItem("token", res.data.token);
-				return <Redirect to="/home" />;
-			});
+			axios
+				.post("http://localhost:8080/login", values)
+				.then((res) => {
+					//res.data
+					localStorage.setItem("token", res.data.token);
+				})
+				.catch((err) => console.log(err));
+			navigate("/home");
 		},
 	});
 	// const submitLogin = (event) => {
@@ -43,9 +47,9 @@ function Login() {
 						<img src={legoAccountLogo} alt="Lego Logo" />
 					</div>
 					<div className="close">
-						<a href="home.html">
+						<NavLink to="/home">
 							<img src={close} alt="close button" />
-						</a>
+						</NavLink>
 					</div>
 				</div>
 				<div className="logo">

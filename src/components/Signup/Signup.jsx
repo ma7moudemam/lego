@@ -11,9 +11,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import "../Login/Login.css";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function Signup() {
+  let navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       signup_email: "",
@@ -44,11 +45,13 @@ function Signup() {
       country: Yup.string().required("required"),
     }),
     onSubmit: (values) => {
-      console.log("submitted");
       axios
         .post("http://localhost:8080/register", values)
-        .then((res) => <Redirect to="/login" />)
+        .then((res) => {
+          console.log(res);
+        })
         .catch((err) => console.log(err));
+      navigate("/login");
     },
   });
   return (
@@ -62,7 +65,7 @@ function Signup() {
         <div className="login-suPage">
           <h2>Create your adult LEGO® Account</h2>
           <p>Already have an account?</p>
-          <a href="login.html">Log in</a>
+          <NavLink to="/login">Log in</NavLink>
           <div className="divider">
             <span>Or sign up</span>
           </div>

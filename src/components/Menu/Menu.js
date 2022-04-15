@@ -2,60 +2,63 @@ import "./Menu.css";
 import legoUser from "../../assets/imgs/lego-user.svg";
 import { NavLink } from "react-router-dom";
 
-export default function Menu() {
+export default function Menu(props) {
 	return (
 		<>
-			<div class="menu-bar">
+			<div className={`menu-bar ${props.openMenuBar ? "open" : ""}`}>
 				<header>
 					<div>Menu</div>
-					<NavLink to="#">
-						<i class="fas fa-times"></i>
-					</NavLink>
+					<a onClick={props.toggleMenu}>
+						<i className="fas fa-times"></i>
+					</a>
 				</header>
-				<div class="flex-wrapper">
-					<div class="play-zone">
-						<NavLink class="left-utility" to="#">
-							<i class="fas fa-long-arrow-alt-right"></i>
+				<div className="flex-wrapper">
+					<div className="play-zone">
+						<NavLink className="left-utility" to="#">
+							<i className="fas fa-long-arrow-alt-right"></i>
 							play zone
 						</NavLink>
 					</div>
 
-					<ul class="menu-bar-list">
-						<li class="menu-bar-list-item">
-							<NavLink to="/">HOME</NavLink>
+					<ul className="menu-bar-list">
+						<li className="menu-bar-list-item">
+							<NavLink to="/home">HOME</NavLink>
 						</li>
-						<li class="menu-bar-list-item">
+						<li className="menu-bar-list-item">
 							<NavLink to="/shop-now">SHOP</NavLink>
 						</li>
-						<li class="menu-bar-list-item">
-							<NavLink to="/">DISCOVER</NavLink>
+						<li className="menu-bar-list-item">
+							<NavLink to="/about-us">ABOUT US</NavLink>
 						</li>
-						<li class="menu-bar-list-item">
-							<NavLink to="/contact-us">HELP</NavLink>
+						<li className="menu-bar-list-item">
+							<NavLink to="/contact-us">CONTACT US</NavLink>
 						</li>
-						<li class="menu-bar-list-item">
-							<NavLink to="/login" class="user-icon">
-								<img src={legoUser} class="svg" />
+						<li className="menu-bar-list-item">
+							<NavLink to="/dashboard">DASHBOARD</NavLink>
+						</li>
+						<li className="menu-bar-list-item">
+							<NavLink to={props.isLoggedIn ? "/details" : "/login"} className="user-icon">
+								<img src={legoUser} className="svg" />
 								Account
 							</NavLink>
 						</li>
-						<li class="menu-bar-list-item">
-							<NavLink to="#" class="vip-icon">
-								<i class="fas fa-crown"></i>
+						<li className="menu-bar-list-item">
+							<NavLink to="#" className="vip-icon">
+								<i className="fas fa-crown"></i>
 								VIP
 							</NavLink>
 						</li>
-						<li class="menu-bar-list-item">
+						<li className="menu-bar-list-item">
 							<NavLink to="/wishlist">My Wishlist</NavLink>
 						</li>
-						<li class="menu-bar-list-item">
+						<li className="menu-bar-list-item">
 							<NavLink to="/mybag">
 								My Bag <span>(0)</span>
 							</NavLink>
 						</li>
-						<li class="menu-bar-list-item">
-							<NavLink to="#" class="region-icon">
-								<i class="fas fa-map-marker-alt"></i> Region
+						<li className="menu-bar-list-item">
+							<NavLink to="#" className="region-icon">
+								<i className="fas fa-map-marker-alt"></i> Region
 							</NavLink>
 						</li>
 					</ul>

@@ -1,27 +1,33 @@
 import "./Navbar.css";
 import legoLogo from "./../../assets/imgs/lego-logo.svg";
 import legoUser from "../../assets/imgs/lego-user.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-export default function Navbar() {
+export default function Navbar(props) {
 	const totalItemsCount = useSelector((store) => store.cart.totalItemsCount);
 	return (
 		<div className="nav-container">
 			<nav className="nav-bar">
 				<ul className="nav-list">
-					<div className="nav-list-item menu-icon">
+					<div className="nav-list-item menu-icon" onClick={props.toggleMenu}>
 						<sub>Menu</sub>
 					</div>
-					<img src={legoLogo} className="nav-list-item" alt="logo" />
+					<Link to="/home" className="logo">
+						<img src={legoLogo} className="nav-list-item" alt="logo" />
+					</Link>
 
-					<NavLink to="/shop-now">
-						<li className="nav-list-item">shop</li>
-					</NavLink>
 					<li className="nav-list-item">
-						<NavLink to="/store">discover</NavLink>
+						<NavLink to="/shop-now">shop</NavLink>
+					</li>
+
+					<li className="nav-list-item">
+						<NavLink to="/about-us">about us</NavLink>
 					</li>
 					<li className="nav-list-item">
-						<NavLink to="/contactus">help</NavLink>
+						<NavLink to="/contact-us">contact us</NavLink>
+					</li>
+					<li className="nav-list-item">
+						<NavLink to="/dashboard">dashboard</NavLink>
 					</li>
 				</ul>
 				<div className="nav-icons">
@@ -39,7 +45,7 @@ export default function Navbar() {
 						</div>
 						<div className="search-content"></div>
 					</div>
-					<NavLink to="/account" className="nav-user-icon">
+					<NavLink to={props.isLoggedIn ? "/details" : "/login"} className="nav-user-icon">
 						<img src={legoUser} className="svg" alt="account" />
 					</NavLink>
 					<NavLink to="/whishlist">
@@ -61,7 +67,7 @@ export default function Navbar() {
 									<path d="M2.46 6.33c-.269 0-.489.194-.5.441L1.435 18.19a.436.436 0 00.131.332.52.52 0 00.348.149h12.151c.276 0 .501-.207.501-.462l-.525-11.436c-.011-.248-.23-.442-.5-.442H2.46zM14.448 20l-12.974-.001a1.591 1.591 0 01-1.064-.462 1.357 1.357 0 01-.408-1.03L.56 6.372C.595 5.602 1.277 5 2.11 5h11.78c.835 0 1.516.602 1.551 1.372l.56 12.197c0 .789-.697 1.431-1.553 1.431z"></path>
 								</g>
 							</svg>
-							<small>{totalItemsCount}</small>
+							<small>({totalItemsCount})</small>
 						</i>
 					</NavLink>
 				</div>

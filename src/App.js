@@ -1,8 +1,6 @@
 import "./App.css";
 import Wishlist from "./components/wishList/wishListContent/Wishlist";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Hero from "./components/Hero/Hero";
-import Recommended from "./components/Recommended/Recommended";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AccordionProduct from "./components/AccordionProduct/AccordionProduct";
 import MyBag from "./components/Bag";
 import ProductCart from "./components/ProductCart/ProductCart";
@@ -23,93 +21,152 @@ import { getUserCart, updateUserCart } from "./network/cartAPI";
 import { useSelector, useDispatch } from "react-redux";
 import { initUserCart } from "./Redux/Actions/cartActions";
 import Layout from "./components/Layout/Layout";
+import Checkout from "./components/Checkout/Checkout";
+import Success from "./components/Success/Success";
+import Canceled from "./components/Canceled/Canceled";
+import NotFound from "./components/NotFound/NotFound";
+import Navbar from "./components/Navbar/Navbar";
+import ContactUs from "./components/Contact-us/ContactUs";
+
+import MyOrder from "./components/Myorder/MyOrder";
+import WishListContent from "./components/wishList/wishListContent/WishlistContent";
+
 
 function App() {
 	const dispatch = useDispatch();
 	const cart = useSelector((store) => store.cart);
 	const [initCart, setInitCart] = useState(false);
+	const [token, setToken] = useState(localStorage.getItem("token"))
 
 	useEffect(() => {
-		if (initCart) {
-			updateUserCart({ ...cart })
-				.then((res) => console.log("===>UPDATE CART ", res.data))
-				.catch((err) => console.log("==>ERROR UPDATE CART ,", err));
-		} else {
-			setInitCart(true);
-			getUserCart()
-				.then((res) => dispatch(initUserCart(res.data)))
-				.catch((err) => console.log("==>ERROR CART ,", err));
-		}
-	}, [cart]);
+		if(token) {
+			if (initCart) {
+				updateUserCart({ ...cart })
+					.then((res) => console.log("===>UPDATE CART ", res.data))
+					.catch((err) => console.log("==>ERROR UPDATE CART ,", err));
+			} else {
+				setInitCart(true);
+				getUserCart()
+					.then((res) => dispatch(initUserCart(res.data)))
+					.catch((err) => console.log("==>ERROR CART ,", err));
+			}
+		}	
+		
+	}, [cart, token]);				
 
 	return (
 		<div className="App">
 			<Router>
-				<Switch>
-					<Route exact path="/mybag">
-						<Layout>
-							<MyBag />
-						</Layout>
+				<Routes>
+					<Route
+						path="/mybag"
+						element={
+							<Layout>
+								<MyBag />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/"
+						element={
+							<Layout>
+								<HomePage />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/home"
+						element={
+							<Layout>
+								<HomePage />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/whishlist"
+						element={
+							<Layout>
+								<Wishlist />
+							</Layout>
+						}
+					>
+    			 		<Route  path="personal" element={<Personal />} />
+						<Route path="myorder" element={<MyOrder />} />
+						<Route path="whishlist" element={<WishListContent />} />
 					</Route>
-					<Route exact path="/">
-						<Layout>
-							<HomePage />
-							<Hero />
-							<Recommended />
-						</Layout>
-					</Route>
-					<Route exact path="/whishlist">
-						<Layout>
-							<Wishlist />
-						</Layout>
-					</Route>
-					<Route exact path="/login">
-						<Login />
-					</Route>
-					<Route exact path="/signup">
-						<Signup />
-					</Route>
-					<Route exact path="/shop-now">
-						<Layout>
-							<ProductCard />
-							<AccordionProduct />
-						</Layout>
-					</Route>
-					<Route exact path="/card">
-						<Layout>
-							<ProductCart />
-							<SwiperSlider />
-						</Layout>
-					</Route>
-					<Route exact path="/my-account">
-						<Layout>
-							<Personal />
-						</Layout>
-					</Route>
-					<Route exact path="/details">
-						<Layout>
-							<AccountDetails />
-						</Layout>
-					</Route>
-					<Route exact path="/info">
-						<Layout>
-							<AccountInformation />
-						</Layout>
-					</Route>
-					<Route exact path="/security">
-						<Layout>
-							<AccountSecurity />
-						</Layout>
-					</Route>
-					<Route exact path="/delete-account">
-						<Layout>
-							<DeleteAccount />
-						</Layout>
-					</Route>
-					<Route exact path="/dashboard">
-						<Dashboard />
-					</Route>
-				</Switch>
+					<Route path="/login" element={<Login />} />
+					<Route path="/signup" element={<Signup />} />
+					<Route
+						path="/shop-now"
+						element={
+							<Layout>
+								<>
+								<ProductCard />
+								<AccordionProduct />
+								</>
+							</Layout>
+						}
+					/>
+					<Route
+						path="/card"
+						element={
+							<Layout>
+								<>
+								<ProductCart />
+								<SwiperSlider />
+								</>
+							</Layout>
+						}
+					/>
+					<Route
+						path="/my-account"
+						element={
+							<>
+								<Navbar />
+								<Personal />
+							</>
+						}
+					/>
+					<Route path="/details" element={<AccountDetails />} />
+					<Route path="/info" element={<AccountInformation />} />
+					<Route path="/security" element={<AccountSecurity />} />
+					<Route path="/delete-account" element={<DeleteAccount />} />
+					<Route path="/dashboard" element={<Dashboard />} />
+					<Route
+						path="/checkout"
+						element={
+							<Layout>
+								<Checkout />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/success"
+						element={
+							<Layout>
+								<Success />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/canceled"
+						element={
+							<Layout>
+								<Canceled />
+							</Layout>
+						}
+					/>
+					<Route
+						path="/contact-us"
+						element={
+							<Layout>
+								<ContactUs />
+							</Layout>
+						}
+					/>
+					<Route path="/about-us" element={<NotFound />} />
+					<Route path="*" element={<NotFound />} />
+				</Routes>
 			</Router>
 		</div>
 	);

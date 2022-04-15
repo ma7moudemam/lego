@@ -12,31 +12,37 @@ import TextField from "@mui/material/TextField";
 import Logo from "../../assets/imgs/LEGOAccount-Logo.svg";
 import "./AccountDetails.css";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 export default function AccountSecurity() {
-  const [user, setUser] = useState([]);
-useEffect(() => {
-  axios
-    .get("http://localhost:8080/account/me", {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    })
-    .then((res) => setUser(res.data))
-    .catch((err) => console.log(err));
-}, []);
+  const [users, setUsers] = useState(() =>
+    jwt_decode(localStorage.getItem("token"))
+  );
+
+  let navigate = useNavigate();
 
   const handelDeleteAction = () => {
     axios
       .delete("http://localhost:8080/account", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
-      .then((res) => (console.log("deleted"), (<Redirect to="/" />)))
+      .then((res) => {
+        localStorage.removeItem("token");
+        console.log("deleted");
+      })
       .catch((err) => console.log(err));
+    navigate("/home");
   };
 
   const handelLogOutAction = () => {
     localStorage.removeItem("token");
-    <Redirect to="/" />;
+    // To insure token Remove 
+    if(localStorage.getItem("token")){
+      localStorage.removeItem("token");
+    }else {
+      navigate("/");
+    }
   };
 
   return (
@@ -99,23 +105,23 @@ useEffect(() => {
             </h4>
 
             <form id="delete-form" sx={{ mb: "0" }}>
-              <TextField
-                fullWidth
-                id="standard-read-only-input"
-                label="Username"
-                defaultValue={user.userName}
-                InputProps={{
-                  readOnly: true,
-                }}
-                sx={{ mb: 2 }}
-                //   variant="standard"
-              />
+              {/* <TextField
+								fullWidth
+								id="standard-read-only-input"
+								label="Username"
+								defaultValue={users.user.userName}
+								InputProps={{
+									readOnly: true,
+								}}
+								sx={{ mb: 2 }}
+								//   variant="standard"
+							/> */}                
 
               <TextField
                 fullWidth
                 id="standard-read-only-input"
                 label="Email"
-                defaultValue={user.email}
+                defaultValue={users.user.email}
                 InputProps={{
                   readOnly: true,
                 }}
@@ -151,7 +157,7 @@ useEffect(() => {
                 type="button"
                 onClick={handelLogOutAction}
               >
-                cancel
+                Log Out
               </button>
             </div>
           </Box>

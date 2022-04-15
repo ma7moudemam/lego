@@ -96,6 +96,9 @@ a {
 		color: #2c2c2c;
 		font-size: 1.5rem;
 	}
+	.hide {
+		display: none;
+	}
 }
 @media (max-width: 470px) {
     .utility-bar-styles {
