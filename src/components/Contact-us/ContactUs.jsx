@@ -2,7 +2,7 @@ import React from "react";
 import DeveloperCard from "../DeveloperCard/DeveloperCard";
 import "./ContactUs.css";
 import KarimShahin from "./PP.jpg";
-import Emam from './emam.jpg';
+import Emam from "./emam.jpg";
 
 export default function ContactUs() {
 	const us = [
@@ -19,7 +19,7 @@ export default function ContactUs() {
 			email: "m7moud_emam@hotmail.com",
 			linkedIn: "https://www.linkedin.com/in/m7hmoudemam/",
 			github: "https://github.com/ma7moudemam",
-		}
+		},
 	];
 	return (
 		<div className="contact-us">
