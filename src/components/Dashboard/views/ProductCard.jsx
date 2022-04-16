@@ -34,6 +34,7 @@ function ProductCard({
   const [editing, setEditing] = useState(false);
   const [singleProduct, setSingleProduct] = useState(product);
   const [notValid, setNotValid] = useState(false);
+
   let config = {
     headers: {
       "content-type": "application/json",
@@ -65,7 +66,7 @@ function ProductCard({
             productName: values.productName,
             price: Number(values.price),
             amount: Number(values.amount),
-            category: values.updateCategory?._id,
+            category: values.updateCategory,
           },
           config
         )
@@ -219,20 +220,23 @@ function ProductCard({
                 <Typography gutterBottom variant="h5" component="div">
                   {formik.values.productName}
                 </Typography>
-                <Typography variant="h5">{formik.values.price}$</Typography>
+                <Typography variant="h5">{formik.values.price}EGP</Typography>
                 <Typography variant="body2" color="text.secondary">
                   stock:{formik.values.amount}{" "}
-                  {formik.values.amount == 0 ? (
+                  {Number(formik.values.amount) === 0 ? (
                     <span style={{ color: "red" }}>out of stock</span>
                   ) : null}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Category:
-                  {typeof singleProduct.category === "number"
-                    ? categories.find(
-                        (cate) => cate._id === singleProduct.category
-                      ).name
-                    : singleProduct.category?.name}
+                  {
+                    categories.find((cate) => {
+                      return (
+                        Number(cate._id) ===
+                        Number(formik.values.updateCategory)
+                      );
+                    })?.name
+                  }
                 </Typography>
               </>
             )}

@@ -3,6 +3,7 @@ import DeveloperCard from "../DeveloperCard/DeveloperCard";
 import "./ContactUs.css";
 import KarimShahin from "./PP.jpg";
 import Emam from "./emam.jpg";
+import Essam from "./essam.jpg";
 
 export default function ContactUs() {
 	const us = [
@@ -19,6 +20,13 @@ export default function ContactUs() {
 			email: "m7moud_emam@hotmail.com",
 			linkedIn: "https://www.linkedin.com/in/m7hmoudemam/",
 			github: "https://github.com/ma7moudemam",
+		},
+		{
+			name: "Mahmoud Essam",
+			image: Essam,
+			email: "dev.mahmoud.essam@gmail.com",
+			linkedIn: "https://www.linkedin.com/in/mahmoud-essam-956898182/",
+			github: "https://github.com/MahmoudEssam12",
 		},
 	];
 	return (

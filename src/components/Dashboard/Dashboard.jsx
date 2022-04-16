@@ -30,6 +30,8 @@ import Users from "./views/Users";
 import Reviews from "./views/Reviews";
 import Shippers from "./Shippers";
 import Categories from "./views/Categories";
+import HomeIcon from "@mui/icons-material/Home";
+import { NavLink } from "react-router-dom";
 function Copyright(props) {
   return (
     <Typography
@@ -179,6 +181,11 @@ function DashboardContent() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+            <NavLink to="/">
+              <IconButton color="inherit" sx={{ color: "black" }}>
+                <HomeIcon />
+              </IconButton>
+            </NavLink>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
