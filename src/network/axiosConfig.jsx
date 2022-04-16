@@ -27,10 +27,17 @@ axiosInstance.interceptors.response.use(
     // HIDE LOADER
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
+    // if(response.status == 401) {
+    //   console.log("hi")
+    // }
+    
     return response;
   },
   function (error) {
     // HIDE LOADER
+    if (error.response && error.response.status == 401 ) {
+      localStorage.clear();
+    }
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return Promise.reject(error);
