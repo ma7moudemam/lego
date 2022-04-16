@@ -1,10 +1,10 @@
-import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Grid } from "@mui/material";
 import User from "./User";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-
+import axios from "axios";
 function Users() {
   const [users, setUsers] = useState([
     { email: "batman@gotham.dc", name: "vengeance" },
@@ -18,7 +18,26 @@ function Users() {
     setSearchOptions(arr);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/dashboard/users")
+      .then((res) => {
+        console.log(res.data);
+        setUsers(res.data.users);
+      })
+      .catch((err) => console.log(err));
+
+    axios
+      .get("http://localhost:8080/dashboard/blacklist")
+      .then((res) => {
+        console.log("blacklist", res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    setSearchOptions(users);
+  }, [users]);
   return (
     <div className="users">
       <Box component="div" sx={{ my: 3 }}>

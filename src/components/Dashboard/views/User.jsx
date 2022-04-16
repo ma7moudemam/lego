@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -7,9 +7,79 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import { red } from "@mui/material/colors";
+import axios from "axios";
+
 function User({ user }) {
+  const [userState, setUserState] = useState(user.blocked);
+
+  const blockUser = () => {
+    setUserState(true);
+    axios
+      .post(
+        "http://localhost:8080/dashboard/users",
+        { email: user.email },
+        {
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+    // update blocked user state
+    axios
+      .put("http://localhost:8080/dashboard/users", {
+        id: user._id,
+        blocked: true,
+      })
+      .then((res) => {
+        console.log(res);
+        setUserState(true);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const unBlock = () => {
+    axios
+      .delete(
+        "http://localhost:8080/dashboard/users",
+        { data: { user: user.email } },
+        {
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log("unblocked", res);
+        // if (res.data.body.deletedCount === 1) {
+
+        // }
+      })
+      .catch((err) => console.log(err));
+    // update blocked user state
+
+    axios
+      .put("http://localhost:8080/dashboard/users", {
+        id: user._id,
+        blocked: false,
+      })
+      .then((res) => {
+        setUserState(false);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, position: "relative" }}>
+      {userState && (
+        <div className="user-state">
+          <span></span> Blocked user
+        </div>
+      )}
+
       <CardHeader
         sx={{ width: "100%", justifyContent: "center" }}
         avatar={
@@ -27,13 +97,51 @@ function User({ user }) {
           </Avatar>
         }
       />
-      <CardContent>
-        <Typography gutterBottom variant="h6" align="center" component="div">
+      <CardContent sx={{ paddingBottom: 0 }}>
+        <Typography gutterBottom variant="h5" align="center" component="div">
           {user.email}
+        </Typography>
+        <Typography
+          variant="h6"
+          align="center"
+          sx={{ color: "grey" }}
+          component="div"
+        >
+          From:{" "}
+          <span
+            style={{
+              color: red[500],
+              textTransform: "uppercase",
+              fontSize: "1.2rem",
+              letterSpacing: "1px",
+            }}
+          >
+            {user.country}
+          </span>
         </Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: "center" }}>
-        <Button size="small">Send to Blacklist</Button>
+        {userState ? (
+          <Button
+            size="small"
+            onClick={() => {
+              unBlock();
+            }}
+          >
+            Unblock
+          </Button>
+        ) : (
+          <Button
+            size="small"
+            onClick={() => {
+              setUserState(true);
+              blockUser();
+            }}
+          >
+            Send to Blacklist
+          </Button>
+        )}
+
         <Button size="small">Go to profile</Button>
       </CardActions>
     </Card>

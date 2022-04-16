@@ -12,3 +12,24 @@
   display: inline-block;
   margin-right: 15px;
 }
+.user-state {
+  position: absolute;
+  top: 20px;
+  z-index: 10;
+  right: 10px;
+  border: 1px solid #b6b6b6;
+  color: #000;
+  background-color: #ececec99;
+  padding: 0.5em 1.2em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 5px;
+}
+.user-state span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #e90000;
+}
