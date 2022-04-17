@@ -3,9 +3,8 @@ import { Link, Navigate } from "react-router-dom";
 import Style from "./Personal.module.css";
 import jwt_decode from "jwt-decode";
 
-
 export default function Personal() {
-  const [users, setUsers] = useState(() => jwt_decode(localStorage.getItem("token")));
+	const [users, setUsers] = useState(() => jwt_decode(localStorage.getItem("token")));
 
   
 	// const handelLogOutAction = () => {

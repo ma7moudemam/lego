@@ -10,6 +10,7 @@ import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 
 import {addToBag} from '../../Redux/Actions/cartActions'
+import { addToWishList } from "../../network/wishListAPI";
 export default function Cards({product}) {
 
   const dispatch = useDispatch()
@@ -27,11 +28,20 @@ export default function Cards({product}) {
       navigate('/login')
     }
   }
+
+  const addWishList = (product) => {
+    let token = localStorage.getItem("token");
+    if(token) {
+      addToWishList(product).then(data => console.log(data))
+    } else {
+      navigate('/login')
+    } 
+  }
   return (
     <div>
           <div className="card">
             <div className="add-to-wishlist">
-              <span>
+              <span onClick={() => addWishList(product)}>
                 <i className="far fa-heart"></i>
               </span>
               <span>Add to wish list</span>

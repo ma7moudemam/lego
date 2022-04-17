@@ -5,6 +5,7 @@ import { getUserCart, updateUserCart } from "./network/cartAPI";
 import { useSelector, useDispatch } from "react-redux";
 import { initUserCart } from "./Redux/Actions/cartActions";
 import "./App.css";
+import RequireAuth from "./Auh";
 
 const AccordionProduct = lazy(() => import("./components/AccordionProduct/AccordionProduct"));
 const MyBag = lazy(() => import("./components/Bag"));
@@ -69,9 +70,11 @@ function App() {
 						<Route
 							path="/mybag"
 							element={
-								<Layout>
-									<MyBag />
-								</Layout>
+								<RequireAuth>
+									<Layout>
+										<MyBag />
+									</Layout>
+								</RequireAuth>
 							}
 						/>
 						<Route
@@ -93,9 +96,11 @@ function App() {
 						<Route
 							path="/whishlist"
 							element={
-								<Layout>
-									<Wishlist />
-								</Layout>
+								<RequireAuth>
+									<Layout>
+										<Wishlist />
+									</Layout>
+								</RequireAuth>
 							}
 						>
 							<Route path="personal" element={<Personal />} />
