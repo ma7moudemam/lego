@@ -1,30 +1,32 @@
 import { Link } from "@mui/material";
 import Style from "./sidemenue.module.css";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import { useState } from "react";
 
 function SideMenue() {
-
   const [isOpen, setIsOpen] = useState(false);
 
   const toggling = () => {
-      setIsOpen(!isOpen);
-  }
+    setIsOpen(!isOpen);
+  };
+  const handelLogOutAction = () => {
+		localStorage.removeItem("token");
+		Navigate("/");
+	};
   return (
     <div className={Style.container}>
-      <ul className={Style.menu} style={{paddingLeft: "0px"}}>
+      <ul className={Style.menu} style={{ paddingLeft: "0px" }}>
         <NavLink
           to="/whishlist/myorder"
-          className={({isActive}) =>
+          className={({ isActive }) =>
             isActive ? Style.active : Style["side-menu"]
-            
           }
         >
           <li className={Style["side-menu-items"]}>My Orders</li>
         </NavLink>
         <NavLink
           to="/whishlist/personal"
-          className={({isActive}) =>
+          className={({ isActive }) =>
             isActive ? Style.active : Style["side-menu"]
           }
         >
@@ -34,17 +36,17 @@ function SideMenue() {
         </NavLink>
         <NavLink
           to="/whishlist/whishlist"
-          className={({isActive}) =>
+          className={({ isActive }) =>
             isActive ? Style.active : Style["side-menu"]
           }
         >
           <li className={Style["side-menu-items"]}>Wish list</li>
         </NavLink>
         <NavLink to="/" className={Style["side-menu"]}>
-          <li className={Style["side-menu-items"]}>Logout</li>
+          <li className={Style["side-menu-items"]}onClick={handelLogOutAction}>Logout</li>
         </NavLink>
       </ul>
-      <ul className={Style.menuTwo} style={{paddingLeft: "0px"}}>
+      <ul className={Style.menuTwo} style={{ paddingLeft: "0px" }}>
         <div>
           <button className={Style["btn-menu"]} onClick={toggling}>
             <div className={Style["account-menu"]}>
@@ -52,7 +54,7 @@ function SideMenue() {
               <div className={Style["menu-arrow"]}>
                 Wish list
                 <svg
-                  className={isOpen ?Style.up :Style.down}
+                  className={isOpen ? Style.up : Style.down}
                   width="18"
                   height="28"
                   viewBox="0 0 18 28"
@@ -66,11 +68,11 @@ function SideMenue() {
               </div>
             </div>
           </button>
-          <div className={isOpen ?Style.show :Style.hiddenMenu} >
-            <ul className={Style.menuTwo} style={{paddingLeft: "0px"}}> 
+          <div className={isOpen ? Style.show : Style.hiddenMenu}>
+            <ul className={Style.menuTwo} style={{ paddingLeft: "0px" }}>
               <NavLink
                 to="/whishlist/myorder"
-                className={(isActive) =>
+                className={({ isActive }) =>
                   isActive ? Style.active : Style["side-menu"]
                 }
               >
@@ -78,7 +80,7 @@ function SideMenue() {
               </NavLink>
               <NavLink
                 to="/whishlist/personal"
-                className={(isActive) =>
+                className={({ isActive }) =>
                   isActive ? Style.active : Style["side-menu"]
                 }
               >
@@ -88,14 +90,19 @@ function SideMenue() {
               </NavLink>
               <NavLink
                 to="/whishlist/whishlist"
-                className={(isActive) =>
+                className={({ isActive }) =>
                   isActive ? Style.active : Style["side-menu"]
                 }
               >
                 <li className={Style["side-menu-items"]}>Wish list</li>
               </NavLink>
-              <NavLink to="/" className={Style["side-menu"]}>
-                <li className={Style["side-menu-items"]}>Logout</li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? Style.active : Style["side-menu"]
+                }
+              >
+               <li onClick={handelLogOutAction} className={Style["side-menu-items"]} > Logout </li>
               </NavLink>
             </ul>
           </div>

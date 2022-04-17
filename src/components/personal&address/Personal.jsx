@@ -8,40 +8,12 @@ export default function Personal() {
   const [users, setUsers] = useState(() => jwt_decode(localStorage.getItem("token")));
 
   
-	const handelLogOutAction = () => {
-		localStorage.removeItem("token");
-		Navigate("/");
-	};
+	// const handelLogOutAction = () => {
+	// 	localStorage.removeItem("token");
+	// 	Navigate("/");
+	// };
 
-  return (
-    <div className="">
-      <div className="row mt-5 mx-auto">
-        <div className="col-4">
-          <div className="list-group text-center w-75 mx-auto my-4">
-            <Link
-              to="/details"
-              className="list-group-item list-group-item-action"
-              aria-current="true"
-            >
-              Personal Information
-            </Link>
-            <Link to="/whishlist" className="list-group-item list-group-item-action">
-              WhishList
-            </Link>
-            <Link to="/mybag" className="list-group-item list-group-item-action">
-              My Order
-            </Link>
-            <Link to="/home" className="list-group-item list-group-item-action">
-            <button
-								type="button"
-								onClick={handelLogOutAction}
-							>
-								Log Out
-							</button>
-            </Link>
-          </div>
-        </div>
-        <div class="col-8">
+  return ( 
           <div className={Style["inner-content"]}>
             {/* personal things  */}
             <h1 className={Style.nameOfBlock}>Personal & Address Details</h1>
@@ -65,14 +37,11 @@ export default function Personal() {
                     LEGO® Account Email
                   </span>
                   <span className={Style["personal-text"]}>
-                    {users.user.email}@gmail.com
+                    {users.user.email}
                   </span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
   );
 }

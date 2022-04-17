@@ -48,7 +48,7 @@ export default function Navbar(props) {
 					<NavLink to={props.isLoggedIn ? "/details" : "/login"} className="nav-user-icon">
 						<img src={legoUser} className="svg" alt="account" />
 					</NavLink>
-					<NavLink to="/whishlist">
+					<NavLink to="/whishlist/whishlist">
 						<i className="wish-list-icon">
 							<svg width="20" height="18">
 								<path
