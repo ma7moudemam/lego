@@ -262,7 +262,10 @@ function DashboardContent() {
               <Copyright sx={{ pt: 4 }} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-              <Table orders={orders} />
+              {/* <Table orders={orders} /> */}
+              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                {/* <Orders /> */}
+              </Paper>
             </TabPanel>
             <TabPanel value={value} index={2} sx={{ p: 0 }}>
               <Products />

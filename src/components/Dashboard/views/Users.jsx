@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Snackbar, Alert } from "@mui/material";
 import User from "./User";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
@@ -17,6 +17,25 @@ function Users() {
     let arr = users.filter((user) => user.email.includes(value));
     setSearchOptions(arr);
   };
+
+  /**** notifications */
+  const [notification, setnotification] = useState(false);
+  const [blockedUserStatus, setBlockedUserStatus] = useState("test");
+
+  const openNotification = (message) => {
+    setBlockedUserStatus(message);
+    setnotification(true);
+  };
+
+  const hideNotification = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setnotification(false);
+  };
+
+  /**** notifications */
 
   useEffect(() => {
     axios
@@ -64,10 +83,24 @@ function Users() {
       <Grid container spacing={3}>
         {searchOptions.map((user) => (
           <Grid item md={6} xs={12} lg={4} key={user.email}>
-            <User user={user} />
+            <User user={user} openNotification={openNotification} />
           </Grid>
         ))}
       </Grid>
+      <Snackbar
+        open={notification}
+        autoHideDuration={3000}
+        onClose={hideNotification}
+        severity="success"
+      >
+        <Alert
+          onClose={hideNotification}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {blockedUserStatus}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

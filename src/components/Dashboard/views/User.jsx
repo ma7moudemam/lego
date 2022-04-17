@@ -9,7 +9,7 @@ import Avatar from "@mui/material/Avatar";
 import { red } from "@mui/material/colors";
 import axios from "axios";
 
-function User({ user }) {
+function User({ user, openNotification }) {
   const [userState, setUserState] = useState(user.blocked);
 
   const blockUser = () => {
@@ -24,9 +24,7 @@ function User({ user }) {
           },
         }
       )
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => {})
       .catch((err) => console.log(err));
     // update blocked user state
     axios
@@ -35,8 +33,8 @@ function User({ user }) {
         blocked: true,
       })
       .then((res) => {
-        console.log(res);
         setUserState(true);
+        openNotification(`${user.email} has been blocked`);
       })
       .catch((err) => console.log(err));
   };
@@ -53,9 +51,7 @@ function User({ user }) {
         }
       )
       .then((res) => {
-        console.log("unblocked", res);
         // if (res.data.body.deletedCount === 1) {
-
         // }
       })
       .catch((err) => console.log(err));
@@ -68,6 +64,7 @@ function User({ user }) {
       })
       .then((res) => {
         setUserState(false);
+        openNotification(`${user.email} unBlocked`);
       })
       .catch((err) => console.log(err));
   };
