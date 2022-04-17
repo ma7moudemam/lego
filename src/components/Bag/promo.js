@@ -42,7 +42,7 @@ export default function Promo() {
 						<p className="fs-5">Order Total</p>
 						<p className="fs-5">$399.98</p>
 					</div>
-					<button type="button" class="btn btn-warning w-100">
+					<button type="button" className="btn btn-warning w-100">
 						<NavLink className="btn btn-warning w-100" to="/checkout">
 							Checkout Securely
 						</NavLink>
