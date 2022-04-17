@@ -189,8 +189,12 @@ max-width: 750px */
 		padding 500ms ease-in-out;
 }
 
-.nav-list a:hover.logo {
+.nav-list a:hover.nav-logo {
 	border-color: transparent;
+}
+
+.nav-logo {
+	width: 100px;
 }
 
 

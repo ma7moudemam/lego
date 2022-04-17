@@ -11,10 +11,10 @@ export default function DeveloperCard({ developer }) {
 			<p>{developer.email}</p>
 			<div className="social">
 				<a className="social-link" href={developer.linkedIn}>
-					<i class="fab fa-linkedin"></i>LinkedIn
+					<i className="fab fa-linkedin"></i>LinkedIn
 				</a>
 				<a className="social-link" href={developer.github}>
-					<i class="fab fa-github-square"></i>Github
+					<i className="fab fa-github-square"></i>Github
 				</a>
 			</div>
 		</div>

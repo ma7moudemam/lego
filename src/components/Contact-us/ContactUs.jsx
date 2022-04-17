@@ -31,8 +31,8 @@ export default function ContactUs() {
 	];
 	return (
 		<div className="contact-us">
-			{us.map((developer) => (
-				<DeveloperCard developer={{ ...developer }} />
+			{us.map((developer, index) => (
+				<DeveloperCard key={index} developer={{ ...developer }} />
 			))}
 		</div>
 	);
