@@ -30,7 +30,11 @@ export default function Utility(props) {
 					</NavLink>
 				</div>
 				<div className="utility-bar-styles">
-					<button type="button" onClick={() => setToggleUtility((prev) => !prev)}>
+					<button
+						type="button"
+						className="utility-close-btn"
+						onClick={() => setToggleUtility((prev) => !prev)}
+					>
 						<i className="fas fa-times"></i>
 					</button>
 				</div>

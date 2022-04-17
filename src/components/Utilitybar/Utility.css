@@ -81,6 +81,11 @@ a {
 	-webkit-text-fill-color: transparent;
 }
 
+.utility-close-btn {
+	border: 0;
+	background-color: transparent;
+}
+
 @media (max-width: 770px) {
     .utility-bar-styles {
 		display: none;
