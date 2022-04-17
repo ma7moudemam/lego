@@ -4,8 +4,12 @@ import bag from "../../assets/imgs/40527 (1).png";
 import bagTwo from "../../assets/imgs/10297.png";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Promo() {
+	const totalItemsCount = useSelector((store) => store.cart.totalItemsCount);
+	const totalPrice = useSelector((store) => store.cart.totalPrice);
+
 	const [product, setProduct] = useState({
 		name: "Product",
 		price: 10,
@@ -31,16 +35,16 @@ export default function Promo() {
 
 				<div className="py-3">
 					<div className="d-flex justify-content-between">
-						<p className="fs-5">Order value (3) items</p>
-						<p className="fs-5">$399.98</p>
+						<p className="fs-5">Order value ({totalItemsCount}) items</p>
+						<p className="fs-5">${totalPrice}</p>
 					</div>
 					<div className="d-flex justify-content-between">
 						<p className="fs-5">Shipping cost</p>
-						<p className="fs-5">$399.98</p>
+						<p className="fs-5">$5</p>
 					</div>
 					<div className="d-flex justify-content-between">
 						<p className="fs-5">Order Total</p>
-						<p className="fs-5">$399.98</p>
+						<p className="fs-5">{totalPrice+5}</p>
 					</div>
 					<button type="button" className="btn btn-warning w-100">
 						<NavLink className="btn btn-warning w-100" to="/checkout">
