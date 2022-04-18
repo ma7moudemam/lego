@@ -136,22 +136,22 @@ export default function AccountSecurity() {
 							<button
 								className="btn py-2 mb-2"
 								style={{
-									backgroundColor: "#006cb6",
+									backgroundColor: "red",
 									color: "white",
 									fontSize: "20px",
 								}}
 								type=""
 							>
-								<Link to={`/delete-account`} style={{ textDecoration: "none", color: "white", background: "red"}}>
+								<Link to={`/delete-account`} style={{ textDecoration: "none", color: "white"}}>
 									Delete Account
 								</Link>
 							</button>
 							<button
-								className="btn mb-2"
+								className="btn mb-2 p-3"
 								style={{
 									backgroundColor: "transparent",
-									color: "black",
 									fontSize: "20px",
+									color: "black",
 								}}
 								type="button"
 							>
@@ -160,9 +160,8 @@ export default function AccountSecurity() {
 									style={{
 										textDecoration: "none",
 										border: "none",
-										color: "black",
 									}}
-									className="go-back-btn"
+									className="go-back-btn hover-btn"
 								>
 									Go Back
 								</Link>

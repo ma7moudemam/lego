@@ -269,11 +269,11 @@ export default function UpdateForm() {
 						</Link>
 					</button>
 					<button
-						className="btn mb-2 hover-btn"
+						className="btn mb-2"
 						style={{ backgroundColor: "transparent", color: "black" }}
 						type="button"
 					>
-						<Link to={`/details`} style={{ textDecoration: "none", color: "black" }}>
+						<Link to={`/details`} className="hover-btn" style={{ textDecoration: "none", border: "none"}}>
 							Go Back
 						</Link>
 					</button>
