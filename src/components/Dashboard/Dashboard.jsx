@@ -171,11 +171,11 @@ function DashboardContent() {
               />
               Dashboard
             </Typography>
-            {/* <IconButton color="inherit" sx={{ color: "black" }}>
+            <IconButton color="inherit" sx={{ color: "black" }}>
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton> */}
+            </IconButton>
             <NavLink to="/">
               <IconButton color="inherit" sx={{ color: "black" }}>
                 <HomeIcon />
