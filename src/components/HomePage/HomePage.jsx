@@ -14,7 +14,7 @@ export default function HomePage(props) {
 	useEffect(() => {
 		axios
 			.get("http://localhost:8080/home/trending-products")
-			.then((res) => {setTtrendingProducts(res.data.trendingProducts), console.log(res)})
+			.then((res) => {setTtrendingProducts(res.data.trendingProducts); console.log(res)})
 			.catch((err) => console.log(err));
 	}, []);
 

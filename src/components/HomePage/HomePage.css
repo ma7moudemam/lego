@@ -132,8 +132,8 @@ body{
 
 /* /////////////////////////////////////////////// */
 .main-image img{
-    width:150px;
-    height: 100px;
+    width:300px;
+    height: 300px;
 }
 
 .nested-image img{
