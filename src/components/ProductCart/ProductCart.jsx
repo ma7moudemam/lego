@@ -10,10 +10,9 @@ function ProductCart({ product }) {
 				<div className="box">
 					<div className="cardImage">
 						<a className="wish" href="#">
-							{" "}
 							<i className="fas fa-heart"></i> Add to wish List
 						</a>
-						<img src={product.images[0]} alt="" />
+						<img src={`http://localhost:8080/images/${product.images[0]}`} alt={product.name} />
 						<p className="new">New</p>
 					</div>
 					<Link className="product-title" to="#">

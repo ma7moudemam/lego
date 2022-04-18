@@ -4,11 +4,6 @@ import NestedCards from "../../assets/images/spotlight/nested-card1.png";
 export default function HomeCard({ product }) {
   return (
     <div>
-      <h1>
-        {product.amount}
-        {product.category}
-        {product.name}
-      </h1>
       <div className="card-1">
         <a className="card-content" href="#" target="_blank">
           <div className="image-container">
