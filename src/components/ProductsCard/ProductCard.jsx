@@ -48,7 +48,7 @@ export default function ProductCard() {
 				setIsLoading(false);
 			})
 			.catch((err) => console.log(err));
-    });
+	});
 	// }, [filterValues]);
 
 	const handelFilterChange = (filterValues) => {
@@ -78,7 +78,6 @@ export default function ProductCard() {
 							<Typography color="text.primary">Shop Now</Typography>
 						</Breadcrumbs>
 					</div>
-
 					<section className="shop-now ">
 						<Filter handelFilterChange={handelFilterChange} />
 
@@ -86,7 +85,7 @@ export default function ProductCard() {
 							{/* <!-- cards-header-section --> */}
 							<div className="cards-header-section">
 								<span>
-									Showing 1 - {3} of {count} results
+									Showing 1 - {9} of {count} results
 								</span>
 							</div>
 							{/* <!-- cards ccontainer --> */}
@@ -96,30 +95,16 @@ export default function ProductCard() {
 								))}
 							</div>
 
-        <section className="shop-now ">
-          <Filter  handelFilterChange={handelFilterChange}/>
-
-          <section className="cards">
-            {/* <!-- cards-header-section --> */}
-            <div className="cards-header-section">
-              <span>Showing 1 - {9} of {count} results</span>
-            </div>
-            {/* <!-- cards ccontainer --> */}
-            <div className="cards-container">
-              {
-                products.map(item => <Cards product={item} key={item._id} />)
-              }
-            </div>
-
-            {/* <!-- sliding --> */}
-            <div className="sliding">
-              <Stack spacing={2}>
-                <Pagination count={Math.ceil(count/9) || 1} card={page} onChange={handleChange} />
-              </Stack>
-            </div>
-          </section>
-        </section>
-      </div>
-    </>
-  );
+							{/* <!-- sliding --> */}
+							<div className="sliding">
+								<Stack spacing={2}>
+									<Pagination count={Math.ceil(count / 9) || 1} card={page} onChange={handleChange} />
+								</Stack>
+							</div>
+						</section>
+					</section>
+				</div>
+			)}
+		</>
+	);
 }
