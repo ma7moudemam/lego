@@ -4,6 +4,7 @@ import "./ContactUs.css";
 import KarimShahin from "./PP.jpg";
 import Emam from "./emam.jpg";
 import Essam from "./essam.jpg";
+import Alaa from "./Alaa.jpg"
 
 export default function ContactUs() {
 	const us = [
@@ -27,6 +28,13 @@ export default function ContactUs() {
 			email: "dev.mahmoud.essam@gmail.com",
 			linkedIn: "https://www.linkedin.com/in/mahmoud-essam-956898182/",
 			github: "https://github.com/MahmoudEssam12",
+		},
+		{
+			name: "Alaa AbdElmotlep Mahmoed",
+			image: Alaa,
+			email: "alaa.abdelmotlep.mahmoed@gmail.com",
+			linkedIn: "https://www.linkedin.com/in/alaa-abdelmotlep",
+			github: "https://github.com/AlaaAbdelmotlep",
 		},
 	];
 	return (

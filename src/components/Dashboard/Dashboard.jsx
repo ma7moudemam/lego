@@ -32,6 +32,7 @@ import Shippers from "./Shippers";
 import Categories from "./views/Categories";
 import HomeIcon from "@mui/icons-material/Home";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 function Copyright(props) {
   return (
     <Typography
@@ -101,32 +102,26 @@ const mdTheme = createTheme();
 function DashboardContent() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
-  const [orders, setOrders] = React.useState([
-    {
-      id: 1,
-      email: "example@gmail.com",
-      address: "Cairo",
-      date: "20/4/2022",
-      price: "50",
-      productName: "Batman lego",
-    },
-    {
-      id: 2,
-      email: "superexamp@gmail.com",
-      address: "Mansoura",
-      date: "15/4/2022",
-      price: "40",
-      productName: "Superman lego",
-    },
-    {
-      id: 3,
-      email: "superexamp@gmail.com",
-      address: "Aswan",
-      date: "17/4/2022",
-      price: 70,
-      productName: "Joker lego",
-    },
-  ]);
+  const [orders, setOrders] = React.useState([]);
+  const [shippers, setShippers] = React.useState([]);
+  React.useEffect(() => {
+    axios
+      .get("http://localhost:8080/dashboard/orders")
+      .then((res) => {
+        console.log(res);
+        setOrders(res.data.orders);
+      })
+      .catch((err) => console.log(err));
+
+    // shippers
+    axios
+      .get("http://localhost:8080/dashboard/shippers")
+      .then((res) => {
+        console.log(res);
+        setShippers(res.data.shippers);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -142,7 +137,7 @@ function DashboardContent() {
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
-              backgroundColor: "yellow",
+              backgroundColor: "#ffcf00",
             }}
           >
             <IconButton
@@ -176,11 +171,11 @@ function DashboardContent() {
               />
               Dashboard
             </Typography>
-            <IconButton color="inherit" sx={{ color: "black" }}>
+            {/* <IconButton color="inherit" sx={{ color: "black" }}>
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <NavLink to="/">
               <IconButton color="inherit" sx={{ color: "black" }}>
                 <HomeIcon />
@@ -255,7 +250,7 @@ function DashboardContent() {
                   <Paper
                     sx={{ p: 2, display: "flex", flexDirection: "column" }}
                   >
-                    <Orders />
+                    <Orders propOrders={orders} propShippers={shippers} />
                   </Paper>
                 </Grid>
               </Grid>
@@ -264,22 +259,22 @@ function DashboardContent() {
             <TabPanel value={value} index={1}>
               {/* <Table orders={orders} /> */}
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                {/* <Orders /> */}
+                <Orders propOrders={orders} propShippers={shippers} />
               </Paper>
             </TabPanel>
-            <TabPanel value={value} index={2} sx={{ p: 0 }}>
+            <TabPanel value={value} index={2}>
               <Products />
             </TabPanel>
             <TabPanel value={value} index={3}>
               <Users />
             </TabPanel>
-            <TabPanel value={value} index={4}>
+            {/* <TabPanel value={value} index={4}>
               <Reviews />
-            </TabPanel>
-            <TabPanel value={value} index={5}>
+            </TabPanel> */}
+            <TabPanel value={value} index={4}>
               <Shippers />
             </TabPanel>
-            <TabPanel value={value} index={6}>
+            <TabPanel value={value} index={5}>
               <Categories />
             </TabPanel>
           </Container>

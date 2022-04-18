@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import User from "./views/User";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import Shipper from "./views/shipperCard";
+import { Snackbar, Alert } from "@mui/material";
 
 function Shippers() {
   const [shippers, setShipppers] = useState([
@@ -17,8 +27,153 @@ function Shippers() {
     let arr = shippers.filter((shipper) => shipper.email.includes(value));
     setSearchOptions(arr);
   };
+
+  /**** notifications */
+  const [notification, setnotification] = useState(false);
+  const [addShipperMsg, setAddShipperMsg] = useState("test");
+
+  const openNotification = (message) => {
+    setAddShipperMsg(message);
+    setnotification(true);
+  };
+
+  const hideNotification = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setnotification(false);
+  };
+
+  /**** notifications */
+
+  /*********** reflect in run time ********** */
+  const deleteShipper = (id) => {
+    let ourShippers = searchOptions.filter((shipper) => shipper._id !== id);
+    setShipppers(ourShippers);
+  };
+
+  /*********** reflect in run time ********** */
+
+  // get shippers on mount
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/dashboard/shippers")
+      .then((res) => {
+        setShipppers(res.data.shippers);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    setSearchOptions(shippers);
+  }, [shippers]);
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      phone_number: "",
+    },
+    validationSchema: Yup.object({
+      name: Yup.string().required("shipper name is required"),
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("email address is required"),
+      phone_number: Yup.string()
+        .max(11, "Must be 11 characters")
+        .required("phone number is required"),
+    }),
+    onSubmit: (values, { resetForm }) => {
+      let formData = {
+        shipperName: values.name.toLowerCase(),
+        shipperEmail: values.email,
+        phoneNumber: values.phone_number,
+      };
+      const config = {
+        headers: {
+          "content-type": "application/json",
+        },
+      };
+      axios
+        .post("http://localhost:8080/dashboard/shippers", formData, config)
+        .then((res) => {
+          console.log(res);
+          openNotification(res.data.message);
+          setShipppers([...shippers, values]);
+          resetForm();
+        })
+        .catch((err) => console.log(err));
+    },
+  });
+
   return (
     <div className="shippers">
+      <Box component="div" sx={{ my: 3 }}>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>Register Shipper</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Box
+              component="form"
+              onSubmit={formik.handleSubmit}
+              className="add-shipper-form"
+            >
+              <TextField
+                id="shippername"
+                label="Shipper Name"
+                variant="outlined"
+                helperText={
+                  formik.touched.name && formik.errors.name
+                    ? formik.errors.name
+                    : null
+                }
+                error={formik.touched.name && formik.errors.name ? true : false}
+                {...formik.getFieldProps("name")}
+              />
+              <TextField
+                id="shipperEmail"
+                label="Shipper Email"
+                variant="outlined"
+                helperText={
+                  formik.touched.email && formik.errors.email
+                    ? formik.errors.email
+                    : null
+                }
+                error={
+                  formik.touched.email && formik.errors.email ? true : false
+                }
+                {...formik.getFieldProps("email")}
+              />
+              <TextField
+                id="shipperPhoneNumber"
+                label="Shipper Phone Number"
+                variant="outlined"
+                helperText={
+                  formik.touched.phone_number && formik.errors.phone_number
+                    ? formik.errors.phone_number
+                    : null
+                }
+                error={
+                  formik.touched.phone_number && formik.errors.phone_number
+                    ? true
+                    : false
+                }
+                {...formik.getFieldProps("phone_number")}
+              />
+
+              <Button type="submit" variant="contained">
+                Register Shipper
+              </Button>
+            </Box>
+          </AccordionDetails>
+        </Accordion>
+      </Box>
       <Box component="div" sx={{ my: 3 }}>
         <Autocomplete
           freeSolo
@@ -43,10 +198,28 @@ function Shippers() {
       <Grid container spacing={3}>
         {searchOptions.map((shipper) => (
           <Grid item md={6} xs={12} lg={4} key={shipper.email}>
-            <User user={shipper} />
+            <Shipper
+              shipper={shipper}
+              removeShipper={deleteShipper}
+              openNotification={openNotification}
+            />
           </Grid>
         ))}
       </Grid>
+      <Snackbar
+        open={notification}
+        autoHideDuration={3000}
+        onClose={hideNotification}
+        severity="success"
+      >
+        <Alert
+          onClose={hideNotification}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {addShipperMsg}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

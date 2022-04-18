@@ -10,6 +10,25 @@ button:active{
   border: 1px solid grey;
 } */
 
+.account-body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f2f5f7;
+}
+
+.account-border {
+  border: 5px solid white;
+}
+
+.hover-btn:hover {
+  color: blue;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
 .Logo-img-account {
   margin-top: 3vh;
   margin-left: 10vh;
@@ -21,7 +40,7 @@ button:active{
   color: black;
 }
 
-.back-arrow{
+.back-arrow {
   float: left;
   padding: 2.7vh;
   color: black;
@@ -77,8 +96,6 @@ button:active{
   float: right;
 }
 
-.birthDateLabel{
+.birthDateLabel {
   margin-bottom: 2vh;
 }
-
-

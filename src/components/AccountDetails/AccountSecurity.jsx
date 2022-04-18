@@ -56,17 +56,18 @@ export default function AccountSecurity() {
 				})
 				.then((res) => {
 					console.log("res");
+					navigate("/login");
 				})
 				.catch((err) => console.log(err));
-			navigate("/login");
+			
 		},
 	});
 
 	return (
-		<>
+		<div style={{width: "100vw", backgroundColor: "#f2f5f7"}}>
 			<CssBaseline />
 			<Container maxWidth="sm">
-				<Box sx={{ bgcolor: "#f2f5f7", height: "100%" }}>
+				<Box sx={{ bgcolor: "#f2f5f7", height: "100%" }} className="account-border">
 					<Box sx={{ bgcolor: "#ffcf00", height: "12vh" }}>
 						<div className="text-center">
 							<button className="back-arrow">
@@ -135,22 +136,22 @@ export default function AccountSecurity() {
 							<button
 								className="btn py-2 mb-2"
 								style={{
-									backgroundColor: "#006cb6",
+									backgroundColor: "red",
 									color: "white",
 									fontSize: "20px",
 								}}
 								type=""
 							>
-								<Link to={`/delete-account`} style={{ textDecoration: "none", color: "white" }}>
+								<Link to={`/delete-account`} style={{ textDecoration: "none", color: "white"}}>
 									Delete Account
 								</Link>
 							</button>
 							<button
-								className="btn mb-2"
+								className="btn mb-2 p-3"
 								style={{
 									backgroundColor: "transparent",
-									color: "black",
 									fontSize: "20px",
+									color: "black",
 								}}
 								type="button"
 							>
@@ -159,8 +160,8 @@ export default function AccountSecurity() {
 									style={{
 										textDecoration: "none",
 										border: "none",
-										color: "black",
 									}}
+									className="go-back-btn hover-btn"
 								>
 									Go Back
 								</Link>
@@ -169,6 +170,6 @@ export default function AccountSecurity() {
 					</Box>
 				</Box>
 			</Container>
-		</>
+		</div>
 	);
 }

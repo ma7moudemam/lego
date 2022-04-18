@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useStripe } from "@stripe/react-stripe-js";
 import { fetchFromAPI } from "../../../helpers";
+import { useSelector } from "react-redux";
 // import cart redux
 
 export default function StripeCheckout() {
 	const [email, setEmail] = useState("");
 	const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
+	const cart = useSelector((store) => store.cart);
+	console.log(cart);
 	// this comes from cart redux
 	const cartItems = [
 		{

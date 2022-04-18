@@ -44,7 +44,7 @@ export default function Promo() {
 					</div>
 					<div className="d-flex justify-content-between">
 						<p className="fs-5">Order Total</p>
-						<p className="fs-5">{totalPrice+5}</p>
+						<p className="fs-5">{totalPrice + 5}</p>
 					</div>
 					<button type="button" className="btn btn-warning w-100">
 						<NavLink className="btn btn-warning w-100" to="/checkout">

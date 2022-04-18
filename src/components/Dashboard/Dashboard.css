@@ -33,3 +33,41 @@
   border-radius: 50%;
   background-color: #e90000;
 }
+.order-status-code {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+.add-shipper-form {
+  display: flex;
+  justify-content: space-evenly;
+}
+#use-autocomplete-demo {
+  height: 50px;
+  border: 1px solid #c4c4c4;
+  width: 50%;
+  margin: 10px auto;
+  display: block;
+  border-radius: 7px;
+  padding: 0 1rem;
+  margin-bottom: 0;
+  z-index: 12;
+  position: relative;
+}
+#use-autocomplete-demo-listbox {
+  width: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 5px;
+  overflow: hidden;
+}
+#use-autocomplete-demo-listbox li {
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  background-color: #fff;
+  transition: background-color 0.25s ease;
+}
+#use-autocomplete-demo-listbox li:hover {
+  background-color: #c4c4c4;
+}

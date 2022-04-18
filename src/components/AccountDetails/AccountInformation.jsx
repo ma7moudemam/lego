@@ -13,10 +13,10 @@ import "./AccountDetails.css";
 
 export default function AccountInformation() {
   return (
-    <>
+    <div style={{backgroundColor: "#f2f5f7"}} >
       <CssBaseline />
       <Container maxWidth="sm">
-        <Box sx={{ bgcolor: "#f2f5f7", height: "100%" }}>
+        <Box sx={{ bgcolor: "#f2f5f7", height: "100%" }} className="account-border">
           <Box sx={{ bgcolor: "#ffcf00", height: "12vh" }}>
             <div className="text-center">
               <button className="back-arrow">
@@ -46,6 +46,6 @@ export default function AccountInformation() {
           </Box>
         </Box>
       </Container>
-    </>
+    </div>
   );
 }
