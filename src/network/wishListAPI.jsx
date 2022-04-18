@@ -13,5 +13,7 @@ export const addToWishList = (product) => {
 };
 
 
-
+export const deleteFromWishList = (product) => {
+    return axiosInstance.delete(`/wishlist/${product._id}`);
+};
 
