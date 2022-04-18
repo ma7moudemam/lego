@@ -37,12 +37,20 @@ export default function Cards({product}) {
       navigate('/login')
     } 
   }
+  const [fillHeart, setfillHeart] = useState("");
+
+  const toggling = () => {
+    setfillHeart(!fillHeart);
+  };
   return (
     <div>
           <div className="card">
             <div className="add-to-wishlist">
               <span onClick={() => addWishList(product)}>
-                <i className="far fa-heart"></i>
+                <i onClick={toggling} className={fillHeart ? "fa fa-heart": "far fa-heart" }
+                // className="fa fa-heart"
+                 >
+                </i>
               </span>
               <span>Add to wish list</span>
             </div>

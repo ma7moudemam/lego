@@ -28,7 +28,7 @@ export default function ProductCard() {
   };
 
   useEffect(() => {
-      getProduct(3, page,filterValues)
+      getProduct(9, page,filterValues)
       .then((res) => {
         setProducts(res.data.products)
         setCount(res.data.count)
@@ -37,7 +37,7 @@ export default function ProductCard() {
 
   }, [page]);
   useEffect(() => {
-    getProduct(3, page,filterValues)
+    getProduct(9, page,filterValues)
     .then((res) => {
       setProducts(res.data.products)
       setCount(res.data.count)
@@ -71,7 +71,7 @@ export default function ProductCard() {
           <section className="cards">
             {/* <!-- cards-header-section --> */}
             <div className="cards-header-section">
-              <span>Showing 1 - {3} of {count} results</span>
+              <span>Showing 1 - {9} of {count} results</span>
             </div>
             {/* <!-- cards ccontainer --> */}
             <div className="cards-container">
@@ -83,7 +83,7 @@ export default function ProductCard() {
             {/* <!-- sliding --> */}
             <div className="sliding">
               <Stack spacing={2}>
-                <Pagination count={Math.ceil(count/3) || 1} card={page} onChange={handleChange} />
+                <Pagination count={Math.ceil(count/9) || 1} card={page} onChange={handleChange} />
               </Stack>
             </div>
           </section>

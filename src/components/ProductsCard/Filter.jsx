@@ -77,7 +77,7 @@ export default function Filter(props) {
         <ul className="accordion-menu">
           <li id="header-filter">
             <p>
-              <div onClick={()=>setReset(true)}>Reset All</div>
+              <div onClick={()=>setReset(true)} style={{cursor:"pointer"}}>Reset All</div>
             </p>
           </li>
           <li>
@@ -124,7 +124,7 @@ export default function Filter(props) {
               PRICE <i className="fas fa-chevron-down"></i>
             </label>
             <section className="filter-content">
-              <br></br>
+              {/* <br></br> */}
               <input type="checkbox" id="max-25" name="0-25" value="" checked={priceRangeFilter.includes("0-25")}  onChange={handelPriceRangeFilter}/>
               <label for="max-25"> $0 - $25 </label>
               <br></br>
