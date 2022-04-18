@@ -1,63 +1,126 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import DeleteIcon from "@mui/icons-material/Delete";
+import React, { useEffect, useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import TableCell from "@mui/material/TableCell";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import {
+  TableRow,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText,
+  Button,
+} from "@mui/material";
+import axios from "axios";
 
-export default function Order({
-  id,
-  email,
-  address,
-  date,
-  productName,
-  price,
-}) {
+export default function Order({ order, shippers }) {
+  const [assignedShipper, setAssignedShipper] = useState("");
+  const [changeShipper, setChangeShipper] = useState(false);
+  const [orderState, setOrderState] = useState({
+    isCanceled: order.isCanceled,
+    isDelivered: order.isDelivered,
+    isPending: order.isPending,
+    isShipped: order.isShipped,
+  });
+  const submitShipper = () => {
+    axios
+      .put("http://localhost:8080/dashboard/orders", {
+        id: order._id,
+        ...orderState,
+        shipper: assignedShipper,
+      })
+      .then((res) => {
+        console.log(res);
+        setChangeShipper(false);
+      })
+      .catch((err) => console.log(err));
+  };
+  // useEffect(()=>{
+
+  // },[])
   return (
-    <Card sx={{ display: "flex", padding: "10px" }}>
-      <CardContent
-      // sx={{
-      //   flex: "1 0 auto",
-      //   display: "flex",
-      //   justifyContent: "space-around",
-      // }}
-      >
-        <TableCell align="right">
-          <Typography component="td" variant="h6">
-            {id}
-          </Typography>
-        </TableCell>
-        <TableCell align="right">
-          <Typography variant="h6" component="td">
-            {email}
-          </Typography>
-        </TableCell>
-        <TableCell align="right">
-          <Typography variant="h6" component="td">
-            {address}
-          </Typography>
-        </TableCell>
-        {/* <Typography variant="h6" component="div">
-          {date}
-        </Typography>
-        <Typography variant="h6" component="div">
-          {price}
-        </Typography>
-        <Typography variant="h6" component="div">
-          {productName}
-        </Typography> */}
-      </CardContent>
-      <Box sx={{ display: "flex", padding: "16px" }}>
-        <IconButton aria-label="dispatch">
-          <CheckIcon />
-        </IconButton>
-        <IconButton aria-label="delete">
-          <DeleteIcon />
-        </IconButton>
-      </Box>
-    </Card>
+    <TableRow>
+      <TableCell>{order.order_date}</TableCell>
+      <TableCell>{order.user.email}</TableCell>
+      <TableCell>{order.total_price} EGP</TableCell>
+      <TableCell align="center">
+        <span
+          className="order-status-code"
+          style={{
+            backgroundColor: orderState.isCanceled
+              ? "red"
+              : orderState.isDelivered
+              ? "green"
+              : orderState.isShipped
+              ? "orange"
+              : orderState.isPending
+              ? "grey"
+              : "grey",
+          }}
+        ></span>{" "}
+        {orderState.isCanceled
+          ? "Canceled"
+          : orderState.isDelivered
+          ? "Delivered"
+          : orderState.isShipped
+          ? "Shipped"
+          : orderState.isPending
+          ? "Pending"
+          : assignedShipper.length
+          ? "Pending"
+          : "Not assigned"}
+      </TableCell>
+      <TableCell align="center" sx={{ minWidth: "150px" }}>
+        {changeShipper ? (
+          <FormControl sx={{ width: "100%", mt: 2 }}>
+            <InputLabel id="updateCategory">Category</InputLabel>
+            <Select
+              fullWidth
+              labelId="updateCategory"
+              id="updateCategory"
+              label="Category"
+              name="updateCategory"
+              value={assignedShipper}
+              onChange={(e) => setAssignedShipper(e.target.value)}
+            >
+              <MenuItem value="" selected>
+                <em>None</em>
+              </MenuItem>
+              {shippers.map((shipper, index) => (
+                <MenuItem value={shipper._id} key={index}>
+                  {shipper.name}
+                </MenuItem>
+              ))}
+            </Select>
+            <FormHelperText sx={{ color: "red" }}></FormHelperText>
+          </FormControl>
+        ) : order.shipper ? (
+          shippers.find((shipper) => shipper._id === order.shipper)?.name
+        ) : assignedShipper ? (
+          shippers.find((shipper) => shipper._id === assignedShipper)?.name
+        ) : (
+          "None"
+        )}
+      </TableCell>
+      <TableCell align="center">
+        {changeShipper && (
+          <Button
+            variant="outlined"
+            startIcon={<CheckIcon color="success" />}
+            onClick={submitShipper}
+            sx={{ marginRight: "5px" }}
+          >
+            Assign
+          </Button>
+        )}
+        <Button
+          variant="outlined"
+          startIcon={<ModeEditIcon color="primary" />}
+          onClick={() => setChangeShipper(!changeShipper)}
+        >
+          {changeShipper ? "Cancel" : "Change"}
+        </Button>
+      </TableCell>
+    </TableRow>
   );
 }
