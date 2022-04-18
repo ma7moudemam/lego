@@ -22,154 +22,185 @@ import Logo from "../../assets/imgs/LEGOAccount-Logo.svg";
 import "./AccountDetails.css";
 
 export default function AccountSecurity() {
-	const [users, setUsers] = useState(() => jwt_decode(localStorage.getItem("token")));
-	
-	console.log(users)
-	let navigate = useNavigate();
-	const formik = useFormik({
-		initialValues: {
-			password: "",
-		},
+  const [users, setUsers] = useState(() =>
+    jwt_decode(localStorage.getItem("token"))
+  );
 
-		validationSchema: Yup.object({
-			password: Yup.string()
-				.max(20, "Must be 20 characters or less")
-				.min(5, "Must be 5 characters or more")
-				.required("required"),
-		}),
+  console.log(users);
+  let navigate = useNavigate();
+  const formik = useFormik({
+    initialValues: {
+      password: "",
+    },
 
-		onSubmit: (values) => {
-			console.log("submited");
-			console.log(JSON.stringify(values, null, 2));
+    validationSchema: Yup.object({
+      password: Yup.string()
+        .max(20, "Must be 20 characters or less")
+        .min(5, "Must be 5 characters or more")
+        .required("required"),
+    }),
 
-			const body = {
-				password: values.password,
-			};
+    onSubmit: (values) => {
+      console.log("submited");
+      console.log(JSON.stringify(values, null, 2));
 
-			console.log(body);
+      const body = {
+        password: values.password,
+      };
 
-			axios
-				.post("http://localhost:8080/account/change-password", body, {
-					headers: {
-						Authorization: `Bearer ${localStorage.getItem("token")}`,
-					},
-				})
-				.then((res) => {
-					console.log("res");
-					navigate("/login");
-				})
-				.catch((err) => console.log(err));
-			
-		},
-	});
+      console.log(body);
 
-	return (
-		<div style={{width: "100vw", backgroundColor: "#f2f5f7"}}>
-			<CssBaseline />
-			<Container maxWidth="sm">
-				<Box sx={{ bgcolor: "#f2f5f7", height: "100%" }} className="account-border">
-					<Box sx={{ bgcolor: "#ffcf00", height: "12vh" }}>
-						<div className="text-center">
-							<button className="back-arrow">
-								<Link to={`/details`} style={{ textDecoration: "none", color: "black" }}>
-									<ArrowBackIosIcon fontSize="large" />
-								</Link>
-							</button>
-							<img src={Logo} alt="" className="Logo-img-account rounded" style={{ marginLeft: "0" }} />
-							<button className="closing-btn">
-								<Link to={`/my-account`} style={{ textDecoration: "none", color: "black" }}>
-									<CloseIcon fontSize="large" />
-								</Link>
-							</button>
-						</div>
-					</Box>
+      axios
+        .post("http://localhost:8080/account/change-password", body, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          console.log("res");
+          navigate("/login");
+        })
+        .catch((err) => console.log(err));
+    },
+  });
 
-					<Box sx={{ mt: 2, mx: 7 }}>
-						<h4 style={{ textAlign: "center", marginBottom: "16px" }}>Security</h4>
+  return (
+    <div style={{ width: "100vw", backgroundColor: "#f2f5f7" }}>
+      <CssBaseline />
+      <Container maxWidth="sm">
+        <Box
+          sx={{ bgcolor: "#f2f5f7", height: "100%" }}
+          className="account-border"
+        >
+          <Box sx={{ bgcolor: "#ffcf00", height: "12vh" }}>
+            <div className="text-center">
+              <button className="back-arrow">
+                <Link
+                  to={`/details`}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <ArrowBackIosIcon fontSize="large" />
+                </Link>
+              </button>
+              <img
+                src={Logo}
+                alt=""
+                className="Logo-img-account rounded"
+                style={{ marginLeft: "0" }}
+              />
+              <button className="closing-btn">
+                <Link
+                  to={`/my-account`}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <CloseIcon fontSize="large" />
+                </Link>
+              </button>
+            </div>
+          </Box>
 
-						<h4 style={{ textAlign: "center", marginBottom: "16px" }}>
-							Do you want to change your password?
-						</h4>
+          <Box sx={{ mt: 2, mx: 7 }}>
+            <h4 style={{ textAlign: "center", marginBottom: "16px" }}>
+              Security
+            </h4>
 
-						<form id="security-form" sx={{ mb: "0" }} onSubmit={formik.handleSubmit}>
-							<FormControl sx={{ width: "100%" }} variant="filled">
-								<TextField
-									helperText={
-										formik.touched.password && formik.errors.password
-											? `${formik.errors.password}`
-											: null
-									}
-									error={formik.touched.password && formik.errors.password ? true : false}
-									label="Password"
-									type="password"
-									id="signupPassword"
-									name={users.user.password}
-									{...formik.getFieldProps("password")}
-								/>
-							</FormControl>
+            <h4 style={{ textAlign: "center", marginBottom: "16px" }}>
+              Do you want to change your password?
+            </h4>
 
-							<div className="d-grid gap-2 col-6 mx-auto my-2">
-								<button
-									className="btn py-2 px-1 mb-2"
-									style={{
-										backgroundColor: "#006cb6",
-										color: "white",
-										fontSize: "20px",
-									}}
-									type="submit"
-								>
-									{/* TODO: sent confirmation to user email */}
-									<Link to={`/my-account`} style={{ textDecoration: "none", color: "black" }}>
-										Save
-									</Link>
-								</button>
-							</div>
-						</form>
+            <form
+              id="security-form"
+              sx={{ mb: "0" }}
+              onSubmit={formik.handleSubmit}
+            >
+              <FormControl sx={{ width: "100%" }} variant="filled">
+                <TextField
+                  helperText={
+                    formik.touched.password && formik.errors.password
+                      ? `${formik.errors.password}`
+                      : null
+                  }
+                  error={
+                    formik.touched.password && formik.errors.password
+                      ? true
+                      : false
+                  }
+                  label="Password"
+                  type="password"
+                  id="signupPassword"
+                  name={users.user.password}
+                  {...formik.getFieldProps("password")}
+                />
+              </FormControl>
 
-						<h4 style={{ textAlign: "center" }}>Link with LEGO® Account</h4>
+              <div className="d-grid gap-2 col-6 mx-auto my-2">
+                <button
+                  className="btn py-2 px-1 mb-2"
+                  style={{
+                    backgroundColor: "#006cb6",
+                    color: "white",
+                    fontSize: "20px",
+                  }}
+                  type="submit"
+                >
+                  {/* TODO: sent confirmation to user email */}
+                  <Link
+                    to={`/my-account`}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    Save
+                  </Link>
+                </button>
+              </div>
+            </form>
 
-						<FacebookLoginButton onClick={() => alert("Hello FaceBook")} />
+            <h4 style={{ textAlign: "center" }}>Link with LEGO® Account</h4>
 
-						<GoogleLoginButton onClick={() => alert("Hello Google")} />
+            <FacebookLoginButton onClick={() => alert("Hello FaceBook")} />
 
-						<div className="d-grid gap-2 col-6 mx-auto my-4">
-							<button
-								className="btn py-2 mb-2"
-								style={{
-									backgroundColor: "red",
-									color: "white",
-									fontSize: "20px",
-								}}
-								type=""
-							>
-								<Link to={`/delete-account`} style={{ textDecoration: "none", color: "white"}}>
-									Delete Account
-								</Link>
-							</button>
-							<button
-								className="btn mb-2 p-3"
-								style={{
-									backgroundColor: "transparent",
-									fontSize: "20px",
-									color: "black",
-								}}
-								type="button"
-							>
-								<Link
-									to={`/details`}
-									style={{
-										textDecoration: "none",
-										border: "none",
-									}}
-									className="go-back-btn hover-btn"
-								>
-									Go Back
-								</Link>
-							</button>
-						</div>
-					</Box>
-				</Box>
-			</Container>
-		</div>
-	);
+            <GoogleLoginButton onClick={() => alert("Hello Google")} />
+
+            <div className="d-grid gap-2 col-6 mx-auto my-4">
+              <button
+                className="btn py-2 mb-2"
+                style={{
+                  backgroundColor: "red",
+                  color: "white",
+                  fontSize: "20px",
+                }}
+                type=""
+              >
+                <Link
+                  to={`/delete-account`}
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  Delete Account
+                </Link>
+              </button>
+              <button
+                className="btn mb-2 p-3"
+                style={{
+                  backgroundColor: "transparent",
+                  fontSize: "20px",
+                  color: "black",
+                }}
+                type="button"
+              >
+                <Link
+                  to={`/details`}
+                  style={{
+                    textDecoration: "none",
+                    border: "none",
+                  }}
+                  className="go-back-btn hover-btn"
+                >
+                  Go Back
+                </Link>
+              </button>
+            </div>
+          </Box>
+        </Box>
+      </Container>
+    </div>
+  );
 }

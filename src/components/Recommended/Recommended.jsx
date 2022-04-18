@@ -18,7 +18,7 @@ function Recommended() {
 			<div className="recommended">
 				<div className="boxes">
 					{randomProducts.map((product) => {
-						<ProductCart product={product} />;
+					return	<ProductCart product={product} />;
 					})}
 				</div>
 			</div>

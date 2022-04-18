@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { initUserCart } from "./Redux/Actions/cartActions";
 import "./App.css";
 import RequireAuth from "./Auh";
+import Shipper from "./components/Shipper/Shipper";
 
 const AccordionProduct = lazy(() => import("./components/AccordionProduct/AccordionProduct"));
 const MyBag = lazy(() => import("./components/Bag"));
@@ -90,6 +91,14 @@ function App() {
 							element={
 								<Layout>
 									<HomePage />
+								</Layout>
+							}
+						/>
+						<Route
+							path="/shipper"
+							element={
+								<Layout>
+									<Shipper />
 								</Layout>
 							}
 						/>

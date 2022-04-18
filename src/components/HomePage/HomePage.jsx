@@ -14,7 +14,7 @@ export default function HomePage(props) {
 	useEffect(() => {
 		axios
 			.get("http://localhost:8080/home/trending-products")
-			.then((res) => setTtrendingProducts(res.data.trendingProducts))
+			.then((res) => {setTtrendingProducts(res.data.trendingProducts), console.log(res)})
 			.catch((err) => console.log(err));
 	}, []);
 
@@ -23,7 +23,7 @@ export default function HomePage(props) {
 			.get("http://localhost:8080/home/new-products")
 			.then((res) => {
 				setNewProducts(res.data.newProducts);
-				console.log(res);
+				console.log(res.data.newProducts);
 			})
 			.catch((err) => console.log(err));
 	}, []);
@@ -74,7 +74,7 @@ export default function HomePage(props) {
 						{/* card outer content  */}
 						<div className="card-container">
 							{newProducts.map((product) => {
-								<HomeCard product={product} />;
+								return <HomeCard product={product} />;
 							})}
 						</div>
 					</div>
@@ -95,7 +95,7 @@ export default function HomePage(props) {
 						{/* card outer content  */}
 						<div className="card-container">
 							{trendingProducts.map((product) => {
-								<HomeCard product={product} />;
+								return <HomeCard product={product} />;
 							})}
 						</div>
 					</div>
