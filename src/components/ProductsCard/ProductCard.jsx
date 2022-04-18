@@ -37,6 +37,7 @@ export default function ProductCard() {
 				setIsLoading(false);
 			})
 			.catch((err) => console.log(err));
+		return () => {};
 	}, [page]);
 	useEffect(() => {
 		setIsLoading(true);
@@ -49,8 +50,7 @@ export default function ProductCard() {
 			})
 			.catch((err) => console.log(err));
 		return () => {};
-	}, []);
-	// }, [filterValues]);
+	}, [filterValues]);
 
 	const handelFilterChange = (filterValues) => {
 		setFilterValues(filterValues);
