@@ -14,81 +14,97 @@ import "./ProductCard.css";
 import { getProduct, getProductDetails } from "../../network/productsAPIs";
 
 function handleClick(event) {
-  event.preventDefault();
+	event.preventDefault();
 }
 
 export default function ProductCard() {
-  const [page, setPage] = useState(1);
-  const [count, setCount] = useState(1);
-  const [products, setProducts] = useState([]);
-  const [filterValues , setFilterValues]=useState({});
- 
-    const handleChange = (event, value) => {
-    setPage(value);
-  };
+	const [page, setPage] = useState(1);
+	const [count, setCount] = useState(1);
+	const [products, setProducts] = useState([]);
+	const [filterValues, setFilterValues] = useState({});
+	const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-      getProduct(3, page,filterValues)
-      .then((res) => {
-        setProducts(res.data.products)
-        setCount(res.data.count)
-      })
-      .catch((err) => console.log(err));
+	const handleChange = (event, value) => {
+		setPage(value);
+	};
 
-  }, [page]);
-  useEffect(() => {
-    getProduct(3, page,filterValues)
-    .then((res) => {
-      setProducts(res.data.products)
-      setCount(res.data.count)
-      setPage(1)
-    })
-    .catch((err) => console.log(err));
+	useEffect(() => {
+		setIsLoading(true);
+		getProduct(3, page, filterValues)
+			.then((res) => {
+				setProducts(res.data.products);
+				setCount(res.data.count);
+				setIsLoading(false);
+			})
+			.catch((err) => console.log(err));
+	}, [page]);
+	useEffect(() => {
+		setIsLoading(true);
+		getProduct(3, page, filterValues)
+			.then((res) => {
+				setProducts(res.data.products);
+				setCount(res.data.count);
+				setPage(1);
+				setIsLoading(false);
+			})
+			.catch((err) => console.log(err));
+	}, [filterValues]);
 
-}, [filterValues]);
-  
+	const handelFilterChange = (filterValues) => {
+		setFilterValues(filterValues);
+	};
 
+	return (
+		<>
+			{isLoading && (
+				<div className="inner-loader">
+					<h1>Logging you in please hold</h1>
+					<div className="lds-ring">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+			)}
+			{!isLoading && (
+				<div className="container">
+					<div role="presentation" onClick={handleClick}>
+						<Breadcrumbs sx={{ pt: 1 }} aria-label="breadcrumb">
+							<Link underline="hover" color="inherit" href="/">
+								<Typography color="text.primary">Home</Typography>
+							</Link>
+							<Typography color="text.primary">Shop Now</Typography>
+						</Breadcrumbs>
+					</div>
 
-  const handelFilterChange = filterValues =>{
-    setFilterValues(filterValues);
-  }
+					<section className="shop-now ">
+						<Filter handelFilterChange={handelFilterChange} />
 
-  return (
-    <>
-      <div className="container">
-        <div role="presentation" onClick={handleClick}>
-          <Breadcrumbs sx={{ pt: 1 }} aria-label="breadcrumb">
-            <Link underline="hover" color="inherit" href="/">
-              <Typography color="text.primary">Home</Typography>
-            </Link>
-            <Typography color="text.primary">Shop Now</Typography>
-          </Breadcrumbs>
-        </div>
+						<section className="cards">
+							{/* <!-- cards-header-section --> */}
+							<div className="cards-header-section">
+								<span>
+									Showing 1 - {3} of {count} results
+								</span>
+							</div>
+							{/* <!-- cards ccontainer --> */}
+							<div className="cards-container">
+								{products.map((item) => (
+									<Cards product={item} key={item._id} />
+								))}
+							</div>
 
-        <section className="shop-now ">
-          <Filter  handelFilterChange={handelFilterChange}/>
-
-          <section className="cards">
-            {/* <!-- cards-header-section --> */}
-            <div className="cards-header-section">
-              <span>Showing 1 - {3} of {count} results</span>
-            </div>
-            {/* <!-- cards ccontainer --> */}
-            <div className="cards-container">
-              {
-                products.map(item => <Cards product={item} key={item._id} />)
-              }
-            </div>
-
-            {/* <!-- sliding --> */}
-            <div className="sliding">
-              <Stack spacing={2}>
-                <Pagination count={Math.ceil(count/3) || 1} card={page} onChange={handleChange} />
-              </Stack>
-            </div>
-          </section>
-        </section>
-      </div>
-    </>
-  );
+							{/* <!-- sliding --> */}
+							<div className="sliding">
+								<Stack spacing={2}>
+									<Pagination count={Math.ceil(count / 3) || 1} card={page} onChange={handleChange} />
+								</Stack>
+							</div>
+						</section>
+					</section>
+				</div>
+			)}
+		</>
+	);
 }
