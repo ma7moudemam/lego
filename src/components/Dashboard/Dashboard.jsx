@@ -271,10 +271,10 @@ function DashboardContent() {
             {/* <TabPanel value={value} index={4}>
               <Reviews />
             </TabPanel> */}
-            <TabPanel value={value} index={5}>
+            <TabPanel value={value} index={4}>
               <Shippers />
             </TabPanel>
-            <TabPanel value={value} index={6}>
+            <TabPanel value={value} index={5}>
               <Categories />
             </TabPanel>
           </Container>

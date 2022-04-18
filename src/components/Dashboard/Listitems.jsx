@@ -60,13 +60,13 @@ export function MainListItems({ value, handler, open }) {
           label={open ? "Shippers" : ""}
           icon={<LocalShippingIcon />}
           iconPosition="start"
-          {...allyprops(5)}
+          {...allyprops(4)}
         />
         <Tab
           label={open ? "Category" : ""}
           icon={<CategoryIcon />}
           iconPosition="start"
-          {...allyprops(6)}
+          {...allyprops(5)}
         />
       </Tabs>
     </React.Fragment>
