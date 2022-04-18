@@ -9,6 +9,7 @@ export default function Main() {
 	const dispatch = useDispatch();
 	const [count, setCount] = useState(0);
 	const cart = useSelector((store) => store.cart);
+
 	// const [itemProducts,setItemProducts] = useState({})
 	// useEffect(()=>{
 	//     let uniqueProduct ={}
@@ -21,8 +22,8 @@ export default function Main() {
 	//     })
 	//     console.log('MY PRODUCTS ',uniqueProduct)
 	//     setItemProducts(uniqueProduct)
-
 	// },[cart])
+
 	return (
 		<div className="col-12 col-md-8 border bg-white p-3">
 			<p className="border-bottom text-success py-2"> Available now</p>
