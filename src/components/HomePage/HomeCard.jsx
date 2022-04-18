@@ -1,6 +1,7 @@
 import React from "react";
 import Cards from "../../assets/images/spotlight/card1.jpg";
 import NestedCards from "../../assets/images/spotlight/nested-card1.png";
+import "./HomePage.css";
 export default function HomeCard({ product }) {
   return (
     <div>
