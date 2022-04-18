@@ -48,7 +48,8 @@ export default function ProductCard() {
 				setIsLoading(false);
 			})
 			.catch((err) => console.log(err));
-	});
+		return () => {};
+	}, []);
 	// }, [filterValues]);
 
 	const handelFilterChange = (filterValues) => {
