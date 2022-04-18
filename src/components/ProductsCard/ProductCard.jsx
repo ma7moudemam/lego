@@ -30,7 +30,7 @@ export default function ProductCard() {
 
 	useEffect(() => {
 		setIsLoading(true);
-		getProduct(3, page, filterValues)
+		getProduct(9, page, filterValues)
 			.then((res) => {
 				setProducts(res.data.products);
 				setCount(res.data.count);
@@ -40,7 +40,7 @@ export default function ProductCard() {
 	}, [page]);
 	useEffect(() => {
 		setIsLoading(true);
-		getProduct(3, page, filterValues)
+		getProduct(9, page, filterValues)
 			.then((res) => {
 				setProducts(res.data.products);
 				setCount(res.data.count);
@@ -48,7 +48,8 @@ export default function ProductCard() {
 				setIsLoading(false);
 			})
 			.catch((err) => console.log(err));
-	}, [filterValues]);
+    });
+	// }, [filterValues]);
 
 	const handelFilterChange = (filterValues) => {
 		setFilterValues(filterValues);
@@ -95,16 +96,30 @@ export default function ProductCard() {
 								))}
 							</div>
 
-							{/* <!-- sliding --> */}
-							<div className="sliding">
-								<Stack spacing={2}>
-									<Pagination count={Math.ceil(count / 3) || 1} card={page} onChange={handleChange} />
-								</Stack>
-							</div>
-						</section>
-					</section>
-				</div>
-			)}
-		</>
-	);
+        <section className="shop-now ">
+          <Filter  handelFilterChange={handelFilterChange}/>
+
+          <section className="cards">
+            {/* <!-- cards-header-section --> */}
+            <div className="cards-header-section">
+              <span>Showing 1 - {9} of {count} results</span>
+            </div>
+            {/* <!-- cards ccontainer --> */}
+            <div className="cards-container">
+              {
+                products.map(item => <Cards product={item} key={item._id} />)
+              }
+            </div>
+
+            {/* <!-- sliding --> */}
+            <div className="sliding">
+              <Stack spacing={2}>
+                <Pagination count={Math.ceil(count/9) || 1} card={page} onChange={handleChange} />
+              </Stack>
+            </div>
+          </section>
+        </section>
+      </div>
+    </>
+  );
 }
