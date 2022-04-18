@@ -9,7 +9,6 @@ import axios from "axios";
 import "./HomePage.css";
 
 export default function HomePage(props) {
-<<<<<<< HEAD
 	const [trendingProducts, setTtrendingProducts] = useState([]);
 	const [newProducts, setNewProducts] = useState([]);
 	useEffect(() => {
@@ -28,29 +27,6 @@ export default function HomePage(props) {
 			})
 			.catch((err) => console.log(err));
 	}, []);
-=======
-  const [trendingProducts, setTtrendingProducts] = useState([]);
-  const [newProducts, setNewProducts] = useState([]);
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/home/trending-products")
-      .then((res) => {
-        setTtrendingProducts(res.data.trendingProducts);
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/home/new-products")
-      .then((res) => {
-        setNewProducts(res.data.newProducts);
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  }, []);
->>>>>>> 411e63a090caca38875e6e2979f0a80c275ef222
 
   return (
     <>
@@ -96,7 +72,6 @@ export default function HomePage(props) {
               </h2>
             </div>
 
-<<<<<<< HEAD
 						{/* card outer content  */}
 						<div className="card-container">
 							{newProducts.map((product) => {
@@ -106,17 +81,6 @@ export default function HomePage(props) {
 					</div>
 				</section>
 			</div>
-=======
-            {/* card outer content  */}
-            <div className="card-container">
-              {newProducts.map((product) => {
-                <HomeCard product={product} />;
-              })}
-            </div>
-          </div>
-        </section>
-      </div>
->>>>>>> 411e63a090caca38875e6e2979f0a80c275ef222
 
       {/* trending Now */}
       <div className="container">
@@ -129,7 +93,6 @@ export default function HomePage(props) {
               </h2>
             </div>
 
-<<<<<<< HEAD
 						{/* card outer content  */}
 						<div className="card-container">
 							{trendingProducts.map((product) => {
@@ -141,17 +104,4 @@ export default function HomePage(props) {
 			</div>
 		</>
 	);
-=======
-            {/* card outer content  */}
-            <div className="card-container">
-              {trendingProducts.map((product) => {
-                <HomeCard product={product} />;
-              })}
-            </div>
-          </div>
-        </section>
-      </div>
-    </>
-  );
->>>>>>> 411e63a090caca38875e6e2979f0a80c275ef222
 }
