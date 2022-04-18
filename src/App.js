@@ -123,7 +123,7 @@ function App() {
 								<Layout>
 									<>
 										<ProductCard />
-										<AccordionProduct />
+										{/* <AccordionProduct /> */}
 									</>
 								</Layout>
 							}
