@@ -60,7 +60,7 @@ export default function Cards({product}) {
             <div className="new-item">new</div>
             <div className="card-name">
               <p>
-                <a href="#">Heartlake City Park</a>
+                <a href="#">{product.name}</a>
               </p>
             </div>
             <span>
