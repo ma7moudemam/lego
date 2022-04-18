@@ -21,10 +21,10 @@ import { Link } from "react-router-dom";
 
 export default function AccountDetails() {
   return (
-    <>
+    <div className="account-body">
       <CssBaseline />
       <Container maxWidth="sm">
-        <Box sx={{ bgcolor: "#f2f5f7", height: "100%" }}>
+        <Box sx={{ bgcolor: "#f2f5f7", height: "100%" }}  className="account-border">
           <Box sx={{ bgcolor: "#ffcf00", height: "12vh" }}>
             <div className="text-center">
               <img src={Logo} alt="" className="Logo-img-account rounded" />
@@ -105,7 +105,7 @@ export default function AccountDetails() {
               >
                 <Link
                   to={`/my-account`}
-                  style={{ textDecoration: "none", color: "black" }}
+                  style={{ textDecoration: "none", color: "white" }}
                 >
                   Save
                 </Link>
@@ -114,6 +114,6 @@ export default function AccountDetails() {
           </Box>
         </Box>
       </Container>
-    </>
+    </div>
   );
 }

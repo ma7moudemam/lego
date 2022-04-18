@@ -56,17 +56,18 @@ export default function AccountSecurity() {
 				})
 				.then((res) => {
 					console.log("res");
+					navigate("/login");
 				})
 				.catch((err) => console.log(err));
-			navigate("/login");
+			
 		},
 	});
 
 	return (
-		<>
+		<div style={{width: "100vw", backgroundColor: "#f2f5f7"}}>
 			<CssBaseline />
 			<Container maxWidth="sm">
-				<Box sx={{ bgcolor: "#f2f5f7", height: "100%" }}>
+				<Box sx={{ bgcolor: "#f2f5f7", height: "100%" }} className="account-border">
 					<Box sx={{ bgcolor: "#ffcf00", height: "12vh" }}>
 						<div className="text-center">
 							<button className="back-arrow">
@@ -141,7 +142,7 @@ export default function AccountSecurity() {
 								}}
 								type=""
 							>
-								<Link to={`/delete-account`} style={{ textDecoration: "none", color: "white" }}>
+								<Link to={`/delete-account`} style={{ textDecoration: "none", color: "white", background: "red"}}>
 									Delete Account
 								</Link>
 							</button>
@@ -161,6 +162,7 @@ export default function AccountSecurity() {
 										border: "none",
 										color: "black",
 									}}
+									className="go-back-btn"
 								>
 									Go Back
 								</Link>
@@ -169,6 +171,6 @@ export default function AccountSecurity() {
 					</Box>
 				</Box>
 			</Container>
-		</>
+		</div>
 	);
 }

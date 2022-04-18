@@ -11,6 +11,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./AccountDetails.css";
 
 import jwt_decode from "jwt-decode";
 
@@ -86,14 +87,15 @@ export default function UpdateForm() {
 				})
 				.then((res) => {
 					console.log("res");
+					navigate("/login");
 				})
 				.catch((err) => console.log(err));
-			navigate("/login");
+			
 		},
 	});
 
 	return (
-		<>
+		<div>
 			<form id="update-form" onSubmit={formik.handleSubmit}>
 				<FormControl sx={{ width: "100%", mb: 2 }}>
 					<TextField
@@ -261,13 +263,13 @@ export default function UpdateForm() {
 				</div>
 
 				<div className="d-grid gap-2 col-6 mx-auto my-4">
-					<button className="btn py-2 mb-2" style={{ backgroundColor: "gray", color: "white" }} type="submit">
-						<Link to={`/my-account`} style={{ textDecoration: "none", color: "black" }}>
+					<button className="btn py-2 mb-2" style={{ backgroundColor: "blue", color: "white" }} type="submit">
+						<Link to={`/my-account`} style={{ textDecoration: "none", color: "white"}}>
 							Save
 						</Link>
 					</button>
 					<button
-						className="btn mb-2"
+						className="btn mb-2 hover-btn"
 						style={{ backgroundColor: "transparent", color: "black" }}
 						type="button"
 					>
@@ -277,6 +279,6 @@ export default function UpdateForm() {
 					</button>
 				</div>
 			</form>
-		</>
+		</div>
 	);
 }

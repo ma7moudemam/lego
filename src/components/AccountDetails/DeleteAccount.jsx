@@ -28,11 +28,12 @@ export default function AccountSecurity() {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => {
-        localStorage.removeItem("token");
+        localStorage.clear();
         console.log("deleted");
+        navigate("/home");
       })
       .catch((err) => console.log(err));
-    navigate("/home");
+
   };
 
   const handelLogOutAction = () => {
@@ -46,10 +47,10 @@ export default function AccountSecurity() {
   };
 
   return (
-    <>
+    <div className="account-body">
       <CssBaseline />
       <Container maxWidth="sm">
-        <Box sx={{ bgcolor: "#f2f5f7", height: "100%" }}>
+        <Box sx={{ bgcolor: "#f2f5f7", height: "100%" }} className="account-border">
           <Box sx={{ bgcolor: "#ffcf00", height: "12vh" }}>
             <div className="text-center">
               <button className="back-arrow">
@@ -133,7 +134,7 @@ export default function AccountSecurity() {
               <button
                 className="btn py-2 mb-2"
                 style={{
-                  backgroundColor: "#e3000b",
+                  backgroundColor: "red",
                   color: "white",
                   fontSize: "20px",
                 }}
@@ -163,6 +164,6 @@ export default function AccountSecurity() {
           </Box>
         </Box>
       </Container>
-    </>
+    </div>
   );
 }
