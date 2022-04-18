@@ -92,7 +92,7 @@ export default function Filter(props) {
                     <input type="checkbox" checked={categoryFilter.includes(String(catgory._id))} id={catgory._id} name={catgory.name} value={catgory._id}
                     onChange={handelCategoryFilter}
                     />
-                    <label for={catgory._id}> {catgory.name}[{catgory.products.length}]</label>
+                    <label for={catgory._id}> {catgory.name}</label>
                     <br></br>
                   </div>
                 )
@@ -126,19 +126,19 @@ export default function Filter(props) {
             <section className="filter-content">
               <br></br>
               <input type="checkbox" id="max-25" name="0-25" value="" checked={priceRangeFilter.includes("0-25")}  onChange={handelPriceRangeFilter}/>
-              <label for="max-25"> $0 - $25 [19]</label>
+              <label for="max-25"> $0 - $25 </label>
               <br></br>
               <input type="checkbox" id="max-50" name="25-50" value="" checked={priceRangeFilter.includes("25-50")} onChange={handelPriceRangeFilter}/>
-              <label for="max-50">$25 - $50 [18]</label>
+              <label for="max-50">$25 - $50 </label>
               <br></br>
               <input type="checkbox" id="max-75" name="50-75" value="" onChange={handelPriceRangeFilter} checked={priceRangeFilter.includes("50-75")}/>
-              <label for="max-75"> $50 - $75 [7]</label>
+              <label for="max-75"> $50 - $75 </label>
               <br></br>
               <input type="checkbox" id="max-100" name="75-100" value="" onChange={handelPriceRangeFilter} checked={priceRangeFilter.includes("75-100")}/>
-              <label for="max-100"> $75 - $100 [6]</label>
+              <label for="max-100"> $75 - $100 </label>
               <br></br>
               <input type="checkbox" id="min-100" name="100-200" value="" onChange={handelPriceRangeFilter} checked={priceRangeFilter.includes("100-200")} />
-              <label for="min-100"> $100+ [1]</label>
+              <label for="min-100"> $100+ </label>
               <br></br>
             </section>
           </li>
@@ -206,7 +206,7 @@ export default function Filter(props) {
                 <span>
                   <i className="far fa-star"></i>
                 </span>
-                <span>[19]</span>
+                {/* <span></span> */}
               </label>
               <br></br>
               <input type="checkbox" id="up-4-star" name="up-4-star" value="4" checked={ratingFilter.includes("4")} onChange={handelRatingFilter}/>
@@ -226,7 +226,7 @@ export default function Filter(props) {
                 <span>
                   <i className="far fa-star"></i>
                 </span>
-                <span>[3]</span>
+                {/* <span></span> */}
               </label>
             </section>
           </li>

@@ -231,7 +231,7 @@ function Products() {
         variant="fullWidth"
         onChange={handleChange}
         aria-label="Horizontal tabs example"
-        sx={{ borderRight: 1, borderColor: "divider" }}
+        // sx={{ borderRight: 1, borderColor: "divider" }}
       >
         <Tab
           label="Update"
@@ -271,10 +271,10 @@ function Products() {
                 )}
               /> */}
               <div {...getRootProps()}>
-                <Label {...getInputLabelProps()}>useAutocomplete</Label>
                 <SearchInput
                   {...getInputProps()}
                   onKeyUp={(event) => search(event.target.value)}
+                  placeholder="Search..."
                 />
               </div>
               {groupedOptions.length > 0 ? (
