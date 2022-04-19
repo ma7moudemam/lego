@@ -16,7 +16,7 @@ export default function HomePage(props) {
       .get("http://localhost:8080/home/trending-products")
       .then((res) => {
         setTtrendingProducts(res.data.trendingProducts);
-        // console.log(res);
+        console.log(res);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -26,7 +26,7 @@ export default function HomePage(props) {
       .get("http://localhost:8080/home/new-products")
       .then((res) => {
         setNewProducts(res.data.newProducts);
-        // console.log(res);
+        console.log(res.data.newProducts);
       })
       .catch((err) => console.log(err));
   }, []);

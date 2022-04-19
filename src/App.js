@@ -93,6 +93,14 @@ function App() {
 								</Layout>
 							}
 						/>
+						{/* <Route
+							path="/shipper"
+							element={
+								<Layout>
+									<Shipper />
+								</Layout>
+							}
+						/> */}
 						<Route
 							path="/whishlist"
 							element={
