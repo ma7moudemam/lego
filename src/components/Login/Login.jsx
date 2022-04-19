@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import legoAccountLogo from "./../../assets/imgs/LEGOAccount-Logo.svg";
 import close from "./../../assets/imgs/close.svg";
 import legoLarge from "./../../assets/imgs/lego(1)large.png";
@@ -11,11 +11,41 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import "./Login.css";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink, useLocation } from "react-router-dom";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 function Login() {
 	const [isLoading, setIsLoading] = useState(false);
 	let navigate = useNavigate();
+	const Location = useLocation();
+	const [notification, setNotification] = useState(false);
+	const [errorNotification, setErrorNotification] = useState(false);
+	const [notificationMessage, setNotificationMessage] = useState("");
+	// notification
+	const openErrorMsg = (message) => {
+		setNotificationMessage(message);
+		setErrorNotification(true);
+	};
+	const hideErrorMsg = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+
+		setNotification(false);
+	};
+	const openNotificationMsg = (message) => {
+		setNotificationMessage(message);
+		setNotification(true);
+	};
+	const hideNotificationMsg = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+
+		setNotification(false);
+	};
+	// end notification
 	const formik = useFormik({
 		initialValues: {
 			email: "",
@@ -29,15 +59,23 @@ function Login() {
 			setIsLoading(true);
 			axios
 				.post("http://localhost:8080/login", values)
-				.then((res) => {
-					localStorage.setItem("token", res.data.token);
-					localStorage.setItem("refreshToken", res.data.refreshToken);
+				.then((response) => {
+					localStorage.setItem("token", response.data.token);
+					localStorage.setItem("refreshToken", response.data.refreshToken);
 					setIsLoading(false);
-					navigate("/home");
+					navigate("/home", { state: { message: response.data.message } });
 				})
-				.catch((err) => console.log(err));
+				.catch((error) => {
+					setIsLoading(false);
+					openErrorMsg(error.response.data.Error);
+				});
 		},
 	});
+	useEffect(() => {
+		if (Location.state) {
+			openNotificationMsg(Location.state.message);
+		}
+	}, []);
 	// const submitLogin = (event) => {
 	//   event.preventDefault();
 	//   console.log(event);
@@ -103,10 +141,6 @@ function Login() {
 									{...formik.getFieldProps("password")}
 								/>
 							</FormControl>
-
-							<div className="remember-me">
-								<FormControlLabel control={<Checkbox />} label="Remember me" />
-							</div>
 							<p className="logout-advice">
 								Remember to log out afterwards if you are using a shared computer, for example in a
 								library or school.
@@ -115,14 +149,26 @@ function Login() {
 								Log in
 							</button>
 						</Box>
-						<div className="forgetting">
-							<a href="#test">Forgot username?</a> |<a href="#test">Forgot password</a>
-						</div>
 						<div className="go-signup">
 							<p>Don't have a LEGO® Account?</p>
 							<NavLink to="/signup">Create account</NavLink>
 						</div>
 					</div>
+					<Snackbar open={errorNotification} autoHideDuration={3000} onClose={hideErrorMsg} severity="error">
+						<Alert onClose={hideErrorMsg} severity="error" sx={{ width: "100%" }}>
+							{notificationMessage}
+						</Alert>
+					</Snackbar>
+					<Snackbar
+						open={notification}
+						autoHideDuration={3000}
+						onClose={hideNotificationMsg}
+						severity="success"
+					>
+						<Alert onClose={hideNotificationMsg} severity="success" sx={{ width: "100%" }}>
+							{notificationMessage}
+						</Alert>
+					</Snackbar>
 				</div>
 			)}
 		</>

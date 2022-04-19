@@ -6,6 +6,8 @@
 .login-container {
   background-color: #f2f5f7;
   padding-bottom: 2rem;
+  min-height: 100vh;
+  text-align: center;
 }
 
 .login-container .header {

@@ -12,22 +12,36 @@ import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./AccountDetails.css";
-
 import jwt_decode from "jwt-decode";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 export default function UpdateForm() {
 	const [users, setUsers] = useState(() => jwt_decode(localStorage.getItem("token")));
 	const [isLoading, setIsLoading] = useState(false);
+	const [notification, setNotification] = useState(false);
+	const [notificationMessage, setNotificationMessage] = useState("");
+	// notification
+	const openNotificationMsg = (message) => {
+		setNotificationMessage(message);
+		setNotification(true);
+	};
+	const hideNotificationMsg = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
 
+		setNotification(false);
+	};
 	// console.log(users)
 	let navigate = useNavigate();
 	const formik = useFormik({
 		initialValues: {
 			userName: users.user.userName,
 			email: users.user.email,
-			day: "",
-			month: "",
-			year: "",
+			day: users.user.day,
+			month: users.user.month,
+			year: users.user.year,
 			country: users.user.country,
 			city: users.user.address ? users.user.address.city : "",
 			street: users.user.address ? users.user.address.street : "",
@@ -35,7 +49,10 @@ export default function UpdateForm() {
 		},
 
 		validationSchema: Yup.object({
-			userName: Yup.string().max(15, "Must be 15 characters or less").required("Required"),
+			userName: Yup.string()
+				.max(15, "Must be 15 characters or less")
+				.min(3, "Must be more than 3 characters")
+				.required("Required"),
 			email: Yup.string().email("Invalid email address").required("required"),
 			day: Yup.number("day should be a number").max(31, "day should be two numbers DD").required("required"),
 			month: Yup.number("month should be a number")
@@ -47,8 +64,11 @@ export default function UpdateForm() {
 				.required("required"),
 			country: Yup.string().required("required"),
 			city: Yup.string().required("required"),
-			street: Yup.string().required("required"),
-			building: Yup.string().required("required"),
+			street: Yup.string()
+				.max(10, "Street must be 10 characters max")
+				.min(4, "Street must be 4 characters or more")
+				.required("required"),
+			building: Yup.number("building must be number").required("Number required"),
 		}),
 
 		onSubmit: (values) => {
@@ -78,6 +98,9 @@ export default function UpdateForm() {
 				country: values.country,
 				address: address,
 				age: getAge(),
+				year: values.year,
+				month: values.month,
+				day: values.day,
 			};
 
 			console.log(body);
@@ -88,11 +111,16 @@ export default function UpdateForm() {
 					},
 				})
 				.then((res) => {
-					console.log("res");
+					console.log("update response", res.data);
+					localStorage.setItem("token", res.data.token);
 					setIsLoading(false);
-					navigate("/login");
+					navigate("/whishlist/personal", { state: { message: res.data.message } });
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					console.log(err);
+					setIsLoading(false);
+					openNotificationMsg(err.response.data.Error);
+				});
 		},
 	});
 
@@ -100,7 +128,7 @@ export default function UpdateForm() {
 		<>
 			{isLoading && (
 				<div className="inner-loader">
-					<h1>Logging you in please hold</h1>
+					<h1>Loading please hold</h1>
 					<div className="lds-ring">
 						<div></div>
 						<div></div>
@@ -141,6 +169,7 @@ export default function UpdateForm() {
 								InputProps={{
 									readOnly: true,
 								}}
+								disabled
 								value={formik.values.email}
 								name="email"
 								placeholder="example@gmail.com"
@@ -280,7 +309,7 @@ export default function UpdateForm() {
 										}
 										error={formik.touched.building && formik.errors.building ? true : false}
 										label="Building"
-										type="text"
+										type="number"
 										id="UpdateBuilding"
 										// name={users.user.address["building"]}
 										name="building"
@@ -294,12 +323,10 @@ export default function UpdateForm() {
 						<div className="d-grid gap-2 col-6 mx-auto my-4">
 							<button
 								className="btn py-2 mb-2"
-								style={{ backgroundColor: "blue", color: "white" }}
+								style={{ backgroundColor: "#ffcf00", color: "#000" }}
 								type="submit"
 							>
-								<Link to={`/my-account`} style={{ textDecoration: "none", color: "white" }}>
-									Save
-								</Link>
+								Save
 							</button>
 							<button
 								className="btn mb-2"
@@ -316,6 +343,16 @@ export default function UpdateForm() {
 							</button>
 						</div>
 					</form>
+					<Snackbar
+						open={notification}
+						autoHideDuration={3000}
+						onClose={hideNotificationMsg}
+						severity="error"
+					>
+						<Alert onClose={hideNotificationMsg} severity="error" sx={{ width: "100%" }}>
+							{notificationMessage}
+						</Alert>
+					</Snackbar>
 				</div>
 			)}
 		</>

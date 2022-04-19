@@ -6,10 +6,13 @@ export default function HomeCard({ product }) {
   return (
     <div>
       <div className="card-1">
-        <a className="card-content" href="#" target="_blank">
+        <a className="card-content" href="#test" target="_blank">
           <div className="image-container">
             <div className="main-image">
-              <img src={`http://localhost:8080/images/${product.images[0]}`} alt={product.name} />
+              <img
+                src={`http://localhost:8080/images/${product.images[0]}`}
+                alt={product.name}
+              />
             </div>
             {/* <div className="nested-image">
               <img src={NestedCards} />

@@ -8,7 +8,6 @@
     z-index: 100;
 	box-sizing: border-box;
     height: 100vh;
-    overflow-y: scroll;
 	transition: left 250ms ease-in-out;
 }
 
@@ -52,33 +51,7 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	margin-top: 5rem;
-}
-
-.menu-bar .play-zone {
-	width: 100%;
-}
-
-.menu-bar .play-zone a {
-	text-transform: uppercase;
-	text-decoration: none;
-	display: flex;
-	gap: 10px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 90%;
-	margin: 0 auto;
-	padding: 0.5rem 3rem;
-	line-height: 1.5625rem;
-	color: rgb(0, 0, 0);
-	background: rgb(171, 217, 255);
-	box-shadow: rgb(48 85 181 / 44%) 0px 1px 4px 0px;
-	font-weight: 500;
-}
-
-.menu-bar .play-zone a:hover {
-    background-color: #f8f8f8;
+	margin-top: 3.5rem;
 }
 
 .menu-bar .menu-bar-list {
@@ -93,7 +66,8 @@
 	border-bottom: 1px solid rgb(216, 216, 216);
 }
 
-.menu-bar .menu-bar-list-item a {
+.menu-bar .menu-bar-list-item a{
+	width: 100%;
     font-family: "CeraProLight";
 	font-size: 1rem;
 	color: rgb(0, 0, 0);

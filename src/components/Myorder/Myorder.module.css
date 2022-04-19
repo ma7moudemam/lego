@@ -86,20 +86,20 @@
 .order-contatiner {
 
 }
-table {
+.tableOrder {
     width: 100%;
     background-color: #F8F8F8;
     border-radius: 10px;
     box-shadow: 2px 2px 2px #e7e6e6;
-}
-  
-  td, th {
+    font-size: .9rem;
+} 
+.tableOrder td, th {
     border-bottom: 1px solid #ddd;
     text-align: left;
     padding: 10px;
   }
   
-  tr:hover {background-color: #D6EEEE;}
+.tableOrder tr:hover {background-color: #D6EEEE;}
 
 @media screen and (max-width: 900px) {
     .container {

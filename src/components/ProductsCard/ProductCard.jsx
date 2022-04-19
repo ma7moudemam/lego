@@ -36,7 +36,10 @@ export default function ProductCard() {
 				setCount(res.data.count);
 				// setIsLoading(false);
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+				// setIsLoading(false);
+			});
 		return () => {};
 	}, [page]);
 	useEffect(() => {

@@ -22,7 +22,7 @@ export default function MyOrder() {
           {
             orders.length > 0 ?
             <div className={Style["order-contatiner"]}>
-             <table>
+             <table className={Style.tableOrder}>
              <thead>
                <tr>
                   <th>User</th>
