@@ -10,7 +10,7 @@ export default function WishListContent() {
     <>
       <div className={Style.content}>
           <h1 className={Style.nameOfBlock}>Wish list</h1>
-          <div className={Style["wish-block"]}>
+          {/* <div className={Style["wish-block"]}>
             <div className={Style["wish-content"]}>
               <img src="/imags/fairy_girl.png" className={Style["wish-img"]} />
               <div className={Style["wish-wrapper"]}>
@@ -32,7 +32,7 @@ export default function WishListContent() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className={Style.general}>
             <General/>
           </div>

@@ -14,6 +14,7 @@ export default function General() {
     getWishList().then((data) => setWishList(data.data.wishlist));
   }, []);
 
+  console.log({...wishList})
   const addItems = () => {
     let token = localStorage.getItem("token");
     if (token) {
@@ -33,10 +34,10 @@ export default function General() {
     <div>
       <div className={Style["wish-general"]}>
         <div className={Style["wish-general-info"]}>
-          <Link href="#" className={Style.link}>
+         
             <span>WishList </span>
             {wishList?.length > 0 && wishList?.product?.length}
-          </Link>
+          
           <div className={Style["general-content"]}>
             <div className={Style["items-contatiner"]} style={{display:"flex"}}>
               {wishList.length > 0 &&
