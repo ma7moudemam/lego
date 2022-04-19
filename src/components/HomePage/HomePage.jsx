@@ -100,7 +100,7 @@ export default function HomePage(props) {
 						{/* card outer content  */}
 						<div className="card-container">
 							{newProducts.map((product) => {
-								return <HomeCard product={product} />;
+								return <HomeCard product={product} key={product._id} />;
 							})}
 						</div>
 					</div>
