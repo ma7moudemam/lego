@@ -92,7 +92,7 @@ export default function Filter(props) {
                     <input type="checkbox" checked={categoryFilter.includes(String(catgory._id))} id={catgory._id} name={catgory.name} value={catgory._id}
                     onChange={handelCategoryFilter}
                     />
-                    <label for={catgory._id}> {catgory.name}</label>
+                    <label htmlFor={catgory._id}> {catgory.name}</label>
                     <br></br>
                   </div>
                 )

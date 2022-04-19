@@ -57,7 +57,7 @@ export default function Cards({product}) {
             <div className="image-contatiner" style={{width: "100%",overflow: "hidden"}}>
               <img src={`http://localhost:8080/images/${product?.images?.[0]}`} className="card-img" />
             </div>
-            <div className="new-item">new</div>
+            {/* <div className="new-item">new</div> */}
             <div className="card-name">
               <p>
                 <a href="#">{product.name}</a>

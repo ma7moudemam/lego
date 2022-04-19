@@ -29,24 +29,24 @@ export default function ProductCard() {
 	};
 
 	useEffect(() => {
-		setIsLoading(true);
+		// setIsLoading(true);
 		getProduct(9, page, filterValues)
 			.then((res) => {
 				setProducts(res.data.products);
 				setCount(res.data.count);
-				setIsLoading(false);
+				// setIsLoading(false);
 			})
 			.catch((err) => console.log(err));
 		return () => {};
 	}, [page]);
 	useEffect(() => {
-		setIsLoading(true);
+		// setIsLoading(true);
 		getProduct(9, page, filterValues)
 			.then((res) => {
 				setProducts(res.data.products);
 				setCount(res.data.count);
 				setPage(1);
-				setIsLoading(false);
+				// setIsLoading(false);
 			})
 			.catch((err) => console.log(err));
 		return () => {};
