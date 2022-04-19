@@ -49,21 +49,12 @@ a {
 	text-decoration: none;
 }
 .utility-bar-styles:nth-child(2) a:hover {
-	text-decoration: underline;
+	
 }
 .utility-bar-styles:nth-child(3) {
-    font-size: 0.75rem;
-    display: flex;
-    align-items: center;
-	gap: 1rem;
-	line-height: 1.5625rem;
+    display: none;
 }
-.utility-bar-styles:nth-child(4) {
-	display: none;
-}
-.user-icon,
-.vip-icon,
-.region-icon {
+.user-icon{
 	display: flex;
     align-items: center;
 	gap: 0.5em;
@@ -72,49 +63,46 @@ a {
     font-size: 0.75rem;
 	text-decoration: none;
 }
-.vip-icon i {
-	line-height: 1.5em;
-	font-size: 1.125em;
-	background: linear-gradient(to bottom right, #70cbe9, #1055af);
-	background-clip: text;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-}
 
 .utility-close-btn {
 	border: 0;
 	background-color: transparent;
 }
 
-@media (max-width: 770px) {
-    .utility-bar-styles {
-		display: none;
-		margin: 0.325rem 0;
-	}
-    .utility-bar-styles:nth-child(3) {
-        display: none;
-    }
-	.utility-bar-styles:nth-child(4) {
-		display: inline-flex;
-	}
-	.utility-bar-styles:nth-child(4) a {
-		color: #2c2c2c;
-		font-size: 1.5rem;
-	}
-	.hide {
+.utility-logout {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.75rem;
+	font-family: "CeraProMedium";
+	border: 0;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+.utility-logout i {
+	font-size: 1rem;
+}
+
+.utility-logout:hover {
+	color: #1055af;
+}
+
+.hide {
+	display: none;
+}
+
+@media (max-width: 950px) {
+	.utility-bar {
 		display: none;
 	}
 }
 @media (max-width: 470px) {
+	.utility-bar {
+		display: none;
+	}
     .utility-bar-styles {
 		display: none;
 		margin: 0.325rem 0;
-	}
-	.utility-bar-styles:nth-child(4) {
-		display: inline-flex;
-	}
-	.utility-bar-styles:nth-child(4) a {
-		color: #2c2c2c;
-		font-size: 1.5rem;
 	}
 }

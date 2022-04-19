@@ -92,7 +92,10 @@ export default function UpdateForm() {
 					setIsLoading(false);
 					navigate("/login");
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					console.log(err);
+					setIsLoading(false);
+				});
 		},
 	});
 
@@ -100,7 +103,7 @@ export default function UpdateForm() {
 		<>
 			{isLoading && (
 				<div className="inner-loader">
-					<h1>Logging you in please hold</h1>
+					<h1>Loading please hold</h1>
 					<div className="lds-ring">
 						<div></div>
 						<div></div>

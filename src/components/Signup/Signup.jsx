@@ -12,13 +12,30 @@ import * as Yup from "yup";
 import "../Login/Login.css";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 function Signup() {
 	let navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(false);
+	const [notification, setNotification] = useState(false);
+	const [notificationMessage, setNotificationMessage] = useState("");
+	// notification
+	const openNotificationMsg = (message) => {
+		setNotificationMessage(message);
+		setNotification(true);
+	};
+	const hideNotificationMsg = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
+
+		setNotification(false);
+	};
 	const formik = useFormik({
 		initialValues: {
 			signup_email: "",
+			signup_username: "",
 			signup_password: "",
 			day: "",
 			month: "",
@@ -27,6 +44,10 @@ function Signup() {
 		},
 		validationSchema: Yup.object({
 			signup_email: Yup.string().email("Invalid email address").required("required"),
+			signup_username: Yup.string()
+				.max(20, "Must be 20 characters or less")
+				.min(5, "Must be 5 characters or more")
+				.required("required"),
 			signup_password: Yup.string()
 				.max(20, "Must be 20 characters or less")
 				.min(5, "Must be 5 characters or more")
@@ -42,21 +63,26 @@ function Signup() {
 			country: Yup.string().required("required"),
 		}),
 		onSubmit: (values) => {
+			console.log(values);
 			setIsLoading(true);
 			axios
 				.post("http://localhost:8080/register", values)
 				.then((res) => {
 					setIsLoading(false);
-					navigate("/login");
+					navigate("/login", { state: { message: res.data.message } });
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {
+					setIsLoading(false);
+					console.log(err.response.data.Error);
+					openNotificationMsg(err.response.data.Error);
+				});
 		},
 	});
 	return (
 		<>
 			{isLoading && (
 				<div className="inner-loader">
-					<h1>Logging you in please hold</h1>
+					<h1>Signing you up please hold</h1>
 					<div className="lds-ring">
 						<div></div>
 						<div></div>
@@ -101,6 +127,29 @@ function Signup() {
 										name="signup_email"
 										placeholder="example@domain.com"
 										{...formik.getFieldProps("signup_email")}
+									/>
+								</FormControl>
+							</div>
+							<div className="login-username">
+								<label htmlFor="signupUsername"></label>
+								<FormControl sx={{ width: "100%" }}>
+									<TextField
+										helperText={
+											formik.touched.signup_username && formik.errors.signup_username
+												? `${formik.errors.signup_username}`
+												: null
+										}
+										error={
+											formik.touched.signup_username && formik.errors.signup_username
+												? true
+												: false
+										}
+										label="User Name"
+										type="text"
+										id="signupUsername:"
+										name="signup_username"
+										placeholder="username"
+										{...formik.getFieldProps("signup_username")}
 									/>
 								</FormControl>
 							</div>
@@ -186,7 +235,7 @@ function Signup() {
 							</div>
 							<div className="countries">
 								<FormControl sx={{ minWidth: 120, width: "100%" }}>
-									<InputLabel id="countries-label">Country</InputLabel>
+									<InputLabel id="countries-label">Governorate</InputLabel>
 									<Select
 										error={formik.touched.country && formik.errors.country ? true : false}
 										labelId="countries-label"
@@ -198,9 +247,9 @@ function Signup() {
 										<MenuItem value="">
 											<em>...</em>
 										</MenuItem>
-										<MenuItem value="egypt">Egypt</MenuItem>
-										<MenuItem value="mansoura">Mansoura</MenuItem>
 										<MenuItem value="cairo">Cairo</MenuItem>
+										<MenuItem value="dakahlia ">Dakahlia</MenuItem>
+										<MenuItem value="alexandria">Alexandria</MenuItem>
 									</Select>
 									<FormHelperText sx={{ color: "red" }}>
 										{formik.touched.country && formik.errors.country
@@ -214,6 +263,16 @@ function Signup() {
 							</button>
 						</form>
 					</div>
+					<Snackbar
+						open={notification}
+						autoHideDuration={3000}
+						onClose={hideNotificationMsg}
+						severity="error"
+					>
+						<Alert onClose={hideNotificationMsg} severity="error" sx={{ width: "100%" }}>
+							{notificationMessage}
+						</Alert>
+					</Snackbar>
 				</div>
 			)}
 		</>

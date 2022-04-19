@@ -15,7 +15,7 @@ export default function Layout(props) {
 	return (
 		<>
 			<Menu openMenuBar={openMenuBar} toggleMenu={toggleMenu} isLoggedIn={isLoggedIn} />
-			<Utility isLoggedIn={isLoggedIn} />
+			<Utility isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 			<Navbar toggleMenu={toggleMenu} isLoggedIn={isLoggedIn} />
 			<main>{React.cloneElement(props.children, { isLoggedIn })}</main>
 			<Footer />
