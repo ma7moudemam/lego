@@ -37,7 +37,11 @@ export default function Utility(props) {
 						<img src={legoUser} className="svg" />
 						{props.isLoggedIn ? `${jwt_decode(localStorage.getItem("token")).user.userName}` : "Account"}
 					</NavLink>
-					<button className="utility-logout" onClick={logout}>
+					<button
+						className="utility-logout"
+						style={props.isLoggedIn ? null : { display: "none" }}
+						onClick={logout}
+					>
 						<i className="fa-solid fa-right-from-bracket"></i>Logout
 					</button>
 				</div>

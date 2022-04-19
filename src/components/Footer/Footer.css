@@ -10,60 +10,11 @@ footer {
   font-family: "CeraProLight";
   text-align: left;
 }
-.footer-container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 2.5rem 1.5rem;
-}
-.col-logo {
-  margin-bottom: 20px;
-}
-.col-logo img {
-  width: 6rem;
-  height: 6rem;
-  display: block;
-}
-.col-logo a {
-  display: block;
-  text-decoration: none;
-  color: #fff;
-  margin: 10px 0 0;
-}
-
-.column h4 {
-  font-size: 1.3rem;
-  margin-bottom: 15px;
-  font-family: "CeraProBold";
-}
-.column ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  transition: all 0.3s ease;
-}
-.column li {
-  font-size: 1rem;
-  font-family: "CeraProLight";
-}
-.column a {
-  display: block;
-  text-decoration: none;
-  color: #fff;
-  padding: 10px 0;
-}
-.column li:hover a {
-  text-decoration: underline;
-}
-.column .region {
-  background-color: rgba(0, 0, 0, 0.4);
-  padding: 10px 15px;
-  margin-top: 20px;
-}
 .socialmedia-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 10rem;
   padding: 2.5rem 1rem;
 }
 .socialmedia-wrapper h6 {
@@ -72,41 +23,19 @@ footer {
   margin-bottom: 15px;
   text-transform: uppercase;
 }
-.subscription .email {
-  position: relative;
+.logo-region{
+  width: 100px;
+  height: 100px;
 }
-.subscription img {
-  width: 20px;
-  height: 20px;
-}
-.subscription .email input {
-  width: 90%;
-  height: 50px;
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-.subscription .email button {
-  position: absolute;
-  right: 5%;
-  height: 100%;
-  width: 60px;
-  border: 2px solid #fd8024;
-  background-color: #fd8024;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-.subscription .email button:hover {
-  background-color: #fff;
+.logo-region img {
+  display: inline-block;
 }
 
 .social-icons {
   display: flex;
   justify-content: space-evenly;
   gap: 10px;
+  font-size: 1.3rem;
 }
 .social-icons .icon {
   background-color: #121029;
@@ -119,6 +48,11 @@ footer {
   font-size: 1.3rem;
   transition: all 0.3s ease;
 }
+
+.social-icons .icon i {
+  font-size: 1.3rem;
+}
+
 .social-icons .insta {
   position: relative;
   background-image: linear-gradient(to top right, #121029, #121029);
@@ -225,7 +159,10 @@ footer {
   }
   .socialmedia-wrapper {
     flex-flow: column;
+    justify-content: center;
+    align-items: center;
     gap: 30px;
+    text-align: center;
   }
   .social-icons {
     justify-content: flex-start;

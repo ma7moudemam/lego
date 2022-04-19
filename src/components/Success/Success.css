@@ -11,10 +11,23 @@
     font-size: 1.5rem;
 }
 
-.success-button {
+.success-button,
+.home-button {
     width: 200px;
-    padding: 1em 2em;
     border-radius: 0.4em;
-    margin: 0 auto 5rem;
+}
+
+.home-button {
+    padding: 1em 2em;
+    border: none;
+    color: #000;
     background-color: #ffcf00;
+}
+
+.home-button:hover {
+    background-color: #ffcf00cc;
+}
+
+.success-button {
+    margin: 0 auto 5rem;
 }

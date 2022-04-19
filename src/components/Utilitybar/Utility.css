@@ -27,16 +27,14 @@ a {
 	align-items: center;
 	padding: 0 0.625rem;
 	line-height: 1.5625rem;
-	color: rgb(0, 0, 0);
-	background: rgb(171, 217, 255);
-	box-shadow: rgb(48 85 181 / 44%) 0px 1px 4px 0px;
+	color: #2c2c2c;
     font-size: 0.75rem;
-	font-weight: 500;
 }
 .utility-bar-styles:nth-child(1) a:hover {
 	background-color: #f8f8f8;
 }
 .utility-bar-styles:nth-child(2) {
+	color: #2c2c2c;
     font-size: 0.75rem;
 	font-family: "CeraProLight";
 	line-height: 1.5rem;
@@ -45,11 +43,12 @@ a {
 }
 .utility-bar-styles:nth-child(2) span,
 .utility-bar-styles:nth-child(2) a {
+	font-family: "CeraProMedium";
     font-size: 0.75rem;
 	text-decoration: none;
 }
 .utility-bar-styles:nth-child(2) a:hover {
-	
+	color: #006db7;	
 }
 .utility-bar-styles:nth-child(3) {
     display: none;
