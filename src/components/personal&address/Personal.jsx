@@ -1,16 +1,37 @@
-import React, { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import Style from "./Personal.module.css";
 import jwt_decode from "jwt-decode";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 export default function Personal() {
 	const [users, setUsers] = useState(() => jwt_decode(localStorage.getItem("token")));
+	const [notification, setNotification] = useState(false);
+	const [notificationMessage, setNotificationMessage] = useState("");
+	// notification
+	const Location = useLocation();
+	const openNotificationMsg = (message) => {
+		setNotificationMessage(message);
+		setNotification(true);
+	};
+	const hideNotificationMsg = (event, reason) => {
+		if (reason === "clickaway") {
+			return;
+		}
 
+		setNotification(false);
+	};
 	const handelLogOutAction = () => {
 		localStorage.clear();
 		Navigate("/");
 	};
-
+	useEffect(() => {
+		if (Location.state) {
+			openNotificationMsg(Location.state.message);
+		}
+		return () => {};
+	}, []);
 	return (
 		<div className="">
 			<div className="row mt-5">
@@ -57,6 +78,11 @@ export default function Personal() {
 					</div>
 				</div>
 			</div>
+			<Snackbar open={notification} autoHideDuration={3000} onClose={hideNotificationMsg} severity="success">
+				<Alert onClose={hideNotificationMsg} severity="success" sx={{ width: "100%" }}>
+					{notificationMessage}
+				</Alert>
+			</Snackbar>
 		</div>
 	);
 }

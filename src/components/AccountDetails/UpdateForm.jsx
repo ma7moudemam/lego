@@ -322,8 +322,8 @@ export default function UpdateForm() {
 
 						<div className="d-grid gap-2 col-6 mx-auto my-4">
 							<button
-								className="btn py-2 mb-2"
-								style={{ backgroundColor: "#ffcf00", color: "#000" }}
+								disabled={formik.dirty && !formik.isValid}
+								className="btn update-save-btn py-2 mb-2"
 								type="submit"
 							>
 								Save
