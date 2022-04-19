@@ -1,7 +1,7 @@
 import React from "react";
 import Cards from "../../assets/images/spotlight/card1.jpg";
 import NestedCards from "../../assets/images/spotlight/nested-card1.png";
-export default function HomeCard({product}) {
+export default function HomeCard({ product }) {
   return (
     <div>
       {" "}
@@ -9,7 +9,10 @@ export default function HomeCard({product}) {
         <a className="card-content" href="#" target="_blank">
           <div className="image-container">
             <div className="main-image">
-              <img src={product.images[0]} />
+              <img
+                src={`http://localhost:8080/images/${product.images[0]}`}
+                alt={product.images[0]}
+              />
             </div>
             {/* <div className="nested-image">
               <img src={NestedCards} />

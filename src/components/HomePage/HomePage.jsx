@@ -16,7 +16,7 @@ export default function HomePage(props) {
       .get("http://localhost:8080/home/trending-products")
       .then((res) => {
         setTtrendingProducts(res.data.trendingProducts);
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -26,7 +26,7 @@ export default function HomePage(props) {
       .get("http://localhost:8080/home/new-products")
       .then((res) => {
         setNewProducts(res.data.newProducts);
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -78,7 +78,7 @@ export default function HomePage(props) {
             {/* card outer content  */}
             <div className="card-container">
               {newProducts.map((product) => {
-                <HomeCard product={product} />;
+                return <HomeCard product={product} key={product._id} />;
               })}
             </div>
           </div>
@@ -99,7 +99,7 @@ export default function HomePage(props) {
             {/* card outer content  */}
             <div className="card-container">
               {trendingProducts.map((product) => {
-                <HomeCard product={product} />;
+                return <HomeCard product={product} key={product._id} />;
               })}
             </div>
           </div>
