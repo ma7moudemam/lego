@@ -14,10 +14,12 @@ export default function General() {
     getWishList().then((data) => setWishList(data.data.wishlist));
   }, []);
 
+  console.log({...wishList})
   const addItems = () => {
     let token = localStorage.getItem("token");
     if (token) {
-      dispatch(addToBag({ ...wishList }));
+      dispatch(addToBag({ ...wishList}));
+      console.log("added to bag");
     } else {
       navigate("/login");
     }
@@ -27,19 +29,20 @@ export default function General() {
     <div>
       <div className={Style["wish-general"]}>
         <div className={Style["wish-general-info"]}>
-          <Link href="#" className={Style.link}>
+         
             <span>WishList </span>
-            {wishList.length > 0 && wishList.product.length}
-          </Link>
+            {wishList.length > 0 && wishList.length}
+          
           <div className={Style["general-content"]}>
             <div className={Style["content-info"]}>
               {/* <span className={Style["wish-general-date"]}>Last updated: 1/28/2022</span> */}
               <span className={Style["wish-general-cost"]}>
                 Total cost:{" "}
                 {wishList.length > 0 &&
-                  wishList.map((product) => {
-                    product?.price?.toFixed(2);
-                  })}
+                  wishList.reduce((acc, curr) => {
+                    return acc + curr.price;
+                  }, 0)}
+          
               </span>
             </div>
             {wishList.length > 0 &&
