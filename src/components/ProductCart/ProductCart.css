@@ -83,6 +83,7 @@
 }
 
 .card-button-exist {
+    border: none;
     cursor: pointer;
     width: 100%;
     padding: 1em 2em;
