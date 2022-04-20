@@ -1,10 +1,11 @@
 import { Link } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getWishList } from "../../../network/wishListAPI";
+import { deleteFromWishList, getWishList } from "../../../network/wishListAPI";
 import Style from "./general.module.css";
 import { addToBag } from "../../../Redux/Actions/cartActions";
 import { useNavigate } from "react-router-dom";
+import WishListProducts from "../wishListProducts/WishListProducts";
 
 export default function General() {
 	const navigate = useNavigate();
@@ -25,6 +26,19 @@ export default function General() {
 		}
 	};
 
+	const removeFromWishList = (product) => {
+		let token = localStorage.getItem("token");
+		if (token) {
+			deleteFromWishList(product).then(() => {
+				let newWishlist = wishList.reduce((id) => id === product._id);
+				setWishList(newWishlist);
+				console.log("new wishList" + newWishlist);
+			});
+		} else {
+			navigate("/login");
+		}
+	};
+
 	const calaculateTotal = () => {
 		let result = 0;
 		wishList.forEach((p) => (result += p.price));
@@ -34,7 +48,10 @@ export default function General() {
 		<div>
 			<div className={Style["wish-general"]}>
 				<div className={Style["wish-general-info"]}>
+					<Link>
 					<span>WishList </span>
+					</Link>
+					
 					{wishList?.length > 0 && wishList?.product?.length}
 
 					<div className={Style["general-content"]}>
@@ -56,7 +73,7 @@ export default function General() {
 							<div className={Style.breakline}></div>
 							<button
 								className={Style["addtobag-btn"]}
-								onClick={() => addItems()}
+								onClick={() => {addItems(); removeFromWishList()}}
 								style={{ cursor: wishList.length > 0 ? "pointer" : "not-allowed" }}
 							>
 								Add all to Bag
@@ -69,6 +86,7 @@ export default function General() {
 							Total cost: {wishList?.length > 0 ? `${calaculateTotal()} EGP` : "0.00 EGP"}
 						</span>
 					</div>
+					<WishListProducts/>
 				</div>
 			</div>
 		</div>
