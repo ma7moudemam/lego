@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import CardImg from "../../assets/imgs/1.jpg";
@@ -10,11 +10,27 @@ import {useDispatch} from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 
 import {addToBag} from '../../Redux/Actions/cartActions'
-import { addToWishList } from "../../network/wishListAPI";
+import { addToWishList, deleteFromWishList, getWishList } from "../../network/wishListAPI";
 export default function Cards({product}) {
 
   const dispatch = useDispatch()
-  const navigate  = useNavigate()
+  const navigate  = useNavigate();
+  
+  const [fillHeart, setfillHeart] = useState(false);
+  const [didMount,setDidMount]=useState(false)
+
+  const [wishList, setWishList] = useState([])
+  useEffect(()=> {
+    getWishList().then((data) => { 
+       let ids = data.data.wishlist.map(p => p._id)
+       if(ids.includes(product._id)) 
+        {
+          setfillHeart(true)
+        }
+      setWishList(ids)
+    });
+  },[])
+
   const ratingChanged = (newRating) => {
   postProductRating(newRating, product._id).then(res => console.log(res))
   };
@@ -32,22 +48,55 @@ export default function Cards({product}) {
   const addWishList = (product) => {
     let token = localStorage.getItem("token");
     if(token) {
-      addToWishList(product).then(data => console.log(data))
+      addToWishList(product).then(()=>{
+        setWishList((prevState)=>[...prevState,product._id])
+      })
     } else {
       navigate('/login')
     } 
   }
-  const [fillHeart, setfillHeart] = useState("");
 
-  const toggling = () => {
-    setfillHeart(!fillHeart);
+  const removeFromWishList = (product) => {
+    let token = localStorage.getItem("token");
+    if(token) {
+      deleteFromWishList(product).then(()=>{
+        let newWishlist = wishList.filter(id => id!=product._id);
+        setWishList(newWishlist)
+      })
+     
+    } else {
+      navigate('/login')
+    }
+  }
+
+  useEffect(()=>{setDidMount(true)},[])
+  useEffect(()=>{
+    if(didMount){
+      addOrRemove()
+    }
+    return ()=>{}
+  },[fillHeart])
+
+  const toggling = (e) => {
+    e.stopPropagation();
+    setfillHeart(prevState=>!prevState);
   };
+
+  const addOrRemove = () => {
+    if(fillHeart) {
+      addWishList(product)
+      console.log('ADD PRODUCT ',product);
+    } else {
+       removeFromWishList(product)
+      console.log('REMOVE PRODUCT ',product);
+    }
+  }
   return (
     <div>
           <div className="card">
             <div className="add-to-wishlist">
-              <span onClick={() => addWishList(product)}>
-                <i onClick={toggling} className={fillHeart ? "fa fa-heart": "far fa-heart" }
+              <span onClick={addOrRemove}>
+                <i onClick={toggling} className={fillHeart || wishList.includes(product._id) ? "fa fa-heart": "far fa-heart" }
                 // className="fa fa-heart"
                  >
                 </i>

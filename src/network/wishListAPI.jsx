@@ -14,6 +14,6 @@ export const addToWishList = (product) => {
 
 
 export const deleteFromWishList = (product) => {
-    return axiosInstance.delete(`/wishlist ` ,{wishlist: product._id});
+    return axiosInstance.put(`/deleteFromWishlist ` ,{wishlist: product._id});
 };
 

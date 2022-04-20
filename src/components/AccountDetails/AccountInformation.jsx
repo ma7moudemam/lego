@@ -21,16 +21,13 @@ export default function AccountInformation() {
 						<div className="text-center">
 							<button className="back-arrow">
 								<Link to={`/details`}>
-									<ArrowBackIosIcon
-										fontSize="large"
-										style={{ textDecoration: "none", color: "black" }}
-									/>
+									<ArrowBackIosIcon fontSize="large" className="inner-back-arrow" />
 								</Link>
 							</button>
 							<img src={Logo} alt="" className="Logo-img-account rounded" style={{ marginLeft: "0" }} />
 							<button className="closing-btn">
 								<Link to={`/whishlist/personal`} style={{ textDecoration: "none", color: "black" }}>
-									<CloseIcon fontSize="large" />
+									<CloseIcon fontSize="large" className="inner-back-arrow" />
 								</Link>
 							</button>
 						</div>
