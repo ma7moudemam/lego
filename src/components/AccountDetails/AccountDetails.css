@@ -109,10 +109,18 @@ button {
 }
 
 .update-save-btn{
-  background-color: #ffcf00;
-  color: #000;
+  background-color: #ffcf00 !important;
+  color: #000 !important;
 }
 
 .update-save-btn:hover{
-  background-color: #ffcf00cc;
+  background-color: #ffcf00cc !important;
+}
+
+.delete-account-btn{
+  background-color: #e3000b !important;
+}
+
+.delete-account-btn:hover {
+  background-color:#e3000bcc !important;
 }
