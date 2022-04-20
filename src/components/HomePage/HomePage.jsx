@@ -85,14 +85,12 @@ export default function HomePage(props) {
 			</div>
 
 			{/* Spotlight-on */}
-			<div className="container">
+			<div className="spotlight-on-container">
 				<section id="spotlight-on">
 					<div className="card-section">
 						{/* card inner content */}
 						<div className="card-header-spotlight">
-							<h2>
-								<span>Spotlight on</span>
-							</h2>
+							<h2>Spotlight on</h2>
 						</div>
 
 						{/* card outer content  */}
@@ -106,7 +104,7 @@ export default function HomePage(props) {
 			</div>
 
 			{/* trending Now */}
-			<div className="container">
+			<div className="spotlight-on-container">
 				<section id="spotlight-on">
 					<div className="card-section">
 						{/* card inner content */}
