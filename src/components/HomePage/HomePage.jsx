@@ -114,7 +114,7 @@ export default function HomePage(props) {
 						{/* card inner content */}
 						<div className="card-header-spotlight">
 							<h2>
-								<span>Spotlight on</span>
+								<span>Trending Now</span>
 							</h2>
 						</div>
 
@@ -127,6 +127,7 @@ export default function HomePage(props) {
 					</div>
 				</section>
 			</div>
+
 			<Snackbar open={notification} autoHideDuration={3000} onClose={hideNotificationMsg} severity="success">
 				<Alert onClose={hideNotificationMsg} severity="success" sx={{ width: "100%" }}>
 					{notificationMessage}
