@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { addToBag } from "../../Redux/Actions/cartActions";
 import { addToWishList, deleteFromWishList, getWishList } from "../../network/wishListAPI";
 import ReviewStars from "../ReviewStars/ReviewStars";
+
 export default function Cards({ product }) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();

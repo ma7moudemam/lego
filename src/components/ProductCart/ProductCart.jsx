@@ -1,39 +1,44 @@
 import React from "react";
 import "./ProductCart.css";
 import ProductImg from "../../assets/imgs/Valentine Lovebirds.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ReviewStars from "../ReviewStars/ReviewStars";
+import { addToBag } from "../../Redux/Actions/cartActions";
+import { useDispatch } from "react-redux";
 
 function ProductCart({ product }) {
-  return (
-    <div>
-      <div className="product-cart">
-        <div className="box">
-          <div className="cardImage">
-            <a className="wish" href="#">
-              <i className="fas fa-heart"></i> Add to wish List
-            </a>
-            <img
-              src={`http://localhost:8080/images/${product.images[0]}`}
-              alt={product.name}
-            />
-            <p className="new">New</p>
-          </div>
-          <Link className="product-title" to="#">
-            {product.name}
-          </Link>
-          <div className="stars">
-            <i className="fas fa-star"></i>
-            <i className="fas fa-star"></i>
-            <i className="fas fa-star"></i>
-            <i className="fas fa-star"></i>
-            <i className="far fa-star"></i>
-          </div>
-          <p className="price">{product.price}</p>
-          <input type="button" value="Add to Bag" />
-        </div>
-      </div>
-    </div>
-  );
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const addItem = () => {
+		let token = localStorage.getItem("token");
+		if (token) {
+			dispatch(addToBag({ ...product }));
+		} else {
+			navigate("/login");
+		}
+	};
+	return (
+		<div>
+			<div className="recommended-card">
+				<div className="image-container" style={{ width: "100%", overflow: "hidden" }}>
+					<img src={`http://localhost:8080/images/${product?.images?.[0]}`} className="product-card-img" />
+				</div>
+				{/* <div className="new-item">new</div> */}
+				<div className="card-name">
+					<p>
+						<a href="#">{product.name}</a>
+					</p>
+				</div>
+				<span>
+					<ReviewStars count={product.rating} />
+				</span>
+				<div className="card-price">{product.price} EGP</div>
+				<button className="card-button-exist" onClick={() => addItem()}>
+					Add to Bag
+				</button>
+			</div>
+		</div>
+	);
 }
 
 export default ProductCart;

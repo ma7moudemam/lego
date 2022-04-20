@@ -34,7 +34,7 @@ export default function Personal() {
 	}, []);
 	return (
 		<>
-			<div className="col-12">
+			<div>
 				<div className={Style["inner-content"]}>
 					{/* personal things  */}
 					<h1 className={Style.nameOfBlock}>Personal & Address Details</h1>
