@@ -44,13 +44,13 @@ export default function StripeCheckout() {
 					product_data: {
 						name: item.title,
 						description: item.description,
-						images: [...item.images], // array of images
+						images: item.images, // array of images
 					},
 				},
 			};
 		});
 		const response = await fetchFromAPI("create-checkout-session", {
-			body: { line_items, customer_email: email },
+			body: { line_items, customer_email: email, totalPrice: cart.totalPrice },
 		});
 		const { sessionId } = response;
 		const { error } = await stripe.redirectToCheckout({

@@ -30,7 +30,7 @@ export default function ProductCard() {
 
 	useEffect(() => {
 		// setIsLoading(true);
-		getProduct(9, page, filterValues)
+		getProduct(12, page, filterValues)
 			.then((res) => {
 				setProducts(res.data.products);
 				setCount(res.data.count);
@@ -44,7 +44,7 @@ export default function ProductCard() {
 	}, [page]);
 	useEffect(() => {
 		// setIsLoading(true);
-		getProduct(9, page, filterValues)
+		getProduct(12, page, filterValues)
 			.then((res) => {
 				setProducts(res.data.products);
 				setCount(res.data.count);
@@ -94,7 +94,7 @@ export default function ProductCard() {
 							{/* <!-- cards-header-section --> */}
 							<div className="cards-header-section">
 								<span>
-									Showing {count < 9 ? count : 9} of {count} Products
+									Showing {count < 12 ? count : 12} of {count} Products
 								</span>
 							</div>
 							{/* <!-- cards ccontainer --> */}
