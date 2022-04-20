@@ -5,7 +5,7 @@ import { deleteFromWishList, getWishList } from "../../../network/wishListAPI";
 import Style from "./general.module.css";
 import { addToBag } from "../../../Redux/Actions/cartActions";
 import { useNavigate } from "react-router-dom";
-import WishListProducts from "../wishListProducts/WishListProducts";
+import WishListProducts from "./../wishListProducts/wishListProducts";
 
 export default function General() {
 	const navigate = useNavigate();
@@ -49,9 +49,9 @@ export default function General() {
 			<div className={Style["wish-general"]}>
 				<div className={Style["wish-general-info"]}>
 					<Link>
-					<span>WishList </span>
+						<span>WishList </span>
 					</Link>
-					
+
 					{wishList?.length > 0 && wishList?.product?.length}
 
 					<div className={Style["general-content"]}>
@@ -73,7 +73,10 @@ export default function General() {
 							<div className={Style.breakline}></div>
 							<button
 								className={Style["addtobag-btn"]}
-								onClick={() => {addItems(); removeFromWishList()}}
+								onClick={() => {
+									addItems();
+									removeFromWishList();
+								}}
 								style={{ cursor: wishList.length > 0 ? "pointer" : "not-allowed" }}
 							>
 								Add all to Bag
@@ -86,7 +89,7 @@ export default function General() {
 							Total cost: {wishList?.length > 0 ? `${calaculateTotal()} EGP` : "0.00 EGP"}
 						</span>
 					</div>
-					<WishListProducts/>
+					<WishListProducts />
 				</div>
 			</div>
 		</div>

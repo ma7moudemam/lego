@@ -9,7 +9,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
 import "./HomePage.css";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 export default function HomePage(props) {
 	const [trendingProducts, setTtrendingProducts] = useState([]);
@@ -59,10 +59,10 @@ export default function HomePage(props) {
 			<Hero />
 			<Recommended />
 			{/* Keep-in-touch */}
-			<div className="container-full">
-				<section className="keep-in-touch">
-					<div className="keep-in-touch-container">
-						<div className="left-side">
+			<div className="keep-in-touch-container">
+				<section className="keep-in-touch-inner">
+					<div className="keep-in-touch-wrapper">
+						<div className="left-side-content">
 							<h2>
 								<span>Keep in touch</span>
 							</h2>
@@ -72,14 +72,12 @@ export default function HomePage(props) {
 									about new sets, product updates, promotions and much more
 								</span>
 							</p>
-							<a className="shop-fill" href="#" target="_blank">
-								<span>Shop Now</span>
-								<span>
-									<i className="fas fa-angle-right"></i>
-								</span>
-							</a>
+							<NavLink className="shop-now-btn" to="/shop-now">
+								Shop Now
+								<i className="fas fa-angle-right"></i>
+							</NavLink>
 						</div>
-						<div className="right-side">
+						<div className="right-side-content">
 							<img src={Women} />
 						</div>
 					</div>

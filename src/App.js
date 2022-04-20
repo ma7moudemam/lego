@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { initUserCart } from "./Redux/Actions/cartActions";
 import "./App.css";
 import RequireAuth from "./Auh";
+import AboutUs from "./components/About-us/AboutUs";
 
 const AccordionProduct = lazy(() => import("./components/AccordionProduct/AccordionProduct"));
 const MyBag = lazy(() => import("./components/Bag"));
@@ -139,15 +140,6 @@ function App() {
 								</Layout>
 							}
 						/>
-						<Route
-							path="/my-account"
-							element={
-								<>
-									<Navbar />
-									<Personal />
-								</>
-							}
-						/>
 						<Route path="/details" element={<AccountDetails />} />
 						<Route path="/info" element={<AccountInformation />} />
 						<Route path="/security" element={<AccountSecurity />} />
@@ -185,7 +177,14 @@ function App() {
 								</Layout>
 							}
 						/>
-						<Route path="/about-us" element={<NotFound />} />
+						<Route
+							path="/about-us"
+							element={
+								<Layout>
+									<AboutUs />
+								</Layout>
+							}
+						/>
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</Suspense>
