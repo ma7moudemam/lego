@@ -24,6 +24,7 @@ export default function Utility(props) {
 	function logout() {
 		localStorage.clear();
 		props.setIsLoggedIn(false);
+		props.setIsAdmin(false);
 		openNotificationMsg("You Logged Out Successfully");
 	}
 	return (

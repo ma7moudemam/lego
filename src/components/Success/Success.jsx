@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Layout from "./../Layout/Layout";
+import { useEffect } from "react";
 import "./Success.css";
 // clear cart
 

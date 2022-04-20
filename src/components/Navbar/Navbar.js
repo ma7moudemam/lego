@@ -26,9 +26,11 @@ export default function Navbar(props) {
 					<li className="nav-list-item">
 						<NavLink to="/contact-us">contact us</NavLink>
 					</li>
-					<li className="nav-list-item">
-						<NavLink to="/dashboard">dashboard</NavLink>
-					</li>
+					{props.isAdmin && (
+						<li className="nav-list-item">
+							<NavLink to="/dashboard">dashboard</NavLink>
+						</li>
+					)}
 				</ul>
 				<div className="nav-icons">
 					<div className="content">

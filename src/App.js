@@ -7,6 +7,7 @@ import { initUserCart } from "./Redux/Actions/cartActions";
 import "./App.css";
 import RequireAuth from "./Auh";
 import AboutUs from "./components/About-us/AboutUs";
+import RequireAdminAuth from "./AdminAuth";
 
 const AccordionProduct = lazy(() => import("./components/AccordionProduct/AccordionProduct"));
 const MyBag = lazy(() => import("./components/Bag"));
@@ -140,33 +141,74 @@ function App() {
 								</Layout>
 							}
 						/>
-						<Route path="/details" element={<AccountDetails />} />
-						<Route path="/info" element={<AccountInformation />} />
-						<Route path="/security" element={<AccountSecurity />} />
-						<Route path="/delete-account" element={<DeleteAccount />} />
-						<Route path="/dashboard" element={<Dashboard />} />
+						<Route
+							path="/details"
+							element={
+								<RequireAuth>
+									<AccountDetails />
+								</RequireAuth>
+							}
+						/>
+						<Route
+							path="/info"
+							element={
+								<RequireAuth>
+									<AccountInformation />
+								</RequireAuth>
+							}
+						/>
+						<Route
+							path="/security"
+							element={
+								<RequireAuth>
+									<AccountSecurity />
+								</RequireAuth>
+							}
+						/>
+						<Route
+							path="/delete-account"
+							element={
+								<RequireAuth>
+									<DeleteAccount />
+								</RequireAuth>
+							}
+						/>
+						<Route
+							path="/dashboard"
+							element={
+								<RequireAdminAuth>
+									<Dashboard />
+								</RequireAdminAuth>
+							}
+						/>
 						<Route
 							path="/checkout"
 							element={
-								<Layout>
-									<Checkout />
-								</Layout>
+								<RequireAuth>
+									<Layout>
+										<Checkout />
+									</Layout>
+								</RequireAuth>
 							}
 						/>
 						<Route
 							path="/success"
 							element={
-								<Layout>
-									<Success />
-								</Layout>
+								<RequireAuth>
+									<Layout>
+										<Success />
+									</Layout>
+								</RequireAuth>
 							}
 						/>
 						<Route
 							path="/canceled"
 							element={
-								<Layout>
-									<Canceled />
-								</Layout>
+								<RequireAuth>
+									<Layout>
+										<Canceled />
+									</Layout>
+								</RequireAuth>
 							}
 						/>
 						<Route
