@@ -16,13 +16,17 @@
     border-left: 1px solid rgb(224, 224, 224);
     border-right: 1px solid rgb(224, 224, 224);
     padding: 1rem;
-    color: black;}
-.active{
+    color: black;
+}
+.side-menu-items:hover {
+    background-color: #f8f8f8;
+}
+.active,.active:hover,.active:focus{
     border-bottom: 1px solid white;
     color: white;
     background-color:rgb(0, 109, 183);
 }
-.active li{
+.active li,.active li:hover,.active li:focus{
     border-bottom: 1px solid white;
     color: white;
     background-color:rgb(0, 109, 183);

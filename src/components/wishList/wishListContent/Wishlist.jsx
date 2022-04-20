@@ -45,7 +45,7 @@ export default function Wishlist() {
 				<div className={Style.sidemenue}>
 					<SideMenue />
 				</div>
-				<div style={{ width: "73%" }}>
+				<div style={{ width: "73%", display: "flex", alignItems: "center" }}>
 					{/* <Routes>
 						<Route exact path="/whishlist/personal">
 							<Personal />
