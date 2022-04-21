@@ -1,6 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
-function RequireAuth({ children }) {
+function RequireAdminAuth({ children }) {
 	// let auth = useAuth();
 	let token = localStorage.getItem("token");
 	let location = useLocation();
@@ -12,7 +13,11 @@ function RequireAuth({ children }) {
 		// than dropping them off on the home page.
 		return <Navigate to="/login" state={{ from: location }} replace />;
 	}
+	let decode = jwt_decode(token);
+	if (decode.role !== "admin") {
+		return <Navigate to="/not-found" state={{ from: location }} replace />;
+	}
 
 	return children;
 }
-export default RequireAuth;
+export default RequireAdminAuth;

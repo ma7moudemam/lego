@@ -8,23 +8,25 @@
 	padding: 0 1.875rem;
 	text-transform: uppercase;
 	font-weight: 500;
-    font-size: 1rem;
+    font-size: 1.2rem;
 	height: 3.6875rem;
+	font-family: "CeraProMedium";
 }
 .nav-bar {
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 .nav-list {
 	display: flex;
 	font-size: 0.9275rem;
 	align-items: center;
 	list-style: none;
-	gap: 2.7em;
+	gap: 2.7rem;
 	margin-bottom: 0;
+	padding-left: 0;
 }
 .nav-list a {
     font-size: 1rem;
@@ -194,7 +196,8 @@ max-width: 750px */
 }
 
 .nav-logo {
-	width: 100px;
+	flex-shrink: 0;
+	width: max-content;
 }
 
 

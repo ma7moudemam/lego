@@ -40,3 +40,8 @@
 .checkout button:hover {
     background-color: #ffcf00cc;
 }
+
+.checkout-button {
+    border: none;
+    color: white;
+}

@@ -2,25 +2,36 @@ import React, { useState } from "react";
 import { useStripe } from "@stripe/react-stripe-js";
 import { fetchFromAPI } from "../../../helpers";
 import { useSelector } from "react-redux";
+import jwt_decode from "jwt-decode";
 // import cart redux
 
 export default function StripeCheckout() {
-	const [email, setEmail] = useState("");
+	const [email, setEmail] = useState(() => jwt_decode(localStorage.getItem("token")).email);
 	const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
 	const cart = useSelector((store) => store.cart);
-	console.log(cart);
+	const cartProducts = Object.values(cart.products);
+	console.log(cartProducts);
+	const cartItems = cartProducts.map((product) => {
+		return {
+			quantity: product.quantity,
+			title: product.name,
+			images: product.images.map((image) => `http://localhost:8080/images/${image}`),
+			price: product.amount,
+		};
+	});
+	console.log("cart items", cartItems);
 	// this comes from cart redux
-	const cartItems = [
-		{
-			quantity: 1,
-			price: 2000,
-			title: "Kems",
-			description: "light as air",
-			images: [
-				"https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-			],
-		},
-	];
+	// const cartItems = [
+	// 	{
+	// 		quantity: 1,
+	// 		price: 2000,
+	// 		title: "Kems",
+	// 		description: "light as air",
+	// 		images: [
+	// 			"https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+	// 		],
+	// 	},
+	// ];
 	const stripe = useStripe();
 	const handleCheckout = async (e) => {
 		e.preventDefault();
@@ -39,7 +50,7 @@ export default function StripeCheckout() {
 			};
 		});
 		const response = await fetchFromAPI("create-checkout-session", {
-			body: { line_items, customer_email: email },
+			body: { line_items, customer_email: email, totalPrice: cart.totalPrice },
 		});
 		const { sessionId } = response;
 		const { error } = await stripe.redirectToCheckout({
@@ -53,17 +64,11 @@ export default function StripeCheckout() {
 	return (
 		<form onSubmit={handleCheckout}>
 			<div>
-				<input
-					type="email"
-					onChange={(e) => setEmail(e.target.value)}
-					placeholder="Email"
-					value={email}
-					className="stripe-email-input"
-				/>
+				<input disabled type="email" placeholder="Email" value={email} className="stripe-email-input" />
 				{!emailPattern.test(email) && email !== "" && <p className="error">Enter a Valid Email Address</p>}
 			</div>
 			<div className="submit-button">
-				<button type="submit" className="button checkout-button">
+				<button type="submit" className="checkout-button">
 					Checkout
 				</button>
 			</div>

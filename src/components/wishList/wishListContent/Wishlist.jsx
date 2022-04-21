@@ -1,4 +1,4 @@
-import { Link } from "@mui/material";
+import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Outlet, Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
@@ -24,7 +24,7 @@ export default function Wishlist() {
 		<>
 			<ul className={Style.ulist}>
 				<li className={Style["list-direct"]}>
-					<Link href="#" className={Style.link}>
+					<Link to="/home" style={{ cursor: "pointer" }} className={Style.link}>
 						Home
 					</Link>
 					<svg
@@ -45,7 +45,7 @@ export default function Wishlist() {
 				<div className={Style.sidemenue}>
 					<SideMenue />
 				</div>
-				<div style={{ width: "73%" }}>
+				<div className="outlet-container" style={{ width: "100%" }}>
 					{/* <Routes>
 						<Route exact path="/whishlist/personal">
 							<Personal />

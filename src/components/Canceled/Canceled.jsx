@@ -10,10 +10,8 @@ export default function Canceled() {
 				<h1>😞 Payment Failed 😞</h1>
 				<p>Payment was not successful</p>
 				<div className="canceled-button">
-					<NavLink to="/home">
-						<button onClick={() => {}} className="home-button">
-							Continue Shopping
-						</button>
+					<NavLink to="/shop-now">
+						<button className="home-button">Continue Shopping</button>
 					</NavLink>
 				</div>
 			</div>

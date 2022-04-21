@@ -1,6 +1,7 @@
 .recommended{
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .recommended .boxes{
@@ -20,3 +21,4 @@
     margin-left: 50px;
     margin-top: 60px;
 }
+

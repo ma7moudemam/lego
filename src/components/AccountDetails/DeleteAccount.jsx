@@ -37,10 +37,10 @@ export default function AccountSecurity() {
 	};
 
 	const handelLogOutAction = () => {
-		localStorage.removeItem("token");
+		localStorage.clear();
 		// To insure token Remove
 		if (localStorage.getItem("token")) {
-			localStorage.removeItem("token");
+			localStorage.clear();
 		} else {
 			navigate("/");
 		}
@@ -86,7 +86,7 @@ export default function AccountSecurity() {
 									/>
 									<button className="closing-btn">
 										<Link
-											to={`/my-account`}
+											to={`/whishlist/personal`}
 											style={{
 												textDecoration: "none",
 												border: "none",

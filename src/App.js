@@ -6,6 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { initUserCart } from "./Redux/Actions/cartActions";
 import "./App.css";
 import RequireAuth from "./Auh";
+import AboutUs from "./components/About-us/AboutUs";
+import RequireAdminAuth from "./AdminAuth";
+import RequireUserAuth from "./UserAuth";
 
 const AccordionProduct = lazy(() => import("./components/AccordionProduct/AccordionProduct"));
 const MyBag = lazy(() => import("./components/Bag"));
@@ -115,8 +118,22 @@ function App() {
 							<Route path="myorder" element={<MyOrder />} />
 							<Route path="whishlist" element={<WishListContent />} />
 						</Route>
-						<Route path="/login" element={<Login />} />
-						<Route path="/signup" element={<Signup />} />
+						<Route
+							path="/login"
+							element={
+								<RequireUserAuth>
+									<Login />
+								</RequireUserAuth>
+							}
+						/>
+						<Route
+							path="/signup"
+							element={
+								<RequireUserAuth>
+									<Signup />
+								</RequireUserAuth>
+							}
+						/>
 						<Route
 							path="/shop-now"
 							element={
@@ -140,41 +157,73 @@ function App() {
 							}
 						/>
 						<Route
-							path="/my-account"
+							path="/details"
 							element={
-								<>
-									<Navbar />
-									<Personal />
-								</>
+								<RequireAuth>
+									<AccountDetails />
+								</RequireAuth>
 							}
 						/>
-						<Route path="/details" element={<AccountDetails />} />
-						<Route path="/info" element={<AccountInformation />} />
-						<Route path="/security" element={<AccountSecurity />} />
-						<Route path="/delete-account" element={<DeleteAccount />} />
-						<Route path="/dashboard" element={<Dashboard />} />
+						<Route
+							path="/info"
+							element={
+								<RequireAuth>
+									<AccountInformation />
+								</RequireAuth>
+							}
+						/>
+						<Route
+							path="/security"
+							element={
+								<RequireAuth>
+									<AccountSecurity />
+								</RequireAuth>
+							}
+						/>
+						<Route
+							path="/delete-account"
+							element={
+								<RequireAuth>
+									<DeleteAccount />
+								</RequireAuth>
+							}
+						/>
+						<Route
+							path="/dashboard"
+							element={
+								<RequireAdminAuth>
+									<Dashboard />
+								</RequireAdminAuth>
+							}
+						/>
 						<Route
 							path="/checkout"
 							element={
-								<Layout>
-									<Checkout />
-								</Layout>
+								<RequireAuth>
+									<Layout>
+										<Checkout />
+									</Layout>
+								</RequireAuth>
 							}
 						/>
 						<Route
 							path="/success"
 							element={
-								<Layout>
-									<Success />
-								</Layout>
+								<RequireAuth>
+									<Layout>
+										<Success />
+									</Layout>
+								</RequireAuth>
 							}
 						/>
 						<Route
 							path="/canceled"
 							element={
-								<Layout>
-									<Canceled />
-								</Layout>
+								<RequireAuth>
+									<Layout>
+										<Canceled />
+									</Layout>
+								</RequireAuth>
 							}
 						/>
 						<Route
@@ -185,7 +234,14 @@ function App() {
 								</Layout>
 							}
 						/>
-						<Route path="/about-us" element={<NotFound />} />
+						<Route
+							path="/about-us"
+							element={
+								<Layout>
+									<AboutUs />
+								</Layout>
+							}
+						/>
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</Suspense>

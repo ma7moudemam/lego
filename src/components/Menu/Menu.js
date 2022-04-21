@@ -1,8 +1,11 @@
 import "./Menu.css";
+import { useSelector } from "react-redux";
 import legoUser from "../../assets/imgs/lego-user.svg";
 import { NavLink } from "react-router-dom";
-
+import jwt_decode from "jwt-decode";
 export default function Menu(props) {
+	const totalItemsCount = useSelector((store) => store.cart.totalItemsCount);
+
 	return (
 		<>
 			<div className={`menu-bar ${props.openMenuBar ? "open" : ""}`}>
@@ -13,52 +16,54 @@ export default function Menu(props) {
 					</a>
 				</header>
 				<div className="flex-wrapper">
-					<div className="play-zone">
-						<NavLink className="left-utility" to="#">
-							<i className="fas fa-long-arrow-alt-right"></i>
-							play zone
-						</NavLink>
-					</div>
-
 					<ul className="menu-bar-list">
 						<li className="menu-bar-list-item">
-							<NavLink to="/home">HOME</NavLink>
+							<NavLink onClick={() => props.setOpenMenuBar(false)} to="/home">
+								HOME
+							</NavLink>
 						</li>
 						<li className="menu-bar-list-item">
-							<NavLink to="/shop-now">SHOP</NavLink>
+							<NavLink onClick={() => props.setOpenMenuBar(false)} to="/shop-now">
+								SHOP
+							</NavLink>
 						</li>
 						<li className="menu-bar-list-item">
-							<NavLink to="/about-us">ABOUT US</NavLink>
+							<NavLink onClick={() => props.setOpenMenuBar(false)} to="/about-us">
+								ABOUT US
+							</NavLink>
 						</li>
 						<li className="menu-bar-list-item">
-							<NavLink to="/contact-us">CONTACT US</NavLink>
+							<NavLink onClick={() => props.setOpenMenuBar(false)} to="/contact-us">
+								CONTACT US
+							</NavLink>
 						</li>
+						{props.isAdmin && (
+							<li className="menu-bar-list-item">
+								<NavLink onClick={() => props.setOpenMenuBar(false)} to="/dashboard">
+									DASHBOARD
+								</NavLink>
+							</li>
+						)}
 						<li className="menu-bar-list-item">
-							<NavLink to="/dashboard">DASHBOARD</NavLink>
-						</li>
-						<li className="menu-bar-list-item">
-							<NavLink to={props.isLoggedIn ? "/details" : "/login"} className="user-icon">
+							<NavLink
+								onClick={() => props.setOpenMenuBar(false)}
+								to={props.isLoggedIn ? "/details" : "/login"}
+								className="user-icon"
+							>
 								<img src={legoUser} className="svg" />
-								Account
+								{props.isLoggedIn
+									? `${jwt_decode(localStorage.getItem("token")).user.userName}`
+									: "Account"}
 							</NavLink>
 						</li>
 						<li className="menu-bar-list-item">
-							<NavLink to="#" className="vip-icon">
-								<i className="fas fa-crown"></i>
-								VIP
+							<NavLink onClick={() => props.setOpenMenuBar(false)} to="/whishlist/whishlist">
+								My Wishlist
 							</NavLink>
 						</li>
 						<li className="menu-bar-list-item">
-							<NavLink to="/wishlist">My Wishlist</NavLink>
-						</li>
-						<li className="menu-bar-list-item">
-							<NavLink to="/mybag">
-								My Bag <span>(0)</span>
-							</NavLink>
-						</li>
-						<li className="menu-bar-list-item">
-							<NavLink to="#" className="region-icon">
-								<i className="fas fa-map-marker-alt"></i> Region
+							<NavLink onClick={() => props.setOpenMenuBar(false)} to="/mybag">
+								My Bag <span>({totalItemsCount})</span>
 							</NavLink>
 						</li>
 					</ul>

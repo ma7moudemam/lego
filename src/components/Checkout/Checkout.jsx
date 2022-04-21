@@ -12,7 +12,7 @@ export default function Checkout() {
 		<div className="checkout">
 			<h2>Checkout Summary</h2>
 			<h3>{`Total Items: ${totalItemsCount}`}</h3>
-			<h4>{`Amount to Pay: EGP${totalPrice}`}</h4>
+			<h4>{`Amount to Pay: ${totalPrice > 1000 ? totalPrice : totalPrice + 30} EGP`}</h4>
 			<StripeCheckout />
 		</div>
 	);
