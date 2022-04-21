@@ -66,7 +66,7 @@ export default function Order({ order, shippers }) {
           ? "Shipped"
           : orderState.isPending
           ? "Pending"
-          : assignedShipper.length
+          : assignedShipper.length !== 0
           ? "Pending"
           : "Not assigned"}
       </TableCell>

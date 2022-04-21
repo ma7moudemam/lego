@@ -5,7 +5,7 @@ import Style from "./wishlist.module.css";
 export default function WishListSup() {
   return (
     <div>
-      {/* {" "}
+      {" "}
       <div className={Style["wish-supp"]}>
         <img src="/imags/Support_2.png" className={Style["img-supp"]} />
         <span className={Style["supp-heading"]}>Support</span>
@@ -29,7 +29,7 @@ export default function WishListSup() {
             </Link>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

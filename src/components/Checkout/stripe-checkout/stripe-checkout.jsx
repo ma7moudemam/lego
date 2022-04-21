@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useStripe } from "@stripe/react-stripe-js";
 import { fetchFromAPI } from "../../../helpers";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
+import { resetCart } from "../../../Redux/Actions/cartActions";
 // import cart redux
 
 export default function StripeCheckout() {
@@ -11,6 +12,8 @@ export default function StripeCheckout() {
 	const cart = useSelector((store) => store.cart);
 	const cartProducts = Object.values(cart.products);
 	console.log(cartProducts);
+
+
 	const cartItems = cartProducts.map((product) => {
 		return {
 			quantity: product.quantity,
@@ -35,6 +38,7 @@ export default function StripeCheckout() {
 	const stripe = useStripe();
 	const handleCheckout = async (e) => {
 		e.preventDefault();
+		
 		const line_items = cartItems.map((item) => {
 			return {
 				quantity: item.quantity,
@@ -44,16 +48,13 @@ export default function StripeCheckout() {
 					product_data: {
 						name: item.title,
 						description: item.description,
-						images: [
-							"https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-							...item.images,
-						], // array of images
+						images: item.images, // array of images
 					},
 				},
 			};
 		});
 		const response = await fetchFromAPI("create-checkout-session", {
-			body: { line_items, customer_email: email },
+			body: { line_items, customer_email: email, totalPrice: cart.totalPrice },
 		});
 		const { sessionId } = response;
 		const { error } = await stripe.redirectToCheckout({

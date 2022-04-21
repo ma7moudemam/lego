@@ -29,15 +29,11 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { Search } from "@mui/icons-material";
 import { useAutocomplete } from "@mui/base/AutocompleteUnstyled";
 import ProductCard from "./ProductCard";
 
 const Input = styled("input")({
   display: "none",
-});
-const Label = styled("label")({
-  display: "block",
 });
 
 const SearchInput = styled("input")(({ theme }) => ({
@@ -92,7 +88,6 @@ function Products() {
   const [preview, setPreview] = useState([]);
   const {
     getRootProps,
-    getInputLabelProps,
     getInputProps,
     getListboxProps,
     getOptionProps,
@@ -102,7 +97,7 @@ function Products() {
     options: searchOptions,
     getOptionLabel: (option) => option.name,
   });
-  let imgPreviewer;
+  // let imgPreviewer;
   useEffect(() => {
     // imgPreviewer = document.querySelectorAll(".image-previewer");
     // console.log(imgPreviewer);
@@ -201,6 +196,25 @@ function Products() {
     let arr = products.filter((product) => product.name.includes(searchValue));
     setSearchOptions(arr);
   };
+
+  const [categoryFilter, setCategoryFilter] = useState("");
+
+  const handleCategoryFilter = (event) => {
+    if (event.target.value !== "") {
+      setCategoryFilter(event.target.value);
+      let categoryFilter = categories.filter(
+        (category) => category._id === event.target.value
+      );
+      let filterProducts = products.filter(
+        (product) => product.category.name === categoryFilter[0].name
+      );
+      setSearchOptions(filterProducts);
+    } else {
+      setSearchOptions(products);
+      setCategoryFilter("");
+    }
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:8080/dashboard/category")
@@ -230,7 +244,7 @@ function Products() {
         value={value}
         variant="fullWidth"
         onChange={handleChange}
-        aria-label="Horizontal tabs example"
+        aria-label="Horizontal tabs "
         // sx={{ borderRight: 1, borderColor: "divider" }}
       >
         <Tab
@@ -252,40 +266,62 @@ function Products() {
         >
           <TabPanel value={value} index={0}>
             <Box component="div">
-              {/* <Autocomplete
-                freeSolo
-                id="updateSearch"
-                disableClearable
-                options={products.map((product) => product.name)}
-                onKeyUp={(event) => search(event.target.value)}
-                sx={{ backgroundColor: "#fff", margin: "20px 0" }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Search input"
-                    InputProps={{
-                      ...params.InputProps,
-                      type: "search",
-                    }}
+              <Box
+                component="div"
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <div {...getRootProps()} className="product-search-wrapper">
+                  <SearchInput
+                    {...getInputProps()}
+                    onKeyUp={(event) => search(event.target.value)}
+                    placeholder="Search..."
                   />
-                )}
-              /> */}
-              <div {...getRootProps()}>
-                <SearchInput
-                  {...getInputProps()}
-                  onKeyUp={(event) => search(event.target.value)}
-                  placeholder="Search..."
-                />
-              </div>
-              {groupedOptions.length > 0 ? (
-                <Listbox {...getListboxProps()}>
-                  {groupedOptions.map((option, index) => (
-                    <li {...getOptionProps({ option, index })} key={option._id}>
-                      {option.name}
-                    </li>
-                  ))}
-                </Listbox>
-              ) : null}
+                </div>
+                {groupedOptions.length > 0 ? (
+                  <Listbox {...getListboxProps()}>
+                    {groupedOptions.map((option, index) => (
+                      <li
+                        {...getOptionProps({ option, index })}
+                        key={option._id}
+                      >
+                        {option.name}
+                      </li>
+                    ))}
+                  </Listbox>
+                ) : null}
+                <Box sx={{ minWidth: 120, height: "50px" }}>
+                  <FormControl fullWidth>
+                    <InputLabel id="category-simple-select-label">
+                      Category
+                    </InputLabel>
+                    <Select
+                      labelId="category-simple-select-label"
+                      id="category-simple-select"
+                      value={categoryFilter}
+                      label="Age"
+                      onChange={handleCategoryFilter}
+                      sx={{
+                        height: "50px",
+                        width: "100%",
+                        backgroundColor: "#fff",
+                      }}
+                    >
+                      <MenuItem value="" selected>
+                        All
+                      </MenuItem>
+                      {categories.map((category) => (
+                        <MenuItem value={category._id} key={category._id}>
+                          {category.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Box>
+              </Box>
               <Grid container spacing={3} sx={{ my: 2 }}>
                 {searchOptions.length > 0 ? (
                   searchOptions.map((product, index) => (
@@ -405,6 +441,7 @@ function Products() {
                     openNotification(response.data.message);
                     resetForm();
                     setPreview([]);
+
                     // [...imgPreviewer].forEach((img) => {
                     //   img.remove();
                     // });
@@ -426,13 +463,14 @@ function Products() {
                     // console.log(products);
                   })
                   .catch((error) => {
-                    console.log("err");
-
+                    if (error.response.status === 500) {
+                      openErrorMsg(
+                        "Faild to upload your images's size is too large"
+                      );
+                    } else {
+                      openErrorMsg(error.response.data.message);
+                    }
                     setPreview([]);
-
-                    openErrorMsg(
-                      "Faild to upload your images's size is too large"
-                    );
                   });
               }}
             >

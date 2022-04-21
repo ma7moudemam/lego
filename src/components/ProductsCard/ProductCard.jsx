@@ -5,10 +5,10 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-
-import Filter from "./Filter";
+import { Grid } from "@mui/material";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import CustomFilter from "./../CustomFilter/CustomFilter";
 import Cards from "./Cards";
-// import ProductFilter from "./ProductFilter";
 
 import "./ProductCard.css";
 import { getProduct, getProductDetails } from "../../network/productsAPIs";
@@ -30,7 +30,7 @@ export default function ProductCard() {
 
 	useEffect(() => {
 		// setIsLoading(true);
-		getProduct(9, page, filterValues)
+		getProduct(12, page, filterValues)
 			.then((res) => {
 				setProducts(res.data.products);
 				setCount(res.data.count);
@@ -44,7 +44,7 @@ export default function ProductCard() {
 	}, [page]);
 	useEffect(() => {
 		// setIsLoading(true);
-		getProduct(9, page, filterValues)
+		getProduct(12, page, filterValues)
 			.then((res) => {
 				setProducts(res.data.products);
 				setCount(res.data.count);
@@ -73,31 +73,38 @@ export default function ProductCard() {
 				</div>
 			)}
 			{!isLoading && (
-				<div className="container">
-					<div role="presentation" onClick={handleClick}>
-						<Breadcrumbs sx={{ pt: 1 }} aria-label="breadcrumb">
+				<div className="shop-container">
+					<div role="presentation" className="breadcrumbs" onClick={handleClick}>
+						<Breadcrumbs
+							separator={<NavigateNextIcon fontSize="small" />}
+							sx={{ pt: 1 }}
+							aria-label="breadcrumb"
+						>
 							<Link underline="hover" color="inherit" href="/">
-								<Typography color="text.primary">Home</Typography>
+								<Typography color="#006db7">Home</Typography>
 							</Link>
 							<Typography color="text.primary">Shop Now</Typography>
 						</Breadcrumbs>
 					</div>
 					<section className="shop-now ">
-						<Filter handelFilterChange={handelFilterChange} />
-
+						<div className="filter">
+							<CustomFilter handelFilterChange={handelFilterChange} />
+						</div>
 						<section className="cards">
 							{/* <!-- cards-header-section --> */}
 							<div className="cards-header-section">
 								<span>
-									Showing 1 - {9} of {count} results
+									Showing {count < 12 ? count : 12} of {count} Products
 								</span>
 							</div>
 							{/* <!-- cards ccontainer --> */}
-							<div className="cards-container">
+							<Grid container>
 								{products.map((item) => (
-									<Cards product={item} key={item._id} />
+									<Grid item xs={12} sm={6} md={4} lg={3}>
+										<Cards product={item} key={item._id} />
+									</Grid>
 								))}
-							</div>
+							</Grid>
 
 							{/* <!-- sliding --> */}
 							<div className="sliding">

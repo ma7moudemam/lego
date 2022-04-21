@@ -1,106 +1,124 @@
-
-.box {
+.recommended-card{
+    border: 1px solid #c4c4c4;
+    border-radius: 0;
     display: flex;
     flex-direction: column;
-    height: 500px;
-    width: 280px;
-    margin: 20px auto;
+    align-items: stretch;
+    justify-content: stretch;
+    flex: 1 1 400px;
+    gap: 0.5rem;
+    padding: 1rem;
+    width: 320px;
 }
 
-.box a {
-    font-size: 18px;
-    color: black;
-    margin-top: 5px;
-    height: 30px;
-    text-decoration: none;
-    
+.recommended-card .add-to-wishlist {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
 }
 
-.box .product-title{
-    transition: 1s;
-}
-
-.box .product-title:hover {
-    text-decoration: underline;
-}
-
-
-.box input {
-    padding: 15px;
-    text-align: center;
-    border-radius: 5px;
-    outline: none;
-    border: none;
-    background-color: #fd8024;
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.box input:hover {
-    border: 2px solid #fd8024;
-    background-color: white;
-}
-
-.box .cardImage a {
+.recommended-card .add-to-wishlist span:nth-child(1) {
+    background-color: #f8f8f8;
     position: relative;
-    left: 20px;
-    top: 10px;
-    font-size: 14px;
-    z-index: 23;
-}
-
-.box .cardImage a i {
-    color: orangered;
-    margin-right: 10px;
-}
-
-
-
-.box .price {
-    text-align: left;
-    color: black;
-    font-size: 22px;
-    font-weight: bold;
-    margin-left: 0;
-    margin-bottom: 10px;
-}
-
-.cardImage {
-    border: 1px solid #ccc;
-    height: 280px;
-    width: 280px;
-    margin-bottom: 10px;
-    overflow: hidden;
-}
-
-.cardImage img {
-    height: 200px;
-    width: 200px;
-    transition: 1s;
-    display:block;
-    margin:auto;
-}
-
-.cardImage img:hover {
-    transform: scale(1.1);
-}
-
-.cardImage p {
-    position: relative;
-    z-index: 20;
-    color: black;
-    font-size: 16px;
-    background-color: yellow;
-    text-align: center;
-    padding: 10px;
-    width: 50px;
-    top: 10px;
-    left: 10px;
+    border-radius: 100%;
+    width: 30px;
+    aspect-ratio: 1/1;
     cursor: pointer;
 }
 
-.stars i {
+.recommended-card .add-to-wishlist i {
     font-size: 1rem;
-    color: gold;
-    margin-top: 30px;
+    position: absolute;
+    color: #006db7;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.recommended-card .image-container .product-card-img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center center;
+    transform: scale(1);
+    transition: all 250ms ease-in-out;
+}
+
+.recommended-card .image-container .product-card-img:hover {
+    transform: scale(1.1);
+}
+
+.recommended-card-name {
+    font-family: "CeraProMedium";
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    color: #333;
+}
+
+.recommended-card-name p {
+    margin-bottom: 0;
+}
+
+.recommended-card-name p a {
+    color: #333;
+}
+
+.review-stars-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 1rem;
+    margin-block: 0;
+}
+
+.sliding {
+    margin-block-start: 1rem;
+    margin-inline: auto;
+}
+
+.card-price {
+    font-size: 1.125rem;
+    font-family: "CeraProBold";
+}
+
+.card-button-exist {
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    padding: 1em 2em;
+    background-color: #ffcf00;
+    border-radius: 0.5rem;
+    margin-inline: auto;
+    transition: all 250ms ease-in-out;
+}
+
+.card-button-exist:hover {
+    background-color: #ffcf00cc;
+}
+
+.filter {
+    width: 30%;
+    flex-grow: 1;
+    max-width: 300px;
+}
+
+.yellow-star {
+    color: #ffcf00;
+}
+
+.gray-star {
+    color: #ffcf00cc;
+}
+
+@media (max-width:950px) {
+    .recommended-card {
+        width: 250px;
+    }
+}
+
+@media (max-width:750px) {
+    .recommended-card {
+        width: 200px;
+    }
 }

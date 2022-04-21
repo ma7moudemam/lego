@@ -37,11 +37,13 @@ export default function Menu(props) {
 								CONTACT US
 							</NavLink>
 						</li>
-						<li className="menu-bar-list-item">
-							<NavLink onClick={() => props.setOpenMenuBar(false)} to="/dashboard">
-								DASHBOARD
-							</NavLink>
-						</li>
+						{props.isAdmin && (
+							<li className="menu-bar-list-item">
+								<NavLink onClick={() => props.setOpenMenuBar(false)} to="/dashboard">
+									DASHBOARD
+								</NavLink>
+							</li>
+						)}
 						<li className="menu-bar-list-item">
 							<NavLink
 								onClick={() => props.setOpenMenuBar(false)}

@@ -29,7 +29,7 @@ const style = {
   p: 4,
 };
 
-function CTapleRow({ category, confirmDelete }) {
+function CTapleRow({ category, confirmDelete, openErrorMsg, index }) {
   const [editing, setEditing] = useState(false);
   const [cate, setCate] = useState(category);
   const [validName, setValidName] = useState(false);
@@ -58,7 +58,7 @@ function CTapleRow({ category, confirmDelete }) {
           setEditing(false);
         })
         .catch((err) => {
-          console.log(err);
+          openErrorMsg("you can't set two categories with same name");
         });
     } else {
       setValidName(true);
@@ -80,7 +80,7 @@ function CTapleRow({ category, confirmDelete }) {
           "&:last-child td, &:last-child th": { bcategory: 0 },
         }}
       >
-        <TableCell>{cate._id}</TableCell>
+        <TableCell>{index + 1}</TableCell>
         <TableCell>
           {editing ? (
             <>
