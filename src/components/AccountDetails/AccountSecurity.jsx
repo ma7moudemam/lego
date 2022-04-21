@@ -55,6 +55,7 @@ export default function AccountSecurity() {
 					},
 				})
 				.then((res) => {
+					localStorage.clear();
 					console.log(res);
 					navigate("/login");
 				})

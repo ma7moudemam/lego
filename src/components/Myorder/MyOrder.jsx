@@ -6,11 +6,11 @@ import Style from "./Myorder.module.css";
 
 export default function MyOrder() {
 	const [orders, setOrders] = useState([]);
-
 	useEffect(() => {
 		getOrder().then((data) => setOrders(data.data));
+		return () => {};
 	}, []);
-
+	console.log(orders);
 	return (
 		<div>
 			<div className={Style["inner-content"]}>
@@ -23,36 +23,53 @@ export default function MyOrder() {
 							<table className={Style.tableOrder}>
 								<thead>
 									<tr>
-										<th>User</th>
-										<th>Shipper Number</th>
-										<th>Is Pending</th>
-										<th>Is Shipped</th>
-										<th>Is Delivered</th>
-										<th>Tax</th>
+										<th>Shipper Name</th>
+										<th>Order Status</th>
 										<th>Order Date</th>
 										<th>Product</th>
+										<th>Total Cost</th>
 									</tr>
 								</thead>
 								<tbody>
-									{orders.map(
+									{orders?.map(
 										({
 											_id,
-											user,
 											shipper,
 											isPending,
 											isShipped,
+											isCanceled,
 											isDelivered,
-											tax,
 											order_date,
-											product,
+											products,
+											total_price,
 										}) => (
 											<tr key={_id}>
-												<td>{user.email}</td>
-												<td>{shipper}</td>
-												<td>{isPending ? "true" : "false"}</td>
-												<td>{isShipped ? "true" : "false"}</td>
-												<td>{isDelivered ? "true" : "false"}</td>
-												<td>{tax}</td>
+												<td>{shipper ? shipper.name : "-"}</td>
+												<td>
+													<span
+														className="order-status-code"
+														style={{
+															backgroundColor: isCanceled
+																? "red"
+																: isDelivered
+																? "green"
+																: isShipped
+																? "orange"
+																: isPending
+																? "grey"
+																: "grey",
+														}}
+													></span>{" "}
+													{isCanceled
+														? "Canceled"
+														: isDelivered
+														? "Delivered"
+														: isShipped
+														? "Shipped"
+														: isPending
+														? "Pending"
+														: "Pending"}
+												</td>
 												<td>{order_date}</td>
 												{/* <td>
                           <select>
@@ -63,11 +80,12 @@ export default function MyOrder() {
                         </td> */}
 												<td>
 													<ul style={{ marginBottom: "0rem" }}>
-														{product.map((p) => (
+														{products?.map((p) => (
 															<li key={_id}>{p?.product?.name}</li>
 														))}
 													</ul>
 												</td>
+												<td>{total_price} EGP</td>
 											</tr>
 										)
 									)}

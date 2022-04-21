@@ -1,6 +1,6 @@
 import "./Utility.css";
 import legoUser from "../../assets/imgs/lego-user.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import Snackbar from "@mui/material/Snackbar";
@@ -10,6 +10,7 @@ export default function Utility(props) {
 	const [toggleUtility, setToggleUtility] = useState(false);
 	const [notification, setNotification] = useState(false);
 	const [notificationMessage, setNotificationMessage] = useState("");
+	const Navigate = useNavigate();
 	const openNotificationMsg = (message) => {
 		setNotificationMessage(message);
 		setNotification(true);
@@ -26,6 +27,7 @@ export default function Utility(props) {
 		props.setIsLoggedIn(false);
 		props.setIsAdmin(false);
 		openNotificationMsg("You Logged Out Successfully");
+		Navigate("/home");
 	}
 	return (
 		<>
