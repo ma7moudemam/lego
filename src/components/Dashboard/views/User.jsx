@@ -9,11 +9,10 @@ import Avatar from "@mui/material/Avatar";
 import { red } from "@mui/material/colors";
 import axios from "axios";
 
-function User({ user, openNotification }) {
+function User({ user, openNotification, updateBlockedUsers, unBlockUser }) {
   const [userState, setUserState] = useState(user.blocked);
 
   const blockUser = () => {
-    setUserState(true);
     axios
       .post(
         "http://localhost:8080/dashboard/users",
@@ -24,17 +23,19 @@ function User({ user, openNotification }) {
           },
         }
       )
-      .then((res) => {})
-      .catch((err) => console.log(err));
-    // update blocked user state
-    axios
-      .put("http://localhost:8080/dashboard/users", {
-        id: user._id,
-        blocked: true,
-      })
-      .then((res) => {
-        setUserState(true);
-        openNotification(`${user.email} has been blocked`);
+      .then((respnse) => {
+        // update blocked user state
+        axios
+          .put("http://localhost:8080/dashboard/users", {
+            id: user._id,
+            blocked: true,
+          })
+          .then((res) => {
+            setUserState(true);
+            openNotification(`${user.email} has been blocked`);
+            updateBlockedUsers({ ...user, blocked: true });
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   };
@@ -51,22 +52,23 @@ function User({ user, openNotification }) {
         }
       )
       .then((res) => {
-        // if (res.data.body.deletedCount === 1) {
-        // }
+        if (res.data.body.deletedCount === 1) {
+          axios
+            .put("http://localhost:8080/dashboard/users", {
+              id: user._id,
+              blocked: false,
+            })
+            .then((res) => {
+              setUserState(false);
+              openNotification(`${user.email} unBlocked`);
+
+              unBlockUser({ ...user, blocked: false });
+            })
+            .catch((err) => console.log(err));
+        }
       })
       .catch((err) => console.log(err));
     // update blocked user state
-
-    axios
-      .put("http://localhost:8080/dashboard/users", {
-        id: user._id,
-        blocked: false,
-      })
-      .then((res) => {
-        setUserState(false);
-        openNotification(`${user.email} unBlocked`);
-      })
-      .catch((err) => console.log(err));
   };
 
   return (

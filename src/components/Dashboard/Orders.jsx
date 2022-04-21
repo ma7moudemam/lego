@@ -17,7 +17,7 @@ export default function Orders({ propOrders, propShippers }) {
     setOrders(propOrders);
     setShippers(propShippers);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [propOrders]);
+  }, [propOrders, propShippers]);
 
   // now i create update assign shipper for the order
   //by making axios req on click and update the order shipper with the shipper refernce

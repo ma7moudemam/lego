@@ -4,19 +4,27 @@ import User from "./User";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import { Tabs, Tab } from "@mui/material";
+import GroupIcon from "@mui/icons-material/Group";
+import allyprops from "../Tabs/allyprops";
+import SwipeableViews from "react-swipeable-views";
 import axios from "axios";
+import TabPanel from "../Tabs/TabPanel";
+import { useTheme } from "@mui/material/styles";
+import BlockIcon from "@mui/icons-material/Block";
 function Users() {
+  const theme = useTheme();
   const [users, setUsers] = useState([
     { email: "batman@gotham.dc", name: "vengeance" },
     { email: "batwoman@gotham.dc", name: "batwoman" },
     { email: "homelander@theboys.paramount", name: "cocksucker" },
     { email: "superman@metropolice.dc", name: "superman" },
   ]);
+  const [blockedUsers, setBlockedUsers] = useState([]);
+  const [searchBlockedUsers, setSearchBlockedUsers] = useState([
+    ...blockedUsers,
+  ]);
   const [searchOptions, setSearchOptions] = useState([...users]);
-  const search = (value) => {
-    let arr = users.filter((user) => user.email.includes(value));
-    setSearchOptions(arr);
-  };
 
   /**** notifications */
   const [notification, setnotification] = useState(false);
@@ -37,12 +45,54 @@ function Users() {
 
   /**** notifications */
 
+  /********* tabs handlers******** */
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
+  /********* tabs handlers******** */
+  const search = (searchValue) => {
+    if (value === 1) {
+      let arr = blockedUsers.filter((user) => user.email.includes(searchValue));
+      setSearchBlockedUsers(arr);
+    } else if (value === 0) {
+      let arr = users.filter((user) => user.email.includes(searchValue));
+      setSearchOptions(arr);
+    }
+  };
+  // on mount find in all users by isBlocked ? show them in blocked users tab
+
+  const updateBlockedUsers = (blockedUser) => {
+    setBlockedUsers([...blockedUsers, blockedUser]);
+    let unBlockedUsers = users.filter((user) => user._id !== blockedUser._id);
+    setUsers(unBlockedUsers);
+  };
+
+  const unBlockUser = (unBlockedUser) => {
+    let arr = blockedUsers.filter((user) => {
+      // console.log(user._id, unBlockedUser._id);
+      return user._id !== unBlockedUser._id;
+    });
+    setBlockedUsers(arr);
+    setUsers([...users, unBlockedUser]);
+    console.log(arr);
+    // console.log(blockedUsers);
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:8080/dashboard/users")
       .then((res) => {
         console.log(res.data);
-        setUsers(res.data.users);
+        let users = res.data.users.filter((user) => !user.blocked);
+        setUsers(users);
+        // setUsers(res.data.users);
+        let blocked = res.data.users.filter((user) => user.blocked);
+        setBlockedUsers(blocked);
       })
       .catch((err) => console.log(err));
 
@@ -50,15 +100,36 @@ function Users() {
       .get("http://localhost:8080/dashboard/blacklist")
       .then((res) => {
         console.log("blacklist", res);
+        // setBlockedUsers(res.data.blacklist);
       })
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     setSearchOptions(users);
-  }, [users]);
+    setSearchBlockedUsers(blockedUsers);
+  }, [users, blockedUsers]);
   return (
     <div className="users">
+      <Tabs
+        orientation="horizontal"
+        value={value}
+        variant="fullWidth"
+        onChange={handleChange}
+        aria-label="Horizontal tabs example"
+        // sx={{ borderRight: 1, borderColor: "divider" }}
+      >
+        <Tab
+          label="Users"
+          icon={<GroupIcon color="primary" />}
+          {...allyprops(0)}
+        />
+        <Tab
+          label="Blocked Users"
+          icon={<BlockIcon color="error" />}
+          {...allyprops(1)}
+        />
+      </Tabs>
       <Box component="div" sx={{ my: 3 }}>
         <Autocomplete
           freeSolo
@@ -80,13 +151,53 @@ function Users() {
           )}
         />
       </Box>
-      <Grid container spacing={3}>
-        {searchOptions.map((user) => (
-          <Grid item md={6} xs={12} lg={4} key={user.email}>
-            <User user={user} openNotification={openNotification} />
+      <SwipeableViews
+        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+        index={value}
+        onChangeIndex={handleChangeIndex}
+      >
+        <TabPanel value={value} index={0}>
+          <Grid container spacing={3}>
+            {searchOptions.map((user) => (
+              <Grid item md={6} xs={12} lg={4} key={user.email}>
+                <User
+                  user={user}
+                  openNotification={openNotification}
+                  updateBlockedUsers={updateBlockedUsers}
+                  unBlockUser={unBlockUser}
+                />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <Grid container spacing={3}>
+            {searchBlockedUsers.length ? (
+              searchBlockedUsers.map((user) => (
+                <Grid item md={6} xs={12} lg={4} key={user.email}>
+                  <User
+                    user={user}
+                    openNotification={openNotification}
+                    unBlockUser={unBlockUser}
+                    updateBlockedUsers={updateBlockedUsers}
+                  />
+                </Grid>
+              ))
+            ) : (
+              <Alert
+                severity="warning"
+                sx={{
+                  margin: "2rem 1rem",
+                  borderRadius: "10px",
+                  width: "100%",
+                }}
+              >
+                There is no blocked users... Block some
+              </Alert>
+            )}
+          </Grid>
+        </TabPanel>
+      </SwipeableViews>
       <Snackbar
         open={notification}
         autoHideDuration={3000}
