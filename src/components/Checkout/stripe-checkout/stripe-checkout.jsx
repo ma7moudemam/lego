@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import { useStripe } from "@stripe/react-stripe-js";
 import { fetchFromAPI } from "../../../helpers";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
-import { resetCart } from "../../../Redux/Actions/cartActions";
 // import cart redux
 
 export default function StripeCheckout() {
-	const [email, setEmail] = useState(() => jwt_decode(localStorage.getItem("token")).email);
+	const [email] = useState(() => jwt_decode(localStorage.getItem("token")).email);
 	const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
 	const cart = useSelector((store) => store.cart);
 	const cartProducts = Object.values(cart.products);
-	console.log(cartProducts);
-
 
 	const cartItems = cartProducts.map((product) => {
 		return {
@@ -22,7 +19,6 @@ export default function StripeCheckout() {
 			price: product.amount,
 		};
 	});
-	console.log("cart items", cartItems);
 	// this comes from cart redux
 	// const cartItems = [
 	// 	{
@@ -38,7 +34,7 @@ export default function StripeCheckout() {
 	const stripe = useStripe();
 	const handleCheckout = async (e) => {
 		e.preventDefault();
-		
+
 		const line_items = cartItems.map((item) => {
 			return {
 				quantity: item.quantity,
@@ -61,7 +57,7 @@ export default function StripeCheckout() {
 			sessionId,
 		});
 		if (error) {
-			console.log(error);
+			return;
 			// show user an error
 		}
 	};

@@ -11,7 +11,6 @@ import RequireAdminAuth from "./AdminAuth";
 import Shipper from "./components/Shipper/Shipper";
 import RequireUserAuth from "./UserAuth";
 
-const AccordionProduct = lazy(() => import("./components/AccordionProduct/AccordionProduct"));
 const MyBag = lazy(() => import("./components/Bag"));
 const ProductCart = lazy(() => import("./components/ProductCart/ProductCart"));
 const Personal = lazy(() => import("./components/personal&address/Personal"));
@@ -30,18 +29,16 @@ const Checkout = lazy(() => import("./components/Checkout/Checkout"));
 const Success = lazy(() => import("./components/Success/Success"));
 const Canceled = lazy(() => import("./components/Canceled/Canceled"));
 const NotFound = lazy(() => import("./components/NotFound/NotFound"));
-const Navbar = lazy(() => import("./components/Navbar/Navbar"));
 const ContactUs = lazy(() => import("./components/Contact-us/ContactUs"));
 const MyOrder = lazy(() => import("./components/Myorder/MyOrder"));
 const WishListContent = lazy(() => import("./components/wishList/wishListContent/WishlistContent"));
 const Wishlist = lazy(() => import("./components/wishList/wishListContent/Wishlist"));
 
-
 function App() {
 	const dispatch = useDispatch();
 	const cart = useSelector((store) => store.cart);
 	const [initCart, setInitCart] = useState(false);
-	const [token, setToken] = useState(localStorage.getItem("token"));
+	const [token] = useState(localStorage.getItem("token"));
 
 	useEffect(() => {
 		if (token) {
