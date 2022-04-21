@@ -1,11 +1,9 @@
-import { padding } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { getOrder } from "../../network/orderAPI";
-import WishlistSup from "../wishList/wishListContent/WishListSup";
 import Style from "./Myorder.module.css";
 
-import moment from 'moment';
+import moment from "moment";
 
 export default function MyOrder() {
 	const [orders, setOrders] = useState([]);
@@ -13,12 +11,11 @@ export default function MyOrder() {
 		getOrder().then((data) => setOrders(data.data));
 		return () => {};
 	}, []);
-	console.log(orders);
 	const calaculateTotal = (products) => {
 		let result = 0;
-		products.forEach((p) => (result += (p.quantity* p.unit_price)));
+		products.forEach((p) => (result += p.quantity * p.unit_price));
 		return result;
-	  };
+	};
 	return (
 		<div>
 			<div className={Style["inner-content"]}>
@@ -86,7 +83,7 @@ export default function MyOrder() {
 														? "Pending"
 														: "Pending"}
 												</td>
-												<td>{moment(order_date).format('DD/MM/YYYY')}</td>
+												<td>{moment(order_date).format("DD/MM/YYYY")}</td>
 												{/* <td>
                           <select>
                             {
@@ -114,9 +111,10 @@ export default function MyOrder() {
 																	alignItems: "center",
 																	gap: "1rem",
 																}}
-																key={_id}
+																key={p?.product?._id}
 															>
 																<img
+																	alt=""
 																	style={{
 																		width: "50px",
 																		aspectRatio: "1/1",

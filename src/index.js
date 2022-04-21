@@ -15,12 +15,10 @@ const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
 //Redux
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Elements stripe={stripePromise}>
-        <App />
-      </Elements>
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
+	<Provider store={store}>
+		<Elements stripe={stripePromise}>
+			<App />
+		</Elements>
+	</Provider>,
+	document.getElementById("root")
 );

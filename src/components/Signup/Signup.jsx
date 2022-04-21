@@ -63,7 +63,6 @@ function Signup() {
 			country: Yup.string().required("required"),
 		}),
 		onSubmit: (values) => {
-			console.log(values);
 			setIsLoading(true);
 			axios
 				.post("http://localhost:8080/register", values)
@@ -73,8 +72,7 @@ function Signup() {
 				})
 				.catch((err) => {
 					setIsLoading(false);
-					console.log(err.response.data.Error);
-					openNotificationMsg(err.response.data.Error);
+					openNotificationMsg("Something went wrong please try again");
 				});
 		},
 	});

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import CssBaseline from "@mui/material/CssBaseline";
@@ -16,7 +16,7 @@ import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 export default function AccountSecurity() {
-	const [users, setUsers] = useState(() => jwt_decode(localStorage.getItem("token")));
+	const [users] = useState(() => jwt_decode(localStorage.getItem("token")));
 	const [isLoading, setIsLoading] = useState(false);
 
 	let navigate = useNavigate();
@@ -29,11 +29,10 @@ export default function AccountSecurity() {
 			})
 			.then((res) => {
 				localStorage.clear();
-				console.log("deleted");
 				setIsLoading(false);
 				navigate("/home");
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {});
 	};
 
 	const handelLogOutAction = () => {

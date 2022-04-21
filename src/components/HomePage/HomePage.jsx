@@ -34,23 +34,21 @@ export default function HomePage(props) {
 			.get("http://localhost:8080/home/trending-products")
 			.then((res) => {
 				setTtrendingProducts(res.data.trendingProducts);
-				console.log(res);
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {});
 		if (Location.state) {
 			openNotificationMsg(Location.state.message);
 		}
 		return () => {};
-	}, []);
+	});
 
 	useEffect(() => {
 		axios
 			.get("http://localhost:8080/home/new-products")
 			.then((res) => {
 				setNewProducts(res.data.newProducts);
-				console.log(res.data.newProducts);
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {});
 		return () => {};
 	}, []);
 
@@ -78,7 +76,7 @@ export default function HomePage(props) {
 							</NavLink>
 						</div>
 						<div className="right-side-content">
-							<img src={Women} />
+							<img src={Women} alt="" />
 						</div>
 					</div>
 				</section>
@@ -117,7 +115,7 @@ export default function HomePage(props) {
 						{/* card outer content  */}
 						<div className="card-container">
 							{trendingProducts.map((product) => {
-								return <HomeCard product={product} />;
+								return <HomeCard key={product._id} product={product} />;
 							})}
 						</div>
 					</div>

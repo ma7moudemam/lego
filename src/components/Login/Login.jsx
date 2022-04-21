@@ -5,8 +5,6 @@ import legoLarge from "./../../assets/imgs/lego(1)large.png";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -78,7 +76,6 @@ function Login() {
 	}, []);
 	// const submitLogin = (event) => {
 	//   event.preventDefault();
-	//   console.log(event);
 	// };
 	return (
 		<>
