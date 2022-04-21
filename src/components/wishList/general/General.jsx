@@ -27,19 +27,20 @@ export default function General() {
     }
   };
 
-  const removeFromWishList = (product) => {
-    let token = localStorage.getItem("token");
-    if (token) {
-      deleteFromWishList(product).then(() => {
-        let newWishlist = wishList.filter((item) => item._id === product._id);
-        setWishList(newWishlist);
-        console.log("new wishList" + newWishlist);
-        setRefresh(!refresh);
-      });
-    } else {
-      navigate("/login");
-    }
-  };
+  const removeFromWishList = () => {
+		let token = localStorage.getItem("token");
+		if (token) {
+			// deleteFromWishList(product).then(() => {
+			// 	let newWishlist = wishList.filter((id) => id != product._id);
+			// 	setWishList(newWishlist);
+       
+			// });
+      wishList.forEach((p) => deleteFromWishList(p));
+      setWishList([]);
+		} else {
+			navigate("/login");
+		}
+	};
 
   const calaculateTotal = () => {
     let result = 0;
@@ -99,7 +100,7 @@ export default function General() {
               {wishList?.length > 0 ? `${calaculateTotal()} EGP` : "0.00 EGP"}
             </span>
           </div>
-          <WishListProducts />
+          {/* <WishListProducts /> */}
         </div>
       </div>
     </div>
