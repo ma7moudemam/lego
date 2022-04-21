@@ -16,7 +16,7 @@ function User({ user, openNotification, updateBlockedUsers, unBlockUser }) {
     axios
       .post(
         "http://localhost:8080/dashboard/users",
-        { email: user.email },
+        { id: user._id },
         {
           headers: {
             "content-type": "application/json",
@@ -44,7 +44,7 @@ function User({ user, openNotification, updateBlockedUsers, unBlockUser }) {
     axios
       .delete(
         "http://localhost:8080/dashboard/users",
-        { data: { user: user.email } },
+        { data: { user: user._id } },
         {
           headers: {
             "content-type": "application/json",

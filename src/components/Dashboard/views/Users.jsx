@@ -79,7 +79,6 @@ function Users() {
     });
     setBlockedUsers(arr);
     setUsers([...users, unBlockedUser]);
-    console.log(arr);
     // console.log(blockedUsers);
   };
 
@@ -87,7 +86,6 @@ function Users() {
     axios
       .get("http://localhost:8080/dashboard/users")
       .then((res) => {
-        console.log(res.data);
         let users = res.data.users.filter((user) => !user.blocked);
         setUsers(users);
         // setUsers(res.data.users);
@@ -99,7 +97,6 @@ function Users() {
     axios
       .get("http://localhost:8080/dashboard/blacklist")
       .then((res) => {
-        console.log("blacklist", res);
         // setBlockedUsers(res.data.blacklist);
       })
       .catch((err) => console.log(err));
