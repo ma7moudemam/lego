@@ -23,7 +23,6 @@ export default function ProductCard() {
 	const [count, setCount] = useState(1);
 	const [products, setProducts] = useState([]);
 	const [filterValues, setFilterValues] = useState({});
-	const [isLoading, setIsLoading] = useState(false);
 	const [wishList, setWishList] = useState([]);
 	useEffect(() => {
 		getWishList().then((data) => {
