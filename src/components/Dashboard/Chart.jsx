@@ -27,15 +27,23 @@ const data = [
   createData("24:00", undefined),
 ];
 
-export default function Chart() {
+export default function Chart({ orders }) {
   const theme = useTheme();
+  const chartData = orders.map((order) => {
+    let date = order.order_date.split("/");
 
+    let dateWithoutYear = [date[1], date[0]].join("/");
+    return {
+      date: dateWithoutYear,
+      sales: order.total_price,
+    };
+  });
   return (
     <React.Fragment>
       <Title>Today</Title>
       <ResponsiveContainer>
         <LineChart
-          data={data}
+          data={chartData}
           margin={{
             top: 16,
             right: 16,
@@ -44,7 +52,7 @@ export default function Chart() {
           }}
         >
           <XAxis
-            dataKey="time"
+            dataKey="date"
             stroke={theme.palette.text.secondary}
             style={theme.typography.body2}
           />
@@ -67,7 +75,7 @@ export default function Chart() {
           <Line
             isAnimationActive={false}
             type="monotone"
-            dataKey="amount"
+            dataKey="sales"
             stroke={theme.palette.primary.main}
             dot={false}
           />
