@@ -69,7 +69,7 @@ export default function Chart({ orders }) {
                 ...theme.typography.body1,
               }}
             >
-              Sales ($)
+              Sales (EGP)
             </Label>
           </YAxis>
           <Line
