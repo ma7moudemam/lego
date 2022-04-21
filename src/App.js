@@ -8,6 +8,7 @@ import "./App.css";
 import RequireAuth from "./Auh";
 import AboutUs from "./components/About-us/AboutUs";
 import RequireAdminAuth from "./AdminAuth";
+import Shipper from "./components/Shipper/Shipper";
 
 const AccordionProduct = lazy(() => import("./components/AccordionProduct/AccordionProduct"));
 const MyBag = lazy(() => import("./components/Bag"));
@@ -33,6 +34,7 @@ const ContactUs = lazy(() => import("./components/Contact-us/ContactUs"));
 const MyOrder = lazy(() => import("./components/Myorder/MyOrder"));
 const WishListContent = lazy(() => import("./components/wishList/wishListContent/WishlistContent"));
 const Wishlist = lazy(() => import("./components/wishList/wishListContent/Wishlist"));
+
 
 function App() {
 	const dispatch = useDispatch();
@@ -95,14 +97,14 @@ function App() {
 								</Layout>
 							}
 						/>
-						{/* <Route
+						<Route
 							path="/shipper"
 							element={
 								<Layout>
 									<Shipper />
 								</Layout>
 							}
-						/> */}
+						/>
 						<Route
 							path="/whishlist"
 							element={
