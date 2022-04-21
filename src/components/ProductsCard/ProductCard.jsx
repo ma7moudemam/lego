@@ -12,6 +12,7 @@ import Cards from "./Cards";
 
 import "./ProductCard.css";
 import { getProduct, getProductDetails } from "../../network/productsAPIs";
+import { getWishList } from "../../network/wishListAPI";
 
 function handleClick(event) {
 	event.preventDefault();
@@ -23,7 +24,16 @@ export default function ProductCard() {
 	const [products, setProducts] = useState([]);
 	const [filterValues, setFilterValues] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
-
+	const [wishList, setWishList] = useState([]);
+	useEffect(() => {
+		getWishList().then((data) => {
+			let ids = data.data.wishlist.map((p) => p._id);
+			// if (ids.includes(product._id)) {
+			// 	setfillHeart(true);
+			// }
+			setWishList(ids);
+		});
+	}, []);
 	const handleChange = (event, value) => {
 		setPage(value);
 	};
@@ -101,7 +111,7 @@ export default function ProductCard() {
 							<Grid container>
 								{products.map((item) => (
 									<Grid item xs={12} sm={6} md={4} lg={3}>
-										<Cards product={item} key={item._id} />
+										<Cards product={item} key={item._id} wishList={wishList} />
 									</Grid>
 								))}
 							</Grid>
