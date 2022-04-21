@@ -85,7 +85,7 @@ export default function Cards({ product }) {
 	const addOrRemove = () => {
 		if (fillHeart) {
 		let newWishlist = wishList.filter((id) => id != product._id);
-		    if(newWishlist) return;
+		    // if(newWishlist) return;
 			addWishList(product);
 		} else {
 			removeFromWishList(product);
