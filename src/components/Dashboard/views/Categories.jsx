@@ -194,16 +194,18 @@ function Categories() {
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>ID</TableCell>
+                    <TableCell>Index</TableCell>
                     <TableCell>Name</TableCell>
                     <TableCell>Controls</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {searchOptions.map((category) => (
+                  {searchOptions.map((category, index) => (
                     <CTableRow
                       category={category}
+                      index={index}
                       confirmDelete={confirmDelete}
+                      openErrorMsg={openErrorMsg}
                       key={category._id}
                     />
                   ))}
@@ -215,13 +217,11 @@ function Categories() {
             <Formik
               initialValues={{
                 categoryName: "",
-                products: [0],
               }}
               validationSchema={Yup.object({
                 categoryName: Yup.string().required(
                   "product category name is Required"
                 ),
-                products: Yup.array().nullable(),
               })}
               onSubmit={(values) => {
                 let data = new FormData();

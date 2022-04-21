@@ -11,19 +11,13 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { MainListItems } from "./Listitems";
-import Chart from "./Chart";
-import Deposits from "./Deposits";
-import Orders from "./Orders";
+
 import logo from "./../../assets/imgs/lego-logo.svg";
 import TabPanel from "./Tabs/TabPanel";
-import Table from "./Table";
 import "./Dashboard.css";
 import Products from "./views/Products";
 import Users from "./views/Users";
@@ -33,23 +27,8 @@ import Categories from "./views/Categories";
 import HomeIcon from "@mui/icons-material/Home";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Lego clone
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import EnhancedTable from "./views/Table/EnhancedTable";
+import DashboardPanel from "./views/DashboardPanel";
 
 const drawerWidth = 200;
 
@@ -104,12 +83,20 @@ function DashboardContent() {
   const [value, setValue] = React.useState(0);
   const [orders, setOrders] = React.useState([]);
   const [shippers, setShippers] = React.useState([]);
+  const [recentOrder, setRecentOrder] = React.useState([]);
+
   React.useEffect(() => {
     axios
       .get("http://localhost:8080/dashboard/orders")
       .then((res) => {
-        console.log(res);
         setOrders(res.data.orders);
+      })
+      .catch((err) => console.log(err));
+
+    axios
+      .get("http://localhost:8080/dashboard/recentOrders")
+      .then((res) => {
+        setRecentOrder(res.data.orders);
       })
       .catch((err) => console.log(err));
 
@@ -117,7 +104,6 @@ function DashboardContent() {
     axios
       .get("http://localhost:8080/dashboard/shippers")
       .then((res) => {
-        console.log(res);
         setShippers(res.data.shippers);
       })
       .catch((err) => console.log(err));
@@ -171,11 +157,6 @@ function DashboardContent() {
               />
               Dashboard
             </Typography>
-            <IconButton color="inherit" sx={{ color: "black" }}>
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
             <NavLink to="/">
               <IconButton color="inherit" sx={{ color: "black" }}>
                 <HomeIcon />
@@ -218,49 +199,18 @@ function DashboardContent() {
         >
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <TabPanel value={value} index={0}>
-              <Grid container spacing={3}>
-                {/* Chart */}
-                <Grid item xs={12} md={8} lg={9}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      display: "flex",
-                      flexDirection: "column",
-                      height: 240,
-                    }}
-                  >
-                    <Chart />
-                  </Paper>
-                </Grid>
-                {/* Recent Deposits */}
-                <Grid item xs={12} md={4} lg={3}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      display: "flex",
-                      flexDirection: "column",
-                      height: 240,
-                    }}
-                  >
-                    <Deposits />
-                  </Paper>
-                </Grid>
-                {/* Recent Orders */}
-                <Grid item xs={12}>
-                  <Paper
-                    sx={{ p: 2, display: "flex", flexDirection: "column" }}
-                  >
-                    <Orders propOrders={orders} propShippers={shippers} />
-                  </Paper>
-                </Grid>
-              </Grid>
-              <Copyright sx={{ pt: 4 }} />
+              <DashboardPanel
+                recentOrder={recentOrder}
+                shippers={shippers}
+                orders={orders}
+              />
             </TabPanel>
             <TabPanel value={value} index={1}>
               {/* <Table orders={orders} /> */}
-              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+              {/* <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
                 <Orders propOrders={orders} propShippers={shippers} />
-              </Paper>
+              </Paper> */}
+              <EnhancedTable orders={orders} shippers={shippers} />
             </TabPanel>
             <TabPanel value={value} index={2}>
               <Products />

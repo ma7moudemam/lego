@@ -46,21 +46,23 @@
 #use-autocomplete-demo {
   height: 50px;
   border: 1px solid #c4c4c4;
-  width: 50%;
+  width: 100%;
   margin: 10px auto;
   display: block;
   border-radius: 7px;
   padding: 0 1rem;
+  margin-top: 0;
   margin-bottom: 0;
   z-index: 12;
   position: relative;
 }
 #use-autocomplete-demo-listbox {
   width: 50%;
-  left: 50%;
+  left: 45%;
   transform: translateX(-50%);
   border-radius: 5px;
   overflow: hidden;
+  top: 70px;
 }
 #use-autocomplete-demo-listbox li {
   padding: 0.7rem 1rem;
@@ -70,4 +72,21 @@
 }
 #use-autocomplete-demo-listbox li:hover {
   background-color: #c4c4c4;
+}
+.product-search-wrapper {
+  width: 50%;
+}
+/* .MuiOutlinedInput-root
+  .MuiInputBase-root
+  .MuiInputBase-colorPrimary
+  .MuiInputBase-formControl
+  .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+  height: 50px;
+  width: 120px;
+} */
+#mui-3 {
+  margin: 0;
+}
+.MuiTablePagination-displayedRows {
+  margin-bottom: 0;
 }

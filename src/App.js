@@ -9,6 +9,7 @@ import RequireAuth from "./Auh";
 import AboutUs from "./components/About-us/AboutUs";
 import RequireAdminAuth from "./AdminAuth";
 import Shipper from "./components/Shipper/Shipper";
+import RequireUserAuth from "./UserAuth";
 
 const AccordionProduct = lazy(() => import("./components/AccordionProduct/AccordionProduct"));
 const MyBag = lazy(() => import("./components/Bag"));
@@ -119,8 +120,22 @@ function App() {
 							<Route path="myorder" element={<MyOrder />} />
 							<Route path="whishlist" element={<WishListContent />} />
 						</Route>
-						<Route path="/login" element={<Login />} />
-						<Route path="/signup" element={<Signup />} />
+						<Route
+							path="/login"
+							element={
+								<RequireUserAuth>
+									<Login />
+								</RequireUserAuth>
+							}
+						/>
+						<Route
+							path="/signup"
+							element={
+								<RequireUserAuth>
+									<Signup />
+								</RequireUserAuth>
+							}
+						/>
 						<Route
 							path="/shop-now"
 							element={
