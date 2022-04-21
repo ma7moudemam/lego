@@ -10,10 +10,11 @@ import WishListProducts from "./../wishListProducts/wishListProducts";
 export default function General() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [refresh, setRefresh] = useState(false);
   const [wishList, setWishList] = useState([]);
   useEffect(() => {
     getWishList().then((data) => setWishList(data.data.wishlist));
-  }, []);
+  }, [refresh]);
 
   console.log({ ...wishList });
   const addItems = () => {
@@ -30,9 +31,10 @@ export default function General() {
     let token = localStorage.getItem("token");
     if (token) {
       deleteFromWishList(product).then(() => {
-        let newWishlist = wishList.reduce((id) => id === product._id);
+        let newWishlist = wishList.filter((item) => item._id === product._id);
         setWishList(newWishlist);
         console.log("new wishList" + newWishlist);
+        setRefresh(!refresh);
       });
     } else {
       navigate("/login");

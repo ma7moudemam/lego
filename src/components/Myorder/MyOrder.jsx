@@ -1,3 +1,4 @@
+import { padding } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { getOrder } from "../../network/orderAPI";
@@ -16,8 +17,16 @@ export default function MyOrder() {
 			<div className={Style["inner-content"]}>
 				{/* My orders */}
 				<h1 className={Style.nameOfBlock}>My Orders</h1>
-				<div className={Style["wrapper-order"]}>
-					<span className={Style.heading}>Latest Order</span>
+				<div className={Style["wrapper-order"]} style={{ marginTop: "1rem" }}>
+					<span
+						className={Style.heading}
+						style={{
+							display: "block",
+							marginBottom: "1rem",
+						}}
+					>
+						Latest Order
+					</span>
 					{orders.length > 0 ? (
 						<div className={Style["order-contatiner"]}>
 							<table className={Style.tableOrder}>
@@ -26,7 +35,7 @@ export default function MyOrder() {
 										<th>Shipper Name</th>
 										<th>Order Status</th>
 										<th>Order Date</th>
-										<th>Product</th>
+										<th style={{ textAlign: "center" }}>Product</th>
 										<th>Total Cost</th>
 									</tr>
 								</thead>
@@ -47,7 +56,7 @@ export default function MyOrder() {
 												<td>{shipper ? shipper.name : "-"}</td>
 												<td>
 													<span
-														className="order-status-code"
+														className={Style["order-status-code"]}
 														style={{
 															backgroundColor: isCanceled
 																? "red"
@@ -79,9 +88,52 @@ export default function MyOrder() {
                           </select>
                         </td> */}
 												<td>
-													<ul style={{ marginBottom: "0rem" }}>
+													<ul
+														style={{
+															marginBottom: "0",
+															paddingLeft: "0",
+															listStyle: "none",
+															display: "flex",
+															justifyContent: "center",
+															gap: "1.5rem",
+															flexWrap: "wrap",
+														}}
+													>
 														{products?.map((p) => (
-															<li key={_id}>{p?.product?.name}</li>
+															<li
+																style={{
+																	display: "flex",
+																	justifyContent: "center",
+																	alignItems: "center",
+																	gap: "1rem",
+																}}
+																key={_id}
+															>
+																<img
+																	style={{
+																		width: "50px",
+																		aspectRatio: "1/1",
+																		objectFit: "cover",
+																	}}
+																	src={`http://localhost:8080/images/${p?.product?.images[0]}`}
+																/>
+																<span
+																	style={{
+																		display: "flex",
+																		flexDirection: "column",
+																		fontSize: "1rem",
+																		textTransform: "capitalize",
+																	}}
+																>
+																	{p?.product?.name}
+																	<small
+																		style={{
+																			fontSize: "0.7rem",
+																			color: "#999",
+																		}}
+																	>{`Qty. ${p?.quantity}`}</small>
+																</span>
+															</li>
 														))}
 													</ul>
 												</td>
