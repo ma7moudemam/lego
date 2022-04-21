@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "./../Chart";
 import Deposits from "./../Deposits";
 import Orders from "./../Orders";
 import { Grid, Paper, Typography } from "@mui/material";
 import Link from "@mui/material/Link";
+import axios from "axios";
 
 function Copyright(props) {
   return (
@@ -24,6 +25,34 @@ function Copyright(props) {
 }
 
 function DashboardPanel({ recentOrder, shippers }) {
+  const [orders, setOrders] = useState([]);
+  let deposites = orders?.map((order) => {
+    let cost = order.total_price.split(" ")[0];
+    return cost;
+  });
+  let recentDeposites;
+  if (deposites.length > 0) {
+    recentDeposites = deposites?.reduce((prev, current) => {
+      return Number(current) + Number(prev);
+    });
+  }
+
+  useEffect(() => {
+    let startDate = new Date().toLocaleDateString().split("/");
+    let start = [startDate[0], "1", startDate[2]].join("/");
+    axios
+      .post("http://localhost:8080/dashboard/order", {
+        date: {
+          start,
+          end: new Date().toLocaleDateString(),
+        },
+      })
+      .then((res) => {
+        setOrders(res.data.orders);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       <Grid container spacing={3}>
@@ -37,7 +66,7 @@ function DashboardPanel({ recentOrder, shippers }) {
               height: 240,
             }}
           >
-            <Chart />
+            <Chart orders={orders} />
           </Paper>
         </Grid>
         {/* Recent Deposits */}
@@ -50,7 +79,7 @@ function DashboardPanel({ recentOrder, shippers }) {
               height: 240,
             }}
           >
-            <Deposits />
+            <Deposits recentDeposites={recentDeposites} />
           </Paper>
         </Grid>
         {/* Recent Orders */}
