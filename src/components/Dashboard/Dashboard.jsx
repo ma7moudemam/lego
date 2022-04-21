@@ -199,7 +199,11 @@ function DashboardContent() {
         >
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <TabPanel value={value} index={0}>
-              <DashboardPanel recentOrder={recentOrder} shippers={shippers} />
+              <DashboardPanel
+                recentOrder={recentOrder}
+                shippers={shippers}
+                orders={orders}
+              />
             </TabPanel>
             <TabPanel value={value} index={1}>
               {/* <Table orders={orders} /> */}
