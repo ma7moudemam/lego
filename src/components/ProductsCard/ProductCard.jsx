@@ -109,7 +109,7 @@ export default function ProductCard() {
 							{/* <!-- sliding --> */}
 							<div className="sliding">
 								<Stack spacing={2}>
-									<Pagination count={Math.ceil(count / 9) || 1} card={page} onChange={handleChange} />
+									<Pagination count={Math.ceil(count / 12) || 1} card={page} onChange={handleChange} />
 								</Stack>
 							</div>
 						</section>

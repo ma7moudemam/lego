@@ -33,7 +33,7 @@ function Footer() {
 			<section className="footer-copyright">
 				<p>
 					This website cloned and developed by&copy; Karim 3alaa , Mahmoud Emam , Mahmoud 3ssam, Alaa
-					Abdelmotelb, Romaisaa Samir
+					Abdelmotelb, Romisaa Samir
 				</p>
 			</section>
 		</footer>

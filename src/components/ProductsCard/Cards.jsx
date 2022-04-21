@@ -99,7 +99,6 @@ export default function Cards({ product }) {
 						<i
 							onClick={toggling}
 							className={fillHeart || wishList.includes(product._id) ? "fa fa-heart" : "far fa-heart"}
-							// className="fa fa-heart"
 						></i>
 					</span>
 					<span>Add to wish list</span>
@@ -110,7 +109,7 @@ export default function Cards({ product }) {
 				{/* <div className="new-item">new</div> */}
 				<div className="card-name">
 					<p>
-						<a href="#">{product.name}</a>
+						<span href="#">{product.name}</span>
 					</p>
 				</div>
 				<span>
