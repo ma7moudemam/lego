@@ -37,7 +37,7 @@ export default function Main() {
 
 						<div>
 							<p>{product.name}</p>
-							<p>${product.price}</p>
+							<p>{product.price} EGP</p>
 						</div>
 
 						<div className="border rounded">
