@@ -54,43 +54,6 @@ button {
   color: #555555cc;
 }
 
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: none;
-}
-
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  box-shadow: 0 1px 3px 1px #ccc;
-  border-radius: 50%;
-  border: 4px solid #fff;
-  background: linear-gradient(0deg, #fff, #abbaab);
-}
-
-.mySwiper .swiper-slide {
-  width: 25%;
-  height: 100%;
-  opacity: 1;
-}
-
-.swiper-button-next:after,
-.swiper-button-prev:after {
-  font-size: 1.7vw;
-  font-weight: 800;
-  color: black;
-}
 
 .box-styling {
   margin-top: 16px;

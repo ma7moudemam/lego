@@ -43,6 +43,7 @@
     object-position: center center;
     transform: scale(1);
     transition: all 250ms ease-in-out;
+    cursor: pointer;
 }
 
 .recommended-card .image-container .product-card-img:hover {

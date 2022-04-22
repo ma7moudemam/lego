@@ -61,14 +61,10 @@ export default function HomePage(props) {
 				<section className="keep-in-touch-inner">
 					<div className="keep-in-touch-wrapper">
 						<div className="left-side-content">
-							<h2>
-								<span>Keep in touch</span>
-							</h2>
+							<h2>Only the best is good enough</h2>
 							<p>
-								<span>
-									Sign up to receive communications from LEGO® Marketing and be the first to know
-									about new sets, product updates, promotions and much more
-								</span>
+								As children shape their own worlds with LEGO bricks, we play our part in having a
+								positive impact on the world they live in today and will inherit in the future.
 							</p>
 							<NavLink className="shop-now-btn" to="/shop-now">
 								Shop Now

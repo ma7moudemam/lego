@@ -15,7 +15,7 @@ import Alert from "@mui/material/Alert";
 
 function Login() {
 	const [isLoading, setIsLoading] = useState(false);
-	let navigate = useNavigate();
+	const navigate = useNavigate();
 	const Location = useLocation();
 	const [notification, setNotification] = useState(false);
 	const [errorNotification, setErrorNotification] = useState(false);
