@@ -30,6 +30,8 @@ function Shippers() {
   /**** notifications */
   const [notification, setnotification] = useState(false);
   const [addShipperMsg, setAddShipperMsg] = useState("test");
+  const [error, setError] = useState(false);
+  const [addErrorMsg, setAddErrorMsg] = useState("");
 
   const openNotification = (message) => {
     setAddShipperMsg(message);
@@ -42,6 +44,18 @@ function Shippers() {
     }
 
     setnotification(false);
+  };
+
+  const openErrorMsg = (message) => {
+    setAddErrorMsg(message);
+    setError(true);
+  };
+  const hideError = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setError(false);
   };
 
   /**** notifications */
@@ -109,7 +123,9 @@ function Shippers() {
           setShipppers([...shippers, values]);
           resetForm();
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          openErrorMsg(err.response.data.message);
+        });
     },
   });
 
@@ -224,6 +240,16 @@ function Shippers() {
           sx={{ width: "100%" }}
         >
           {addShipperMsg}
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={error}
+        autoHideDuration={3000}
+        onClose={hideError}
+        severity="error"
+      >
+        <Alert onClose={hideError} severity="error" sx={{ width: "100%" }}>
+          {addErrorMsg}
         </Alert>
       </Snackbar>
     </div>

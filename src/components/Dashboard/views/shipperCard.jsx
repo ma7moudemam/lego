@@ -53,7 +53,9 @@ function Shipper({ shipper, openNotification, removeShipper }) {
         <Typography gutterBottom variant="h5" align="center" component="div">
           {shipper.name.toUpperCase()}
         </Typography>
-        <Typography>Phone Number: {shipper.phone_number}</Typography>
+        <Typography align="center">
+          Phone Number: +20{shipper.phone_number}
+        </Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: "center" }}>
         <Button
