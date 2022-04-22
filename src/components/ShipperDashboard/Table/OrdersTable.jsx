@@ -11,7 +11,7 @@ import OrdersTableHead from "./OrdersTableHead";
 import OrdersTableToolbar from "./OrdersTableToolbar";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import ShipperOrders from "../ShipperOrders";
+import ShipperOrder from "./ShipperOrder";
 function descendingComparator(a, b, orderBy) {
   if (new Date(b[orderBy]) < new Date(a[orderBy])) {
     return -1;
@@ -95,7 +95,9 @@ function OrdersTable({ orders }) {
 
   // const countTest = () => Math.ceil(Number(orders.length) / rowsPerPage);
   // const isSelected = (name) => selected.indexOf(name) !== -1;
-
+  useEffect(() => {
+    setPropsOrders(orders);
+  }, [orders]);
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - propsOrders.length) : 0;
@@ -130,7 +132,7 @@ function OrdersTable({ orders }) {
                 {stableSort(propsOrders, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((order, index) => {
-                    return <ShipperOrders order={order} key={index} />;
+                    return <ShipperOrder order={order} key={order._id} />;
                   })}
                 {emptyRows > 0 && (
                   <TableRow

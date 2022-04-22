@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import jwt_decode from "jwt-decode";
 import CardHeader from "@mui/material/CardHeader";
@@ -18,10 +15,22 @@ function ShipperDetails() {
 
   return (
     <>
-      <div style={{ marginTop: "2rem" }}>
-        <Card sx={{ maxWidth: 345, position: "relative" }}>
+      <div style={{ marginTop: "3rem" }}>
+        <Card
+          sx={{
+            position: "relative",
+            flexDirection: "row",
+            display: "flex",
+            width: "70%",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            textAlign: "left",
+            gap: "1rem",
+            marginInline: "auto",
+          }}
+        >
           <CardHeader
-            sx={{ width: "100%", justifyContent: "center" }}
+            sx={{ justifyContent: "center" }}
             avatar={
               <Avatar
                 sx={{
@@ -39,20 +48,16 @@ function ShipperDetails() {
             }
           />
           <CardContent sx={{ paddingBottom: 0 }}>
-            <Typography
-              gutterBottom
-              variant="h5"
-              align="center"
-              component="div"
-            >
-              {profile.email}
+            <Typography gutterBottom variant="h5" align="left" component="div">
+              Email: <span style={{ color: red[500] }}>{profile.email}</span>
             </Typography>
             <Typography
               variant="h6"
-              align="center"
+              align="left"
               sx={{ color: "grey" }}
               component="div"
             >
+              Name:{" "}
               <span
                 style={{
                   color: red[500],
@@ -66,11 +71,11 @@ function ShipperDetails() {
             </Typography>
             <Typography
               variant="h6"
-              align="center"
+              align="left"
               sx={{ color: "grey" }}
               component="div"
             >
-              Phone:{" "}
+              Phone Number:{" "}
               <span
                 style={{
                   color: red[500],

@@ -96,20 +96,24 @@ export default function ShipperDashboard() {
             pr: "24px", // keep right padding when drawer closed
             backgroundColor: "#ffcf00",
             color: "#000",
+            display: "flex",
+            justifyContent: "space-between",
           }}
         >
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Shipper Dashboard
-          </Typography>
+          <Box component="div" sx={{ display: "flex", alignItems: "center" }}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: "none" }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              Shipper Dashboard
+            </Typography>
+          </Box>
           <NavLink to="/">
             <IconButton color="inherit" sx={{ color: "black" }}>
               <HomeIcon />
