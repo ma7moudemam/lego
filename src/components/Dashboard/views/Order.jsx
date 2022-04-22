@@ -78,6 +78,7 @@ export default function Order({ order, shippers }) {
           ? "Pending"
           : "Not assigned"}
       </TableCell>
+
       <TableCell align="center" sx={{ minWidth: "150px" }}>
         {changeShipper ? (
           <FormControl sx={{ width: "100%", mt: 2 }}>

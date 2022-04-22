@@ -63,6 +63,7 @@ function Shippers() {
     axios
       .get("http://localhost:8080/dashboard/shippers", config)
       .then((res) => {
+        console.log(res.data.shippers);
         setShipppers(res.data.shippers);
       })
       .catch((err) => console.log(err));
