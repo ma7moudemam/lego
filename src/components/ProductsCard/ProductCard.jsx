@@ -32,6 +32,7 @@ export default function ProductCard() {
 			// }
 			setWishList(ids);
 		});
+		return () => {};
 	}, []);
 	const handleChange = (event, value) => {
 		setPage(value);
