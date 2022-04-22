@@ -40,7 +40,7 @@ export default function HomePage(props) {
 			openNotificationMsg(Location.state.message);
 		}
 		return () => {};
-	});
+	}, []);
 
 	useEffect(() => {
 		axios
