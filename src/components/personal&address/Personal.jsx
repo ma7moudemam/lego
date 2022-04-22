@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { NavLink, Navigate, useLocation } from "react-router-dom";
 import Style from "./Personal.module.css";
 import jwt_decode from "jwt-decode";
 import Snackbar from "@mui/material/Snackbar";
@@ -22,10 +22,6 @@ export default function Personal() {
 
 		setNotification(false);
 	};
-	const handelLogOutAction = () => {
-		localStorage.clear();
-		Navigate("/");
-	};
 	useEffect(() => {
 		if (Location.state) {
 			openNotificationMsg(Location.state.message);
@@ -46,9 +42,9 @@ export default function Personal() {
 						</span>
 						<div className={Style["wrapper-personal-btn"]}>
 							<button className={Style["personal-btn"]}>
-								<Link to={`/details`} style={{ textDecoration: "none", color: "white" }}>
+								<NavLink to={`/details`} style={{ textDecoration: "none", color: "white" }}>
 									LEGO® Account Details
-								</Link>
+								</NavLink>
 							</button>
 							<div className={Style["personal-email"]}>
 								<span className={Style["lego-account"]}>LEGO® Account Email</span>

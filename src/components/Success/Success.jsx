@@ -31,6 +31,7 @@ export default function Success() {
 	const session_id = location.search.split("=")[1];
 	const total_price = cart.totalPrice;
 	useEffect(() => {
+		console.log("useEffect", products);
 		const user = jwt_decode(localStorage.getItem("token")).user._id;
 		axios
 			.post("http://localhost:8080/order", { user, products, total_price, session_id })

@@ -15,9 +15,9 @@ function Footer() {
 				<div className="follow">
 					<h6>Follow us</h6>
 					<div className="social-icons">
-						<Link to="/" className="icon fa">
+						<a href="https://www.facebook.com/legooo4u/" className="icon fa">
 							<i className="fab fa-facebook-f"></i>
-						</Link>
+						</a>
 						<Link to="/" className="icon tw">
 							<i className="fab fa-twitter"></i>
 						</Link>
@@ -32,8 +32,8 @@ function Footer() {
 			</section>
 			<section className="footer-copyright">
 				<p>
-					This website cloned and developed by&copy; Karim 3alaa , Mahmoud Emam , Mahmoud 3ssam, Alaa
-					Abdelmotelb, Romisaa Samir
+					This website cloned and developed by&copy; Mahmoud Essam, Karim shahin, Romisaa Samir, Mahmoud Emam,
+					Alaa Abdelmotelb, Ahmed Mansour.
 				</p>
 			</section>
 		</footer>

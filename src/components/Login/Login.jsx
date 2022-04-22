@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 import "./Login.css";
 import { useNavigate, NavLink, useLocation } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
@@ -60,8 +61,12 @@ function Login() {
 				.then((response) => {
 					localStorage.setItem("token", response.data.token);
 					localStorage.setItem("refreshToken", response.data.refreshToken);
+					let decode = jwt_decode(response.data.token);
+					let role = decode.role;
 					setIsLoading(false);
-					navigate("/home", { state: { message: response.data.message } });
+					navigate(role === "admin" ? "/dashboard" : role === "shipper" ? "/shipper" : "/home", {
+						state: { message: response.data.message },
+					});
 				})
 				.catch((error) => {
 					setIsLoading(false);
