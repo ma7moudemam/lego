@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -14,6 +14,9 @@ function Shipper({ shipper, openNotification, removeShipper }) {
     axios
       .delete("http://localhost:8080/dashboard/shippers", {
         data: { id: shipper._id },
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
       })
       .then((res) => {
         if (res.data.body.deletedCount === 1) {
@@ -61,8 +64,6 @@ function Shipper({ shipper, openNotification, removeShipper }) {
         >
           Delete Shipper
         </Button>
-
-        <Button size="small">Go to profile</Button>
       </CardActions>
     </Card>
   );

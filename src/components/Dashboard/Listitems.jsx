@@ -8,7 +8,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import PeopleIcon from "@mui/icons-material/People";
 import CategoryIcon from "@mui/icons-material/Category";
-import ReviewsIcon from "@mui/icons-material/Reviews";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Tabs from "@mui/material/Tabs";

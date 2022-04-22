@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -20,16 +20,25 @@ function User({ user, openNotification, updateBlockedUsers, unBlockUser }) {
         {
           headers: {
             "content-type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
           },
         }
       )
       .then((respnse) => {
         // update blocked user state
         axios
-          .put("http://localhost:8080/dashboard/users", {
-            id: user._id,
-            blocked: true,
-          })
+          .put(
+            "http://localhost:8080/dashboard/users",
+            {
+              id: user._id,
+              blocked: true,
+            },
+            {
+              headers: {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+              },
+            }
+          )
           .then((res) => {
             setUserState(true);
             openNotification(`${user.email} has been blocked`);
@@ -42,22 +51,28 @@ function User({ user, openNotification, updateBlockedUsers, unBlockUser }) {
 
   const unBlock = () => {
     axios
-      .delete(
-        "http://localhost:8080/dashboard/users",
-        { data: { user: user._id } },
-        {
-          headers: {
-            "content-type": "application/json",
-          },
-        }
-      )
+      .delete("http://localhost:8080/dashboard/users", {
+        data: { user: user._id },
+        headers: {
+          "content-type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
       .then((res) => {
         if (res.data.body.deletedCount === 1) {
           axios
-            .put("http://localhost:8080/dashboard/users", {
-              id: user._id,
-              blocked: false,
-            })
+            .put(
+              "http://localhost:8080/dashboard/users",
+              {
+                id: user._id,
+                blocked: false,
+              },
+              {
+                headers: {
+                  Authorization: "Bearer " + localStorage.getItem("token"),
+                },
+              }
+            )
             .then((res) => {
               setUserState(false);
               openNotification(`${user.email} unBlocked`);
@@ -140,8 +155,6 @@ function User({ user, openNotification, updateBlockedUsers, unBlockUser }) {
             Send to Blacklist
           </Button>
         )}
-
-        <Button size="small">Go to profile</Button>
       </CardActions>
     </Card>
   );

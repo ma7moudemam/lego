@@ -9,11 +9,9 @@ import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { MainListItems } from "./Listitems";
 
 import logo from "./../../assets/imgs/lego-logo.svg";
@@ -21,7 +19,6 @@ import TabPanel from "./Tabs/TabPanel";
 import "./Dashboard.css";
 import Products from "./views/Products";
 import Users from "./views/Users";
-import Reviews from "./views/Reviews";
 import Shippers from "./Shippers";
 import Categories from "./views/Categories";
 import HomeIcon from "@mui/icons-material/Home";
@@ -84,17 +81,21 @@ function DashboardContent() {
   const [orders, setOrders] = React.useState([]);
   const [shippers, setShippers] = React.useState([]);
   const [recentOrder, setRecentOrder] = React.useState([]);
-
+  let config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
   React.useEffect(() => {
     axios
-      .get("http://localhost:8080/dashboard/orders")
+      .get("http://localhost:8080/dashboard/orders", config)
       .then((res) => {
         setOrders(res.data.orders);
       })
       .catch((err) => console.log(err));
 
     axios
-      .get("http://localhost:8080/dashboard/recentOrders")
+      .get("http://localhost:8080/dashboard/recentOrders", config)
       .then((res) => {
         setRecentOrder(res.data.orders);
       })
@@ -102,11 +103,12 @@ function DashboardContent() {
 
     // shippers
     axios
-      .get("http://localhost:8080/dashboard/shippers")
+      .get("http://localhost:8080/dashboard/shippers", config)
       .then((res) => {
         setShippers(res.data.shippers);
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleChange = (event, newValue) => {
     setValue(newValue);

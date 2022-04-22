@@ -81,10 +81,15 @@ function Users() {
     setUsers([...users, unBlockedUser]);
     // console.log(blockedUsers);
   };
+  let config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/dashboard/users")
+      .get("http://localhost:8080/dashboard/users", config)
       .then((res) => {
         let users = res.data.users.filter((user) => !user.blocked);
         setUsers(users);
@@ -95,11 +100,12 @@ function Users() {
       .catch((err) => console.log(err));
 
     axios
-      .get("http://localhost:8080/dashboard/blacklist")
+      .get("http://localhost:8080/dashboard/blacklist", config)
       .then((res) => {
         // setBlockedUsers(res.data.blacklist);
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

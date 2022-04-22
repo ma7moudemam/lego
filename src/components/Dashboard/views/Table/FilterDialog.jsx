@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -22,12 +21,20 @@ function FilterDialog({ choosenOrders, open, handleClose, openNotification }) {
     console.log("start", startValue.toLocaleDateString());
     console.log("end", endValue.toLocaleDateString());
     axios
-      .post(`http://localhost:8080/dashboard/order`, {
-        date: {
-          start: startValue.toLocaleDateString(),
-          end: endValue.toLocaleDateString(),
+      .post(
+        `http://localhost:8080/dashboard/order`,
+        {
+          date: {
+            start: startValue.toLocaleDateString(),
+            end: endValue.toLocaleDateString(),
+          },
         },
-      })
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      )
       .then((res) => {
         choosenOrders(res.data.orders);
         openNotification(res.data.message);

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button, Grid } from "@mui/material";
-import User from "./views/User";
 import Autocomplete from "@mui/material/Autocomplete";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -54,15 +53,20 @@ function Shippers() {
   };
 
   /*********** reflect in run time ********** */
-
+  let config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
   // get shippers on mount
   useEffect(() => {
     axios
-      .get("http://localhost:8080/dashboard/shippers")
+      .get("http://localhost:8080/dashboard/shippers", config)
       .then((res) => {
         setShipppers(res.data.shippers);
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -93,6 +97,7 @@ function Shippers() {
       const config = {
         headers: {
           "content-type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       };
       axios
