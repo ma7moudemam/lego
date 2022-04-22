@@ -14,12 +14,11 @@ import ShipperDashboard from "./components/ShipperDashboard/ShipperDashboard"
 import "./App.css";
 import RequireShipperAuth from "./ShipperAuth";
 
+const ProductPage = lazy(() => import("./components/ProductPage/ProductPage"));
 const MyBag = lazy(() => import("./components/Bag"));
-const ProductCart = lazy(() => import("./components/ProductCart/ProductCart"));
 const Personal = lazy(() => import("./components/personal&address/Personal"));
 const HomePage = lazy(() => import("./components/HomePage/HomePage"));
 const ProductCard = lazy(() => import("./components/ProductsCard/ProductCard"));
-const SwiperSlider = lazy(() => import("./components/SwiperSlider/SwiperSlider"));
 const Dashboard = lazy(() => import("./components/Dashboard/Dashboard"));
 const Login = lazy(() => import("./components/Login/Login"));
 const Signup = lazy(() => import("./components/Signup/Signup"));
@@ -144,10 +143,7 @@ function App() {
 							path="/card"
 							element={
 								<Layout>
-									<>
-										<ProductCart />
-										<SwiperSlider />
-									</>
+									<ProductPage />
 								</Layout>
 							}
 						/>

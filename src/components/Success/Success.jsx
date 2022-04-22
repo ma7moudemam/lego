@@ -37,7 +37,7 @@ export default function Success() {
 			.then((res) => dispatch(resetCart()))
 			.catch((err) => {});
 		return () => {};
-	});
+	}, []);
 
 	return (
 		<>

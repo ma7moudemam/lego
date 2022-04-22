@@ -3,7 +3,6 @@ import { postProductRating } from "../../network/productsAPIs";
 //REDUX
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import { addToBag } from "../../Redux/Actions/cartActions";
 import { addToWishList, deleteFromWishList, getWishList } from "../../network/wishListAPI";
 import ReviewStars from "../ReviewStars/ReviewStars";
@@ -101,12 +100,14 @@ export default function Cards({ product }) {
 						alt=""
 						src={`http://localhost:8080/images/${product?.images?.[0]}`}
 						className="product-card-img"
+						style={{ cursor: "pointer" }}
+						onClick={() => navigate("/card", { state: { _id: product._id } })}
 					/>
 				</div>
 				{/* <div className="new-item">new</div> */}
 				<div className="card-name">
-					<p>
-						<span href="#">{product.name}</span>
+					<p onClick={() => navigate("/card", { state: { _id: product._id } })} style={{ cursor: "pointer" }}>
+						{product.name}
 					</p>
 				</div>
 				<span>
