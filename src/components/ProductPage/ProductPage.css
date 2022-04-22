@@ -46,3 +46,28 @@
 .product-single-page .single-product-side .add-to-bag:hover {
     background-color: #ffcf00cc;
 }
+
+.product-single-page .single-product-side .add-to-wishlist {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.7rem;
+}
+
+.product-single-page .single-product-side .add-to-wishlist span:nth-child(1) {
+    background-color: #f8f8f8;
+    position: relative;
+    border-radius: 100%;
+    width: 30px;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+}
+
+.product-single-page .single-product-side .add-to-wishlist i {
+    font-size: 1rem;
+    position: absolute;
+    color: #006db7;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}

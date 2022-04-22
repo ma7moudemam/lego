@@ -44,28 +44,32 @@ export default function Menu(props) {
 								</NavLink>
 							</li>
 						)}
-						<li className="menu-bar-list-item">
-							<NavLink
-								onClick={() => props.setOpenMenuBar(false)}
-								to={props.isLoggedIn ? "/details" : "/login"}
-								className="user-icon"
-							>
-								<img src={legoUser} className="svg" />
-								{props.isLoggedIn
-									? `${jwt_decode(localStorage.getItem("token")).user.userName}`
-									: "Account"}
-							</NavLink>
-						</li>
-						<li className="menu-bar-list-item">
-							<NavLink onClick={() => props.setOpenMenuBar(false)} to="/whishlist/whishlist">
-								My Wishlist
-							</NavLink>
-						</li>
-						<li className="menu-bar-list-item">
-							<NavLink onClick={() => props.setOpenMenuBar(false)} to="/mybag">
-								My Bag <span>({totalItemsCount})</span>
-							</NavLink>
-						</li>
+						{!props.isAdmin && (
+							<>
+								<li className="menu-bar-list-item">
+									<NavLink
+										onClick={() => props.setOpenMenuBar(false)}
+										to={props.isLoggedIn ? "/whishlist/personal" : "/login"}
+										className="user-icon"
+									>
+										<img src={legoUser} className="svg" />
+										{props.isLoggedIn
+											? `${jwt_decode(localStorage.getItem("token")).user.userName}`
+											: "Account"}
+									</NavLink>
+								</li>
+								<li className="menu-bar-list-item">
+									<NavLink onClick={() => props.setOpenMenuBar(false)} to="/whishlist/whishlist">
+										My Wishlist
+									</NavLink>
+								</li>
+								<li className="menu-bar-list-item">
+									<NavLink onClick={() => props.setOpenMenuBar(false)} to="/mybag">
+										My Bag <span>({totalItemsCount})</span>
+									</NavLink>
+								</li>
+							</>
+						)}
 					</ul>
 				</div>
 			</div>

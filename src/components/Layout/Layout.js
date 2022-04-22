@@ -30,7 +30,7 @@ export default function Layout(props) {
 				isLoggedIn={isLoggedIn}
 				isAdmin={isAdmin}
 			/>
-			<Utility setIsAdmin={setIsAdmin} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+			<Utility isAdmin={isAdmin} setIsAdmin={setIsAdmin} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 			<Navbar isAdmin={isAdmin} toggleMenu={toggleMenu} isLoggedIn={isLoggedIn} />
 			<main>{React.cloneElement(props.children, { isLoggedIn })}</main>
 			<Footer />

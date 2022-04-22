@@ -2,21 +2,17 @@ import React, { useEffect, useState } from "react";
 
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
-import Link from "@mui/material/Link";
+import { NavLink } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { Grid } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import CustomFilter from "./../CustomFilter/CustomFilter";
 import Cards from "./Cards";
-
+import jwt_decode from "jwt-decode";
 import "./ProductCard.css";
 import { getProduct, getProductDetails } from "../../network/productsAPIs";
 import { getWishList } from "../../network/wishListAPI";
-
-function handleClick(event) {
-	event.preventDefault();
-}
 
 export default function ProductCard() {
 	const [page, setPage] = useState(1);
@@ -24,14 +20,27 @@ export default function ProductCard() {
 	const [products, setProducts] = useState([]);
 	const [filterValues, setFilterValues] = useState({});
 	const [wishList, setWishList] = useState([]);
+	const [isAdmin, setIsAdmin] = useState(() => {
+		return localStorage.getItem("token")
+			? jwt_decode(localStorage.getItem("token")).role === "admin"
+				? true
+				: false
+			: false;
+	});
+	function handleClick(event) {
+		event.preventDefault();
+	}
 	useEffect(() => {
-		getWishList().then((data) => {
-			let ids = data.data.wishlist.map((p) => p._id);
-			// if (ids.includes(product._id)) {
-			// 	setfillHeart(true);
-			// }
-			setWishList(ids);
-		});
+		console.log(isAdmin);
+		if (isAdmin) {
+			getWishList().then((data) => {
+				let ids = data.data.wishlist.map((p) => p._id);
+				// if (ids.includes(product._id)) {
+				// 	setfillHeart(true);
+				// }
+				setWishList(ids);
+			});
+		}
 		return () => {};
 	}, []);
 	const handleChange = (event, value) => {
@@ -71,9 +80,9 @@ export default function ProductCard() {
 						sx={{ pt: 1 }}
 						aria-label="breadcrumb"
 					>
-						<Link underline="hover" color="inherit" href="/">
+						<NavLink underline="hover" color="inherit" to="/">
 							<Typography color="#006db7">Home</Typography>
-						</Link>
+						</NavLink>
 						<Typography color="text.primary">Shop Now</Typography>
 					</Breadcrumbs>
 				</div>
@@ -92,7 +101,7 @@ export default function ProductCard() {
 						<Grid container>
 							{products.map((item) => (
 								<Grid key={item._id} item xs={12} sm={6} md={4} lg={3}>
-									<Cards product={item} />
+									<Cards isAdmin={isAdmin} product={item} />
 								</Grid>
 							))}
 						</Grid>

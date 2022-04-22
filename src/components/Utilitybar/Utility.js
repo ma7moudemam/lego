@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { useDispatch } from "react-redux";
+import { resetCart } from "../../Redux/Actions/cartActions";
 
 export default function Utility(props) {
+	const dispatch = useDispatch();
 	const [toggleUtility, setToggleUtility] = useState(false);
 	const [notification, setNotification] = useState(false);
 	const [notificationMessage, setNotificationMessage] = useState("");
@@ -26,6 +29,7 @@ export default function Utility(props) {
 		localStorage.clear();
 		props.setIsLoggedIn(false);
 		props.setIsAdmin(false);
+		dispatch(resetCart());
 		openNotificationMsg("You Logged Out Successfully");
 		Navigate("/home");
 	}
@@ -36,10 +40,14 @@ export default function Utility(props) {
 					<span>FREE Shipping with orders over 1000 EGP!</span>
 				</div>
 				<div className="utility-bar-styles">
-					<NavLink to={props.isLoggedIn ? "/details" : "/login"} className="user-icon">
-						<img src={legoUser} className="svg" />
-						{props.isLoggedIn ? `${jwt_decode(localStorage.getItem("token")).user.userName}` : "Account"}
-					</NavLink>
+					{!props.isAdmin && (
+						<NavLink to={props.isLoggedIn ? "/whishlist/personal" : "/login"} className="user-icon">
+							<img src={legoUser} className="svg" />
+							{props.isLoggedIn
+								? `${jwt_decode(localStorage.getItem("token")).user.userName}`
+								: "Account"}
+						</NavLink>
+					)}
 					<button
 						className="utility-logout"
 						style={props.isLoggedIn ? null : { display: "none" }}

@@ -7,54 +7,61 @@ import { addToBag } from "../../Redux/Actions/cartActions";
 import { addToWishList, deleteFromWishList, getWishList } from "../../network/wishListAPI";
 import ReviewStars from "../ReviewStars/ReviewStars";
 
-export default function Cards({ product }) {
+export default function Cards({ isAdmin, product }) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
 	const [fillHeart, setfillHeart] = useState(false);
 	const [didMount, setDidMount] = useState(false);
 
 	const [wishList, setWishList] = useState([]);
 	useEffect(() => {
-		getWishList().then((data) => {
-			let ids = data.data.wishlist.map((p) => p._id);
-			if (ids.includes(product._id)) {
-				setfillHeart(true);
-			}
-			setWishList(ids);
-		});
+		if (!isAdmin) {
+			getWishList().then((data) => {
+				let ids = data.data.wishlist.map((p) => p._id);
+				if (ids.includes(product._id)) {
+					setfillHeart(true);
+				}
+				setWishList(ids);
+			});
+		}
 		return () => {};
 	}, []);
 
 	const addItem = () => {
-		let token = localStorage.getItem("token");
-		if (token) {
-			dispatch(addToBag({ ...product }));
-		} else {
-			navigate("/login");
+		if (!isAdmin) {
+			let token = localStorage.getItem("token");
+			if (token) {
+				dispatch(addToBag({ ...product }));
+			} else {
+				navigate("/login");
+			}
 		}
 	};
 
 	const addWishList = (product) => {
-		let token = localStorage.getItem("token");
-		if (token) {
-			addToWishList(product).then(() => {
-				setWishList((prevState) => [...prevState, product._id]);
-			});
-		} else {
-			navigate("/login");
+		if (!isAdmin) {
+			let token = localStorage.getItem("token");
+			if (token) {
+				addToWishList(product).then(() => {
+					setWishList((prevState) => [...prevState, product._id]);
+				});
+			} else {
+				navigate("/login");
+			}
 		}
 	};
 
 	const removeFromWishList = (product) => {
-		let token = localStorage.getItem("token");
-		if (token) {
-			deleteFromWishList(product).then(() => {
-				let newWishlist = wishList.filter((id) => id !== product._id);
-				setWishList(newWishlist);
-			});
-		} else {
-			navigate("/login");
+		if (!isAdmin) {
+			let token = localStorage.getItem("token");
+			if (token) {
+				deleteFromWishList(product).then(() => {
+					let newWishlist = wishList.filter((id) => id !== product._id);
+					setWishList(newWishlist);
+				});
+			} else {
+				navigate("/login");
+			}
 		}
 	};
 
@@ -75,12 +82,14 @@ export default function Cards({ product }) {
 	};
 
 	const addOrRemove = () => {
-		if (fillHeart) {
-			let newWishlist = wishList.filter((id) => id !== product._id);
-			// if(newWishlist) return;
-			addWishList(product);
-		} else {
-			removeFromWishList(product);
+		if (!isAdmin) {
+			if (fillHeart) {
+				let newWishlist = wishList.filter((id) => id !== product._id);
+				// if(newWishlist) return;
+				addWishList(product);
+			} else {
+				removeFromWishList(product);
+			}
 		}
 	};
 	return (
