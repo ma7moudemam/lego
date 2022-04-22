@@ -12,6 +12,7 @@ import RequireUserAuth from "./UserAuth";
 import ShipperDashboard from "./components/ShipperDashboard/ShipperDashboard"
 
 import "./App.css";
+import RequireShipperAuth from "./ShipperAuth";
 
 const MyBag = lazy(() => import("./components/Bag"));
 const ProductCart = lazy(() => import("./components/ProductCart/ProductCart"));
@@ -97,14 +98,7 @@ function App() {
 								</Layout>
 							}
 						/>
-						<Route
-							path="/shipper"
-							element={
-								<Layout>
-									<Shipper />
-								</Layout>
-							}
-						/>
+
 						<Route
 							path="/whishlist"
 							element={
@@ -200,9 +194,9 @@ function App() {
 						<Route
 							path="/shipper"
 							element={
-								<RequireAdminAuth>
+								<RequireShipperAuth>
 									<ShipperDashboard />
-								</RequireAdminAuth>
+								</RequireShipperAuth>
 							}
 						/>
 						<Route
