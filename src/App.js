@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import { getUserCart, updateUserCart } from "./network/cartAPI";
 import { useSelector, useDispatch } from "react-redux";
 import { initUserCart } from "./Redux/Actions/cartActions";
-import "./App.css";
 import RequireAuth from "./Auh";
 import AboutUs from "./components/About-us/AboutUs";
 import RequireAdminAuth from "./AdminAuth";
 import Shipper from "./components/Shipper/Shipper";
 import RequireUserAuth from "./UserAuth";
+import ShipperDashboard from "./components/ShipperDashboard/ShipperDashboard"
+
+import "./App.css";
 
 const ProductPage = lazy(() => import("./components/ProductPage/ProductPage"));
 const MyBag = lazy(() => import("./components/Bag"));
@@ -188,6 +190,14 @@ function App() {
 							element={
 								<RequireAdminAuth>
 									<Dashboard />
+								</RequireAdminAuth>
+							}
+						/>
+						<Route
+							path="/shipper"
+							element={
+								<RequireAdminAuth>
+									<ShipperDashboard />
 								</RequireAdminAuth>
 							}
 						/>

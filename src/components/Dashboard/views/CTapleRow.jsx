@@ -36,14 +36,15 @@ function CTapleRow({ category, confirmDelete, openErrorMsg, index }) {
   const [open, setOpen] = useState(false);
 
   // update category
-  let config = {
-    headers: {
-      "content-type": "application/json",
-    },
-  };
   const handleClose = () => setOpen(false);
   const handleOpen = (id) => {
     setOpen(true);
+  };
+  let config = {
+    headers: {
+      "content-type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
   };
   const submitEdit = () => {
     if (cate.name.length > 0) {

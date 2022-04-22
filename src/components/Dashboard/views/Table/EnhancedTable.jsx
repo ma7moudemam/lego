@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Box from "@mui/material/Box";
@@ -13,7 +13,6 @@ import Order from "../Order";
 import FilterDialog from "./FilterDialog";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import { Button } from "@mui/material";
 function descendingComparator(a, b, orderBy) {
   if (new Date(b[orderBy]) < new Date(a[orderBy])) {
     return -1;
@@ -49,7 +48,7 @@ function stableSort(array, comparator) {
 function EnhancedTable({ orders, shippers }) {
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("order_date");
-  const [selected, setSelected] = React.useState([]);
+  const [selected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [propsOrders, setPropsOrders] = React.useState([...orders]);
@@ -75,7 +74,6 @@ function EnhancedTable({ orders, shippers }) {
   /**** notifications */
   const [notification, setnotification] = React.useState(false);
   const [addCategoryStatus, setAddCategoryStatus] = React.useState("test");
-  const [addProductNotify, setAddProductNotify] = React.useState(false);
 
   const openNotification = (message) => {
     setAddCategoryStatus(message);

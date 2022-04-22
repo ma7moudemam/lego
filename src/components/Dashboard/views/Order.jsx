@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import TableCell from "@mui/material/TableCell";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
@@ -16,21 +16,29 @@ import axios from "axios";
 export default function Order({ order, shippers }) {
   const [assignedShipper, setAssignedShipper] = useState("");
   const [changeShipper, setChangeShipper] = useState(false);
-  const [orderState, setOrderState] = useState({
+  const [orderState] = useState({
     isCanceled: order.isCanceled,
     isDelivered: order.isDelivered,
     isPending: order.isPending,
     isShipped: order.isShipped,
   });
+  let config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
   const submitShipper = () => {
     axios
-      .put("http://localhost:8080/dashboard/orders", {
-        id: order._id,
-        ...orderState,
-        shipper: assignedShipper,
-      })
+      .put(
+        "http://localhost:8080/dashboard/orders",
+        {
+          id: order._id,
+          ...orderState,
+          shipper: assignedShipper,
+        },
+        config
+      )
       .then((res) => {
-        console.log(res);
         setChangeShipper(false);
       })
       .catch((err) => console.log(err));

@@ -120,6 +120,7 @@ function Products() {
     return () => {
       URL.revokeObjectURL(objectUrl);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFile]);
 
   /************ delete handlers ************* */
@@ -131,12 +132,20 @@ function Products() {
     setOpenModel(true);
   };
   const deleteRejection = () => setOpenModel(false);
-
+  let config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
   const deleteProduct = () => {
     axios
-      .delete("http://localhost:8080/dashboard/products", {
-        data: { id: productDetails.id },
-      })
+      .delete(
+        "http://localhost:8080/dashboard/products",
+        {
+          data: { id: productDetails.id },
+        },
+        config
+      )
       .then((res) => {
         console.log(res);
         let index = searchOptions.findIndex(
@@ -217,22 +226,24 @@ function Products() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/dashboard/category")
+      .get("http://localhost:8080/dashboard/category", config)
       .then((res) => {
         // setCategories(res.data)
         setCategories(res.data.body);
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     // products
     axios
-      .get("http://localhost:8080/dashboard/products")
+      .get("http://localhost:8080/dashboard/products", config)
       .then((res) => {
         console.log(res);
         setProducts(res.data.products);
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     setSearchOptions(products);
@@ -389,8 +400,8 @@ function Products() {
               initialValues={{
                 name: "",
                 images: [""],
-                price: 0,
-                amount: 0,
+                price: "",
+                amount: "",
                 sold: 0,
                 rating: 0,
                 category: "",
@@ -419,6 +430,7 @@ function Products() {
                 let config = {
                   headers: {
                     "content-type": "multipart/form-data",
+                    Authorization: "Bearer " + localStorage.getItem("token"),
                   },
                   onUploadProgress: (progressEvent) => {
                     console.log(

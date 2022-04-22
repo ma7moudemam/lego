@@ -16,7 +16,6 @@ import {
   FormControl,
   Select,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
 import CancelIcon from "@mui/icons-material/Cancel";
 import axios from "axios";
@@ -33,11 +32,13 @@ function ProductCard({
   // to update specefications create model that will have the details
   const [editing, setEditing] = useState(false);
   const [singleProduct, setSingleProduct] = useState(product);
+  // eslint-disable-next-line no-unused-vars
   const [notValid, setNotValid] = useState(false);
 
   let config = {
     headers: {
       "content-type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
     },
   };
   const formik = useFormik({
@@ -57,7 +58,6 @@ function ProductCard({
       ),
     }),
     onSubmit: (values) => {
-      console.log(values);
       axios
         .put(
           "http://localhost:8080/dashboard/products",
@@ -81,20 +81,6 @@ function ProductCard({
         });
     },
   });
-
-  const submitEdit = () => {
-    if (
-      singleProduct.name.length &&
-      singleProduct.price &&
-      singleProduct.amount &&
-      singleProduct.category
-    ) {
-      setNotValid(false);
-      console.log(singleProduct);
-    } else {
-      setNotValid(true);
-    }
-  };
 
   const cancelEdit = () => {
     setSingleProduct({

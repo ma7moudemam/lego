@@ -17,11 +17,11 @@ gif or link to demo
 
 # Technology
 
-**Client:** Html5, CSS3, MUI, Bootstrap, React, React Router, Axios, Redux
+**Client:** `Html5`, `CSS3`, `MUI`, `Bootstrap`, `React`, `React Router`, `Axios`, `Redux`
 
-**Server:** Node, Express, MongoDB, Mongoose, Bcrypt, JWT, Multer.
+**Server:** `Node`, `Express`, `MongoDB`, `Mongoose`, `Bcrypt`, `JWT`, `Multer`.
 
-**Tools:** Strip API, Swiper, Formik.
+**Tools:** `Strip API`, `Swiper`, `Formik`.
 
 # Features
 

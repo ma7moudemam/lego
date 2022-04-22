@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -27,48 +27,11 @@ import CTableRow from "./CTapleRow";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  bcategory: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
-
 function Categories() {
   const theme = useTheme();
   const [categories, setCategories] = useState([]);
   const [searchOptions, setSearchOptions] = useState([...categories]);
   const [value, setValue] = useState(0);
-  const [productsName, setProductName] = useState([]);
   const [addCategoryStatus, setAddCategoryStatus] = useState("test");
   const [addCategoryNotify, setAddCategoryNotify] = useState(false);
   const openErrorMsg = (message) => {
@@ -115,9 +78,20 @@ function Categories() {
     setValue(index);
   };
 
+  let config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
   const confirmDelete = (id, close) => {
     axios
-      .delete("http://localhost:8080/dashboard/category", { data: { id: id } })
+      .delete("http://localhost:8080/dashboard/category", {
+        data: { id: id },
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
       .then((res) => {
         let index = searchOptions.findIndex((element) => element._id === id);
         categories.splice(index, 1);
@@ -133,9 +107,12 @@ function Categories() {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:8080/dashboard/category").then((res) => {
-      setCategories(res.data.body);
-    });
+    axios
+      .get("http://localhost:8080/dashboard/category", config)
+      .then((res) => {
+        setCategories(res.data.body);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -230,6 +207,7 @@ function Categories() {
                 let config = {
                   headers: {
                     "content-type": "application/json",
+                    Authorization: "Bearer " + localStorage.getItem("token"),
                   },
                 };
                 axios

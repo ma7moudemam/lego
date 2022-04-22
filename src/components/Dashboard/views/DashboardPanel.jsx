@@ -36,21 +36,30 @@ function DashboardPanel({ recentOrder, shippers }) {
       return Number(current) + Number(prev);
     });
   }
-
+  let config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
   useEffect(() => {
     let startDate = new Date().toLocaleDateString().split("/");
     let start = [startDate[0], "1", startDate[2]].join("/");
     axios
-      .post("http://localhost:8080/dashboard/order", {
-        date: {
-          start,
-          end: new Date().toLocaleDateString(),
+      .post(
+        "http://localhost:8080/dashboard/order",
+        {
+          date: {
+            start,
+            end: new Date().toLocaleDateString(),
+          },
         },
-      })
+        config
+      )
       .then((res) => {
         setOrders(res.data.orders);
       })
       .catch((err) => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
