@@ -1,19 +1,19 @@
 # Lego Clone
 
-Full-stack e-commerce website
+Lego clone website built with Node and React
 
 # Table of contents
 
-- [ Demo ](#demo)
+- [ Screenshoot ](#screenshoot)
 - [ Technology ](#technology)
 - [ Features ](#features)
 - [ Installation ](#installation)
 - [ Contributing ](#contributing)
 - [ Authors ](#authors)
 
-# Demo
+# Screenshoot
+![WhatsApp Image 2022-04-23 at 12 05 16 AM](https://user-images.githubusercontent.com/52351170/164801913-b34ee1b4-5250-4dd2-bec4-afde5a135085.jpeg)
 
-gif or link to demo
 
 # Technology
 
@@ -70,7 +70,24 @@ Start the server
   npm run start
 ```
 
-## 2. Run Frontend
+## 2. Add .env file
+
+To run this project, you will need to add the following environment variables to your .env file :
+
+```bash
+`NODE_MODE`
+`DB_URL`
+`PORT`
+`SECRET_KEY`
+`REFRESH_SECRET_KEY`
+`ADMIN_EMAIL`
+`ADMIN_PASSWORD`
+`STRIPE_SECRET_KEY`
+`WEB_APP_URL`
+`WEB_HOOK_SECRET`
+```
+
+## 3. Run Frontend
 
 Clone the project
 
@@ -96,24 +113,7 @@ Start the server
   npm run start
 ```
 
-## 3. Add .env file
-
-To run this project, you will need to add the following environment variables to your .env file :
-
-```bash
-`NODE_MODE`
-`DB_URL`
-`PORT`
-`SECRET_KEY`
-`REFRESH_SECRET_KEY`
-`ADMIN_EMAIL`
-`ADMIN_PASSWORD`
-`STRIPE_SECRET_KEY`
-`WEB_APP_URL`
-`WEB_HOOK_SECRET`
-```
-
-## 3. Run server
+## 4. Run server
 
 ```bash
 Run this on chrome: http://localhost:3000
