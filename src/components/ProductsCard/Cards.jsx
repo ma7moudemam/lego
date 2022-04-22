@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Rating from "@mui/material/Rating";
-import Stack from "@mui/material/Stack";
-import CardImg from "../../assets/imgs/1.jpg";
-import ReactStars from "react-rating-stars-component";
-import { render } from "react-dom";
 import { postProductRating } from "../../network/productsAPIs";
 //REDUX
 import { useDispatch } from "react-redux";
@@ -29,11 +24,8 @@ export default function Cards({ product }) {
 			}
 			setWishList(ids);
 		});
+		return () => {};
 	}, []);
-
-	const ratingChanged = (newRating) => {
-		postProductRating(newRating, product._id).then((res) => console.log(res));
-	};
 
 	const addItem = () => {
 		let token = localStorage.getItem("token");
@@ -59,7 +51,7 @@ export default function Cards({ product }) {
 		let token = localStorage.getItem("token");
 		if (token) {
 			deleteFromWishList(product).then(() => {
-				let newWishlist = wishList.filter((id) => id != product._id);
+				let newWishlist = wishList.filter((id) => id !== product._id);
 				setWishList(newWishlist);
 			});
 		} else {
@@ -69,7 +61,8 @@ export default function Cards({ product }) {
 
 	useEffect(() => {
 		setDidMount(true);
-	}, []);
+		return () => {};
+	});
 	useEffect(() => {
 		if (didMount) {
 			addOrRemove();
@@ -84,11 +77,11 @@ export default function Cards({ product }) {
 
 	const addOrRemove = () => {
 		if (fillHeart) {
+			let newWishlist = wishList.filter((id) => id !== product._id);
+			// if(newWishlist) return;
 			addWishList(product);
-			console.log("ADD PRODUCT ", product);
 		} else {
 			removeFromWishList(product);
-			console.log("REMOVE PRODUCT ", product);
 		}
 	};
 	return (
@@ -99,21 +92,31 @@ export default function Cards({ product }) {
 						<i
 							onClick={toggling}
 							className={fillHeart || wishList.includes(product._id) ? "fa fa-heart" : "far fa-heart"}
-							// className="fa fa-heart"
 						></i>
 					</span>
 					<span>Add to wish list</span>
 				</div>
 				<div className="image-container" style={{ width: "100%", overflow: "hidden" }}>
-					<img src={`http://localhost:8080/images/${product?.images?.[0]}`} className="product-card-img" />
+					<img
+						alt=""
+						src={`http://localhost:8080/images/${product?.images?.[0]}`}
+						className="product-card-img"
+					/>
 				</div>
 				{/* <div className="new-item">new</div> */}
 				<div className="card-name">
 					<p>
-						<a href="#">{product.name}</a>
+						<span href="#">{product.name}</span>
 					</p>
 				</div>
 				<span>
+					{/* <ReactStars
+                  count={5}
+                  onChange={ratingChanged}
+                  size={24}
+                  activeColor="#ffd700"
+                  value={product.rating ? product.rating : 0}
+                /> */}
 					<ReviewStars count={product.rating} />
 				</span>
 				<div className="card-price">{product.price} EGP</div>

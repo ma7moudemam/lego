@@ -5,10 +5,10 @@ export default function ReviewStars(props) {
 		const starsArray = [];
 		if (count) {
 			for (let i = 0; i < count; i++) {
-				starsArray.push(<i className="fas fa-star yellow-star"></i>);
+				starsArray.push(<i key={i} className="fas fa-star yellow-star"></i>);
 			}
-			for (let i = 0; i < 5 - count; i++) {
-				starsArray.push(<i className="fas fa-star gray-star"></i>);
+			for (let i = count; i < 5; i++) {
+				starsArray.push(<i key={i} className="fas fa-star gray-star"></i>);
 			}
 		}
 		return starsArray;

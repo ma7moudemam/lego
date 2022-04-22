@@ -9,6 +9,7 @@ function WishListCart({product}) {
 
   const navigate = useNavigate();
   const [wishList, setWishList] = useState([]);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,6 +18,7 @@ function WishListCart({product}) {
 			setWishList(ids);
 		});
 	}, []);
+  
  
 	const removeFromWishList = (product) => {
 		let token = localStorage.getItem("token");
@@ -58,7 +60,6 @@ function WishListCart({product}) {
             {product.name}
           </Link>
           <div className="stars">
-            
           </div>
           <p className="price">{product.price} EGP</p>
           <input type="button" value="Add to Bag"  onClick={() => addItem()}/>

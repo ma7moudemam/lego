@@ -1,10 +1,11 @@
 import React from "react";
-import { NavLink, useLocation, useParams } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import "./Success.css";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { resetCart } from "../../Redux/Actions/cartActions";
 // clear cart
 
 export default function Success() {
@@ -16,6 +17,7 @@ export default function Success() {
 	// shipper will get updated by the order
 	//shipper will update (withShipper, isShipped, isDeliverd, isCanceled)
 	// user will have get tracker ui
+	const dispatch = useDispatch();
 	const cart = useSelector((store) => store.cart);
 	const cartProducts = Object.values(cart.products);
 	const products = cartProducts.map((product) => {
@@ -30,13 +32,11 @@ export default function Success() {
 	const total_price = cart.totalPrice;
 	useEffect(() => {
 		const user = jwt_decode(localStorage.getItem("token")).user._id;
-		console.log("user", user);
-		console.log("products", products);
-		console.log("total price", total_price);
 		axios
 			.post("http://localhost:8080/order", { user, products, total_price, session_id })
-			.then((res) => console.log("order is added"))
-			.catch((err) => console.log(err));
+			.then((res) => dispatch(resetCart()))
+			.catch((err) => {});
+		return () => {};
 	});
 
 	return (

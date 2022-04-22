@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
@@ -17,7 +17,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
 export default function UpdateForm() {
-	const [users, setUsers] = useState(() => jwt_decode(localStorage.getItem("token")));
+	const [users] = useState(() => jwt_decode(localStorage.getItem("token")));
 	const [isLoading, setIsLoading] = useState(false);
 	const [notification, setNotification] = useState(false);
 	const [notificationMessage, setNotificationMessage] = useState("");
@@ -33,7 +33,6 @@ export default function UpdateForm() {
 
 		setNotification(false);
 	};
-	// console.log(users)
 	let navigate = useNavigate();
 	const formik = useFormik({
 		initialValues: {
@@ -73,9 +72,6 @@ export default function UpdateForm() {
 
 		onSubmit: (values) => {
 			setIsLoading(true);
-			console.log("submited");
-			console.log(JSON.stringify(values, null, 2));
-
 			const address = {
 				city: values.city,
 				street: values.street,
@@ -103,7 +99,6 @@ export default function UpdateForm() {
 				day: values.day,
 			};
 
-			console.log(body);
 			axios
 				.post("http://localhost:8080/account/update", body, {
 					headers: {
@@ -111,15 +106,13 @@ export default function UpdateForm() {
 					},
 				})
 				.then((res) => {
-					console.log("update response", res.data);
 					localStorage.setItem("token", res.data.token);
 					setIsLoading(false);
 					navigate("/whishlist/personal", { state: { message: res.data.message } });
 				})
 				.catch((err) => {
-					console.log(err);
 					setIsLoading(false);
-					openNotificationMsg(err.response.data.Error);
+					openNotificationMsg("Something went wrong Please try again");
 				});
 		},
 	});

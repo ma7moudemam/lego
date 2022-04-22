@@ -7,12 +7,12 @@ import { initUserCart } from "./Redux/Actions/cartActions";
 import RequireAuth from "./Auh";
 import AboutUs from "./components/About-us/AboutUs";
 import RequireAdminAuth from "./AdminAuth";
+import Shipper from "./components/Shipper/Shipper";
 import RequireUserAuth from "./UserAuth";
 import ShipperDashboard from "./components/ShipperDashboard/ShipperDashboard"
 
 import "./App.css";
 
-const AccordionProduct = lazy(() => import("./components/AccordionProduct/AccordionProduct"));
 const MyBag = lazy(() => import("./components/Bag"));
 const ProductCart = lazy(() => import("./components/ProductCart/ProductCart"));
 const Personal = lazy(() => import("./components/personal&address/Personal"));
@@ -31,7 +31,6 @@ const Checkout = lazy(() => import("./components/Checkout/Checkout"));
 const Success = lazy(() => import("./components/Success/Success"));
 const Canceled = lazy(() => import("./components/Canceled/Canceled"));
 const NotFound = lazy(() => import("./components/NotFound/NotFound"));
-const Navbar = lazy(() => import("./components/Navbar/Navbar"));
 const ContactUs = lazy(() => import("./components/Contact-us/ContactUs"));
 const MyOrder = lazy(() => import("./components/Myorder/MyOrder"));
 const WishListContent = lazy(() => import("./components/wishList/wishListContent/WishlistContent"));
@@ -41,19 +40,19 @@ function App() {
 	const dispatch = useDispatch();
 	const cart = useSelector((store) => store.cart);
 	const [initCart, setInitCart] = useState(false);
-	const [token, setToken] = useState(localStorage.getItem("token"));
+	const [token] = useState(localStorage.getItem("token"));
 
 	useEffect(() => {
 		if (token) {
 			if (initCart) {
 				updateUserCart({ ...cart })
-					.then((res) => console.log("===>UPDATE CART ", res.data))
-					.catch((err) => console.log("==>ERROR UPDATE CART ,", err));
+					.then()
+					.catch();
 			} else {
 				setInitCart(true);
 				getUserCart()
 					.then((res) => dispatch(initUserCart(res.data)))
-					.catch((err) => console.log("==>ERROR CART ,", err));
+					.catch();
 			}
 		}
 	}, [cart, token]);
@@ -98,14 +97,14 @@ function App() {
 								</Layout>
 							}
 						/>
-						{/* <Route
+						<Route
 							path="/shipper"
 							element={
 								<Layout>
 									<Shipper />
 								</Layout>
 							}
-						/> */}
+						/>
 						<Route
 							path="/whishlist"
 							element={

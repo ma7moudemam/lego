@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
-
-import { FacebookLoginButton } from "react-social-login-buttons";
-import { GoogleLoginButton } from "react-social-login-buttons";
-
 import FormControl from "@mui/material/FormControl";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -22,7 +16,6 @@ import Logo from "../../assets/imgs/LEGOAccount-Logo.svg";
 import "./AccountDetails.css";
 
 export default function AccountSecurity() {
-	const [users, setUsers] = useState(() => jwt_decode(localStorage.getItem("token")));
 	let navigate = useNavigate();
 	const formik = useFormik({
 		initialValues: {
@@ -56,10 +49,9 @@ export default function AccountSecurity() {
 				})
 				.then((res) => {
 					localStorage.clear();
-					console.log(res);
 					navigate("/login");
 				})
-				.catch((err) => console.log(err));
+				.catch((err) => {});
 		},
 	});
 

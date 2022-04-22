@@ -1,4 +1,4 @@
-import {ADD_TO_BAG,REMOVE_FROM_BAG,DELETE_FROM_BAG,INIT_USER_CART} from '../Actions/cartActions'
+import {ADD_TO_BAG,REMOVE_FROM_BAG,DELETE_FROM_BAG,INIT_USER_CART, RESET_CART} from '../Actions/cartActions'
 const initialState={
     products:{},
     totalPrice:0,
@@ -77,6 +77,13 @@ const cartReducer = (state=initialState,action)=>{
                     totalItemsCount:action.payload.carts.totalItemsCount,
 
                 }
+            case RESET_CART: {
+                return {
+                    products:{},
+                    totalPrice: 0,
+                    totalItemsCount: 0,
+                }
+            }
         default:return state
     }
 }

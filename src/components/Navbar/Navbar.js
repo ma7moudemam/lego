@@ -16,9 +16,11 @@ export default function Navbar(props) {
 						<img src={legoLogo} className="nav-list-item" alt="logo" />
 					</Link>
 
-					<li className="nav-list-item">
-						<NavLink to="/shop-now">shop</NavLink>
-					</li>
+					{!props.isAdmin && (
+						<li className="nav-list-item">
+							<NavLink to="/shop-now">shop</NavLink>
+						</li>
+					)}
 
 					<li className="nav-list-item">
 						<NavLink to="/about-us">about us</NavLink>
