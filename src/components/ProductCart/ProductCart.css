@@ -4,8 +4,8 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    justify-content: stretch;
-    flex: 1 1 400px;
+    justify-content: space-between;
+    flex: 1 0 320px;
     gap: 0.5rem;
     padding: 1rem;
     width: 320px;
@@ -109,7 +109,7 @@
 }
 
 .gray-star {
-    color: #ffcf00cc;
+    color: #ffcf0044;
 }
 
 @media (max-width:950px) {

@@ -89,7 +89,7 @@ export default function General() {
 					<div className={Style["content-info"]}>
 						{/* <span className={Style["wish-general-date"]}>Last updated: 1/28/2022</span> */}
 						<span className={Style["wish-general-cost"]}>
-							Total cost: {wishList?.length > 0 ? `${calaculateTotal()} EGP` : "0.00 EGP"}
+							Total cost: {wishList?.length > 0 ? `${calaculateTotal().toFixed(2)} EGP` : "0.00 EGP"}
 						</span>
 					</div>
 					{/* <WishListProducts /> */}

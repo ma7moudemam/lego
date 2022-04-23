@@ -1,12 +1,14 @@
 .recommended{
     display: flex;
     justify-content: center;
+    align-items: stretch;
     width: 100%;
 }
 
 .recommended .boxes{
     display: flex;
     flex-direction: row;
+    align-items: stretch;
     gap: 30px;
     margin-top: 20px;
     margin: 20px auto;

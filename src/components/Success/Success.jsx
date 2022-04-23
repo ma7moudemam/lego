@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import "./Success.css";
@@ -18,8 +18,10 @@ export default function Success() {
 	//shipper will update (withShipper, isShipped, isDeliverd, isCanceled)
 	// user will have get tracker ui
 	const dispatch = useDispatch();
+	const [state, setState] = useState(false);
 	const cart = useSelector((store) => store.cart);
 	const cartProducts = Object.values(cart.products);
+	console.log(cartProducts);
 	const products = cartProducts.map((product) => {
 		return {
 			product: Number(product._id),
@@ -31,14 +33,16 @@ export default function Success() {
 	const session_id = location.search.split("=")[1];
 	const total_price = cart.totalPrice;
 	useEffect(() => {
-		console.log("useEffect", products);
-		const user = jwt_decode(localStorage.getItem("token")).user._id;
-		axios
-			.post("http://localhost:8080/order", { user, products, total_price, session_id })
-			.then((res) => dispatch(resetCart()))
-			.catch((err) => {});
-		return () => {};
-	}, []);
+		if (cartProducts.length) {
+			const user = jwt_decode(localStorage.getItem("token")).user._id;
+			axios
+				.post("http://localhost:8080/order", { user, products, total_price, session_id })
+				.then((res) => dispatch(resetCart()))
+				.catch((err) => {});
+		} else {
+			setState(true);
+		}
+	}, [cartProducts.length]);
 
 	return (
 		<>

@@ -37,7 +37,7 @@ export default function Promo() {
 				<div className="py-3">
 					<div className="d-flex justify-content-between">
 						<p className="fs-5">Order value ({totalItemsCount}) items</p>
-						<p className="fs-5">{totalPrice ? `${totalPrice} EGP` : "-"}</p>
+						<p className="fs-5">{totalPrice ? `${totalPrice.toFixed(2)} EGP` : "-"}</p>
 					</div>
 					<div className="d-flex justify-content-between">
 						<p className="fs-5">Shipping cost</p>
@@ -46,7 +46,11 @@ export default function Promo() {
 					<div className="d-flex justify-content-between">
 						<p className="fs-5">Order Total</p>
 						<p className="fs-5">
-							{totalPrice ? (totalPrice > 1000 ? `${totalPrice} EGP` : `${totalPrice + 30} EGP`) : "-"}
+							{totalPrice
+								? totalPrice > 1000
+									? `${totalPrice.toFixed(2)} EGP`
+									: `${Number(totalPrice.toFixed(2)) + 30} EGP`
+								: "-"}
 						</p>
 					</div>
 					<button

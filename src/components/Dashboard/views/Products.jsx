@@ -208,7 +208,6 @@ function Products() {
 		setPage(0);
 		if (event.target.value !== "") {
 			setCategoryFilter(event.target.value);
-			console.log(products);
 			let categoryFilter = categories.filter((category) => category._id === event.target.value);
 			let filterProducts = products.filter((product) => product.category?.name === categoryFilter[0].name);
 			setSearchOptions(filterProducts);

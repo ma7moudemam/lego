@@ -20,7 +20,7 @@ export default function StripeCheckout() {
 			quantity: product.quantity,
 			title: product.name,
 			images: product.images.map((image) => `http://localhost:8080/images/${image}`),
-			price: product.amount,
+			price: product.price,
 		};
 	});
 	const hideErrorMsg = (event, reason) => {

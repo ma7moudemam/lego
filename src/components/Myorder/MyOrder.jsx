@@ -58,7 +58,7 @@ export default function MyOrder() {
 										}) => (
 											<tr key={_id}>
 												<td>{shipper ? shipper.name : "-"}</td>
-												<td>
+												<td style={{ width: "100px" }}>
 													<span
 														className={Style["order-status-code"]}
 														style={{
@@ -99,7 +99,7 @@ export default function MyOrder() {
 															listStyle: "none",
 															display: "flex",
 															justifyContent: "center",
-															gap: "1.5rem",
+															gap: "0.125rem 0.25rem",
 															flexWrap: "wrap",
 														}}
 													>
@@ -109,7 +109,7 @@ export default function MyOrder() {
 																	display: "flex",
 																	justifyContent: "center",
 																	alignItems: "center",
-																	gap: "1rem",
+																	gap: "0.125rem 0.25rem",
 																}}
 																key={p?.product?._id}
 															>
@@ -126,6 +126,7 @@ export default function MyOrder() {
 																	style={{
 																		display: "flex",
 																		flexDirection: "column",
+																		width: "125px",
 																		fontSize: "1rem",
 																		textTransform: "capitalize",
 																	}}
@@ -142,7 +143,9 @@ export default function MyOrder() {
 														))}
 													</ul>
 												</td>
-												<td>{calaculateTotal(products)} EGP</td>
+												<td style={{ width: "100px" }}>
+													{calaculateTotal(products).toFixed(2)} EGP
+												</td>
 											</tr>
 										)
 									)}

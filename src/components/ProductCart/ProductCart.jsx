@@ -17,29 +17,27 @@ function ProductCart({ product }) {
 		}
 	};
 	return (
-		<div>
-			<div className="recommended-card">
-				<div className="image-container" style={{ width: "100%", overflow: "hidden" }}>
-					<img
-						onClick={() => navigate("/card", { state: { _id: product._id } })}
-						src={`http://localhost:8080/images/${product?.images?.[0]}`}
-						className="product-card-img"
-					/>
-				</div>
-				{/* <div className="new-item">new</div> */}
-				<div className="card-name">
-					<p onClick={() => navigate("/card", { state: { _id: product._id } })} style={{ cursor: "pointer" }}>
-						{product?.name}
-					</p>
-				</div>
-				<span>
-					<ReviewStars count={product?.rating} />
-				</span>
-				<div className="card-price">{product?.price} EGP</div>
-				<button className="card-button-exist" onClick={() => addItem()}>
-					Add to Bag
-				</button>
+		<div className="recommended-card">
+			<div className="image-container" style={{ width: "100%", overflow: "hidden" }}>
+				<img
+					onClick={() => navigate("/card", { state: { _id: product._id } })}
+					src={`http://localhost:8080/images/${product?.images?.[0]}`}
+					className="product-card-img"
+				/>
 			</div>
+			{/* <div className="new-item">new</div> */}
+			<div className="card-name">
+				<p onClick={() => navigate("/card", { state: { _id: product._id } })} style={{ cursor: "pointer" }}>
+					{product?.name}
+				</p>
+			</div>
+			<span>
+				<ReviewStars count={product?.rating} />
+			</span>
+			<div className="card-price">{product?.price} EGP</div>
+			<button className="card-button-exist" onClick={() => addItem()}>
+				Add to Bag
+			</button>
 		</div>
 	);
 }
