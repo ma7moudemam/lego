@@ -69,7 +69,7 @@ export default function AccountSecurity() {
 							</button>
 							<img src={Logo} alt="" className="Logo-img-account rounded" style={{ marginLeft: "0" }} />
 							<button className="closing-btn">
-								<Link to={`/my-account`} style={{ textDecoration: "none", color: "black" }}>
+								<Link to={`/whishlist/personal`} style={{ textDecoration: "none", color: "black" }}>
 									<CloseIcon fontSize="large" />
 								</Link>
 							</button>
