@@ -75,7 +75,7 @@ function Login() {
 		},
 	});
 	useEffect(() => {
-		if (Location.state) {
+		if (Location?.state?.message) {
 			openNotificationMsg(Location.state.message);
 		}
 	}, []);

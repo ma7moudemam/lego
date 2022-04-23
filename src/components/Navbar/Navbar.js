@@ -5,6 +5,7 @@ import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 export default function Navbar(props) {
 	const totalItemsCount = useSelector((store) => store.cart.totalItemsCount);
+	console.log(props.isShipper);
 	return (
 		<div className="nav-container">
 			<nav className="nav-bar">

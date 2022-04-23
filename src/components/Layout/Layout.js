@@ -14,7 +14,11 @@ export default function Layout(props) {
 		if (isLoggedIn) {
 			const decode = jwt_decode(localStorage.getItem("token")).role;
 			if (decode === "admin") setIsAdmin(true);
-			else setIsAdmin(false);
+			else if (decode === "shipper") setIsShipper(true);
+			else {
+				setIsAdmin(false);
+				setIsShipper(false);
+			}
 		}
 	}, [isLoggedIn]);
 	const [openMenuBar, setOpenMenuBar] = useState(false);
