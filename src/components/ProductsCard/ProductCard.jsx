@@ -98,7 +98,7 @@ export default function ProductCard() {
 							</span>
 						</div>
 						{/* <!-- cards ccontainer --> */}
-						<Grid container>
+						<Grid container sx={{ display: "flex", alignItems: "stretch" }}>
 							{products.map((item) => (
 								<Grid key={item._id} item xs={12} sm={6} md={4} lg={3}>
 									<Cards isAdmin={isAdmin} product={item} />

@@ -87,8 +87,14 @@ ul.breadcrumb li+li:before {
 .cards {
     width: 75%;
     flex-grow: 1;
+    height: 100%;
+    align-self: stretch;
     display: flex;
     flex-wrap: wrap;
+}
+
+.card {
+    height: 100%;
 }
 
 /******************** cards ********************/
@@ -169,7 +175,7 @@ ul.breadcrumb li+li:before {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    justify-content: stretch;
+    justify-content: space-between;
     gap: 0.5rem;
     padding: 1rem;
     width: 100%;

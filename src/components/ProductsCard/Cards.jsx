@@ -93,47 +93,45 @@ export default function Cards({ isAdmin, product }) {
 		}
 	};
 	return (
-		<div>
-			<div className="card">
-				<div className="add-to-wishlist">
-					<span onClick={addOrRemove}>
-						<i
-							onClick={toggling}
-							className={fillHeart || wishList.includes(product._id) ? "fa fa-heart" : "far fa-heart"}
-						></i>
-					</span>
-					<span>Add to wish list</span>
-				</div>
-				<div className="image-container" style={{ width: "100%", overflow: "hidden" }}>
-					<img
-						alt=""
-						src={`http://localhost:8080/images/${product?.images?.[0]}`}
-						className="product-card-img"
-						style={{ cursor: "pointer" }}
-						onClick={() => navigate("/card", { state: { _id: product._id } })}
-					/>
-				</div>
-				{/* <div className="new-item">new</div> */}
-				<div className="card-name">
-					<p onClick={() => navigate("/card", { state: { _id: product._id } })} style={{ cursor: "pointer" }}>
-						{product.name}
-					</p>
-				</div>
-				<span>
-					{/* <ReactStars
+		<div className="card">
+			<div className="add-to-wishlist">
+				<span onClick={addOrRemove}>
+					<i
+						onClick={toggling}
+						className={fillHeart || wishList.includes(product._id) ? "fa fa-heart" : "far fa-heart"}
+					></i>
+				</span>
+				<span>Add to wish list</span>
+			</div>
+			<div className="image-container" style={{ width: "100%", overflow: "hidden" }}>
+				<img
+					alt=""
+					src={`http://localhost:8080/images/${product?.images?.[0]}`}
+					className="product-card-img"
+					style={{ cursor: "pointer" }}
+					onClick={() => navigate("/card", { state: { _id: product._id } })}
+				/>
+			</div>
+			{/* <div className="new-item">new</div> */}
+			<div className="card-name">
+				<p onClick={() => navigate("/card", { state: { _id: product._id } })} style={{ cursor: "pointer" }}>
+					{product.name}
+				</p>
+			</div>
+			<span>
+				{/* <ReactStars
                   count={5}
                   onChange={ratingChanged}
                   size={24}
                   activeColor="#ffd700"
                   value={product.rating ? product.rating : 0}
                 /> */}
-					<ReviewStars count={product.rating} />
-				</span>
-				<div className="card-price">{product.price} EGP</div>
-				<button className="card-button-exist" onClick={() => addItem()}>
-					Add to Bag
-				</button>
-			</div>
+				<ReviewStars count={product.rating} />
+			</span>
+			<div className="card-price">{product.price} EGP</div>
+			<button className="card-button-exist" onClick={() => addItem()}>
+				Add to Bag
+			</button>
 		</div>
 	);
 }
