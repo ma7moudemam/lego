@@ -130,7 +130,7 @@ function Categories() {
         sx={{ borderRight: 1, borderColor: "divider" }}
       >
         <Tab
-          label="Update"
+          label="Edit"
           icon={<EditIcon color="primary" />}
           {...allyprops(0)}
         />

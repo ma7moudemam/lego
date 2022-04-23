@@ -33,6 +33,7 @@ import { useAutocomplete } from "@mui/base/AutocompleteUnstyled";
 import ProductCard from "./ProductCard";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Input = styled("input")({
   display: "none",
@@ -89,6 +90,7 @@ function Products() {
   const [selectedFile, setSelectedFile] = useState([]);
   const [preview, setPreview] = useState([]);
   const [page, setPage] = useState(0);
+  const [progress, setProgress] = React.useState(0);
   const {
     getRootProps,
     getInputProps,
@@ -262,7 +264,7 @@ function Products() {
         // sx={{ borderRight: 1, borderColor: "divider" }}
       >
         <Tab
-          label="Update"
+          label="Edit"
           icon={<EditIcon color="primary" />}
           {...allyprops(0)}
         />
@@ -463,13 +465,16 @@ function Products() {
                     Authorization: "Bearer " + localStorage.getItem("token"),
                   },
                   onUploadProgress: (progressEvent) => {
-                    console.log(
-                      "progress:" +
-                        Math.round(
-                          (progressEvent.loaded / progressEvent.total) * 100
-                        ) +
-                        "%"
+                    let prog = Math.round(
+                      (progressEvent.loaded * 100) / progressEvent.total
                     );
+                    console.log("progress:" + prog + "%");
+                    // setProgress(prog);
+                    // if (prog == 100) {
+                    //   setProgress(0);
+                    // } else {
+
+                    // }
                   },
                 };
                 axios
@@ -484,7 +489,6 @@ function Products() {
                     setSearchOptions([response.data.data, ...searchOptions]);
                     resetForm();
                     setPreview([]);
-
                     // [...imgPreviewer].forEach((img) => {
                     //   img.remove();
                     // });
@@ -510,8 +514,10 @@ function Products() {
                       openErrorMsg(
                         "Faild to upload your images's size is too large"
                       );
+                      // setProgress(0);
                     } else {
                       openErrorMsg(error.response.data.message);
+                      // setProgress(0);
                     }
                     setPreview([]);
                   });
@@ -656,6 +662,10 @@ function Products() {
                       <Button variant="contained" type="submit" color="success">
                         Add Product
                       </Button>
+                      <CircularProgress
+                        variant="determinate"
+                        value={progress}
+                      />
                     </Grid>
                     <Grid item xs={12} md={6} lg={6}>
                       {selectedFile.length > 0 ? (
