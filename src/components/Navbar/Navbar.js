@@ -31,6 +31,11 @@ export default function Navbar(props) {
 							<NavLink to="/dashboard">dashboard</NavLink>
 						</li>
 					)}
+					{props.isShipper && (
+						<li className="nav-list-item">
+							<NavLink to="/shipper">dashboard</NavLink>
+						</li>
+					)}
 				</ul>
 				<div className="nav-icons">
 					{/* <div className="content">
@@ -47,7 +52,7 @@ export default function Navbar(props) {
 						</div>
 						<div className="search-content"></div>
 					</div> */}
-					{!props.isAdmin && (
+					{!props.isAdmin && !props.isShipper && (
 						<>
 							<NavLink to={props.isLoggedIn ? "/whishlist/personal" : "/login"} className="nav-user-icon">
 								<img src={legoUser} className="svg" alt="account" />

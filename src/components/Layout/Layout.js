@@ -9,6 +9,7 @@ import jwt_decode from "jwt-decode";
 export default function Layout(props) {
 	const [isLoggedIn, setIsLoggedIn] = useState(() => (localStorage.getItem("token") ? true : false));
 	const [isAdmin, setIsAdmin] = useState(false);
+	const [isShipper, setIsShipper] = useState(false);
 	useEffect(() => {
 		if (isLoggedIn) {
 			const decode = jwt_decode(localStorage.getItem("token")).role;
@@ -29,9 +30,17 @@ export default function Layout(props) {
 				toggleMenu={toggleMenu}
 				isLoggedIn={isLoggedIn}
 				isAdmin={isAdmin}
+				isShipper={isShipper}
 			/>
-			<Utility isAdmin={isAdmin} setIsAdmin={setIsAdmin} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-			<Navbar isAdmin={isAdmin} toggleMenu={toggleMenu} isLoggedIn={isLoggedIn} />
+			<Utility
+				isShipper={isShipper}
+				setIsShipper={setIsShipper}
+				isAdmin={isAdmin}
+				setIsAdmin={setIsAdmin}
+				isLoggedIn={isLoggedIn}
+				setIsLoggedIn={setIsLoggedIn}
+			/>
+			<Navbar isShipper={isShipper} isAdmin={isAdmin} toggleMenu={toggleMenu} isLoggedIn={isLoggedIn} />
 			<main>{React.cloneElement(props.children, { isLoggedIn })}</main>
 			<Footer />
 		</>

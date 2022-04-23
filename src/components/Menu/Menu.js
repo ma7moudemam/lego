@@ -44,7 +44,14 @@ export default function Menu(props) {
 								</NavLink>
 							</li>
 						)}
-						{!props.isAdmin && (
+						{props.isShipper && (
+							<li className="menu-bar-list-item">
+								<NavLink onClick={() => props.setOpenMenuBar(false)} to="/shipper">
+									DASHBOARD
+								</NavLink>
+							</li>
+						)}
+						{!props.isAdmin && !props.isShipper && (
 							<>
 								<li className="menu-bar-list-item">
 									<NavLink

@@ -5,15 +5,15 @@ import { getUserCart, updateUserCart } from "./network/cartAPI";
 import { useSelector, useDispatch } from "react-redux";
 import { initUserCart } from "./Redux/Actions/cartActions";
 import RequireAuth from "./Auh";
-import AboutUs from "./components/About-us/AboutUs";
 import RequireAdminAuth from "./AdminAuth";
-import Shipper from "./components/Shipper/Shipper";
 import RequireUserAuth from "./UserAuth";
-import ShipperDashboard from "./components/ShipperDashboard/ShipperDashboard"
+import RequireShipperAuth from "./ShipperAuth";
+import RequireOnlyUserAuth from "./OnlyUserAuth";
 
 import "./App.css";
-import RequireShipperAuth from "./ShipperAuth";
 
+const AboutUs = lazy(() => import("./components/About-us/AboutUs"));
+const ShipperDashboard = lazy(() => import("./components/ShipperDashboard/ShipperDashboard"));
 const ProductPage = lazy(() => import("./components/ProductPage/ProductPage"));
 const MyBag = lazy(() => import("./components/Bag"));
 const Personal = lazy(() => import("./components/personal&address/Personal"));
@@ -75,9 +75,11 @@ function App() {
 							path="/mybag"
 							element={
 								<RequireAuth>
-									<Layout>
-										<MyBag />
-									</Layout>
+									<RequireOnlyUserAuth>
+										<Layout>
+											<MyBag />
+										</Layout>
+									</RequireOnlyUserAuth>
 								</RequireAuth>
 							}
 						/>
@@ -102,9 +104,11 @@ function App() {
 							path="/whishlist"
 							element={
 								<RequireAuth>
-									<Layout>
-										<Wishlist />
-									</Layout>
+									<RequireOnlyUserAuth>
+										<Layout>
+											<Wishlist />
+										</Layout>
+									</RequireOnlyUserAuth>
 								</RequireAuth>
 							}
 						>
@@ -151,7 +155,9 @@ function App() {
 							path="/details"
 							element={
 								<RequireAuth>
-									<AccountDetails />
+									<RequireOnlyUserAuth>
+										<AccountDetails />
+									</RequireOnlyUserAuth>
 								</RequireAuth>
 							}
 						/>
@@ -159,7 +165,9 @@ function App() {
 							path="/info"
 							element={
 								<RequireAuth>
-									<AccountInformation />
+									<RequireOnlyUserAuth>
+										<AccountInformation />
+									</RequireOnlyUserAuth>
 								</RequireAuth>
 							}
 						/>
@@ -167,7 +175,9 @@ function App() {
 							path="/security"
 							element={
 								<RequireAuth>
-									<AccountSecurity />
+									<RequireOnlyUserAuth>
+										<AccountSecurity />
+									</RequireOnlyUserAuth>
 								</RequireAuth>
 							}
 						/>
@@ -175,7 +185,9 @@ function App() {
 							path="/delete-account"
 							element={
 								<RequireAuth>
-									<DeleteAccount />
+									<RequireOnlyUserAuth>
+										<DeleteAccount />
+									</RequireOnlyUserAuth>
 								</RequireAuth>
 							}
 						/>
@@ -199,9 +211,11 @@ function App() {
 							path="/checkout"
 							element={
 								<RequireAuth>
-									<Layout>
-										<Checkout />
-									</Layout>
+									<RequireOnlyUserAuth>
+										<Layout>
+											<Checkout />
+										</Layout>
+									</RequireOnlyUserAuth>
 								</RequireAuth>
 							}
 						/>
@@ -209,9 +223,11 @@ function App() {
 							path="/success"
 							element={
 								<RequireAuth>
-									<Layout>
-										<Success />
-									</Layout>
+									<RequireOnlyUserAuth>
+										<Layout>
+											<Success />
+										</Layout>
+									</RequireOnlyUserAuth>
 								</RequireAuth>
 							}
 						/>
@@ -219,9 +235,11 @@ function App() {
 							path="/canceled"
 							element={
 								<RequireAuth>
-									<Layout>
-										<Canceled />
-									</Layout>
+									<RequireOnlyUserAuth>
+										<Layout>
+											<Canceled />
+										</Layout>
+									</RequireOnlyUserAuth>
 								</RequireAuth>
 							}
 						/>

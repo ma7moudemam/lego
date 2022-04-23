@@ -29,6 +29,7 @@ export default function Utility(props) {
 		localStorage.clear();
 		props.setIsLoggedIn(false);
 		props.setIsAdmin(false);
+		props.setIsShipper(false);
 		dispatch(resetCart());
 		openNotificationMsg("You Logged Out Successfully");
 		Navigate("/home");
@@ -40,7 +41,7 @@ export default function Utility(props) {
 					<span>FREE Shipping with orders over 1000 EGP!</span>
 				</div>
 				<div className="utility-bar-styles">
-					{!props.isAdmin && (
+					{!props.isAdmin && !props.isShipper && (
 						<NavLink to={props.isLoggedIn ? "/whishlist/personal" : "/login"} className="user-icon">
 							<img src={legoUser} className="svg" />
 							{props.isLoggedIn
