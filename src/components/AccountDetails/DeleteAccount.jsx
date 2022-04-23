@@ -28,11 +28,14 @@ export default function AccountSecurity() {
 				headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
 			})
 			.then((res) => {
+				console.log("Delete account then");
 				localStorage.clear();
 				setIsLoading(false);
-				navigate("/home");
+				navigate("/home", { state: { isLoggedIn: false } });
 			})
-			.catch((err) => {});
+			.catch((err) => {
+				setIsLoading(false);
+			});
 	};
 
 	const handelLogOutAction = () => {
@@ -40,6 +43,7 @@ export default function AccountSecurity() {
 		// To insure token Remove
 		if (localStorage.getItem("token")) {
 			localStorage.clear();
+			navigate("/");
 		} else {
 			navigate("/");
 		}
@@ -49,7 +53,7 @@ export default function AccountSecurity() {
 		<>
 			{isLoading && (
 				<div className="inner-loader">
-					<h1>Logging you in please hold</h1>
+					<h1>Loading please hold</h1>
 					<div className="lds-ring">
 						<div></div>
 						<div></div>
@@ -150,9 +154,7 @@ export default function AccountSecurity() {
 										type=""
 										onClick={handelDeleteAction}
 									>
-										<Link to={`/`} style={{ textDecoration: "none", color: "white" }}>
-											Yes, Delete it
-										</Link>
+										Yes, Delete it
 									</button>
 									<button
 										className="btn mb-2"

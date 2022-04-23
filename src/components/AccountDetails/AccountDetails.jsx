@@ -17,7 +17,7 @@ import InfoImage from "../../assets/imgs/information_icon.svg";
 import ScurityIcon from "../../assets/imgs/esecurity_icon.svg";
 
 import "./AccountDetails.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function AccountDetails() {
 	return (
@@ -29,9 +29,9 @@ export default function AccountDetails() {
 						<div className="text-center">
 							<img src={Logo} alt="" className="Logo-img-account rounded" />
 							<button className="closing-btn">
-								<Link to={`/whishlist/personal`} style={{ textDecoration: "none", color: "black" }}>
+								<NavLink to={`/whishlist/personal`} style={{ textDecoration: "none", color: "black" }}>
 									<CloseIcon fontSize="large" />
-								</Link>
+								</NavLink>
 							</button>
 						</div>
 					</Box>
@@ -45,11 +45,11 @@ export default function AccountDetails() {
 									<span>My Information</span>
 								</div>
 								<div className="col-4">
-									<button className="redirect-btn">
-										<Link to={`/info`}>
+									<NavLink to={`/info`}>
+										<button className="redirect-btn">
 											<ArrowForwardIosIcon sx={{ color: "gray" }} />
-										</Link>
-									</button>
+										</button>
+									</NavLink>
 								</div>
 							</div>
 						</Box>
@@ -61,26 +61,14 @@ export default function AccountDetails() {
 									<span>Security</span>
 								</div>
 								<div className="col-4">
-									<button className="redirect-btn">
-										<Link to={`/security`}>
+									<NavLink to={`/security`}>
+										<button className="redirect-btn">
 											<ArrowForwardIosIcon sx={{ color: "gray" }} />
-										</Link>
-									</button>
+										</button>
+									</NavLink>
 								</div>
 							</div>
 						</Box>
-
-						<div className="d-grid gap-2 col-6 mx-auto my-4">
-							<button
-								className="btn py-2 mb-2"
-								style={{ backgroundColor: "gray", color: "white" }}
-								type="button"
-							>
-								<Link to={`/my-account`} style={{ textDecoration: "none", color: "white" }}>
-									Save
-								</Link>
-							</button>
-						</div>
 					</Box>
 				</Box>
 			</Container>

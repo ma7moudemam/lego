@@ -31,7 +31,7 @@ function Login() {
 			return;
 		}
 
-		setNotification(false);
+		setErrorNotification(false);
 	};
 	const openNotificationMsg = (message) => {
 		setNotificationMessage(message);
